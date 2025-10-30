@@ -29,6 +29,7 @@
             background-size: cover;
             background-position: center center;
             background-attachment: fixed;
+            overflow-x: hidden; /* Evita scroll horizontal por las estrellas */
         }
 
         .container { 
@@ -38,6 +39,8 @@
             padding: 2.5rem; 
             border-radius: 12px; 
             box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+            position: relative; /* Para asegurar que el contenido esté por encima de las estrellas */
+            z-index: 10; /* Asegura que el contenido sea visible */
         }
 
         .header {
@@ -111,7 +114,7 @@
              transform: translateY(-2px);
         }
         
-        /* --- NUEVO CSS PARA EDUCACIÓN --- */
+        /* --- CSS PARA EDUCACIÓN --- */
         .education-grid {
             display: grid;
             grid-template-columns: 1fr; /* Una columna para la lista */
@@ -135,7 +138,51 @@
             font-size: 1rem;
             color: var(--secondary-text);
         }
-        /* --- FIN NUEVO CSS --- */
+        /* --- FIN CSS EDUCACIÓN --- */
+
+        /* --- NUEVO CSS PARA ESTRELLAS FUGACES --- */
+        .shooting-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Permite interactuar con el contenido de abajo */
+            overflow: hidden; /* Esconde las estrellas cuando salen de la pantalla */
+            z-index: 1; /* Asegura que estén detrás del contenido principal */
+        }
+
+        .star {
+            position: absolute;
+            background-color: var(--white);
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            opacity: 0;
+            animation: 
+                star-fall var(--duration) linear var(--delay) infinite,
+                star-twinkle 2s ease-in-out var(--delay) infinite alternate;
+        }
+
+        @keyframes star-fall {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1; /* Aparece */
+            }
+            100% {
+                transform: translate(100vw, 100vh) scale(0.5); /* Se mueve de arriba-izquierda a abajo-derecha */
+                opacity: 0; /* Desaparece */
+            }
+        }
+
+        @keyframes star-twinkle {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.3; }
+        }
+        /* --- FIN NUEVO CSS ESTRELLAS FUGACES --- */
         
         .modal {
             display: none; 
@@ -189,7 +236,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="shooting-stars"></div> <div class="container">
         <div class="header">
             <img src="https://github.com/jose2501106-IA/jose2501106-IA.github.io/blob/main/Pepe.png?raw=true" alt="Foto de José Hugo Meza" class="profile-photo">
             <div>
@@ -400,6 +447,27 @@
                 }
             }
         }
+
+        // --- NUEVO JS PARA ESTRELLAS FUGACES ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const shootingStarsContainer = document.querySelector('.shooting-stars');
+            const numStars = 20; // Número de estrellas fugaces
+
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                // Posición aleatoria inicial
+                star.style.left = `${Math.random() * 100}vw`; 
+                star.style.top = `${Math.random() * 100}vh`;
+
+                // Retraso y duración de la animación aleatorios
+                star.style.setProperty('--delay', `${Math.random() * 10}s`); // Retraso de hasta 10 segundos
+                star.style.setProperty('--duration', `${5 + Math.random() * 5}s`); // Duración de 5 a 10 segundos
+
+                shootingStarsContainer.appendChild(star);
+            }
+        });
+        // --- FIN NUEVO JS ESTRELLAS FUGACES ---
     </script>
 </body>
 </html>
