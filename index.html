@@ -163,37 +163,6 @@
             color: var(--secondary-text);
         }
 
-        .log-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-        .log-item {
-            border: 1px solid var(--border-color);
-            background-color: #fff;
-            padding: 1.5rem;
-            border-radius: 8px;
-            transition: box-shadow 0.2s ease;
-        }
-        .log-item:hover {
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-        .log-date {
-            font-size: 0.85rem;
-            color: var(--secondary-text);
-            margin: 0 0 0.5rem 0;
-        }
-        .log-item h3 {
-            margin: 0 0 0.75rem 0;
-            color: var(--primary-color);
-            font-size: 1.25rem;
-        }
-        .log-summary {
-            font-size: 1rem;
-            margin: 0;
-            line-height: 1.6;
-        }
-
         .shooting-stars {
             position: fixed;
             top: 0;
@@ -358,26 +327,6 @@
         </div>
         
         <div class="section">
-            <h2>Bitácora de Datos</h2>
-            <div class="log-grid">
-                <div class="log-item">
-                    <p class="log-date">30 de Octubre, 2025</p>
-                    <h3>Desmitificando el "Data Lineage": Por qué es Crucial para el Gobierno de Datos</h3>
-                    <p class="log-summary">Hoy profundicé en el concepto de linaje de datos. Entender el origen, las transformaciones y el destino de los datos es como tener el mapa GPS de la información. Es la base para garantizar la confianza y la auditabilidad en cualquier sistema.</p>
-                </div>
-                <div class="log-item">
-                    <p class="log-date">28 de Octubre, 2025</p>
-                    <h3>Lecciones al Validar mi Primer Dataset con Pandas y Python</h3>
-                    <p class="log-summary">Realicé un ejercicio práctico de validación de datos usando Pandas. Descubrí que funciones como `.isnull().sum()` y `.duplicated()` son increíblemente poderosas para un diagnóstico rápido. La limpieza de datos es un 80% de detective y un 20% de programación.</p>
-                </div>
-                <div class="log-item">
-                    <p class="log-date">25 de Octubre, 2025</p>
-                    <h3>Mis Primeros Pasos con AWS S3: Almacenamiento de Objetos para Proyectos de Datos</h3>
-                    <p class="log-summary">Comencé a explorar los fundamentos de la nube con AWS. Creé mi primer bucket en S3 y entendí la diferencia clave entre almacenamiento de objetos y sistemas de archivos tradicionales. Es el primer paso para construir pipelines de datos escalables.</p>
-                </div>
-            </div>
-        </div>
-        <div class="section">
             <h2>Más Allá del Código</h2>
             <p>
                 Creo firmemente en la mejora continua, no solo en la tecnología, sino a nivel personal. Mi enfoque se basa en la introspección y la <strong>resiliencia</strong>; veo cada desafío como una oportunidad para aprender y levantarme más fuerte. Me impulsa un profundo deseo de encontrar la verdadera raíz de los problemas y construir soluciones que generen un impacto positivo y duradero.
@@ -512,19 +461,18 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const shootingStarsContainer = document.querySelector('.shooting-stars');
-            const numStars = 80; // Aumentado a 80 estrellas
+            const numStars = 110; // Aumentado a 110 estrellas
 
             for (let i = 0; i < numStars; i++) {
                 const star = document.createElement('div');
                 star.classList.add('star');
                 star.style.left = `${Math.random() * 100}vw`; 
                 star.style.top = `${Math.random() * 100}vh`;
-                star.style.setProperty('--delay', `${Math.random() * 10}s`);
-                star.style.setProperty('--duration', `${5 + Math.random() * 5}s`);
+                star.style.setProperty('--delay', `${Math.random() * 15}s`);
+                star.style.setProperty('--duration', `${5 + Math.random() * 8}s`);
                 shootingStarsContainer.appendChild(star);
             }
         });
     </script>
 </body>
 </html>
-
