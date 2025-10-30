@@ -41,15 +41,16 @@
             display: flex;
             align-items: center;
             margin-bottom: 2rem;
-            flex-wrap: wrap; /* Para mejor visualización en móviles */
+            flex-wrap: wrap; 
         }
 
+        /* --- CAMBIOS CLAVE AQUÍ --- */
         .profile-photo {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin-right: 1.5rem;
-            object-fit: cover;
+            width: 140px;  /* Ancho aumentado */
+            height: 175px; /* Altura aumentada para mostrar más torso */
+            border-radius: 8px; /* Cambiado de círculo a rectángulo redondeado */
+            margin-right: 2rem;
+            object-fit: cover; /* Asegura que la imagen cubra el área sin estirarse */
             border: 3px solid var(--border-color);
         }
 
