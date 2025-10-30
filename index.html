@@ -98,7 +98,7 @@
             text-align: center;
             font-weight: bold;
             color: var(--dark-blue);
-            cursor: pointer; /* Añadido para indicar que es clickeable */
+            cursor: pointer;
             transition: background-color 0.2s ease;
         }
         
@@ -187,12 +187,12 @@
         <div class="section">
             <h2>Habilidades Técnicas</h2>
             <div class="skills-grid">
-                 <div class="skill">Data Governance</div>
-                 <div class="skill">Python & SQL</div>
-                 <div class="skill">DataOps</div>
-                 <div class="skill">Process Automation</div>
-                 <div class="skill">Lean Six Sigma</div>
-                 <div class="skill">Prompt Engineering</div>
+                 <div class="skill" onclick="openModal('governance')">Data Governance</div>
+                 <div class="skill" onclick="openModal('pythonSql')">Python & SQL</div>
+                 <div class="skill" onclick="openModal('dataops')">DataOps</div>
+                 <div class="skill" onclick="openModal('automation')">Process Automation</div>
+                 <div class="skill" onclick="openModal('sixSigma')">Lean Six Sigma</div>
+                 <div class="skill" onclick="openModal('prompt')">Prompt Engineering</div>
             </div>
         </div>
 
@@ -249,6 +249,49 @@
         </div>
     </div>
     
+    <div id="governance" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('governance')">&times;</span>
+            <h3>Data Governance</h3>
+            <p>Entiendo el Gobierno de Datos como la base para la confianza en la información. Se trata de establecer procesos para asegurar que los datos sean precisos, consistentes y seguros a lo largo de su ciclo de vida. Mi proyecto de automatización es un ejemplo práctico: valida y estandariza la información de entrada para garantizar la calidad del resultado final.</p>
+        </div>
+    </div>
+    <div id="pythonSql" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('pythonSql')">&times;</span>
+            <h3>Python & SQL</h3>
+            <p>Utilizo Python, con librerías como Pandas, para la limpieza y manipulación de datos, y SQL para realizar consultas complejas y extraer información valiosa de bases de datos relacionales. Son las herramientas fundamentales con las que transformo datos crudos en conocimiento accionable.</p>
+        </div>
+    </div>
+    <div id="dataops" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('dataops')">&times;</span>
+            <h3>DataOps</h3>
+            <p>Aplico la mentalidad de DataOps al tratar los flujos de datos como una línea de producción. Mi objetivo es automatizar, monitorear y mejorar continuamente la calidad y la velocidad con la que se entregan los datos. Mi script de automatización es un micro-sistema DataOps: automatiza un pipeline de datos desde la entrada hasta la entrega final.</p>
+        </div>
+    </div>
+    <div id="automation" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('automation')">&times;</span>
+            <h3>Process Automation</h3>
+            <p>Mi habilidad principal es identificar tareas manuales y repetitivas y construir soluciones de software para eliminarlas. Con Google Apps Script, pude integrar múltiples aplicaciones (Sheets, Slides, Gmail) para crear un flujo de trabajo autónomo que ahorra tiempo y reduce drásticamente el error humano.</p>
+        </div>
+    </div>
+    <div id="sixSigma" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('sixSigma')">&times;</span>
+            <h3>Lean Six Sigma</h3>
+            <p>Utilizo los principios de Lean Six Sigma como un marco estratégico para la resolución de problemas. Me enfoco en definir el problema, medir el estado actual, analizar la causa raíz, implementar mejoras y controlar los resultados. Esta metodología guía mi enfoque tanto en la optimización de procesos como en la mejora de la calidad de los datos.</p>
+        </div>
+    </div>
+    <div id="prompt" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('prompt')">&times;</span>
+            <h3>Prompt Engineering</h3>
+            <p>Utilizo la IA como una herramienta para acelerar el desarrollo. Sé cómo formular preguntas precisas y contextualizadas a modelos de lenguaje para generar código eficiente, depurar errores complejos y explorar diferentes enfoques para un problema. Es una habilidad que me permite aprender y construir soluciones de manera mucho más rápida.</p>
+        </div>
+    </div>
+
     <script>
         function openModal(modalId) {
             document.getElementById(modalId).style.display = "block";
