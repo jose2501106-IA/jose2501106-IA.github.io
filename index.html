@@ -4,24 +4,127 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>José Hugo Meza - Data & AI Aspirant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; background-color: #f8f9fa; color: #343a40; margin: 0; padding: 2rem; }
-        .container { max-width: 800px; margin: 0 auto; background-color: #ffffff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        h1 { font-size: 2.5rem; color: #212529; margin-bottom: 0.5rem; }
-        .subtitle { font-size: 1.2rem; color: #6c757d; margin-top: 0; }
+        :root {
+            --primary-color: #0d6efd; /* Azul principal */
+            --dark-blue: #2c3e50;    /* Azul oscuro para texto */
+            --light-gray: #f8f9fa;   /* Fondo */
+            --text-color: #343a40;   /* Texto principal */
+            --secondary-text: #6c757d; /* Texto secundario */
+            --white: #ffffff;
+            --border-color: #e9ecef;
+        }
+
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            line-height: 1.7; 
+            background-color: var(--light-gray); 
+            color: var(--text-color); 
+            margin: 0; 
+            padding: 2rem;
+        }
+
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            background-color: var(--white); 
+            padding: 2.5rem; 
+            border-radius: 12px; 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap; /* Para mejor visualización en móviles */
+        }
+
+        .profile-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 1.5rem;
+            object-fit: cover;
+            border: 3px solid var(--border-color);
+        }
+
+        h1 { 
+            font-size: 2.5rem; 
+            color: var(--dark-blue); 
+            margin: 0; 
+        }
+
+        .subtitle { 
+            font-size: 1.15rem; 
+            color: var(--secondary-text); 
+            margin-top: 0.25rem;
+            font-weight: 400;
+        }
+
         p { font-size: 1.1rem; }
-        .links a { display: inline-block; background-color: #007bff; color: #ffffff; text-decoration: none; padding: 12px 20px; border-radius: 5px; margin: 10px 10px 10px 0; font-weight: bold; transition: background-color 0.2s; }
-        .links a:hover { background-color: #0056b3; }
-        .project { margin-top: 2rem; border-top: 1px solid #e9ecef; padding-top: 1.5rem; }
-        h2 { color: #007bff; }
+
+        .section {
+            margin-top: 2.5rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
+        }
+
+        h2 { 
+            color: var(--primary-color); 
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .links a { 
+            display: inline-block; 
+            background-color: var(--primary-color); 
+            color: var(--white); 
+            text-decoration: none; 
+            padding: 12px 24px; 
+            border-radius: 8px; 
+            margin: 10px 10px 10px 0; 
+            font-weight: bold; 
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .links a:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill {
+            background-color: var(--light-gray);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            color: var(--dark-blue);
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>José Hugo Meza</h1>
-        <p class="subtitle">Estudiante de Ingeniería en IA & Industrial | Apasionado por el Gobierno de Datos y la Optimización de Procesos</p>
+        <div class="header">
+            <img src="https://drive.google.com/uc?export=view&id=1Ecx0NeKTZ8YTYa8Ljy7XOJLjhMlUExmJ" alt="Foto de José Hugo Meza" class="profile-photo">
+            <div>
+                <h1>José Hugo Meza</h1>
+                <p class="subtitle">Estudiante de Ing. en IA & Industrial | Data Governance Aspirant</p>
+            </div>
+        </div>
         
-        <p>Mi misión es construir puentes entre la tecnología de datos y los procesos de negocio eficientes. Creo firmemente que los datos confiables son el activo más importante para la toma de decisiones inteligentes.</p>
+        <p>Mi misión es construir puentes entre la tecnología de datos y los procesos de negocio. Creo firmemente que los datos confiables son el activo más importante para la toma de decisiones inteligentes.</p>
 
         <div class="links">
             <a href="https://drive.google.com/file/d/181wkopI_I6T0KGhwypm6gz5R9VVPEha4/view?usp=sharing" target="_blank">Descargar CV</a>
@@ -29,7 +132,24 @@
             <a href="https://github.com/jose2501106-IA" target="_blank">GitHub</a>
         </div>
 
-        <div class="project">
+        <div class="section">
+            <h2>Mi Filosofía</h2>
+            <p>Aplico principios de <strong>Lean Six Sigma</strong> para la mejora de procesos, buscando eliminar ineficiencias y optimizar flujos de trabajo. Mi enfoque en el Gobierno de Datos se basa en la misma idea: tratar los datos de mala calidad como un "desperdicio" que debe ser erradicado para construir sistemas robustos y eficientes.</p>
+        </div>
+        
+        <div class="section">
+            <h2>Habilidades Clave</h2>
+            <div class="skills-grid">
+                <div class="skill">Data Governance</div>
+                <div class="skill">Python & SQL</div>
+                <div class="skill">DataOps</div>
+                <div class="skill">Process Automation</div>
+                <div class="skill">Lean Six Sigma</div>
+                <div class="skill">Prompt Engineering</div>
+            </div>
+        </div>
+
+        <div class="section">
             <h2>Proyecto Destacado</h2>
             <h3>Automatización de Procesos con Google Apps Script</h3>
             <p>Un sistema 100% autónomo que gestiona el ciclo de vida de los datos de registro de asistentes a eventos, eliminando el trabajo manual y aplicando principios de DataOps.</p>
