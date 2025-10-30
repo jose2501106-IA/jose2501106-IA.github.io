@@ -10,27 +10,25 @@
     
     <style>
         :root {
-            --primary-color: #0d6efd; /* Azul principal */
-            --dark-blue: #2c3e50;    /* Azul oscuro para texto */
-            --light-gray: #f8f9fa;   /* Fondo */
-            --text-color: #343a40;   /* Texto principal */
-            --secondary-text: #6c757d; /* Texto secundario */
+            --primary-color: #0d6efd;
+            --dark-blue: #2c3e50;
+            --light-gray: #f8f9fa;
+            --text-color: #343a40;
+            --secondary-text: #6c757d;
             --white: #ffffff;
             --border-color: #e9ecef;
         }
 
         body { 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            font-family: 'Inter', sans-serif; 
             line-height: 1.7; 
             color: var(--text-color); 
             margin: 0; 
             padding: 2rem;
-            /* Fondo espacial */
             background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop');
             background-size: cover;
             background-position: center center;
-            background-repeat: no-repeat;
-            background-attachment: fixed; /* Efecto Parallax */
+            background-attachment: fixed;
         }
 
         .container { 
@@ -58,19 +56,8 @@
             border: 3px solid var(--border-color);
         }
 
-        h1 { 
-            font-size: 2.5rem; 
-            color: var(--dark-blue); 
-            margin: 0; 
-        }
-
-        .subtitle { 
-            font-size: 1.15rem; 
-            color: var(--secondary-text); 
-            margin-top: 0.25rem;
-            font-weight: 400;
-        }
-
+        h1 { font-size: 2.5rem; color: var(--dark-blue); margin: 0; }
+        .subtitle { font-size: 1.15rem; color: var(--secondary-text); margin-top: 0.25rem; font-weight: 400; }
         p { font-size: 1.1rem; }
 
         .section {
@@ -79,11 +66,7 @@
             padding-top: 2rem;
         }
 
-        h2 { 
-            color: var(--primary-color); 
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-        }
+        h2 { color: var(--primary-color); font-size: 1.8rem; margin-bottom: 1.5rem; }
         
         .links a { 
             display: inline-block; 
@@ -115,6 +98,53 @@
             text-align: center;
             font-weight: bold;
             color: var(--dark-blue);
+            cursor: pointer; /* Añadido para indicar que es clickeable */
+            transition: background-color 0.2s ease;
+        }
+        
+        .skill:hover {
+             background-color: #dde8f8;
+        }
+        
+        /* Estilos para el Modal (Pop-up) */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-btn:hover, .close-btn:focus {
+            color: black;
+        }
+        
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
         }
 
     </style>
@@ -145,24 +175,24 @@
         <div class="section">
             <h2>Habilidades Blandas</h2>
             <div class="skills-grid">
-                <div class="skill">Comunicación Efectiva</div>
-                <div class="skill">Liderazgo Proactivo</div>
-                <div class="skill">Resolución de Problemas</div>
-                <div class="skill">Ownership</div>
-                <div class="skill">Trabajo Colaborativo</div>
-                <div class="skill">Curiosidad por Datos</div>
+                <div class="skill" onclick="openModal('comunicacion')">Comunicación Efectiva</div>
+                <div class="skill" onclick="openModal('liderazgo')">Liderazgo Proactivo</div>
+                <div class="skill" onclick="openModal('resolucion')">Resolución de Problemas</div>
+                <div class="skill" onclick="openModal('ownership')">Ownership</div>
+                <div class="skill" onclick="openModal('colaboracion')">Trabajo Colaborativo</div>
+                <div class="skill" onclick="openModal('curiosidad')">Curiosidad por Datos</div>
             </div>
         </div>
 
         <div class="section">
             <h2>Habilidades Técnicas</h2>
             <div class="skills-grid">
-                <div class="skill">Data Governance</div>
-                <div class="skill">Python & SQL</div>
-                <div class="skill">DataOps</div>
-                <div class="skill">Process Automation</div>
-                <div class="skill">Lean Six Sigma</div>
-                <div class="skill">Prompt Engineering</div>
+                 <div class="skill">Data Governance</div>
+                 <div class="skill">Python & SQL</div>
+                 <div class="skill">DataOps</div>
+                 <div class="skill">Process Automation</div>
+                 <div class="skill">Lean Six Sigma</div>
+                 <div class="skill">Prompt Engineering</div>
             </div>
         </div>
 
@@ -175,5 +205,68 @@
             </div>
         </div>
     </div>
+
+    <div id="comunicacion" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('comunicacion')">&times;</span>
+            <h3>Comunicación Efectiva</h3>
+            <p>Para mí, comunicar no es solo hablar, es asegurar que el mensaje se entienda. En mi proyecto de automatización, tuve que traducir requerimientos no-técnicos en lógica de programación clara y documentar el proceso para que otros pudieran entenderlo. Escucho para entender, no solo para responder.</p>
+        </div>
+    </div>
+    <div id="liderazgo" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('liderazgo')">&times;</span>
+            <h3>Liderazgo Proactivo</h3>
+            <p>El liderazgo no se trata de tener un título, sino de tomar la iniciativa. Cuando identifiqué la necesidad de automatizar el registro de pases, no esperé a que me lo pidieran; investigué, aprendí la tecnología necesaria y construí la solución. Liderar es resolver problemas antes de que crezcan.</p>
+        </div>
+    </div>
+     <div id="resolucion" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('resolucion')">&times;</span>
+            <h3>Resolución de Problemas</h3>
+            <p>Disfruto desglosando un problema complejo en partes más pequeñas y manejables. Durante el desarrollo de mi script, me enfrenté a errores de integración con las APIs. Mi método fue aislar cada componente, probarlo individualmente y luego reintegrarlo, asegurando una solución robusta y funcional.</p>
+        </div>
+    </div>
+     <div id="ownership" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('ownership')">&times;</span>
+            <h3>Ownership</h3>
+            <p>Tomo cada tarea como si fuera mi propio proyecto. Desde la concepción de la idea hasta la implementación y las pruebas, me hago responsable del resultado final. Para mí, "ownership" significa que si algo sale mal, es mi responsabilidad arreglarlo, y si sale bien, es un éxito del equipo.</p>
+        </div>
+    </div>
+    <div id="colaboracion" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('colaboracion')">&times;</span>
+            <h3>Trabajo Colaborativo</h3>
+            <p>Entiendo que las mejores ideas surgen de la diversidad de perspectivas. Aunque trabajé solo en mi proyecto de automatización, me apoyé en comunidades en línea y pedí feedback para mejorar el código. Estoy convencido de que colaborar y compartir conocimiento es la forma más rápida de crecer.</p>
+        </div>
+    </div>
+    <div id="curiosidad" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('curiosidad')">&times;</span>
+            <h3>Curiosidad por Datos</h3>
+            <p>Mi curiosidad va más allá de los números; busco el "porqué" detrás de cada dato. En mi experiencia con inventarios, no me conformaba con corregir una discrepancia, investigaba la causa raíz en el proceso logístico. Para mí, gobernar datos es tener la curiosidad para prevenir errores, no solo para corregirlos.</p>
+        </div>
+    </div>
+    
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        // Cierra el modal si el usuario hace clic fuera del contenido
+        window.onclick = function(event) {
+            const modals = document.getElementsByClassName('modal');
+            for (let i = 0; i < modals.length; i++) {
+                if (event.target == modals[i]) {
+                    modals[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 </body>
 </html>
