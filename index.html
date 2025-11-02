@@ -18,12 +18,10 @@
             --white: #ffffff;
             --border-color: #e9ecef;
             
-            /* --- (NUEVO) Colores de Harvard --- */
             --harvard-red: #A51C30;
             --harvard-red-pastel: #FADADD;
             --harvard-red-pastel-hover: #F8CFD3;
 
-            /* --- (NUEVO) Colores ONE --- */
             --one-blue-pastel: #E1F4FC;
             --one-blue-pastel-hover: #D0EDF9;
         }
@@ -101,6 +99,30 @@
             box-shadow: 0 4px 12px rgba(38, 68, 125, 0.4);
         }
 
+        /* --- (NUEVO) CSS para el botón de Apuntes --- */
+        .links-center {
+            text-align: center;
+            margin-top: 2.5rem;
+        }
+        .btn-primary-ghost {
+            display: inline-block;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            background-color: var(--white);
+            text-decoration: none; 
+            padding: 12px 28px; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            transition: all 0.2s ease;
+        }
+        .btn-primary-ghost:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(38, 68, 125, 0.4);
+        }
+        /* --- FIN CSS Botón Apuntes --- */
+
         .value-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -148,7 +170,6 @@
              transform: translateY(-2px);
         }
 
-        /* --- INICIO: CSS para Botones de Programa (NUEVO) --- */
         .skill-one {
             background-color: var(--one-blue-pastel);
             color: var(--primary-color);
@@ -166,7 +187,6 @@
             background-color: var(--harvard-red-pastel-hover);
             transform: translateY(-2px);
         }
-        /* --- FIN: CSS para Botones de Programa --- */
         
         .education-grid {
             display: grid;
@@ -369,8 +389,9 @@
                 <div class="skill skill-aspire" onclick="openModal('aspireModal')">Aspire Leaders Program</div>
             </div>
         </div>
+
         <div class="section">
-            <h2>Habilidades Blandas</h2>
+            <h2>🌟 Habilidades Blandas</h2>
             <div class="skills-grid">
                 <div class="skill" onclick="openModal('comunicacion')">Comunicación Efectiva</div>
                 <div class="skill" onclick="openModal('liderazgo')">Liderazgo Proactivo</div>
@@ -382,7 +403,7 @@
         </div>
 
         <div class="section">
-            <h2>Habilidades Técnicas</h2>
+            <h2>💻 Habilidades Técnicas</h2>
             <div class="skills-grid">
                  <div class="skill" onclick="openModal('governance')">Data Governance</div>
                  <div class="skill" onclick="openModal('pythonSql')">Python & SQL</div>
@@ -394,7 +415,7 @@
         </div>
 
         <div class="section">
-            <h2>Proyecto Destacado</h2>
+            <h2>🚀 Proyecto Destacado</h2>
             <h3>Automatización de Procesos con Google Apps Script</h3>
             <p>Un sistema 100% autónomo que gestiona el ciclo de vida de los datos para el registro de asistentes a la <strong>Peregrinación Nacional Anual Juvenil al Cerro de Cristo Rey del Cubilete</strong>, eliminando el trabajo manual y aplicando principios de DataOps.</p>
             <div class="links">
@@ -403,13 +424,17 @@
         </div>
         
         <div class="section">
-            <h2>Más Allá del Código</h2>
+            <h2>🧠 Más Allá del Código</h2>
             <p>
                 Creo firmemente en la mejora continua, no solo en la tecnología, sino a nivel personal. Mi enfoque se basa en la introspección y la <strong>resiliencia</strong>; veo cada desafío como una oportunidad para aprender y levantarme más fuerte. Me impulsa un profundo deseo de encontrar la verdadera raíz de los problemas y construir soluciones que generen un impacto positivo y duradero.
             </p>
             <p>
                 Valoro la creación de entornos colaborativos y sanos, donde la conexión humana y la <strong>autenticidad</strong> son la base del éxito. Mi mayor motivación es hacer un trabajo que enorgullezca a mis mentores, mi familia y mi equipo.
             </p>
+            
+            <div class="links-center">
+                <a href="apuntes.html" class="btn-primary-ghost">Ver Apuntes Personales</a>
+            </div>
         </div>
 
     </div>
@@ -552,4 +577,3 @@
     </script>
 </body>
 </html>
-
