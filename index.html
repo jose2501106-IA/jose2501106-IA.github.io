@@ -147,7 +147,7 @@
 
         .education-item {
             background-color: var(--light-gray);
-            padding: 1.2rem;
+            padding: 1.5rem; /* Ajustado el padding */
             border-radius: 8px;
             border-left: 5px solid var(--primary-color);
         }
@@ -162,6 +162,44 @@
             font-size: 1rem;
             color: var(--secondary-text);
         }
+        
+        /* --- INICIO: CSS para Barras de Progreso (NUEVO) --- */
+        .education-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-header h3 {
+            margin: 0;
+        }
+
+        .progress-label {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            background-color: #dde8f8;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: var(--border-color);
+            border-radius: 5px;
+            height: 10px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 5px;
+            transition: width 0.5s ease-out;
+        }
+        /* --- FIN: CSS para Barras de Progreso --- */
 
         .shooting-stars {
             position: fixed;
@@ -270,16 +308,27 @@
             <h2>Formación Académica</h2>
             <div class="education-grid">
                 <div class="education-item">
-                    <h3>Hybridge Education</h3>
+                    <div class="education-header">
+                        <h3>Hybridge Education</h3>
+                        <span class="progress-label">2/9 Cuatrimestres</span>
+                    </div>
                     <p>Ingeniería en Inteligencia Artificial</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 22.2%;"></div> 
+                    </div>
                 </div>
                 <div class="education-item">
-                    <h3>Universidad Virtual del Estado de Guanajuato</h3>
+                    <div class="education-header">
+                        <h3>Universidad Virtual del Estado de Guanajuato</h3>
+                        <span class="progress-label">32% Completado</span>
+                    </div>
                     <p>Ingeniería Industrial</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 32%;"></div>
+                    </div>
                 </div>
             </div>
         </div>
-        
         <div class="section">
             <h2>Mi Filosofía</h2>
             <p>Aplico principios de <strong>Lean Six Sigma</strong> para la mejora de procesos, buscando eliminar ineficiencias y optimizar flujos de trabajo. Mi enfoque en el Gobierno de Datos se basa en la misma idea: tratar los datos de mala calidad como un "desperdicio" que debe ser erradicado para construir sistemas robustos y eficientes.</p>
@@ -461,7 +510,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const shootingStarsContainer = document.querySelector('.shooting-stars');
-            const numStars = 110; // Aumentado a 110 estrellas
+            const numStars = 110; // Mantenemos las 110 estrellas
 
             for (let i = 0; i < numStars; i++) {
                 const star = document.createElement('div');
