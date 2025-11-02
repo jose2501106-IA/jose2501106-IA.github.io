@@ -54,7 +54,7 @@
             0%, 100% { opacity: 0.8; } 50% { opacity: 0.3; }
         }
         
-        /* --- (NUEVO) CSS para Página de Apuntes con CARRUSEL --- */
+        /* --- CSS para Página de Apuntes con CARRUSEL --- */
         .container-apuntes {
             max-width: 1200px;
             margin: 0 auto;
@@ -89,22 +89,21 @@
             overflow: hidden;
             border-radius: 12px;
             border: 1px solid var(--border-color);
-            background-color: #fdfdfd; /* Un fondo ligeramente distinto */
+            background-color: #fdfdfd; 
         }
         
         .carousel-track {
             display: flex;
-            /* Transición suave para el deslizamiento */
             transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         
         .slide {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 columnas por "página" */
+            grid-template-columns: repeat(3, 1fr); 
             gap: 1.5rem;
-            flex: 0 0 100%; /* Cada slide ocupa el 100% del viewport */
+            flex: 0 0 100%; 
             padding: 1.5rem;
-            box-sizing: border-box; /* Importante para que el padding no rompa el 100% */
+            box-sizing: border-box; 
         }
         
         .semester-card {
@@ -113,7 +112,7 @@
             padding: 1.5rem;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            opacity: 0; /* Se animará con JS */
+            opacity: 0;
             transform: translateY(50px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
@@ -141,37 +140,17 @@
         }
         
         .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.9);
-            border: 1px solid var(--border-color);
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: all 0.2s ease;
-            z-index: 20;
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.9); border: 1px solid var(--border-color);
+            border-radius: 50%; width: 44px; height: 44px; font-size: 1.5rem;
+            color: var(--primary-color); cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.2s ease; z-index: 20;
         }
-        .carousel-btn:hover {
-            background-color: var(--white);
-            transform: translateY(-50%) scale(1.05);
-        }
-        .carousel-btn.prev {
-            left: -22px; /* Mitad fuera, mitad dentro */
-        }
-        .carousel-btn.next {
-            right: -22px;
-        }
-        .carousel-btn.hidden { /* Clase para ocultar botones */
-            opacity: 0;
-            pointer-events: none;
-        }
+        .carousel-btn:hover { background-color: var(--white); transform: translateY(-50%) scale(1.05); }
+        .carousel-btn.prev { left: -22px; }
+        .carousel-btn.next { right: -22px; }
+        .carousel-btn.hidden { opacity: 0; pointer-events: none; }
 
-        /* Responsive */
         @media (max-width: 992px) {
             .slide { grid-template-columns: repeat(2, 1fr); }
         }
@@ -181,12 +160,7 @@
             .carousel-btn.next { right: 5px; }
         }
 
-        /* --- Animación --- */
-        .show {
-            opacity: 1;
-            transform: none;
-        }
-
+        .show { opacity: 1; transform: none; }
     </style>
 </head>
 <body>
@@ -234,7 +208,6 @@
                             </ul>
                         </div>
                     </div>
-                    
                     <div class="slide">
                         <div class="semester-card">
                             <h3>Cuarto Cuatrimestre</h3>
@@ -267,7 +240,6 @@
                             </ul>
                         </div>
                     </div>
-                    
                     <div class="slide">
                         <div class="semester-card">
                             <h3>Séptimo Cuatrimestre</h3>
@@ -309,32 +281,126 @@
             
             <div class="carousel-viewport">
                 <div class="carousel-track" id="ind-track">
+                    
                     <div class="slide">
                         <div class="semester-card">
-                            <h3>Materias Clave</h3>
+                            <h3>Fundamentos de Ingeniería</h3>
                             <ul class="subject-list">
-                                <li><a href="#">Administración de Proyectos</a></li>
-                                <li><a href="#">Logística y Cadenas de Suministro</a></li>
-                                <li><a href="#">Optimización de Procesos</a></li>
+                                <li><a href="#">Introducción a computación</a></li>
+                                <li><a href="#">Introducción a la ingeniería industrial</a></li>
+                                <li><a href="#">Matemáticas básicas</a></li>
+                                <li><a href="#">Matemáticas para ingenieros</a></li>
                             </ul>
                         </div>
                         <div class="semester-card">
-                            <h3>Control y Calidad</h3>
+                            <h3>Matemáticas y Estadística</h3>
                             <ul class="subject-list">
-                                <li><a href="#">Control Estadístico de Calidad</a></li>
-                                <li><a href="#">Gestión de Operaciones</a></li>
-                                <li><a href="#">(Próximamente...)</a></li>
+                                <li><a href="#">Cálculo diferencial</a></li>
+                                <li><a href="#">Cálculo integral</a></li>
+                                <li><a href="#">Probabilidad y estadística</a></li>
+                                <li><a href="#">Estadística inferencial</a></li>
                             </ul>
                         </div>
                         <div class="semester-card">
-                            <h3>(Próximamente...)</h3>
+                            <h3>Habilidades Base</h3>
                             <ul class="subject-list">
-                                <li><a href="#">(Próximamente...)</a></li>
+                                <li><a href="#">Taller de lectura y redacción</a></li>
+                                <li><a href="#">Taller de comunicación efectiva</a></li>
+                                <li><a href="#">Idioma extranjero I</a></li>
+                                <li><a href="#">Idioma extranjero II</a></li>
+                                <li><a href="#">Idioma extranjero III</a></li>
+                                <li><a href="#">Idioma extranjero IV</a></li>
                             </ul>
                         </div>
                     </div>
                     
+                    <div class="slide">
+                        <div class="semester-card">
+                            <h3>Sistemas y Producción</h3>
+                            <ul class="subject-list">
+                                <li><a href="#">Sistemas de producción</a></li>
+                                <li><a href="#">El pensamiento sistémico</a></li>
+                                <li><a href="#">Análisis de operaciones</a></li>
+                                <li><a href="#">Diseño de procesos</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>Gestión de Calidad</h3>
+                            <ul class="subject-list">
+                                <li><a href="#">Introducción a la calidad</a></li>
+                                <li><a href="#">Sistemas de gestión de la calidad</a></li>
+                                <li><a href="#">Control de la calidad</a></li>
+                                <li><a href="#">Sistemas esbeltos de manufactura</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>Logística y Suministro</h3>
+                            <ul class="subject-list">
+                                <li><a href="#">Administración de inventarios y almacenes</a></li>
+                                <li><a href="#">Logística y sistemas de distribución</a></li>
+                                <li><a href="#">Administración de la cadena de suministro</a></li>
+                            </ul>
+                        </div>
                     </div>
+
+                    <div class="slide">
+                        <div class="semester-card">
+                            <h3>Administración y Gestión</h3>
+                            <ul class="subject-list">
+                                <li><a href="#">El proceso administrativo</a></li>
+                                <li><a href="#">Gestión del capital humano y liderazgo</a></li>
+                                <li><a href="#">Administración de operaciones</a></li>
+                                <li><a href="#">Gestión de operaciones y calidad</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>Finanzas y Proyectos</h3>
+                            <ul class="subject-list">
+                                <li><a href="#">Contabilidad aplicada a los negocios</a></li>
+                                <li><a href="#">Costos para ingeniería</a></li>
+                                <li><a href="#">Factibilidad y evaluación de proyectos</a></li>
+                                <li><a href="#">Localización y distribución de planta</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>Estrategia y Mercados</h3>
+                            <ul class="subject-list">
+                                <li><a href="#">Mercadotecnia</a></li>
+                                <li><a href="#">Inteligencia de mercados</a></li>
+                                <li><a href="#">Técnicas de servicio al cliente</a></li>
+                                <li><a href="#">Coaching empresarial</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <div class="semester-card">
+                            <h3>Tópicos Avanzados</h3>
+                            <ul class="subject-list">
+                                <li><a href="#">Fundamentos de investigación de operaciones</a></li>
+                                <li><a href="#">Seguridad industrial</a></li>
+                                <li><a href="#">Diseño de producto y servicio</a></li>
+                                <li><a href="#">Economía</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>Desarrollo Profesional</h3>
+                            <ul class="subject-list">
+                                <li><a href="#">Desarrollo sustentable</a></li>
+                                <li><a href="#">Emprendimiento</a></li>
+                                <li><a href="#">Capacitación estratégica</a></li>
+                                <li><a href="#">Ética profesional y de negocios</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>Cierre</h3>
+                            <ul class="subject-list">
+                                <li><a href="#">Estadía profesional</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
             </div>
             
             <button class="carousel-btn prev" id="ind-prev" aria-label="Anterior">&#10094;</button>
@@ -357,19 +423,16 @@
                 shootingStarsContainer.appendChild(star);
             }
             
-            // --- INICIO: CÓDIGO DEL CARRUSEL ---
-            
-            /**
-             * Función reutilizable para crear un carrusel
-             * @param {string} trackId - ID del elemento track (el que se mueve)
-             * @param {string} prevBtnId - ID del botón "anterior"
-             * @param {string} nextBtnId - ID del botón "siguiente"
-             * @param {number} totalSlides - Número total de slides
-             */
-            function setupCarousel(trackId, prevBtnId, nextBtnId, totalSlides) {
+            // --- INICIO: CÓDIGO DEL CARRUSEL (Reutilizable) ---
+            function setupCarousel(trackId, prevBtnId, nextBtnId) {
                 const track = document.getElementById(trackId);
                 const prevBtn = document.getElementById(prevBtnId);
                 const nextBtn = document.getElementById(nextBtnId);
+                
+                if (!track || !prevBtn || !nextBtn) return;
+
+                const slides = Array.from(track.children);
+                const totalSlides = slides.length;
                 let currentIndex = 0;
 
                 function updateSlidePosition() {
@@ -377,9 +440,7 @@
                 }
 
                 function updateButtons() {
-                    // Oculta el botón "anterior" si estamos en el primer slide
                     prevBtn.classList.toggle('hidden', currentIndex === 0);
-                    // Oculta el botón "siguiente" si estamos en el último slide
                     nextBtn.classList.toggle('hidden', currentIndex === totalSlides - 1);
                 }
 
@@ -399,23 +460,22 @@
                     }
                 });
 
-                // Inicializa los botones al cargar
                 updateButtons();
             }
 
             // Inicializar el carrusel de IA (tiene 3 slides)
-            setupCarousel('ia-track', 'ia-prev', 'ia-next', 3);
+            setupCarousel('ia-track', 'ia-prev', 'ia-next');
             
-            // Inicializar el carrusel Industrial (tiene 1 slide por ahora)
-            // Si añades más slides, solo cambia el '1' por el nuevo total
-            setupCarousel('ind-track', 'ind-prev', 'ind-next', 1);
+            // (ACTUALIZADO) Inicializar el carrusel Industrial (ahora tiene 4 slides)
+            setupCarousel('ind-track', 'ind-prev', 'ind-next');
 
             
-            // --- INICIO: CÓDIGO DE ANIMACIÓN DE ENTRADA ---
+            // --- CÓDIGO DE ANIMACIÓN DE ENTRADA ---
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
-                        entry.target.style.transitionDelay = `${index * 100}ms`;
+                        // Aplica un retraso escalonado a cada tarjeta
+                        entry.target.style.transitionDelay = `${index * 50}ms`;
                         entry.target.classList.add('show');
                         observer.unobserve(entry.target);
                     }
