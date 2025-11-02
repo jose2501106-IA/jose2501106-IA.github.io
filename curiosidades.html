@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos Curiosos - José Hugo Meza</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #26447d; 
+            --dark-blue: #2c3e50;
+            --light-gray: #f8f9fa;
+            --text-color: #343a40;
+            --secondary-text: #6c757d;
+            --white: #ffffff;
+            --border-color: #e9ecef;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            line-height: 1.7; 
+            color: var(--text-color); 
+            margin: 0; 
+            padding: 2rem;
+            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        .container { 
+            max-width: 800px; /* Ancho estándar para lectura */
+            margin: 0 auto; 
+            background-color: var(--white); 
+            padding: 2.5rem; 
+            border-radius: 12px; 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+            position: relative;
+            z-index: 10;
+        }
+
+        .shooting-stars {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; overflow: hidden; z-index: 1;
+        }
+        .star {
+            position: absolute; background-color: var(--white); width: 2px; height: 2px;
+            border-radius: 50%; opacity: 0;
+            animation: 
+                star-fall var(--duration) linear var(--delay) infinite,
+                star-twinkle 2s ease-in-out var(--delay) infinite alternate;
+        }
+        @keyframes star-fall {
+            0% { transform: translate(0, 0) scale(1); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translate(100vw, 100vh) scale(0.5); opacity: 0; }
+        }
+        @keyframes star-twinkle {
+            0%, 100% { opacity: 0.8; } 50% { opacity: 0.3; }
+        }
+        
+        .back-link {
+            display: inline-block; color: var(--primary-color); text-decoration: none;
+            font-weight: bold; font-size: 1.1rem; margin-bottom: 1.5rem;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        .apuntes-header {
+            text-align: center; margin-bottom: 2.5rem;
+        }
+        .apuntes-header h2 {
+            color: var(--primary-color); font-size: 2.2rem; margin: 0;
+            display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+        }
+        .apuntes-header p {
+            font-size: 1.1rem;
+            color: var(--secondary-text);
+            margin-top: 0.5rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .curious-card {
+            background-color: var(--light-gray);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary-color);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .curious-card h3 {
+            margin-top: 0;
+            color: var(--dark-blue);
+            font-size: 1.5rem;
+        }
+        .curious-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .show { opacity: 1; transform: none; }
+    </style>
+</head>
+<body>
+    <div class="shooting-stars"></div> 
+
+    <div class="container">
+        <a href="index.html" class="back-link">&larr; Volver al Portafolio Principal</a>
+        
+        <div class="apuntes-header">
+            <h2><span>💡</span>Datos Curiosos y Conexiones</h2>
+            <p>Conectando los puntos entre la industria y la tecnología.</p>
+        </div>
+
+        <div class="card-grid">
+            <div class="curious-card animate-on-scroll">
+                <h3>Industria 4.0: La Fábrica Inteligente</h3>
+                <p>
+                    (Aquí puedes escribir tus notas...)
+                    La Industria 4.0 no es solo automatización. Es la fusión del mundo físico (máquinas) con el digital (datos y IA). Se basa en el IoT, Big Data y la nube. Mi proyecto de automatización es un ejemplo a micro-escala: tomamos un proceso manual y lo convertimos en un flujo de datos digital y autónomo.
+                </p>
+            </div>
+            
+            <div class="curious-card animate-on-scroll">
+                <h3>Industria 5.0: Colaboración Humano-Robot</h3>
+                <p>
+                    (Aquí puedes escribir tus notas...)
+                    Si la Industria 4.0 trata sobre la eficiencia de las máquinas, la 5.0 trae de vuelta el factor humano. Se centra en la colaboración entre humanos y sistemas de IA (como los "cobots"). Mi habilidad en Prompt Engineering es relevante aquí, ya que se trata de ser la "interfaz" humana que guía a la IA para resolver problemas complejos.
+                </p>
+            </div>
+            
+            <div class="curious-card animate-on-scroll">
+                <h3>Lean Six Sigma: La Conexión con Data Governance</h3>
+                <p>
+                    (Aquí puedes escribir tus notas...)
+                    Lean Six Sigma se obsesiona con eliminar "desperdicios" (Muda) y reducir la variabilidad para mejorar la calidad. En el mundo de los datos, el "desperdicio" son los datos duplicados, incorrectos o inútiles. El **Gobierno de Datos** es la herramienta de Lean Six Sigma aplicada a la información: se asegura de que solo los datos de alta calidad, precisos y sin variabilidad fluyan por los procesos de la empresa.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Código de estrellas ---
+            const shootingStarsContainer = document.querySelector('.shooting-stars');
+            const numStars = 110; 
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.left = `${Math.random() * 100}vw`; 
+                star.style.top = `${Math.random() * 100}vh`;
+                star.style.setProperty('--delay', `${Math.random() * 15}s`);
+                star.style.setProperty('--duration', `${5 + Math.random() * 8}s`);
+                shootingStarsContainer.appendChild(star);
+            }
+            
+            // --- CÓDIGO DE ANIMACIÓN ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.transitionDelay = `${index * 100}ms`;
+                        entry.target.classList.add('show');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+            elementsToAnimate.forEach((el) => observer.observe(el));
+            
+        });
+    </script>
+</body>
+</html>
