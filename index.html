@@ -102,6 +102,11 @@
         .links-center {
             text-align: center;
             margin-top: 2.5rem;
+            /* (ACTUALIZADO) Para apilar los botones */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem; 
         }
         .btn-primary-ghost {
             display: inline-block;
@@ -113,6 +118,7 @@
             border-radius: 8px; 
             font-weight: bold; 
             transition: all 0.2s ease;
+            width: 250px; /* Ancho fijo para que los botones se vean iguales */
         }
         .btn-primary-ghost:hover {
             background-color: var(--primary-color);
@@ -228,7 +234,6 @@
             transition: width 0.5s ease-out;
         }
 
-        /* --- INICIO: (NUEVO) CSS DEL CARRUSEL DE PROGRAMAS --- */
         .carousel-container { 
             position: relative; 
             margin-top: 1rem; 
@@ -266,7 +271,6 @@
             margin: 0;
         }
         
-        /* Colores específicos */
         .program-card-one {
             background-color: var(--one-blue-pastel);
             color: var(--dark-blue);
@@ -292,7 +296,6 @@
         .carousel-btn.prev { left: 10px; }
         .carousel-btn.next { right: 10px; }
         .carousel-btn.hidden { opacity: 0; pointer-events: none; }
-        /* --- FIN: CSS DEL CARRUSEL --- */
 
 
         .shooting-stars {
@@ -329,7 +332,6 @@
             50% { opacity: 0.3; }
         }
         
-        /* Modales genéricos (para habilidades) */
         .modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0;
             width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5);
@@ -353,7 +355,6 @@
 
         @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
 
-        /* --- CSS DE ANIMACIÓN EN SCROLL --- */
         .animate-on-scroll {
             opacity: 0;
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
@@ -441,32 +442,28 @@
         
         <div class="section animate-on-scroll fade-in-up">
             <h2>Programas Destacados</h2>
-            
             <div class="carousel-container">
                 <div class="carousel-viewport">
                     <div class="carousel-track" id="program-track">
-                        
                         <div class="slide">
                             <div class="program-card program-card-one">
                                 <h3>Oracle Next Education (ONE)</h3>
                                 <p>Participando en un programa intensivo de 6 meses donde he construido una base sólida en desarrollo full-stack, metodologías Ágiles y lógica de programación. Actualmente, me especializo en <strong>Ciencia de Datos</strong>, profundizando en la manipulación, análisis y visualización de datos para extraer insights de valor.</p>
                             </div>
                         </div>
-                        
                         <div class="slide">
                             <div class="program-card program-card-aspire">
                                 <h3>Aspire Leaders Program (Harvard University)</h3>
                                 <p>Seleccionado para un programa global de desarrollo de liderazgo fundado por catedráticos de Harvard University, diseñado para potenciar el talento emergente a través de networking, mentorías y formación ejecutiva.</p>
                             </div>
                         </div>
-
                     </div>
                 </div>
-                
                 <button class="carousel-btn prev" id="program-prev" aria-label="Anterior">&#10094;</button>
                 <button class="carousel-btn next" id="program-next" aria-label="Siguiente">&#10095;</button>
             </div>
         </div>
+
         <div class="section animate-on-scroll fade-in-up">
             <h2>🌟 Habilidades Blandas</h2>
             <div class="skills-grid">
@@ -509,8 +506,9 @@
                 Valoro la creación de entornos colaborativos y sanos, donde la conexión humana y la <strong>autenticidad</strong> son la base del éxito. Mi mayor motivación es hacer un trabajo que enorgullezca a mis mentores, mi familia y mi equipo.
             </p>
             
-            <div class="links-center">
+            <div class="links-center animate-on-scroll fade-in-up">
                 <a href="apuntes.html" class="btn-primary-ghost">Ver Apuntes Personales</a>
+                <a href="curiosidades.html" class="btn-primary-ghost">💡 Datos Curiosos</a>
             </div>
         </div>
 
@@ -606,19 +604,11 @@
     </div>
 
     <script>
-        // --- INICIO: (NUEVO) LÓGICA DEL CARRUSEL ---
-        /**
-         * Función reutilizable para crear un carrusel
-         * @param {string} trackId - ID del elemento track (el que se mueve)
-         * @param {string} prevBtnId - ID del botón "anterior"
-         * @param {string} nextBtnId - ID del botón "siguiente"
-         */
         function setupCarousel(trackId, prevBtnId, nextBtnId) {
             const track = document.getElementById(trackId);
             const prevBtn = document.getElementById(prevBtnId);
             const nextBtn = document.getElementById(nextBtnId);
             
-            // Chequeo de seguridad por si los elementos no existen
             if (!track || !prevBtn || !nextBtn) return;
             
             const slides = Array.from(track.children);
@@ -650,11 +640,8 @@
                 }
             });
 
-            // Inicializa los botones al cargar
             updateButtons();
         }
-        // --- FIN: LÓGICA DEL CARRUSEL ---
-
 
         function openModal(modalId) {
             document.getElementById(modalId).style.display = "block";
@@ -674,7 +661,6 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // --- Código de estrellas ---
             const shootingStarsContainer = document.querySelector('.shooting-stars');
             const numStars = 110; 
             for (let i = 0; i < numStars; i++) {
@@ -687,7 +673,6 @@
                 shootingStarsContainer.appendChild(star);
             }
             
-            // --- Código de animación en Scroll ---
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
@@ -701,7 +686,6 @@
             const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
             elementsToAnimate.forEach((el) => observer.observe(el));
             
-            // --- (NUEVO) Inicializar el carrusel de Programas ---
             setupCarousel('program-track', 'program-prev', 'program-next');
         });
     </script>
