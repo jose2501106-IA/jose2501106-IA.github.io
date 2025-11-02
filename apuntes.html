@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- ESTILOS BASE (Copiados de index.html) --- */
+        /* --- ESTILOS BASE --- */
         :root {
             --primary-color: #26447d; 
             --dark-blue: #2c3e50;
@@ -33,7 +33,7 @@
             overflow-x: hidden;
         }
 
-        /* --- ESTILOS DE ESTRELLAS (Copiados de index.html) --- */
+        /* --- ESTILOS DE ESTRELLAS --- */
         .shooting-stars {
             position: fixed;
             top: 0;
@@ -68,9 +68,9 @@
             50% { opacity: 0.3; }
         }
         
-        /* --- (NUEVO) CSS para la Página de Apuntes --- */
+        /* --- CSS para la Página de Apuntes --- */
         .container-apuntes {
-            max-width: 1200px; /* Más ancha, como pediste */
+            max-width: 1200px;
             margin: 0 auto;
             background-color: var(--white);
             padding: 2.5rem;
@@ -96,7 +96,7 @@
             font-size: 1.8rem;
         }
 
-        .apuntes-columna h2 span { /* Emoji */
+        .apuntes-columna h2 span {
             margin-right: 1rem;
             font-size: 2.2rem;
         }
@@ -137,12 +137,31 @@
             text-decoration: underline;
         }
 
-        /* Responsive para las columnas */
         @media (max-width: 768px) {
             .apuntes-grid {
-                grid-template-columns: 1fr; /* Se apilan en móvil */
+                grid-template-columns: 1fr;
             }
         }
+
+        /* --- INICIO: (NUEVO) CSS DE ANIMACIÓN EN SCROLL --- */
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-up {
+            transform: translateY(30px);
+        }
+        .fade-in-left { /* Para la columna izquierda */
+            transform: translateX(-30px);
+        }
+        .fade-in-right { /* Para la columna derecha */
+            transform: translateX(30px);
+        }
+        .show {
+            opacity: 1;
+            transform: none;
+        }
+        /* --- FIN: CSS DE ANIMACIÓN --- */
 
     </style>
 </head>
@@ -153,7 +172,7 @@
         <a href="index.html" class="back-link">&larr; Volver al Portafolio Principal</a>
         
         <div class="apuntes-grid">
-            <div class="apuntes-columna">
+            <div class="apuntes-columna animate-on-scroll fade-in-left">
                 <h2><span>⚙️</span>Ingeniería Industrial</h2>
                 <div class="materias-list">
                     <a href="#" class="materia-btn">Administración de Proyectos</a>
@@ -164,7 +183,7 @@
                 </div>
             </div>
             
-            <div class="apuntes-columna">
+            <div class="apuntes-columna animate-on-scroll fade-in-right">
                 <h2><span>🤖</span>Ing. en Inteligencia Artificial</h2>
                 <div class="materias-list">
                     <a href="#" class="materia-btn">Fundamentos de Programación</a>
@@ -178,8 +197,8 @@
     </div>
 
     <script>
-        // JS para las estrellas (Copiado de index.html)
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Código de estrellas (sin cambios) ---
             const shootingStarsContainer = document.querySelector('.shooting-stars');
             const numStars = 110; 
 
@@ -192,6 +211,22 @@
                 star.style.setProperty('--duration', `${5 + Math.random() * 8}s`);
                 shootingStarsContainer.appendChild(star);
             }
+            
+            // --- INICIO: (NUEVO) CÓDIGO DE ANIMACIÓN EN SCROLL ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1 
+            });
+
+            const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+            elementsToAnimate.forEach((el) => observer.observe(el));
+            // --- FIN: CÓDIGO DE ANIMACIÓN ---
         });
     </script>
 </body>
