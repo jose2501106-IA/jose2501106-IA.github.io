@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
+        /* --- ESTILOS BASE --- */
         :root {
             --primary-color: #26447d; 
             --dark-blue: #2c3e50;
@@ -32,40 +33,28 @@
             overflow-x: hidden;
         }
 
+        /* --- ESTILOS DE ESTRELLAS --- */
         .shooting-stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 1;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; overflow: hidden; z-index: 1;
         }
-
         .star {
-            position: absolute;
-            background-color: var(--white);
-            width: 2px;
-            height: 2px;
-            border-radius: 50%;
-            opacity: 0;
+            position: absolute; background-color: var(--white); width: 2px; height: 2px;
+            border-radius: 50%; opacity: 0;
             animation: 
                 star-fall var(--duration) linear var(--delay) infinite,
                 star-twinkle 2s ease-in-out var(--delay) infinite alternate;
         }
-
         @keyframes star-fall {
             0% { transform: translate(0, 0) scale(1); opacity: 0; }
             10% { opacity: 1; }
             100% { transform: translate(100vw, 100vh) scale(0.5); opacity: 0; }
         }
-
         @keyframes star-twinkle {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 0.3; }
+            0%, 100% { opacity: 0.8; } 50% { opacity: 0.3; }
         }
         
+        /* --- (NUEVO) CSS para Página de Apuntes con CARRUSEL --- */
         .container-apuntes {
             max-width: 1200px;
             margin: 0 auto;
@@ -77,92 +66,126 @@
             z-index: 10;
         }
         
-        .apuntes-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2.5rem;
+        .back-link {
+            display: inline-block; color: var(--primary-color); text-decoration: none;
+            font-weight: bold; font-size: 1.1rem; margin-bottom: 1.5rem;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        .apuntes-header {
+            text-align: center; margin-bottom: 1.5rem;
+        }
+        .apuntes-header h2 {
+            color: var(--primary-color); font-size: 2.2rem; margin: 0;
+            display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+        }
+        
+        .carousel-container {
+            position: relative;
             margin-top: 2rem;
         }
         
-        .apuntes-columna h2 {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            font-size: 1.8rem;
-        }
-
-        .apuntes-columna h2 span {
-            margin-right: 1rem;
-            font-size: 2.2rem;
-        }
-        
-        .materias-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .materia-btn {
-            display: block;
-            text-decoration: none;
-            background-color: var(--light-gray);
-            color: var(--dark-blue);
-            padding: 1.25rem;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 1.1rem;
+        .carousel-viewport {
+            overflow: hidden;
+            border-radius: 12px;
             border: 1px solid var(--border-color);
-            transition: all 0.2s ease;
+            background-color: #fdfdfd; /* Un fondo ligeramente distinto */
         }
         
-        .materia-btn:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
-            border-left: 5px solid var(--primary-color);
+        .carousel-track {
+            display: flex;
+            /* Transición suave para el deslizamiento */
+            transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         
-        .back-link {
-            display: inline-block;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
+        .slide {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columnas por "página" */
+            gap: 1.5rem;
+            flex: 0 0 100%; /* Cada slide ocupa el 100% del viewport */
+            padding: 1.5rem;
+            box-sizing: border-box; /* Importante para que el padding no rompa el 100% */
         }
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .apuntes-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* --- INICIO: CSS DE ANIMACIÓN (ACTUALIZADO) --- */
-        .animate-on-scroll {
-            opacity: 0;
-            /* Duración aumentada a 0.8s */
+        
+        .semester-card {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            opacity: 0; /* Se animará con JS */
+            transform: translateY(50px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
-        .fade-in-up {
-            /* Distancia aumentada a 50px */
-            transform: translateY(50px);
+        
+        .semester-card h3 {
+            font-size: 0.9rem; color: var(--secondary-text); text-transform: uppercase;
+            letter-spacing: 0.5px; margin: 0 0 1.5rem 0;
+            border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;
         }
-        .fade-in-left {
-            /* Distancia aumentada a 50px */
-            transform: translateX(-50px);
+        
+        .subject-list {
+            list-style: none; padding: 0; margin: 0;
+            display: flex; flex-direction: column; gap: 1rem;
         }
-        .fade-in-right {
-            /* Distancia aumentada a 50px */
-            transform: translateX(50px);
+        
+        .subject-list li a {
+            display: block; text-decoration: none; color: var(--text-color);
+            font-weight: 500; font-size: 1rem; padding: 0.75rem;
+            border-radius: 6px; transition: all 0.2s ease;
         }
+        
+        .subject-list li a:hover {
+            background-color: var(--light-gray); color: var(--primary-color);
+            transform: translateX(4px);
+        }
+        
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+            z-index: 20;
+        }
+        .carousel-btn:hover {
+            background-color: var(--white);
+            transform: translateY(-50%) scale(1.05);
+        }
+        .carousel-btn.prev {
+            left: -22px; /* Mitad fuera, mitad dentro */
+        }
+        .carousel-btn.next {
+            right: -22px;
+        }
+        .carousel-btn.hidden { /* Clase para ocultar botones */
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .slide { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .slide { grid-template-columns: 1fr; }
+            .carousel-btn.prev { left: 5px; }
+            .carousel-btn.next { right: 5px; }
+        }
+
+        /* --- Animación --- */
         .show {
             opacity: 1;
             transform: none;
         }
-        /* --- FIN: CSS DE ANIMACIÓN --- */
 
     </style>
 </head>
@@ -172,36 +195,158 @@
     <div class="container-apuntes">
         <a href="index.html" class="back-link">&larr; Volver al Portafolio Principal</a>
         
-        <div class="apuntes-grid">
-            <div class="apuntes-columna animate-on-scroll fade-in-left">
-                <h2><span>⚙️</span>Ingeniería Industrial</h2>
-                <div class="materias-list">
-                    <a href="#" class="materia-btn">Administración de Proyectos</a>
-                    <a href="#" class="materia-btn">Logística y Cadenas de Suministro</a>
-                    <a href="#" class="materia-btn">Optimización de Procesos</a>
-                    <a href="#" class="materia-btn">Control Estadístico de Calidad</a>
-                    <a href="#" class="materia-btn">Gestión de Operaciones</a>
+        <div class="carousel-container">
+            <div class="apuntes-header">
+                <h2><span>🤖</span>Ing. en Inteligencia Artificial</h2>
+            </div>
+            
+            <div class="carousel-viewport">
+                <div class="carousel-track" id="ia-track">
+                    <div class="slide">
+                        <div class="semester-card">
+                            <h3>Primer Cuatrimestre</h3>
+                            <ul class="subject-list">
+                                <li><a href="#">Introducción a la Ingeniería en IA</a></li>
+                                <li><a href="#">Experiencia de Usuario</a></li>
+                                <li><a href="#">Tecnología, Sociedad y Futuros Posibles I</a></li>
+                                <li><a href="#">Análisis y Diseño de Algoritmos</a></li>
+                                <li><a href="#">Matemáticas para Ingeniería</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>Segundo Cuatrimestre</h3>
+                            <ul class="subject-list">
+                                <li><a href="#">Fundamentos de Redes Computacionales</a></li>
+                                <li><a href="#">Probabilidad y Estadística</a></li>
+                                <li><a href="#">Tecnología, Sociedad y Futuros Posibles II</a></li>
+                                <li><a href="#">Programación Orientada a Objetos</a></li>
+                                <li><a href="#">Bases de Datos</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>Tercer Cuatrimestre</h3>
+                            <ul class="subject-list">
+                                <li><a href="#">Cloud Computing y Redes Virtuales</a></li>
+                                <li><a href="#">Ciencia de Datos</a></li>
+                                <li><a href="#">Programación Avanzada</a></li>
+                                <li><a href="#">Álgebra Lineal</a></li>
+                                <li><a href="#">Persona y Sociedad</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <div class="semester-card">
+                            <h3>Cuarto Cuatrimestre</h3>
+                            <ul class="subject-list">
+                                <li><a href="#">Arquitectura y Patrones de Diseño</a></li>
+                                <li><a href="#">Inteligencia Artificial</a></li>
+                                <li><a href="#">Fundamentos de Desarrollo Web</a></li>
+                                <li><a href="#">Cálculo Diferencial</a></li>
+                                <li><a href="#">Mundo Contemporáneo</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>Quinto Cuatrimestre</h3>
+                            <ul class="subject-list">
+                                <li><a href="#">Adm. de Sistemas Operativos y Servidores</a></li>
+                                <li><a href="#">Aprendizaje de Máquina</a></li>
+                                <li><a href="#">Desarrollo Web Back-end</a></li>
+                                <li><a href="#">Cálculo Integral</a></li>
+                                <li><a href="#">Comunicación Oral y Escrita</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>Sexto Cuatrimestre</h3>
+                            <ul class="subject-list">
+                                <li><a href="#">Pruebas Unitarias y Funcionales de Software</a></li>
+                                <li><a href="#">Sistemas de Aprendizaje Profundo</a></li>
+                                <li><a href="#">Análisis y Procesamiento de Datos</a></li>
+                                <li><a href="#">Código Abierto para Inteligencia Artificial</a></li>
+                                <li><a href="#">Ecuaciones Diferenciales</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <div class="semester-card">
+                            <h3>Séptimo Cuatrimestre</h3>
+                            <ul class="subject-list">
+                                <li><a href="#">Herramientas para DevOps</a></li>
+                                <li><a href="#">Lenguaje Natural</a></li>
+                                <li><a href="#">Minería de Datos</a></li>
+                                <li><a href="#">Estadística Bayesiana</a></li>
+                                <li><a href="#">Derecho en el Mundo Digital</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>Octavo Cuatrimestre</h3>
+                            <ul class="subject-list">
+                                <li><a href="#">Arquitectura de Producto</a></li>
+                                <li><a href="#">Business Intelligence</a></li>
+                                <li><a href="#">Metodologías y Marcos de Trabajo Ágiles</a></li>
+                                <li><a href="#">Ética en el Mundo Digital</a></li>
+                                <li><a href="#">Plan de Vida y Carrera</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>Noveno Cuatrimestre</h3>
+                            <ul class="subject-list">
+                                <li><a href="#">Seminario</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="apuntes-columna animate-on-scroll fade-in-right">
-                <h2><span>🤖</span>Ing. en Inteligencia Artificial</h2>
-                <div class="materias-list">
-                    <a href="#" class="materia-btn">Fundamentos de Programación</a>
-                    <a href="#" class="materia-btn">Matemáticas Discretas</a>
-                    <a href="#" class="materia-btn">Cálculo Diferencial e Integral</a>
-                    <a href="#" class="materia-btn">Fundamentos de IA</a>
-                    <a href="#" class="materia-btn">Estructura de Datos y Algoritmos</a>
-                </div>
-            </div>
+            <button class="carousel-btn prev" id="ia-prev" aria-label="Anterior">&#10094;</button>
+            <button class="carousel-btn next" id="ia-next" aria-label="Siguiente">&#10095;</button>
         </div>
-    </div>
+        <div class="carousel-container">
+            <div class="apuntes-header">
+                <h2><span>⚙️</span>Ingeniería Industrial</h2>
+            </div>
+            
+            <div class="carousel-viewport">
+                <div class="carousel-track" id="ind-track">
+                    <div class="slide">
+                        <div class="semester-card">
+                            <h3>Materias Clave</h3>
+                            <ul class="subject-list">
+                                <li><a href="#">Administración de Proyectos</a></li>
+                                <li><a href="#">Logística y Cadenas de Suministro</a></li>
+                                <li><a href="#">Optimización de Procesos</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>Control y Calidad</h3>
+                            <ul class="subject-list">
+                                <li><a href="#">Control Estadístico de Calidad</a></li>
+                                <li><a href="#">Gestión de Operaciones</a></li>
+                                <li><a href="#">(Próximamente...)</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>(Próximamente...)</h3>
+                            <ul class="subject-list">
+                                <li><a href="#">(Próximamente...)</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    </div>
+            </div>
+            
+            <button class="carousel-btn prev" id="ind-prev" aria-label="Anterior">&#10094;</button>
+            <button class="carousel-btn next" id="ind-next" aria-label="Siguiente">&#10095;</button>
+        </div>
+        </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Código de estrellas ---
             const shootingStarsContainer = document.querySelector('.shooting-stars');
             const numStars = 110; 
-
             for (let i = 0; i < numStars; i++) {
                 const star = document.createElement('div');
                 star.classList.add('star');
@@ -212,19 +357,76 @@
                 shootingStarsContainer.appendChild(star);
             }
             
+            // --- INICIO: CÓDIGO DEL CARRUSEL ---
+            
+            /**
+             * Función reutilizable para crear un carrusel
+             * @param {string} trackId - ID del elemento track (el que se mueve)
+             * @param {string} prevBtnId - ID del botón "anterior"
+             * @param {string} nextBtnId - ID del botón "siguiente"
+             * @param {number} totalSlides - Número total de slides
+             */
+            function setupCarousel(trackId, prevBtnId, nextBtnId, totalSlides) {
+                const track = document.getElementById(trackId);
+                const prevBtn = document.getElementById(prevBtnId);
+                const nextBtn = document.getElementById(nextBtnId);
+                let currentIndex = 0;
+
+                function updateSlidePosition() {
+                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                }
+
+                function updateButtons() {
+                    // Oculta el botón "anterior" si estamos en el primer slide
+                    prevBtn.classList.toggle('hidden', currentIndex === 0);
+                    // Oculta el botón "siguiente" si estamos en el último slide
+                    nextBtn.classList.toggle('hidden', currentIndex === totalSlides - 1);
+                }
+
+                prevBtn.addEventListener('click', () => {
+                    if (currentIndex > 0) {
+                        currentIndex--;
+                        updateSlidePosition();
+                        updateButtons();
+                    }
+                });
+
+                nextBtn.addEventListener('click', () => {
+                    if (currentIndex < totalSlides - 1) {
+                        currentIndex++;
+                        updateSlidePosition();
+                        updateButtons();
+                    }
+                });
+
+                // Inicializa los botones al cargar
+                updateButtons();
+            }
+
+            // Inicializar el carrusel de IA (tiene 3 slides)
+            setupCarousel('ia-track', 'ia-prev', 'ia-next', 3);
+            
+            // Inicializar el carrusel Industrial (tiene 1 slide por ahora)
+            // Si añades más slides, solo cambia el '1' por el nuevo total
+            setupCarousel('ind-track', 'ind-prev', 'ind-next', 1);
+
+            
+            // --- INICIO: CÓDIGO DE ANIMACIÓN DE ENTRADA ---
             const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
+                entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
+                        entry.target.style.transitionDelay = `${index * 100}ms`;
                         entry.target.classList.add('show');
                         observer.unobserve(entry.target);
                     }
                 });
             }, {
-                threshold: 0.1 
+                threshold: 0.1
             });
 
-            const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+            const elementsToAnimate = document.querySelectorAll('.semester-card');
             elementsToAnimate.forEach((el) => observer.observe(el));
+            
         });
     </script>
 </body>
