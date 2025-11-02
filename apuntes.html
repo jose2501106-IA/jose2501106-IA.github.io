@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- ESTILOS BASE --- */
         :root {
             --primary-color: #26447d; 
             --dark-blue: #2c3e50;
@@ -33,7 +32,6 @@
             overflow-x: hidden;
         }
 
-        /* --- ESTILOS DE ESTRELLAS --- */
         .shooting-stars {
             position: fixed;
             top: 0;
@@ -68,7 +66,6 @@
             50% { opacity: 0.3; }
         }
         
-        /* --- CSS para la Página de Apuntes --- */
         .container-apuntes {
             max-width: 1200px;
             margin: 0 auto;
@@ -143,19 +140,23 @@
             }
         }
 
-        /* --- INICIO: (NUEVO) CSS DE ANIMACIÓN EN SCROLL --- */
+        /* --- INICIO: CSS DE ANIMACIÓN (ACTUALIZADO) --- */
         .animate-on-scroll {
             opacity: 0;
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            /* Duración aumentada a 0.8s */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
         .fade-in-up {
-            transform: translateY(30px);
+            /* Distancia aumentada a 50px */
+            transform: translateY(50px);
         }
-        .fade-in-left { /* Para la columna izquierda */
-            transform: translateX(-30px);
+        .fade-in-left {
+            /* Distancia aumentada a 50px */
+            transform: translateX(-50px);
         }
-        .fade-in-right { /* Para la columna derecha */
-            transform: translateX(30px);
+        .fade-in-right {
+            /* Distancia aumentada a 50px */
+            transform: translateX(50px);
         }
         .show {
             opacity: 1;
@@ -198,7 +199,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- Código de estrellas (sin cambios) ---
             const shootingStarsContainer = document.querySelector('.shooting-stars');
             const numStars = 110; 
 
@@ -212,7 +212,6 @@
                 shootingStarsContainer.appendChild(star);
             }
             
-            // --- INICIO: (NUEVO) CÓDIGO DE ANIMACIÓN EN SCROLL ---
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
@@ -226,7 +225,6 @@
 
             const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
             elementsToAnimate.forEach((el) => observer.observe(el));
-            // --- FIN: CÓDIGO DE ANIMACIÓN ---
         });
     </script>
 </body>
