@@ -306,17 +306,19 @@
 
         @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
 
-        /* --- INICIO: (NUEVO) CSS DE ANIMACIÓN EN SCROLL --- */
+        /* --- INICIO: CSS DE ANIMACIÓN (ACTUALIZADO) --- */
         .animate-on-scroll {
             opacity: 0;
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            /* Duración aumentada a 0.8s */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
         .fade-in-up {
-            transform: translateY(30px);
+            /* Distancia aumentada a 50px */
+            transform: translateY(50px);
         }
         .show {
             opacity: 1;
-            transform: none; /* Regresa a su posición original (0,0) */
+            transform: none;
         }
         /* --- FIN: CSS DE ANIMACIÓN --- */
 
@@ -573,7 +575,6 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // --- Código de estrellas (sin cambios) ---
             const shootingStarsContainer = document.querySelector('.shooting-stars');
             const numStars = 110; 
 
@@ -587,23 +588,19 @@
                 shootingStarsContainer.appendChild(star);
             }
             
-            // --- INICIO: (NUEVO) CÓDIGO DE ANIMACIÓN EN SCROLL ---
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('show');
-                        observer.unobserve(entry.target); // Para que la animación solo ocurra una vez
+                        observer.unobserve(entry.target);
                     }
                 });
             }, {
-                threshold: 0.1 // La animación se dispara cuando el 10% del elemento es visible
+                threshold: 0.1
             });
 
-            // Seleccionamos todos los elementos que queremos animar
             const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
-            // Le decimos al observador que "vigile" cada uno de esos elementos
             elementsToAnimate.forEach((el) => observer.observe(el));
-            // --- FIN: CÓDIGO DE ANIMACIÓN ---
         });
     </script>
 </body>
