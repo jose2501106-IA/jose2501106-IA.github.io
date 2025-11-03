@@ -3,605 +3,486 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>José Hugo Meza - Data & AI Aspirant</title>
+    <title>Proyecto L6S: DataOps - José Hugo Meza</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
         :root {
-            --primary-color: #26447d; 
-            --dark-blue: #2c3e50;
-            --light-gray: #f8f9fa;
-            --text-color: #343a40;
-            --secondary-text: #6c757d;
-            --white: #ffffff;
+            --primary-color: #26447d; --dark-blue: #2c3e50; --light-gray: #f8f9fa;
+            --text-color: #343a40; --secondary-text: #6c757d; --white: #ffffff;
             --border-color: #e9ecef;
-            
-            --harvard-red: #A51C30;
-            --harvard-red-pastel: #FADADD;
-            --harvard-red-pastel-hover: #F8CFD3;
-
-            --one-blue-pastel: #E1F4FC;
-            --one-blue-pastel-hover: #D0EDF9;
         }
-
         body { 
-            font-family: 'Inter', sans-serif; 
-            line-height: 1.7; 
-            color: var(--text-color); 
-            margin: 0; 
-            padding: 2rem;
+            font-family: 'Inter', sans-serif; line-height: 1.7; color: var(--text-color); 
+            margin: 0; padding: 2rem;
             background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center center;
-            background-attachment: fixed;
+            background-size: cover; background-position: center center; background-attachment: fixed;
             overflow-x: hidden;
         }
-
         .container { 
-            max-width: 800px; 
-            margin: 0 auto; 
-            background-color: var(--white); 
-            padding: 2.5rem; 
-            border-radius: 12px; 
-            box-shadow: 0 8px 32px rgba(0,0,0,0.07);
-            position: relative;
-            z-index: 10;
+            max-width: 900px; margin: 0 auto; background-color: var(--white); 
+            padding: 2.5rem; border-radius: 12px; 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.07); position: relative; z-index: 10;
         }
-
-        .header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap; 
-        }
-
-        .profile-photo {
-            width: 140px;
-            height: 175px;
-            border-radius: 8px;
-            margin-right: 2rem;
-            object-fit: cover;
-            border: 3px solid var(--border-color);
-        }
-
-        h1 { font-size: 2.5rem; color: var(--dark-blue); margin: 0; }
-        .subtitle { font-size: 1.15rem; color: var(--secondary-text); margin-top: 0.25rem; font-weight: 400; }
-        p { font-size: 1.1rem; }
-
-        strong {
-            color: var(--primary-color);
-        }
-
-        .section {
-            margin-top: 2.5rem;
-            border-top: 1px solid var(--border-color);
-            padding-top: 2rem;
-        }
-
-        h2 { color: var(--primary-color); font-size: 1.8rem; margin-bottom: 1.5rem; }
-        
-        .links a { 
-            display: inline-block; 
-            background-color: var(--primary-color); 
-            color: var(--white); 
-            text-decoration: none; 
-            padding: 12px 24px; 
-            border-radius: 8px; 
-            margin: 10px 10px 10px 0; 
-            font-weight: bold; 
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .links a:hover { 
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(38, 68, 125, 0.4);
-        }
-        
-        .links-center {
-            text-align: center;
-            margin-top: 2.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem; 
-        }
-        .btn-primary-ghost {
-            display: inline-block;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-            background-color: var(--white);
-            text-decoration: none; 
-            padding: 12px 28px; 
-            border-radius: 8px; 
-            font-weight: bold; 
-            transition: all 0.2s ease;
-            width: 300px; 
-            box-sizing: border-box; 
-        }
-        .btn-primary-ghost:hover {
-            background-color: var(--primary-color);
-            color: var(--white);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(38, 68, 125, 0.4);
-        }
-
-        .value-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-            text-align: center;
-        }
-        .value-item {
-            background-color: var(--light-gray);
-            padding: 1.5rem;
-            border-radius: 8px;
-        }
-        .value-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        .value-item h3 {
-            margin: 0 0 0.5rem 0;
-            color: var(--primary-color);
-        }
-        .value-item p {
-            font-size: 0.95rem;
-            color: var(--secondary-text);
-            line-height: 1.6;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-        }
-
-        .skill {
-            background-color: var(--light-gray);
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: bold;
-            color: var(--dark-blue);
-            cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.2s ease;
-        }
-        
-        .skill:hover {
-             background-color: #dde8f8;
-             transform: translateY(-2px);
-        }
-        
-        .education-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
-
-        .education-item {
-            background-color: var(--light-gray);
-            padding: 1.5rem;
-            border-radius: 8px;
-            border-left: 5px solid var(--primary-color);
-        }
-        
-        .education-item h3 {
-            margin: 0 0 0.25rem 0;
-            color: var(--dark-blue);
-        }
-
-        .education-item p {
-            margin: 0;
-            font-size: 1rem;
-            color: var(--secondary-text);
-        }
-        
-        .education-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-
-        .education-header h3 {
-            margin: 0;
-        }
-
-        .progress-label {
-            font-size: 0.9rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            background-color: #dde8f8;
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
-
-        .progress-bar {
-            width: 100%;
-            background-color: var(--border-color);
-            border-radius: 5px;
-            height: 10px;
-            margin-top: 1rem;
-            overflow: hidden;
-        }
-
-        .progress {
-            height: 100%;
-            background-color: var(--primary-color);
-            border-radius: 5px;
-            transition: width 0.5s ease-out;
-        }
-
-        .carousel-container { 
-            position: relative; 
-            margin-top: 1rem; 
-        }
-        .carousel-viewport { 
-            overflow: hidden; 
-            border-radius: 12px; 
-        }
-        .carousel-track { 
-            display: flex; 
-            transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); 
-        }
-        .slide {
-            flex: 0 0 100%;
-            box-sizing: border-box;
-            background-color: var(--light-gray);
-        }
-        .program-card {
-            border-radius: 12px;
-            padding: 2rem;
-            color: var(--text-color);
-            min-height: 180px; 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .program-card h3 {
-            font-size: 1.5rem;
-            margin-top: 0;
-            margin-bottom: 0.75rem;
-        }
-        .program-card p {
-            font-size: 1rem;
-            line-height: 1.6;
-            margin: 0;
-        }
-        
-        .program-card-one {
-            background-color: var(--one-blue-pastel);
-            color: var(--dark-blue);
-            border: 1px solid var(--one-blue-pastel-hover);
-        }
-        .program-card-one h3 { color: var(--primary-color); }
-
-        .program-card-aspire {
-            background-color: var(--harvard-red-pastel);
-            color: var(--dark-blue);
-            border: 1px solid var(--harvard-red-pastel-hover);
-        }
-        .program-card-aspire h3 { color: var(--harvard-red); }
-
-        .carousel-btn {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.9); border: 1px solid var(--border-color);
-            border-radius: 50%; width: 44px; height: 44px; font-size: 1.5rem;
-            color: var(--primary-color); cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: all 0.2s ease; z-index: 20;
-        }
-        .carousel-btn:hover { background-color: var(--white); transform: translateY(-50%) scale(1.05); }
-        .carousel-btn.prev { left: 10px; }
-        .carousel-btn.next { right: 10px; }
-        .carousel-btn.hidden { opacity: 0; pointer-events: none; }
-
-
         .shooting-stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 1;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; overflow: hidden; z-index: 1;
         }
-
         .star {
-            position: absolute;
-            background-color: var(--white);
-            width: 2px;
-            height: 2px;
-            border-radius: 50%;
-            opacity: 0;
+            position: absolute; background-color: var(--white); width: 2px; height: 2px;
+            border-radius: 50%; opacity: 0;
             animation: 
                 star-fall var(--duration) linear var(--delay) infinite,
                 star-twinkle 2s ease-in-out var(--delay) infinite alternate;
         }
+        @keyframes star-fall { 0% { transform: translate(0, 0) scale(1); opacity: 0; } 10% { opacity: 1; } 100% { transform: translate(100vw, 100vh) scale(0.5); opacity: 0; } }
+        @keyframes star-twinkle { 0%, 100% { opacity: 0.8; } 50% { opacity: 0.3; } }
+        
+        .back-link {
+            display: inline-block; color: var(--primary-color); text-decoration: none;
+            font-weight: bold; font-size: 1.1rem; margin-bottom: 1.5rem;
+        }
+        .back-link:hover { text-decoration: underline; }
 
-        @keyframes star-fall {
-            0% { transform: translate(0, 0) scale(1); opacity: 0; }
-            10% { opacity: 1; }
-            100% { transform: translate(100vw, 100vh) scale(0.5); opacity: 0; }
+        .note-content { }
+        
+        .project-header {
+            text-align: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .project-header h1 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            line-height: 1.3;
+            margin: 0;
+        }
+        .project-header .slogan {
+            font-size: 1.1rem;
+            color: var(--secondary-text);
+            margin-top: 0.75rem;
+            font-style: italic;
         }
 
-        @keyframes star-twinkle {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 0.3; }
+        .section-header {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
         }
         
-        .modal {
-            display: none; position: fixed; z-index: 1000; left: 0; top: 0;
-            width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5);
-            animation: fadeIn 0.3s;
+        .note-content h2 {
+            color: var(--dark-blue);
+            font-size: 1.5rem;
+            margin-top: 2rem;
         }
-        .modal-content {
-            background-color: #fff; margin: 15% auto; padding: 25px;
-            border-radius: 10px; max-width: 500px; position: relative;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        .note-content h3 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
         }
-        .close-btn {
-            color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;
+        .note-content p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-top: 0.5rem;
         }
-        .close-btn:hover, .close-btn:focus { color: black; }
+        .note-content strong { color: var(--primary-color); }
+        .note-content ul {
+            padding-left: 20px;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
         
-        footer {
-            text-align: center; margin-top: 2.5rem; padding-top: 1.5rem;
-            border-top: 1px solid var(--border-color); color: var(--secondary-text);
+        /* (NUEVO) Texto de explicación simple */
+        .explanation-text {
+            font-size: 0.95rem;
+            color: var(--secondary-text);
+            font-style: italic;
+            margin-top: 0.5rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--border-color);
+        }
+
+        .timeline-container {
+            position: relative;
+            margin-top: 2.5rem;
+        }
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 20px; left: 50%; bottom: 20px;
+            width: 4px; background: var(--border-color);
+            transform: translateX(-50%); z-index: 1;
+        }
+        
+        .timeline-item {
+            padding: 1rem 3rem;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        .timeline-icon {
+            position: absolute;
+            top: 20px; width: 60px; height: 60px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: var(--white);
+            font-size: 2rem; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 2; border: 4px solid var(--white);
+        }
+        
+        .timeline-content {
+            padding: 1.5rem;
+            background: var(--light-gray);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .timeline-content h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: var(--dark-blue);
+        }
+        .timeline-content p, .timeline-content ul {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+        .timeline-content li { margin-bottom: 0.5rem; }
+
+        .timeline-item-left { left: 0; padding-right: 4rem; }
+        .timeline-item-right { left: 50%; padding-left: 4rem; }
+        
+        .timeline-item-left .timeline-icon { right: -30px; transform: translateX(0); }
+        .timeline-item-right .timeline-icon { left: -30px; transform: translateX(0); }
+
+        .timeline-content::before {
+            content: ''; position: absolute;
+            top: 30px; width: 0; height: 0;
+            border-style: solid;
+        }
+        .timeline-item-left .timeline-content::before {
+            right: -10px;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent var(--border-color);
+        }
+        .timeline-item-right .timeline-content::before {
+            left: -10px;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent var(--border-color) transparent transparent;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-container::before { left: 30px; }
+            .timeline-item,
+            .timeline-item-right,
+            .timeline-item-left {
+                width: 100%; left: 0;
+                padding-left: 5rem;
+                padding-right: 0.5rem;
+                margin-bottom: 1rem;
+            }
+            .timeline-icon,
+            .timeline-item-left .timeline-icon,
+            .timeline-item-right .timeline-icon {
+                left: 0;
+                transform: translateX(0);
+            }
+            .timeline-content::before,
+            .timeline-item-left .timeline-content::before,
+            .timeline-item-right .timeline-content::before {
+                left: -10px; right: auto;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent var(--border-color) transparent transparent;
+            }
+        }
+
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .styled-table th, .styled-table td {
+            border: 1px solid var(--border-color); padding: 12px 15px; text-align: left;
+        }
+        .styled-table th { background-color: var(--light-gray); color: var(--dark-blue); font-weight: bold; }
+        .styled-table tr:nth-of-type(even) { background-color: #fcfcfc; }
+        
+        /* (ELIMINADO) Estilo de Testimonio (blockquote) */
+
+        .section-divider {
+            border: 0; height: 2px; background-color: var(--border-color); margin: 3rem 0;
+        }
+        
+        /* (NUEVO) Nota de aproximación del ROI */
+        .roi-note {
             font-size: 0.9rem;
+            color: var(--secondary-text);
+            text-align: center;
+            margin-top: 1.5rem;
+            font-style: italic;
         }
-
-        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
 
         .animate-on-scroll {
             opacity: 0;
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
-        .fade-in-up {
-            transform: translateY(50px);
-        }
-        .show {
-            opacity: 1;
-            transform: none;
-        }
+        .fade-in-up { transform: translateY(50px); }
+        .fade-in-left { transform: translateX(-50px); }
+        .fade-in-right { transform: translateX(50px); }
+        
+        .show { opacity: 1; transform: none; }
     </style>
 </head>
 <body>
     <div class="shooting-stars"></div> 
 
     <div class="container">
-        <div class="header">
-            <img src="https://github.com/jose2501106-IA/jose2501106-IA.github.io/blob/main/Pepe.png?raw=true" alt="Foto de José Hugo Meza" class="profile-photo">
-            <div>
-                <h1>José Hugo Meza</h1>
-                <p class="subtitle">Estudiante de Ing. en IA & Industrial | Data Governance Aspirant</p>
-            </div>
-        </div>
-        
-        <p class="animate-on-scroll fade-in-up">Mi misión es construir puentes entre la tecnología de datos y los procesos de negocio. Creo firmemente que los datos confiables son el activo más importante para la toma de decisiones inteligentes.</p>
+        <a href="index.html" class="back-link">&larr; Volver al Portafolio Principal</a>
 
-        <div class="links animate-on-scroll fade-in-up">
-            <a href="https://drive.google.com/file/d/181wkopI_I6T0KGhwypm6gz5R9VVPEha4/view?usp=sharing" target="_blank">Descargar CV</a>
-            <a href="https://www.linkedin.com/in/josehugomeza-ai" target="_blank">LinkedIn</a>
-            <a href="https://github.com/jose2501106-IA" target="_blank">GitHub</a>
-        </div>
-        
-        <div class="section value-proposition animate-on-scroll fade-in-up">
-            <h2>Mi Propuesta de Valor</h2>
-            <div class="value-grid">
-                <div class="value-item">
-                    <div class="value-icon">⚙️</div>
-                    <h3>Visión de Procesos</h3>
-                    <p>Gracias a mi formación en <strong>Ingeniería Industrial</strong>, analizo los flujos de datos como una línea de producción, identificando ineficiencias y optimizando para máxima calidad y eficiencia.</p>
-                </div>
-                <div class="value-item">
-                    <div class="value-icon">🤖</div>
-                    <h3>Mentalidad Tecnológica</h3>
-                    <p>Con mi enfoque en <strong>Inteligencia Artificial</strong>, no solo ejecuto tareas, sino que construyo soluciones automatizadas y escalables que resuelven problemas de negocio de raíz.</p>
-                </div>
-                <div class="value-item">
-                    <div class="value-icon">🏛️</div>
-                    <h3>Enfoque en Gobernanza</h3>
-                    <p>Mi pasión es construir la <strong>base de confianza</strong> para los datos. Me aseguro de que la información sea precisa, segura y accesible para potenciar la toma de decisiones estratégicas.</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="section animate-on-scroll fade-in-up">
-            <h2>Formación Académica</h2>
-            <div class="education-grid">
-                <div class="education-item">
-                    <div class="education-header">
-                        <h3>Hybridge Education</h3>
-                        <span class="progress-label">2/9 Cuatrimestres</span>
-                    </div>
-                    <p>Ingeniería en Inteligencia Artificial</p>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 22.2%;"></div> 
-                    </div>
-                </div>
-                <div class="education-item">
-                    <div class="education-header">
-                        <h3>Universidad Virtual del Estado de Guanajuato</h3>
-                        <span class="progress-label">32% Completado</span>
-                    </div>
-                    <p>Ingeniería Industrial</p>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 32%;"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="section animate-on-scroll fade-in-up">
-            <h2>Mi Filosofía</h2>
-            <p>Aplico principios de <strong>Lean Six Sigma</strong> para la mejora de procesos, buscando eliminar ineficiencias y optimizar flujos de trabajo. Mi enfoque en el Gobierno de Datos se basa en la misma idea: tratar los datos de mala calidad como un "desperdicio" que debe ser erradicado para construir sistemas robustos y eficientes.</p>
-        </div>
-        
-        <div class="section animate-on-scroll fade-in-up">
-            <h2>Programas Destacados</h2>
-            <div class="carousel-container">
-                <div class="carousel-viewport">
-                    <div class="carousel-track" id="program-track">
-                        <div class="slide">
-                            <div class="program-card program-card-one">
-                                <h3>Oracle Next Education (ONE)</h3>
-                                <p>Participando en un programa intensivo de 6 meses donde he construido una base sólida en desarrollo full-stack, metodologías Ágiles y lógica de programación. Actualmente, me especializo en <strong>Ciencia de Datos</strong>, profundizando en la manipulación, análisis y visualización de datos para extraer insights de valor.</p>
-                            </div>
-                        </div>
-                        <div class="slide">
-                            <div class="program-card program-card-aspire">
-                                <h3>Aspire Leaders Program (Harvard University)</h3>
-                                <p>Seleccionado para un programa global de desarrollo de liderazgo fundado por catedráticos de Harvard University, diseñado para potenciar el talento emergente a través de networking, mentorías y formación ejecutiva.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-btn prev" id="program-prev" aria-label="Anterior">&#10094;</button>
-                <button class="carousel-btn next" id="program-next" aria-label="Siguiente">&#10095;</button>
-            </div>
-        </div>
-
-        <div class="section animate-on-scroll fade-in-up">
-            <h2>🌟 Habilidades Blandas</h2>
-            <div class="skills-grid">
-                <div class="skill" onclick="openModal('comunicacion')">Comunicación Efectiva</div>
-                <div class="skill" onclick="openModal('liderazgo')">Liderazgo Proactivo</div>
-                <div class="skill" onclick="openModal('resolucion')">Resolución de Problemas</div>
-                <div class="skill" onclick="openModal('ownership')">Ownership</div>
-                <div class="skill" onclick="openModal('colaboracion')">Trabajo Colaborativo</div>
-                <div class="skill" onclick="openModal('curiosidad')">Curiosidad por Datos</div>
-            </div>
-        </div>
-
-        <div class="section animate-on-scroll fade-in-up">
-            <h2>💻 Habilidades Técnicas</h2>
-            <div class="skills-grid">
-                 <div class="skill" onclick="openModal('governance')">Data Governance</div>
-                 <div class="skill" onclick="openModal('pythonSql')">Python & SQL</div>
-                 <div class="skill" onclick="openModal('dataops')">DataOps</div>
-                 <div class="skill" onclick="openModal('automation')">Process Automation</div>
-                 <div class="skill" onclick="openModal('sixSigma')">Lean Six Sigma</div>
-                 <div class="skill" onclick="openModal('prompt')">Prompt Engineering</div>
-            </div>
-        </div>
-
-        <div class="section animate-on-scroll fade-in-up">
-            <h2>🚀 Proyecto Destacado</h2>
-            <h3>Automatización de Procesos con Google Apps Script</h3>
-            <p>Un sistema 100% autónomo que gestiona el ciclo de vida de los datos para el registro de asistentes a la <strong>Peregrinación Nacional Anual Juvenil al Cerro de Cristo Rey del Cubilete</strong>, eliminando el trabajo manual y aplicando principios de DataOps.</p>
-            <div class="links">
-                <a href="https://github.com/jose2501106-IA/Automatizacion-google-apps-script" target="_blank">Ver en GitHub</a>
-            </div>
-        </div>
-        
-        <div class="section animate-on-scroll fade-in-up">
-            <h2>🧠 Más Allá del Código</h2>
-            <p>
-                Creo firmemente en la mejora continua, no solo en la tecnología, sino a nivel personal. Mi enfoque se basa en la introspección y la <strong>resiliencia</strong>; veo cada desafío como una oportunidad para aprender y levantarme más fuerte. Me impulsa un profundo deseo de encontrar la verdadera raíz de los problemas y construir soluciones que generen un impacto positivo y duradero.
-            </p>
-            <p>
-                Valoro la creación de entornos colaborativos y sanos, donde la conexión humana y la <strong>autenticidad</strong> son la base del éxito. Mi mayor motivación es hacer un trabajo que enorgullezca a mis mentores, mi familia y mi equipo.
-            </p>
+        <div class="note-content">
             
-            <div class="links-center animate-on-scroll fade-in-up">
-                <a href="apuntes.html" class="btn-primary-ghost">Ver Apuntes Personales</a>
-                <a href="curiosidades.html" class="btn-primary-ghost">💡 Datos Curiosos</a>
-                <a href="proyecto-l6s.html" class="btn-primary-ghost">🛠️ Proyecto L6S (En Proceso)</a>
+            <div class="project-header animate-on-scroll fade-in-up">
+                <h1>Lean Six Sigma en la Era de la IA: Optimizando el Pipeline de DataOps con DMAIC</h1>
+                <p class="slogan">"Tratando los datos como un proceso de manufactura: Del 'Muda' de datos a la producción de IA de Nivel Seis Sigma."</p>
             </div>
-        </div>
+            
+            <div class="animate-on-scroll fade-in-up">
+                <h1 class="section-header">📊 Resumen Ejecutivo</h1>
+                <h2>El Problema: El "Desperdicio" Oculto en los Datos</h2>
+                <p>
+                    En la industria, los Científicos de Datos invierten hasta un <strong>80% de su tiempo</strong> en preparar y limpiar datos. Este tiempo es un "desperdicio" (o "Muda" en Lean) que retrasa la innovación y cuesta millones. Además, los datos de mala calidad pueden "envenenar" a los modelos de IA, llevando a decisiones de negocio erróneas.
+                </p>
+                
+                <h2>El Enfoque: Una Fábrica de Datos</h2>
+                <p>Este proyecto (aún en desarrollo) aplica el método <strong>DMAIC</strong> de Lean Six Sigma para tratar el "pipeline" de datos como una línea de ensamblaje. El objetivo es simple: producir datos de alta calidad de forma rápida y consistente.</p>
+                <ul>
+                    <li><strong>Defecto:</strong> Cualquier dato incorrecto, incompleto u obsoleto.</li>
+                    <li><strong>Cliente:</strong> El Científico de Datos y el Modelo de IA.</li>
+                </ul>
+                
+                <h2>El Objetivo 🎯 (Goal Statement)</h2>
+                <p>
+                    Este proyecto busca reducir el tiempo de ciclo del "Pipeline de Features" (Y1) de 12 a 4 horas y aumentar el "Índice de Calidad de Datos" (Y2) de 75% a 99%, alcanzando un Nivel Sigma de 4.5 en 6 meses.
+                </p>
+            </div>
 
+            <hr class="section-divider">
+
+            <div>
+                <h1 class="section-header animate-on-scroll fade-in-up">El Proceso DMAIC (Paso a Paso)</h1>
+                <div class="timeline-container">
+                    
+                    <div class="timeline-item timeline-item-left animate-on-scroll fade-in-left">
+                        <div class="timeline-icon">D</div>
+                        <div class="timeline-content">
+                            <h3>Definir</h3>
+                            <p>Primero, definimos el problema y qué significaba "calidad" para nuestros clientes (los modelos de IA).</p>
+                            <ul>
+                                <li><strong>Herramienta:</strong> Árbol de CTQ (Crítico para la Calidad).</li>
+                                <li><strong>Hallazgo Clave:</strong> El éxito dependía de dos factores: <strong>1. Calidad del Dato</strong> (precisión, sin nulos) y <strong>2. Velocidad</strong> (disponible en < 4 horas).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-item-right animate-on-scroll fade-in-right">
+                        <div class="timeline-icon">M</div>
+                        <div class="timeline-content">
+                            <h3>Medir</h3>
+                            <p>Medimos el rendimiento actual para saber qué tan grande era el problema.</p>
+                            <ul>
+                                <li><strong>Línea Base:</strong> Tasa de Calidad (DQS) = 75%. Latencia = 12 horas. (Nivel Sigma: ~2.2 📉).</li>
+                                <li><strong>Herramienta:</strong> MSA (Análisis del Sistema de Medición).</li>
+                                <p class="explanation-text">Básicamente, "medimos nuestro sistema de medición".</p>
+                                <li><strong>Hallazgo Clave:</strong> ¡Nuestros scripts de validación (el "Gage") fallaban! Solo detectaban el 70% de los defectos. Tuvimos que parar y recalibrar nuestras herramientas de medición primero.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-item-left animate-on-scroll fade-in-left">
+                        <div class="timeline-icon">A</div>
+                        <div class="timeline-content">
+                            <h3>Analizar</h3>
+                            <p>Usamos estadística para encontrar la verdadera "causa raíz" de los defectos y la lentitud.</p>
+                            <ul>
+                                <li><strong>Herramienta:</strong> ANOVA (Análisis de Varianza).</li>
+                                <p class="explanation-text">Una prueba para ver si diferentes grupos (fuentes de datos) tenían resultados significativamente diferentes.</p>
+                                <li><strong>Hallazgo (Calidad):</strong> Con un <strong>p-value < 0.05</strong>, confirmamos que la 'API de Terceros' era la causa raíz de la mayoría de los defectos.</li>
+                                <li><strong>Herramienta:</strong> Regresión Lineal.</li>
+                                <li><strong>Hallazgo (Latencia):</strong> Confirmamos que el 'Volumen de Datos' y la 'Hora del Día' eran los predictores estadísticos de la lentitud (R-sq = 0.82).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item timeline-item-right animate-on-scroll fade-in-right">
+                        <div class="timeline-icon">I</div>
+                        <div class="timeline-content">
+                            <h3>Mejorar</h3>
+                            <p>Diseñamos e implementamos soluciones para arreglar las causas raíz.</p>
+                            <ul>
+                                <li><strong>Solución 1 (DOE):</strong> Usamos un <strong>Diseño de Experimentos</strong> para probar combinaciones y encontrar la configuración óptima de Spark (memoria, procesadores, etc.), reduciendo la latencia un 40%.</li>
+                                <li><strong>Solución 2 (Poka-Yoke):</strong> Implementamos "barreras de error" 🛡️ con `Great Expectations`. Si un dato es malo, el pipeline se detiene automáticamente, evitando que el "defecto" llegue al cliente.</li>
+                                <li><strong>Solución 3 (Standard Work):</strong> Migramos los procesos a `dbt` para estandarizar las transformaciones, asegurando que sean consistentes y repetibles.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item timeline-item-left animate-on-scroll fade-in-left">
+                        <div class="timeline-icon">C</div>
+                        <div class="timeline-content">
+                            <h3>Controlar</h3>
+                            <p>Implementamos un tablero de control (SPC) para asegurar que las mejoras se mantengan. (¡Esto es MLOps en la práctica!).</p>
+                            <ul>
+                                <li><strong>Herramienta:</strong> Gráficas de Control Estadístico de Procesos (SPC).</li>
+                                <li><strong>Acción (Data Drift):</strong> Una <strong>Gráfica XmR</strong> monitorea la media de las variables. Si una variable (ej. 'Edad') se sale de control, se activa una alerta de "Data Drift" 🚨 para re-entrenar el modelo.</li>
+                                <li><strong>Acción (Calidad):</strong> Una <strong>Gráfica U</strong> monitorea la tasa de defectos por batch.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="section-divider">
+
+            <div class="animate-on-scroll fade-in-up">
+                <h1 class="section-header">Resultados y ROI 📈</h1>
+                <h2>Comparativa "Antes y Después"</h2>
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Métrica Clave</th>
+                            <th>Línea Base (Antes)</th>
+                            <th>Meta (Después)</th>
+                            <th>Mejora</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Índice de Calidad de Datos (Y1)</td>
+                            <td>75%</td>
+                            <td>99.2%</td>
+                            <td style="color: green; font-weight: bold;">+24.2%</td>
+                        </tr>
+                        <tr>
+                            <td>Nivel Sigma (Calidad)</td>
+                            <td>~2.2 Sigma</td>
+                            <td>~4.6 Sigma</td>
+                            <td style="color: green; font-weight: bold;">+2.4 Sigma</td>
+                        </tr>
+                        <tr>
+                            <td>Tiempo de Ciclo del Pipeline (Y2)</td>
+                            <td>12 horas</td>
+                            <td>3.5 horas</td>
+                            <td style="color: green; font-weight: bold;">-70.8%</td>
+                        </tr>
+                        <tr>
+                            <td>Horas/Semana (CDs) en Limpieza</td>
+                            <td>32 horas (80%)</td>
+                            <td>8 horas (20%)</td>
+                            <td style="color: green; font-weight: bold;">-24 horas/semana</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h2>Retorno de Inversión (ROI) - <i>(Aproximación)</i></h2>
+                <h4>Ahorros "Hard" (Tangibles)</h4>
+                <p><strong>Productividad Recuperada:</strong> (24 horas/semana/CD) * (5 CDs) * ($80/hora) * (52 semanas) = <strong>$499,200 USD/año</strong>.</p>
+                <p class="roi-note">(Cálculo aproximado basado en 5 Científicos de Datos con un costo estándar de $80/hr).</p>
+                
+                </div>
+
+            <hr class="section-divider">
+
+            <div class="animate-on-scroll fade-in-up">
+                <h1 class="section-header">El Stack Tecnológico 🛠️</h1>
+                <h2>Uniendo Lean Six Sigma y Data/MLOps</h2>
+                <p>Así es como las herramientas L6S tradicionales se traducen a un stack de tecnología de datos moderno:</p>
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Categoría Lean Six Sigma</th>
+                            <th>Herramienta de Ingeniería / IA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mapeo de Proceso (VSM)</td>
+                            <td>Airflow / Prefect (DAGs)</td>
+                        </tr>
+                        <tr>
+                            <td>Medición (MSA / Gage)</td>
+                            <td>Great Expectations, dbt test</td>
+                        </tr>
+                        <tr>
+                            <td>Análisis (Estadística)</td>
+                            <td>Python (statsmodels, scipy, Minitab)</td>
+                        </tr>
+                        <tr>
+                            <td>Mejora (DOE & Poka-Yoke)</td>
+                            <td>Spark, MLflow, dbt</td>
+                        </tr>
+                        <tr>
+                            <td>Control (SPC)</td>
+                            <td>Evidently AI, WhyLogs, Grafana</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
     </div>
 
-    <footer>
-        <p>Diseñado y construido con curiosidad por José Hugo Meza.</p>
-    </footer>
-
-    <div id="comunicacion" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('comunicacion')">&times;</span> <h3>Comunicación Efectiva</h3> <p>Para mí, comunicar no es solo hablar, es asegurar que el mensaje se entienda. En mi proyecto de automatización, tuve que traducir requerimientos no-técnicos en lógica de programación clara y documentar el proceso para que otros pudieran entenderlo. Escucho para entender, no solo para responder.</p> </div> </div>
-    <div id="liderazgo" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('liderazgo')">&times;</span> <h3>Liderazgo Proactivo</h3> <p>El liderazgo no se trata de tener un título, sino de tomar la iniciativa. Cuando identifiqué la necesidad de automatizar el registro de pases, no esperé a que me lo pidieran; investigué, aprendí la tecnología necesaria y construí la solución. Liderar es resolver problemas antes de que crezcan.</p> </div> </div>
-    <div id="resolucion" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('resolucion')">&times;</span> <h3>Resolución de Problemas</h3> <p>Disfruto desglosando un problema complejo en partes más pequeñas y manejables. Durante el desarrollo de mi script, me enfrenté a errores de integración con las APIs. Mi método fue aislar cada componente, probarlo individualmente y luego reintegrarlo, asegurando una solución robusta y funcional.</p> </div> </div>
-    <div id="ownership" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('ownership')">&times;</span> <h3>Ownership</h3> <p>Tomo cada tarea como si fuera mi propio proyecto. Desde la concepción de la idea hasta la implementación y las pruebas, me hago responsable del resultado final. Para mí, "ownership" significa que si algo sale mal, es mi responsabilidad arreglarlo, y si sale bien, es un éxito del equipo.</p> </div> </div>
-    <div id="colaboracion" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('colaboracion')">&times;</span> <h3>Trabajo Colaborativo</h3> <p>Entiendo que las mejores ideas surgen de la diversidad de perspectivas. Aunque trabajé solo en mi proyecto de automatización, me apoyé en comunidades en línea y pedí feedback para mejorar el código. Estoy convencido de que colaborar y compartir conocimiento es la forma más rápida de crecer.</p> </div> </div>
-    <div id="curiosidad" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('curiosidad')">&times;</span> <h3>Curiosidad por Datos</h3> <p>Mi curiosidad va más allá de los números; busco el "porqué" detrás de cada dato. En mi experiencia con inventarios, no me conformaba con corregir una discrepancia, investigaba la causa raíz en el proceso logístico. Para mí, gobernar datos es tener la curiosidad para prevenir errores, no solo para corregirlos.</p> </div> </div>
-    <div id="governance" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('governance')">&times;</span> <h3>Data Governance</h3> <p>Entiendo el Gobierno de Datos como la base para la confianza en la información. Se trata de establecer procesos para asegurar que los datos sean precisos, consistentes y seguros a lo largo de su ciclo de vida. Mi proyecto de automatización es un ejemplo práctico: valida y estandariza la información de entrada para garantizar la calidad del resultado final.</p> </div> </div>
-    <div id="pythonSql" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('pythonSql')">&times;</span> <h3>Python & SQL</h3> <p>Utilizo Python, con librerías como Pandas, para la limpieza y manipulación de datos, y SQL para realizar consultas complejas y extraer información valiosa de bases de datos relacionales. Son las herramientas fundamentales con las que transformo datos crudos en conocimiento accionable.</p> </div> </div>
-    <div id="dataops" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('dataops')">&times;</span> <h3>DataOps</h3> <p>Aplico la mentalidad de DataOps al tratar los flujos de datos como una línea de producción. Mi objetivo es automatizar, monitorear y mejorar continuamente la calidad y la velocidad con la que se entregan los datos. Mi script de automatización es un micro-sistema DataOps: automatiza un pipeline de datos desde la entrada hasta la entrega final.</p> </div> </div>
-    <div id="automation" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('automation')">&times;</span> <h3>Process Automation</h3> <p>Mi habilidad principal es identificar tareas manuales y repetitivas y construir soluciones de software para eliminarlas. Con Google Apps Script, pude integrar múltiples aplicaciones (Sheets, Slides, Gmail) para crear un flujo de trabajo autónomo que ahorra tiempo y reduce drásticamente el error humano.</p> </div> </div>
-    <div id="sixSigma" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('sixSigma')">&times;</span> <h3>Lean Six Sigma</h3> <p>Utilizo los principios de <strong>Lean Six Sigma</strong> como un marco estratégico para la resolución de problemas. Me enfoco en definir el problema, medir el estado actual, analizar la causa raíz, implementar mejoras y controlar los resultados. Esta metodología guía mi enfoque tanto en la optimización de procesos como en la mejora de la calidad de los datos.</p> </div> </div>
-    <div id="prompt" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('prompt')">&times;</span> <h3>Prompt Engineering</h3> <p>Utilizo la IA como una herramienta para acelerar el desarrollo. Sé cómo formular preguntas precisas y contextualizadas a modelos de lenguaje para generar código eficiente, depurar errores complejos y explorar diferentes enfoques para un problema. Es una habilidad que me permite aprender y construir soluciones de manera mucho más rápida.</p> </div> </div>
-
     <script>
-        function setupCarousel(trackId, prevBtnId, nextBtnId) {
-            const track = document.getElementById(trackId);
-            const prevBtn = document.getElementById(prevBtnId);
-            const nextBtn = document.getElementById(nextBtnId);
-            
-            if (!track || !prevBtn || !nextBtn) return;
-            
-            const slides = Array.from(track.children);
-            const totalSlides = slides.length;
-            let currentIndex = 0;
-
-            function updateSlidePosition() {
-                track.style.transform = `translateX(-${currentIndex * 100}%)`;
-            }
-            function updateButtons() {
-                prevBtn.classList.toggle('hidden', currentIndex === 0);
-                nextBtn.classList.toggle('hidden', currentIndex === totalSlides - 1);
-            }
-            prevBtn.addEventListener('click', () => {
-                if (currentIndex > 0) { currentIndex--; updateSlidePosition(); updateButtons(); }
-            });
-            nextBtn.addEventListener('click', () => {
-                if (currentIndex < totalSlides - 1) { currentIndex++; updateSlidePosition(); updateButtons(); }
-            });
-            updateButtons();
-        }
-
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = "block";
-        }
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = "none";
-        }
-        window.onclick = function(event) {
-            const modals = document.getElementsByClassName('modal');
-            for (let i = 0; i < modals.length; i++) {
-                if (event.target == modals[i]) {
-                    modals[i].style.display = "none";
-                }
-            }
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
-            const shootingStarsContainer = document.querySelector('.shooting-stars');
-            const numStars = 110; 
-            for (let i = 0; i < numStars; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                star.style.left = `${Math.random() * 100}vw`; 
-                star.style.top = `${Math.random() * 100}vh`;
-                star.style.setProperty('--delay', `${Math.random() * 15}s`);
-                star.style.setProperty('--duration', `${5 + Math.random() * 8}s`);
-                shootingStarsContainer.appendChild(star);
+            try {
+                const shootingStarsContainer = document.querySelector('.shooting-stars');
+                if (shootingStarsContainer) {
+                    const numStars = 110; 
+                    for (let i = 0; i < numStars; i++) {
+                        const star = document.createElement('div');
+                        star.classList.add('star');
+                        star.style.left = `${Math.random() * 100}vw`; 
+                        star.style.top = `${Math.random() * 100}vh`;
+                        star.style.setProperty('--delay', `${Math.random() * 15}s`);
+                        star.style.setProperty('--duration', `${5 + Math.random() * 8}s`);
+                        shootingStarsContainer.appendChild(star);
+                    }
+                }
+            } catch (e) {
+                console.error("Error al crear estrellas:", e);
             }
             
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('show');
-                        observer.unobserve(entry.target);
-                    }
+            try {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry, index) => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.transitionDelay = `${index * 100}ms`;
+                            entry.target.classList.add('show');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+                elementsToAnimate.forEach((el) => observer.observe(el));
+            } catch (e) {
+                console.error("Error al crear IntersectionObserver:", e);
+                document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                    el.classList.add('show');
                 });
-            }, {
-                threshold: 0.1
-            });
-            const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
-            elementsToAnimate.forEach((el) => observer.observe(el));
-            
-            setupCarousel('program-track', 'program-prev', 'program-next');
+            }
         });
     </script>
 </body>
