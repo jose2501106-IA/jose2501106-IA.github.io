@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Dive: Validando la Métrica (MSA) - José Hugo Meza</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #26447d; --dark-blue: #2c3e50; --light-gray: #f8f9fa;
+            --text-color: #343a40; --secondary-text: #6c757d; --white: #ffffff;
+            --border-color: #e9ecef;
+        }
+        body { 
+            font-family: 'Inter', sans-serif; line-height: 1.7; color: var(--text-color); 
+            margin: 0; padding: 2rem;
+            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop');
+            background-size: cover; background-position: center center; background-attachment: fixed;
+            overflow-x: hidden;
+        }
+        .container { 
+            max-width: 800px; margin: 0 auto; background-color: var(--white); 
+            padding: 2.5rem; border-radius: 12px; 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.07); position: relative; z-index: 10;
+        }
+        .shooting-stars {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; overflow: hidden; z-index: 1;
+        }
+        .star {
+            position: absolute; background-color: var(--white); width: 2px; height: 2px;
+            border-radius: 50%; opacity: 0;
+            animation: 
+                star-fall var(--duration) linear var(--delay) infinite,
+                star-twinkle 2s ease-in-out var(--delay) infinite alternate;
+        }
+        @keyframes star-fall { 0% { transform: translate(0, 0) scale(1); opacity: 0; } 10% { opacity: 1; } 100% { transform: translate(100vw, 100vh) scale(0.5); opacity: 0; } }
+        @keyframes star-twinkle { 0%, 100% { opacity: 0.8; } 50% { opacity: 0.3; } }
+        
+        .back-link {
+            display: inline-block; color: var(--primary-color); text-decoration: none;
+            font-weight: bold; font-size: 1.1rem; margin-bottom: 1.5rem;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        .note-content {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .note-content h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+        .note-content h2 {
+            color: var(--dark-blue);
+            margin-top: 2.5rem;
+            font-size: 1.5rem;
+        }
+        .note-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        .note-content strong {
+            color: var(--primary-color);
+        }
+        
+        /* (NUEVO) CSS para las tarjetas de analogía */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Una sola columna para las tarjetas de explicación */
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .kpi-card {
+            background-color: var(--light-gray);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary-color);
+        }
+        .kpi-card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+        .kpi-card-title span { font-size: 1.5rem; margin-right: 0.75rem; }
+        .kpi-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin: 0;
+            color: var(--secondary-text);
+        }
+        .kpi-card p strong {
+            color: var(--dark-blue);
+        }
+        
+        /* (NUEVO) Caja de Conclusión / Inversión */
+        .conclusion-box {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            border-radius: 12px;
+            padding: 2rem 2.5rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+        .conclusion-box h2 {
+            color: var(--white);
+            margin-top: 0;
+        }
+        .conclusion-box p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .show { opacity: 1; transform: none; }
+    </style>
+</head>
+<body>
+    <div class="shooting-stars"></div> 
+
+    <div class="container">
+        <a href="proyecto-l6s.html" class="back-link">&larr; Volver al Proyecto L6S</a>
+
+        <div class="note-content animate-on-scroll">
+            
+            <h1>🔬 Deep Dive: ¿Cómo Medimos la Calidad de los Datos?</h1>
+            
+            <h2>El Problema: "Basura entra, basura sale" (GIGO)</h2>
+            <p>
+                Un modelo de IA es como un chef: no importa qué tan bueno sea, si sus ingredientes (los datos) están podridos, la comida (la predicción) será mala. El Retorno de Inversión (ROI) del proyecto depende de medir la calidad de esos ingredientes.
+            </p>
+            <p>
+                Pero, ¿cómo confiamos en nuestras herramientas de medición?
+            </p>
+
+            <h2>La Solución: Probar la "Báscula" antes de Pesar el "Oro" (MSA)</h2>
+            <p>
+                En Six Sigma, antes de medir un proceso, debemos probar que nuestro instrumento de medición (el "Gage") es confiable. Esto se llama un <strong>Análisis de Sistema de Medición (MSA)</strong>.
+            </p>
+            <p>
+                En este proyecto, nuestro "Gage" no es una báscula física, es nuestro software: `Great Expectations`, `Evidently AI` y nuestros scripts de Python. El MSA responde: <strong>"¿Nuestro software es capaz de encontrar los defectos de forma confiable?"</strong>
+            </p>
+            
+            <div class="kpi-grid">
+                
+                <div class="kpi-card">
+                    <div class="kpi-card-title"><span>1.</span>Prueba de Calidad (¿Detecta Billetes Falsos?)</div>
+                    <p>
+                        <strong>El Método:</strong> Creamos un "Golden Set" (un set de datos de prueba) e "plantamos" <strong>defectos conocidos</strong> (ej. 15 emails rotos, 10 duplicados).
+                        <br><br>
+                        <strong>La Prueba:</strong> Pasamos nuestro "Gage" (`Great Expectations`) por los datos.
+                        <br><br>
+                        <strong>El Resultado:</strong> Si el Gage solo encuentra 10 de los 15 emails rotos, <strong>falla el MSA</strong>. Significa que nuestro sistema de medición es defectuoso y debe ser "calibrado" (mejorar las reglas) antes de medir el proceso real.
+                    </p>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-card-title"><span>2.</span>Prueba de Estabilidad (¿Detecta el "Drift"?)</div>
+                    <p>
+                        <strong>El Método:</strong> Creamos dos sets de datos. Uno "Normal" (Clientes de 30 años) y uno con un "Drift Conocido" (Clientes de 40 años).
+                        <br><br>
+                        <strong>La Prueba:</strong> Le pedimos a nuestro "Gage" (`Evidently AI`) que compare los dos.
+                        <br><br>
+                        <strong>El Resultado:</strong> El Gage DEBE ser lo suficientemente sensible para sonar una alarma 🚨 y decir: "¡Atención, los datos han cambiado!". Si no lo detecta, es "ciego" (un Falso Negativo) y falla el MSA.
+                    </p>
+                </div>
+                
+                <div class="kpi-card">
+                    <div class="kpi-card-title"><span>3.</span>Prueba de Equidad (¿La "Balanza" está Equilibrada?)</div>
+                    <p>
+                        <strong>El Método:</strong> Creamos un set de datos <strong>perfectamente justo</strong> (50% de aprobación para Grupo A, 50% para Grupo B).
+                        <br><br>
+                        <strong>La Prueba:</strong> Le pedimos a nuestro "Gage" (`Fairlearn`) que mida el sesgo (Bias).
+                        <br><br>
+                        <strong>El Resultado:</strong> El Gage DEBE medir 50/50. Si mide 55/45, sabemos que el propio instrumento de medición está sesgado y no es confiable.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="conclusion-box animate-on-scroll fade-in-up">
+                <h2>¿Por qué esto es una buena Inversión? 💡</h2>
+                <p>
+                    Cualquiera puede ejecutar un script. Pero iniciar un proyecto de datos multimillonario sin saber si sus herramientas de medición son confiables es apostar a ciegas.
+                </p>
+                <p>
+                    Esta metodología (MSA para IA) es la diferencia entre <strong>adivinar</strong> y <strong>saber</strong>. Es un pilar central del entrenamiento Black Belt y la única forma de garantizar que el ROI del proyecto sea real, auditable y defendible.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const shootingStarsContainer = document.querySelector('.shooting-stars');
+                if (shootingStarsContainer) {
+                    const numStars = 110; 
+                    for (let i = 0; i < numStars; i++) {
+                        const star = document.createElement('div');
+                        star.classList.add('star');
+                        star.style.left = `${Math.random() * 100}vw`; 
+                        star.style.top = `${Math.random() * 100}vh`;
+                        star.style.setProperty('--delay', `${Math.random() * 15}s`);
+                        star.style.setProperty('--duration', `${5 + Math.random() * 8}s`);
+                        shootingStarsContainer.appendChild(star);
+                    }
+                }
+            } catch (e) { console.error("Error al crear estrellas:", e); }
+            
+            try {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('show');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+                elementsToAnimate.forEach((el) => observer.observe(el));
+            } catch (e) {
+                console.error("Error al crear IntersectionObserver:", e);
+                document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                    el.classList.add('show');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
