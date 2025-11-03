@@ -131,16 +131,16 @@
             <h1>💡 Deep Dive: Definiendo los Pesos del TSQS</h1>
             
             <p>
-                Tu "Y" primaria (la métrica a optimizar) no puede ser una opinión. Debe ser un modelo matemático que refleje las prioridades del negocio. Este es el proceso para crearlo usando una <strong>Matriz de Priorización</strong>.
+                La métrica principal del proyecto (la "Y") no puede ser una opinión. Debe ser un modelo matemático que refleje las prioridades del negocio. Este documento detalla el proceso para crearla usando una <strong>Matriz de Priorización</strong>.
             </p>
             
             <h2>Objetivo 🎯</h2>
-            <p>Traducir la "Voz del Cliente" (VOC) cualitativa en un modelo matemático (el TSQS) que represente fielmente sus prioridades.</p>
+            <p>Traducir la "Voz del Cliente" (VOC) cualitativa en un modelo matemático (el TSQS) que represente fielmente las prioridades del negocio.</p>
             
             <h2>Proceso de 6 Pasos</h2>
             
             <h3>Paso 1: 👥 Identificar a los "Clientes" (Stakeholders)</h3>
-            <p>Se organiza un workshop con los clientes clave del "Training Set":</p>
+            <p>Este proceso requiere un workshop con los clientes clave del "producto" (el Training Set):</p>
             <ul>
                 <li><strong>Cliente Técnico:</strong> Lead Data Scientist</li>
                 <li><strong>Cliente de Operaciones:</strong> Lead MLOps Engineer</li>
@@ -148,7 +148,7 @@
             </ul>
 
             <h3>Paso 2: 🗣️ Identificar los "Drivers" del Cliente</h3>
-            <p>En la sesión, se agrupan sus necesidades (VOC) en "Drivers" de negocio:</p>
+            <p>En la sesión, el objetivo es preguntar qué es lo más importante para ellos. Sus respuestas (VOC) se agrupan en "Drivers" de negocio:</p>
             <ul>
                 <li><strong>Precisión del Modelo:</strong> (Que el modelo prediga correctamente).</li>
                 <li><strong>Cumplimiento y Riesgo:</strong> (Evitar demandas, decisiones sesgadas).</li>
@@ -156,7 +156,7 @@
             </ul>
 
             <h3>Paso 3: ⚖️ Ponderar los "Drivers" del Cliente</h3>
-            <p>Se pide al grupo ponderar sus drivers (1-10). Luego, se normaliza:</p>
+            <p>Se pide al grupo ponderar sus drivers (1-10). Luego, estos se normalizan:</p>
             <ul>
                 <li>Peso (Riesgo): 10 / 25 = <strong>40%</strong></li>
                 <li>Peso (Precisión): 9 / 25 = <strong>36%</strong></li>
@@ -164,7 +164,7 @@
             </ul>
 
             <h3>Paso 4: MATRIX Construir la Matriz de Relación</h3>
-            <p>Conectamos los "Drivers" (VOC) con nuestros "CTQs" (componentes del TSQS) usando una escala de correlación LSS (9=Fuerte, 3=Media, 1=Débil, 0=Nula).</p>
+            <p>Aquí es donde se conectan los "Drivers" (VOC) con los "CTQs" (los componentes del TSQS) usando una escala de correlación LSS (9=Fuerte, 3=Media, 1=Débil, 0=Nula).</p>
             <table class="styled-table">
                 <thead>
                     <tr>
@@ -203,7 +203,7 @@
             </table>
 
             <h3>Paso 5: 🧮 Calcular el Peso de cada CTQ</h3>
-            <p>Calculamos la puntuación de importancia para cada CTQ: <br><i>Puntuación = Σ (Peso del Driver * Puntuación de Correlación)</i></p>
+            <p>Se calcula la puntuación de importancia para cada CTQ: <br><i>Puntuación = Σ (Peso del Driver * Puntuación de Correlación)</i></p>
             <ul>
                 <li><strong>Puntuación (Estabilidad/Drift):</strong> (36% * 9) + (40% * 9) + (24% * 0) = <strong>6.84</strong></li>
                 <li><strong>Puntuación (Calidad):</strong> (36% * 9) + (40% * 3) + (24% * 1) = <strong>4.68</strong></li>
@@ -212,7 +212,7 @@
             </ul>
 
             <h3>Paso 6: 💯 Normalizar para Obtener los Pesos Finales (w)</h3>
-            <p>Finalmente, normalizamos esas puntuaciones (Total: 18.72) para obtener los pesos finales ($w$) de nuestra fórmula TSQS:</p>
+            <p>Finalmente, estas puntuaciones (Total: 18.72) se normalizan para obtener los pesos ($w$) de la fórmula TSQS:</p>
             <ul>
                 <li>\(w_{\text{est}}\) (Peso de Estabilidad): 6.84 / 18.72 = <strong>36.5%</strong></li>
                 <li>\(w_{\text{cal}}\) (Peso de Calidad): 4.68 / 18.72 = <strong>25%</strong></li>
@@ -221,7 +221,12 @@
             </ul>
 
             <h2>Conclusión: La Fórmula Final (Validada)</h2>
-            <p>Ahora tenemos nuestra "Y" primaria, 100% validada por el cliente. Sabemos que la <strong>Estabilidad/Drift (36.5%)</strong> es el factor más crítico. Si debemos sacrificar algo, es la Puntualidad (13.5%).</p>
+            <p>
+                Ahora se tiene una fórmula final para la "Y" primaria, 100% validada por el cliente. Este análisis demuestra que la <strong>Estabilidad/Drift (36.5%)</strong> es el factor más crítico para el negocio, seguido por la Calidad y la Equidad. La Puntualidad (13.5%) es importante, pero se puede des-priorizar relativamente si es necesario.
+            </p>
+            <p>
+                Al presentar el proyecto, esta matriz es la defensa: "La métrica 'Y' primaria (TSQS) no es una opinión; es la ecuación matemática de lo que el negocio valora, derivada de un consenso estructurado."
+            </p>
             <div class="formula-box">
                 TSQS = (0.25 * M_cal) + (0.365 * M_est) + (0.25 * M_equ) + (0.135 * M_punt)
             </div>
