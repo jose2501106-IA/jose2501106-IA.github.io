@@ -81,7 +81,6 @@
             padding-bottom: 0.5rem;
         }
         
-        /* (NUEVO) Contenedor de sección para agrupar */
         .section-box {
             background-color: var(--light-gray);
             border: 1px solid var(--border-color);
@@ -112,7 +111,6 @@
             font-size: 1.05rem;
         }
         
-        /* (NUEVO) Grid para KPIs */
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -142,7 +140,6 @@
             color: var(--secondary-text);
         }
         
-        /* (NUEVO) Caja de Fórmula */
         .formula-box {
             background-color: var(--dark-blue);
             color: var(--white);
@@ -151,6 +148,7 @@
             text-align: center;
             font-size: 1.2rem;
             font-family: monospace;
+            margin-top: 1.5rem;
         }
 
         .explanation-text {
@@ -162,7 +160,6 @@
             border-left: 3px solid var(--border-color);
         }
 
-        /* --- Estilos de Línea de Tiempo (Sin cambios) --- */
         .timeline-container { position: relative; margin-top: 2.5rem; }
         .timeline-container::before {
             content: ''; position: absolute; top: 20px; left: 50%; bottom: 20px;
@@ -210,7 +207,6 @@
                 border-color: transparent var(--border-color) transparent transparent;
             }
         }
-        /* --- FIN Estilos Línea de Tiempo --- */
 
         .styled-table {
             width: 100%; border-collapse: collapse; margin: 1.5rem 0;
@@ -231,7 +227,6 @@
             text-align: center; margin-top: 1.5rem; font-style: italic;
         }
         
-        /* (NUEVO) Botón para el Deep Dive */
         .btn-secondary {
             display: inline-block;
             text-decoration: none;
@@ -247,6 +242,14 @@
         .btn-secondary:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        /* (NUEVO) Contenedor para botones de deep-dive */
+        .deep-dive-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
         }
 
         .animate-on-scroll {
@@ -307,6 +310,11 @@
                 <div class="formula-box">
                     TSQS = <i>f</i> (Calidad, Estabilidad, Equidad, Puntualidad)
                 </div>
+                
+                <div class="deep-dive-links">
+                    <a href="l6s-tsqs-matrix.html" class="btn-secondary">Ver cómo se calculó el TSQS (Matriz de Priorización)</a>
+                </div>
+                
                 <div class="kpi-grid">
                     <div class="kpi-card">
                         <div class="kpi-card-title"><span>✅</span>Calidad Clásica</div>
@@ -337,7 +345,11 @@
                         <div class="timeline-icon">D</div>
                         <div class="timeline-content">
                             <h3>Definir</h3>
-                            <p>Definimos el "Training Set" como el producto y al "Modelo de IA" como el cliente. El objetivo fue claro: mover el <strong>TSQS de 60 a 95</strong>.</p>
+                            <p>Definimos el problema y qué significaba "calidad" para nuestros clientes (los modelos de IA).</p>
+                            <ul>
+                                <li><strong>Herramienta:</strong> Árbol de CTQ (Crítico para la Calidad).</li>
+                                <li><strong>Hallazgo Clave:</strong> El éxito dependía de dos factores: <strong>1. Calidad del Dato</strong> (precisión, sin nulos) y <strong>2. Velocidad</strong> (disponible en < 4 horas).</li>
+                            </ul>
                         </div>
                     </div>
                     
@@ -347,7 +359,9 @@
                             <h3>Medir</h3>
                             <p>Medimos la línea base (TSQS = 60%) y validamos nuestras herramientas de medición.</p>
                             <p class="explanation-text"><strong>(MSA Crítico):</strong> Probamos nuestras herramientas (como `Evidently AI`) contra datasets sintéticos con "defectos plantados" para asegurar que pudieran detectar el *Drift* y *Bias* de forma confiable.</p>
-                            <a href="l6s-msa-deep-dive.html" class="btn-secondary">Ver Deep Dive del MSA 🔬</a>
+                            <div class="deep-dive-links">
+                                <a href="l6s-msa-deep-dive.html" class="btn-secondary">Ver Deep Dive del MSA 🔬</a>
+                            </div>
                         </div>
                     </div>
                     
@@ -367,9 +381,9 @@
                         <div class="timeline-icon">I</div>
                         <div class="timeline-content">
                             <h3>Mejorar</h3>
-                            <p>Implementamos soluciones de ingeniería y estadística para arreglar las causas raíz.</p>
+                            <p>Diseñamos e implementamos soluciones de ingeniería y estadística para arreglar las causas raíz.</p>
                             <ul>
-                                <li><strong>DOE:</strong> Usamos un <strong>Diseño de Experimentos</strong> para encontrar la configuración óptima de Spark que maximizara el TSQS y minimizara el costo.</li>
+                                <li><strong>DOE:</strong> Usamos un <strong>Diseño de Experimentos</strong> para encontrar la configuración óptima de Spark que maximizara el TSQS.</li>
                                 <li><strong>Poka-Yoke:</strong> Implementamos "barreras de error" 🛡️ con `Great Expectations` para detener los datos malos automáticamente.</li>
                                 <li><strong>Standard Work:</strong> Migramos los procesos a `dbt` para estandarizar las transformaciones.</li>
                             </ul>
@@ -383,7 +397,7 @@
                             <p>Implementamos un tablero de control (SPC) para asegurar que el proceso se mantenga optimizado (¡Esto es MLOps en la práctica!).</p>
                             <ul>
                                 <li><strong>Herramienta:</strong> Gráficas de Control (SPC).</li>
-                                <li><strong>Acción:</strong> Una <strong>Gráfica XmR</strong> monitorea el Data Drift en tiempo real. Si una métrica sale de control 🚨, se activa una alerta para re-entrenar el modelo.</li>
+                                <li><strong>Acción:</strong> Una <strong>Gráfica XmR</strong> monitorea el Data Drift en tiempo real 🚨. Si una métrica clave se sale de control, se activa una alerta para re-entrenar el modelo.</li>
                             </ul>
                         </div>
                     </div>
