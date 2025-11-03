@@ -13,6 +13,11 @@
             --primary-color: #26447d; --dark-blue: #2c3e50; --light-gray: #f8f9fa;
             --text-color: #343a40; --secondary-text: #6c757d; --white: #ffffff;
             --border-color: #e9ecef;
+            
+            /* (NUEVO) Colores para tarjeta Python */
+            --python-blue: #306998;
+            --python-blue-pastel: #E6F0FF;
+            --python-yellow: #FFD43B;
         }
         body { 
             font-family: 'Inter', sans-serif; line-height: 1.7; color: var(--text-color); 
@@ -55,11 +60,8 @@
         .apuntes-header p { font-size: 1.1rem; color: var(--secondary-text); margin-top: 0.5rem; }
         .card-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
 
-        /* (ACTUALIZADO) Convertido en <a> para que sea un enlace */
         .curious-card {
-            display: block; /* Para que el <a> ocupe todo el espacio */
-            text-decoration: none; /* Quitar subrayado */
-            color: var(--text-color); /* Heredar color de texto */
+            display: block; text-decoration: none; color: var(--text-color);
             background-color: var(--light-gray);
             border: 1px solid var(--border-color);
             padding: 2rem;
@@ -70,7 +72,7 @@
             transition: all 0.3s ease-out;
         }
         .curious-card:hover {
-            transform: translateY(45px) scale(1.02); /* Efecto hover sutil */
+            transform: translateY(45px) scale(1.02); 
             box-shadow: 0 8px 20px rgba(0,0,0,0.08);
             border-left-color: var(--dark-blue);
         }
@@ -80,6 +82,19 @@
             font-size: 1.5rem;
         }
         .curious-card p { font-size: 1rem; line-height: 1.6; }
+        
+        /* (NUEVO) Estilo para la tarjeta de Python */
+        .curious-card-python {
+            border-left-color: var(--python-blue);
+            background-color: var(--python-blue-pastel);
+        }
+        .curious-card-python h3 {
+            color: var(--python-blue);
+        }
+        .curious-card-python:hover {
+            border-left-color: var(--python-yellow);
+        }
+
         .show { opacity: 1; transform: none; }
     </style>
 </head>
@@ -95,6 +110,14 @@
         </div>
 
         <div class="card-grid">
+            
+            <a href="cur-python.html" class="curious-card curious-card-python animate-on-scroll">
+                <h3>🐍 Python: El Lenguaje de los Datos</h3>
+                <p>
+                    El pilar de la Ciencia de Datos, Machine Learning y Data Governance. Aquí organizo mis notas clave sobre el lenguaje, sus librerías y mejores prácticas.
+                </p>
+            </a>
+
             <a href="cur-industria-4.html" class="curious-card animate-on-scroll">
                 <h3>Industria 4.0: La Fábrica Inteligente</h3>
                 <p>
