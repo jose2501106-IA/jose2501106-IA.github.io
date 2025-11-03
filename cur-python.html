@@ -18,7 +18,7 @@
         body { 
             font-family: 'Inter', sans-serif; line-height: 1.7; color: var(--text-color); 
             margin: 0; padding: 2rem;
-            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop');
+            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95_ab5986?q=80&w=2071&auto=format&fit=crop');
             background-size: cover; background-position: center center; background-attachment: fixed;
             overflow-x: hidden;
         }
@@ -80,7 +80,6 @@
             color: var(--dark-blue);
         }
         
-        /* (NUEVO) Estilo para el botón de enlace externo */
         .btn-external {
             display: inline-block;
             text-decoration: none;
@@ -97,6 +96,32 @@
             box-shadow: 0 4px 12px rgba(38, 68, 125, 0.4);
         }
 
+        /* --- (NUEVO) CSS para las Tarjetas de Librerías --- */
+        .library-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .library-card {
+            background-color: var(--light-gray);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        .library-card h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        .library-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+            color: var(--secondary-text);
+        }
+        /* --- FIN CSS Tarjetas --- */
+
         .show { opacity: 1; transform: none; }
     </style>
 </head>
@@ -111,10 +136,7 @@
             <h1><span>🐍</span>Python: El Lenguaje de los Datos</h1>
             
             <p>
-                Python es mi herramienta principal para todo lo relacionado con datos. Su sintaxis limpia, su vasto ecosistema de librerías (como <strong>Pandas</strong>, <strong>NumPy</strong>, y <strong>SciKit-Learn</strong>) y su comunidad lo convierten en la opción ideal para la ciencia de datos, machine learning y gobernanza.
-            </p>
-            <p>
-                Aquí recopilo los conceptos, funciones y mejores prácticas que uso con más frecuencia.
+                Python es mi herramienta principal para todo lo relacionado con datos. Su sintaxis limpia, su vasto ecosistema de librerías y su comunidad lo convierten en la opción ideal para la ciencia de datos, machine learning y gobernanza.
             </p>
             
             <h2>Funciones Esenciales</h2>
@@ -126,12 +148,41 @@
                 Built-in-Functions (Documentación Oficial)
             </a>
 
-            <h2 style="margin-top: 3rem;">Mis Librerías Favoritas</h2>
-            <p>
-                (Aquí puedes añadir tus notas sobre Pandas, Matplotlib, etc.)
-            </p>
-            
-        </div>
+            <h2 style="margin-top: 3rem;">Mis Librerías Favoritas para Datos</h2>
+            <div class="library-grid">
+                
+                <div class="library-card">
+                    <h3>NumPy</h3>
+                    <p>El pilar de la computación científica. Fundamental para operaciones matemáticas y de álgebra lineal con arrays y matrices de alto rendimiento.</p>
+                </div>
+                
+                <div class="library-card">
+                    <h3>Pandas</h3>
+                    <p>La herramienta esencial para la manipulación y análisis de datos. Permite cargar, limpiar, transformar y analizar datos tabulares (DataFrames).</p>
+                </div>
+                
+                <div class="library-card">
+                    <h3>Matplotlib</h3>
+                    <p>La librería base para toda visualización en Python. Permite crear gráficos estáticos, animados e interactivos de alta calidad.</p>
+                </div>
+
+                <div class="library-card">
+                    <h3>Seaborn</h3>
+                    <p>Construida sobre Matplotlib, Seaborn ofrece una interfaz de más alto nivel para crear gráficos estadísticos atractivos e informativos.</p>
+                </div>
+                
+                <div class="library-card">
+                    <h3>SciKit-Learn</h3>
+                    <p>La librería de referencia para el Machine Learning. Proporciona herramientas simples y eficientes para preprocesamiento, modelado y evaluación.</p>
+                </div>
+                
+                <div class="library-card">
+                    <h3>SQLAlchemy</h3>
+                    <p>Un *toolkit* de SQL y Mapeador Objeto-Relacional (ORM) que permite a Python interactuar con bases de datos SQL de forma eficiente y agnóstica al motor.</p>
+                </div>
+
+            </div>
+            </div>
     </div>
 
     <script>
