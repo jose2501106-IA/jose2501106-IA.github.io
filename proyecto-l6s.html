@@ -53,7 +53,6 @@
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
         
-        /* (NUEVO) Estilos de la página de proyecto */
         .project-header {
             text-align: center;
             border-bottom: 2px solid var(--border-color);
@@ -109,7 +108,6 @@
             font-size: 1.05rem;
         }
 
-        /* (NUEVO) Estilo para tablas */
         .styled-table {
             width: 100%;
             border-collapse: collapse;
@@ -132,7 +130,6 @@
             background-color: #fcfcfc;
         }
 
-        /* (NUEVO) Estilo para testimonios */
         blockquote {
             border-left: 5px solid var(--primary-color);
             background-color: var(--light-gray);
@@ -259,7 +256,9 @@
                 </ul>
 
                 <h2>Análisis del Proceso: Value Stream Map (VSM)</h2>
+                <p>(Aquí iría una imagen de un VSM simplificado del pipeline, tal vez un DAG de Airflow anotado).</p>
                 <p><strong>Hallazgo:</strong> "Se mapeó el pipeline de datos completo. El análisis VSM reveló que el 80% del tiempo (9.6 horas) era Tiempo de No Valor Agregado (NVA), compuesto por "Esperas" entre tareas y "Re-procesamiento" manual (scripts de limpieza ad-hoc)."</p>
+                
                 <h2>Aplicación Estadística: MSA (Análisis de Sistema de Medición)</h2>
                 <p><strong>El Reto:</strong> ¿Cómo sabemos si nuestro "sistema de medición" (los scripts de validación de datos) es confiable?</p>
                 <p><strong>El "Gage" (Instrumento):</strong> Nuestros scripts de `dbt test` y `Great Expectations`.</p>
