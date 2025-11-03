@@ -11,6 +11,7 @@
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
         :root {
             --primary-color: #26447d; --dark-blue: #2c3e50; --light-gray: #f8f9fa;
@@ -25,7 +26,8 @@
             overflow-x: hidden;
         }
         .container { 
-            max-width: 800px; margin: 0 auto; background-color: var(--white); 
+            /* (NUEVO) Aumentamos el ancho para la nueva UI */
+            max-width: 900px; margin: 0 auto; background-color: var(--white); 
             padding: 2.5rem; border-radius: 12px; 
             box-shadow: 0 8px 32px rgba(0,0,0,0.07); position: relative; z-index: 10;
         }
@@ -49,64 +51,191 @@
         }
         .back-link:hover { text-decoration: underline; }
 
-        .note-content {
-            /* Esta clase ya no necesita reglas de opacidad */
-        }
+        .note-content { }
         
         .project-header {
             text-align: center;
             border-bottom: 2px solid var(--border-color);
             padding-bottom: 1.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
         .project-header h1 {
             color: var(--primary-color);
             font-size: 2.2rem;
+            line-height: 1.3;
             margin: 0;
         }
         .project-header .slogan {
             font-size: 1.1rem;
             color: var(--secondary-text);
-            margin-top: 0.5rem;
+            margin-top: 0.75rem;
             font-style: italic;
         }
 
-        .note-content h1 { /* Título de sección */
+        /* Títulos de sección (Resumen, Resultados, etc.) */
+        .section-header {
             color: var(--primary-color);
             font-size: 2rem;
             margin-top: 3rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 0.5rem;
         }
-        .note-content h2 { /* Sub-título */
+        
+        /* Contenido de texto general */
+        .note-content h2 {
             color: var(--dark-blue);
             font-size: 1.5rem;
             margin-top: 2rem;
         }
-        .note-content h3 { /* Título de entregable */
+        .note-content h3 {
             color: var(--primary-color);
             font-size: 1.2rem;
-            margin-top: 2rem;
-        }
-        .note-content h4 { /* Título de herramienta/método */
-            color: var(--dark-blue);
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
+            margin-top: 1.5rem;
         }
         .note-content p {
             font-size: 1.05rem;
             line-height: 1.8;
+            margin-top: 0.5rem;
         }
-        .note-content strong {
-            color: var(--primary-color);
-        }
+        .note-content strong { color: var(--primary-color); }
         .note-content ul {
             padding-left: 20px;
             line-height: 1.8;
             font-size: 1.05rem;
         }
+
+        /* --- (NUEVO) Estilos de la Línea de Tiempo DMAIC --- */
+        .timeline-container {
+            position: relative;
+            margin-top: 2.5rem;
+        }
+        /* La línea vertical central */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            bottom: 20px;
+            width: 4px;
+            background: var(--border-color);
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        
+        .timeline-item {
+            padding: 1rem 3rem;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        /* Círculo grande con la letra (D, M, A, I, C) */
+        .timeline-icon {
+            position: absolute;
+            top: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: var(--white);
+            font-size: 2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            border: 4px solid var(--white);
+        }
+        
+        /* Tarjeta de contenido */
+        .timeline-content {
+            padding: 1.5rem;
+            background: var(--light-gray);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .timeline-content h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: var(--dark-blue);
+        }
+        .timeline-content p, .timeline-content ul {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+        .timeline-content li { margin-bottom: 0.5rem; }
+
+        /* Posicionamiento Izquierda/Derecha */
+        .timeline-item-left {
+            left: 0;
+            padding-right: 4rem; /* Espacio para el icono */
+        }
+        .timeline-item-right {
+            left: 50%;
+            padding-left: 4rem; /* Espacio para el icono */
+        }
+        
+        /* Iconos Izquierda/Derecha */
+        .timeline-item-left .timeline-icon {
+            right: -30px; /* (Mitad del icono 60px) */
+            transform: translateX(0);
+        }
+        .timeline-item-right .timeline-icon {
+            left: -30px; /* (Mitad del icono 60px) */
+            transform: translateX(0);
+        }
+
+        /* Flecha de la tarjeta (apunta a la línea) */
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+        .timeline-item-left .timeline-content::before {
+            right: -10px;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent var(--border-color);
+        }
+        .timeline-item-right .timeline-content::before {
+            left: -10px;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent var(--border-color) transparent transparent;
+        }
+
+        /* Responsive de la Línea de Tiempo */
+        @media (max-width: 768px) {
+            .timeline-container::before { left: 30px; }
+            .timeline-item,
+            .timeline-item-right,
+            .timeline-item-left {
+                width: 100%;
+                left: 0;
+                padding-left: 5rem; /* Espacio para el icono a la izquierda */
+                padding-right: 0.5rem;
+                margin-bottom: 1rem;
+            }
+            .timeline-icon,
+            .timeline-item-left .timeline-icon,
+            .timeline-item-right .timeline-icon {
+                left: 0;
+                transform: translateX(0);
+            }
+            .timeline-content::before,
+            .timeline-item-left .timeline-content::before,
+            .timeline-item-right .timeline-content::before {
+                left: -10px;
+                right: auto;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent var(--border-color) transparent transparent;
+            }
+        }
+        /* --- FIN Estilos de Línea de Tiempo --- */
+
 
         .styled-table {
             width: 100%;
@@ -115,49 +244,32 @@
             font-size: 0.95rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
-        .styled-table th,
-        .styled-table td {
-            border: 1px solid var(--border-color);
-            padding: 12px 15px;
-            text-align: left;
+        .styled-table th, .styled-table td {
+            border: 1px solid var(--border-color); padding: 12px 15px; text-align: left;
         }
-        .styled-table th {
-            background-color: var(--light-gray);
-            color: var(--dark-blue);
-            font-weight: bold;
-        }
-        .styled-table tr:nth-of-type(even) {
-            background-color: #fcfcfc;
-        }
+        .styled-table th { background-color: var(--light-gray); color: var(--dark-blue); font-weight: bold; }
+        .styled-table tr:nth-of-type(even) { background-color: #fcfcfc; }
 
         blockquote {
-            border-left: 5px solid var(--primary-color);
-            background-color: var(--light-gray);
-            padding: 1.5rem;
-            border-radius: 0 8px 8px 0;
-            font-style: italic;
-            font-size: 1.1rem;
-            color: var(--secondary-text);
-            margin: 1.5rem 0;
+            border-left: 5px solid var(--primary-color); background-color: var(--light-gray);
+            padding: 1.5rem; border-radius: 0 8px 8px 0; font-style: italic;
+            font-size: 1.1rem; color: var(--secondary-text); margin: 1.5rem 0;
         }
 
         .section-divider {
-            border: 0;
-            height: 2px;
-            background-color: var(--border-color);
-            margin: 3rem 0;
+            border: 0; height: 2px; background-color: var(--border-color); margin: 3rem 0;
         }
 
-        /* CSS de Animación */
+        /* --- CSS de Animación --- */
         .animate-on-scroll {
             opacity: 0;
-            transform: translateY(50px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
-        .show { 
-            opacity: 1; 
-            transform: none; 
-        }
+        .fade-in-up { transform: translateY(50px); }
+        .fade-in-left { transform: translateX(-50px); }
+        .fade-in-right { transform: translateX(50px); }
+        
+        .show { opacity: 1; transform: none; }
     </style>
 </head>
 <body>
@@ -168,206 +280,109 @@
 
         <div class="note-content">
             
-            <div class="project-header animate-on-scroll">
+            <div class="project-header animate-on-scroll fade-in-up">
                 <h1>Lean Six Sigma en la Era de la IA: Optimizando el Pipeline de DataOps con DMAIC</h1>
                 <p class="slogan">"Tratando los datos como un proceso de manufactura: Del 'Muda' de datos a la producción de IA de Nivel Seis Sigma."</p>
             </div>
             
-            <div class="animate-on-scroll">
-                <h1>Proyecto Black Belt: Optimización del Pipeline de Datos (DataOps)</h1>
-                <h2>El Desafío de Negocio: El "Muda" Oculto en la Ciencia de Datos</h2>
+            <div class="animate-on-scroll fade-in-up">
+                <h1 class="section-header">Resumen Ejecutivo</h1>
+                <h2>El Desafío de Negocio: El "Muda" Oculto</h2>
                 <p>
-                    En la industria, los Científicos de Datos invierten hasta un <strong>80% de su tiempo</strong> en la preparación y limpieza de datos. Este tiempo representa un desperdicio "Muda" (sobre-procesamiento, espera, defectos) que retrasa la innovación. Adicionalmente, la pobre calidad de los datos, el sesgo (Bias) y la deriva (Data Drift) causan fallas catastróficas en los modelos de IA en producción, erosionando el ROI y la confianza en las decisiones de negocio.
+                    En la industria, los Científicos de Datos invierten hasta un <strong>80% de su tiempo</strong> en la preparación y limpieza de datos. Este tiempo representa un desperdicio "Muda" (sobre-procesamiento, espera, defectos) que retrasa la innovación y cuesta millones.
                 </p>
                 
-                <h2>El Enfoque Lean Six Sigma</h2>
+                <h2>El Enfoque L6S + DataOps</h2>
                 <p>Este proyecto aplica el rigor estadístico del framework DMAIC para tratar el pipeline de ingeniería de datos como un proceso de manufactura.</p>
                 <ul>
-                    <li><strong>Producto:</strong> El *feature set* validado.</li>
+                    <li><strong>Defecto:</strong> Cualquier dato incorrecto, incompleto u obsoleto.</li>
                     <li><strong>Cliente:</strong> El Científico de Datos y el Modelo de IA.</li>
-                    <li><strong>Defecto:</strong> Cualquier dato que sea incorrecto, incompleto, obsoleto o sesgado.</li>
                 </ul>
                 
                 <h2>Objetivo del Proyecto (Goal Statement)</h2>
                 <p>
-                    Reducir el tiempo de ciclo del "Pipeline de Features" de 12 horas a 4 horas (Y1) y aumentar el "Índice de Calidad de Datos" (DQS) de 75% a 99% (Y2), alcanzando un Nivel Sigma de 4.5, en un plazo de 6 meses. Esto liberará 20 horas/semana por Científico de Datos y estabilizará la precisión del modelo en producción.
+                    Reducir el tiempo de ciclo del "Pipeline de Features" de 12 a 4 horas (Y1) y aumentar el "Índice de Calidad de Datos" (DQS) de 75% a 99% (Y2), alcanzando un Nivel Sigma de 4.5 en 6 meses.
                 </p>
             </div>
 
             <hr class="section-divider">
 
-            <div class="animate-on-scroll">
-                <h1>Fase D: Definir el Proceso Digital</h1>
-                <h2>Entregables Clave de la Fase</h2>
-                
-                <h3>1. Project Charter</h3>
-                <ul>
-                    <li><strong>Problem Statement:</strong> (El párrafo de "El Desafío" resumido).</li>
-                    <li><strong>Goal Statement:</strong> (El objetivo SMART ya mencionado).</li>
-                    <li><strong>Business Case:</strong> "El costo de oportunidad de las horas-hombre de los Científicos de Datos se estima en $X anuales. El costo de las fallas del modelo Y se estima en $Z."</li>
-                    <li><strong>Alcance (Scope):</strong>
-                        <ul>
-                            <li><strong>In-Scope:</strong> Pipeline desde la ingesta (Fuente A, B) hasta la carga en feature store del Modelo 'Y'.</li>
-                            <li><strong>Out-of-Scope:</strong> Tuning del algoritmo de IA, infraestructura de hardware.</li>
-                        </ul>
-                    </li>
-                </ul>
-                
-                <h3>2. SIPOC (Supplier-Input-Process-Output-Customer)</h3>
-                <table class="styled-table">
-                    <thead>
-                        <tr>
-                            <th>Supplier (Proveedor)</th>
-                            <th>Input (Entrada)</th>
-                            <th>Process (Proceso)</th>
-                            <th>Output (Salida)</th>
-                            <th>Customer (Cliente)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>• API de Terceros<br>• CRM (Salesforce)<br>• ERP (SAP)</td>
-                            <td>• Datos crudos (JSON)<br>• Tablas SQL<br>• Logs</td>
-                            <td>1. Ingesta (Batch/Stream)<br>2. Validación Cruda<br>3. Transformación (ETL/ELT)<br>4. Validación de Calidad<br>5. Carga a Feature Store</td>
-                            <td>• Feature set validado<br>• Reporte de Calidad<br>• Alertas de Defectos</td>
-                            <td>• Científicos de Datos<br>• Ingenieros de ML<br>• Modelos de IA (en prod.)<br>• Dashboards de BI</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div>
+                <h1 class="section-header animate-on-scroll fade-in-up">Fases del Proyecto (DMAIC)</h1>
+                <div class="timeline-container">
+                    
+                    <div class="timeline-item timeline-item-left animate-on-scroll fade-in-left">
+                        <div class="timeline-icon">D</div>
+                        <div class="timeline-content">
+                            <h3>Definir</h3>
+                            <p>Se definió el problema y al cliente (el Modelo de IA).</p>
+                            <ul>
+                                <li><strong>Herramienta:</strong> SIPOC y Árbol de CTQ.</li>
+                                <li><strong>Hallazgo Clave:</strong> Se identificaron las CTQs (Crítico para la Calidad): <strong>1. Calidad del Dato</strong> (< 1000 DPMO) y <strong>2. Latencia</strong> (< 4 horas).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-item-right animate-on-scroll fade-in-right">
+                        <div class="timeline-icon">M</div>
+                        <div class="timeline-content">
+                            <h3>Medir</h3>
+                            <p>Se midió el rendimiento actual del proceso (Línea Base).</p>
+                            <ul>
+                                <li><strong>Línea Base:</strong> Tasa de Calidad (DQS) = 75%. Latencia = 12 horas.</li>
+                                <li><strong>Nivel Sigma:</strong> ~2.2 (inaceptable).</li>
+                                <li><strong>Herramienta:</strong> MSA (Gage R&R de Atributos).</li>
+                                <li><strong>Hallazgo Clave:</strong> ¡El sistema de medición (scripts de validación) falló! Solo detectaba el 70% de los defectos. <strong>Acción:</strong> Se calibró el "Gage" (scripts) antes de continuar.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-item-left animate-on-scroll fade-in-left">
+                        <div class="timeline-icon">A</div>
+                        <div class="timeline-content">
+                            <h3>Analizar</h3>
+                            <p>Se usó estadística para encontrar las causas raíz (X's vitales).</p>
+                            <ul>
+                                <li><strong>Herramienta:</strong> ANOVA (Análisis de Varianza).</li>
+                                <li><strong>Hallazgo 1 (Calidad):</strong> $H_0$: $\mu_{\text{CRM}} = \mu_{\text{API}}$. Con un <strong>p-value < 0.05</strong>, se confirmó que la 'API de Terceros' era la causa raíz de la mayoría de defectos.</li>
+                                <li><strong>Herramienta:</strong> Regresión Múltiple.</li>
+                                <li><strong>Hallazgo 2 (Latencia):</strong> Se confirmó que el 'Volumen de Datos' y la 'Hora del Día' eran los predictores estadísticos de la latencia.</li>
+                            </ul>
+                        </div>
+                    </div>
 
-                <h3>3. Voz del Cliente (VOC) y CTQ (Crítico para la Calidad)</h3>
-                <ul>
-                    <li><strong>VOC (Científico de Datos):</strong> "No confío en los datos."<br>
-                        <strong>CTQ (Métrica):</strong> Tasa de Defectos de Datos (< 1000 DPMO).</li>
-                    <li><strong>VOC (Científico de Datos):</strong> "Los datos tardan demasiado en llegar."<br>
-                        <strong>CTQ (Métrica):</strong> Latencia del Pipeline (< 4 horas).</li>
-                    <li><strong>VOC (Modelo IA / MLOps):</strong> "La distribución de los datos de inferencia es diferente a la de entrenamiento."<br>
-                        <strong>CTQ (Métrica):</strong> Tasa de Data Drift (< 2% de deriva en variables críticas).</li>
-                </ul>
+                    <div class="timeline-item timeline-item-right animate-on-scroll fade-in-right">
+                        <div class="timeline-icon">I</div>
+                        <div class="timeline-content">
+                            <h3>Mejorar (Improve)</h3>
+                            <p>Se diseñaron e implementaron soluciones para las X's vitales.</p>
+                            <ul>
+                                <li><strong>Solución 1 (DOE):</strong> Se usó un <strong>Diseño de Experimentos</strong> para optimizar los parámetros de Spark, reduciendo la latencia en un 40%.</li>
+                                <li><strong>Solución 2 (Poka-Yoke):</strong> Se implementaron "barreras de error" con `Great Expectations` para que los defectos no pasen al modelo.</li>
+                                <li><strong>Solución 3 (Standard Work):</strong> Se migraron los procesos a `dbt` para estandarizar las transformaciones.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item timeline-item-left animate-on-scroll fade-in-left">
+                        <div class="timeline-icon">C</div>
+                        <div class="timeline-content">
+                            <h3>Controlar</h3>
+                            <p>Se implementó Control Estadístico de Procesos (SPC) para sostener las ganancias (el núcleo de MLOps).</p>
+                            <ul>
+                                <li><strong>Herramienta:</strong> Gráficas de Control (SPC).</li>
+                                <li><strong>Acción (Data Drift):</strong> Se implementó una <strong>Gráfica XmR</strong> para monitorear la media de las variables clave. Si un punto sale de control, se activa una alerta de "Data Drift" y se re-entrena el modelo.</li>
+                                <li><strong>Acción (Calidad):</strong> Una <strong>Gráfica U</strong> monitorea la tasa de defectos por batch.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <hr class="section-divider">
 
-            <div class="animate-on-scroll">
-                <h1>Fase M: Medir el "Gemba" Digital</h1>
-                <h2>Estableciendo la Línea Base (Baseline)</h2>
-                <p>Se estableció el rendimiento actual del proceso para cuantificar el problema.</p>
-                <ul>
-                    <li><strong>Y1: Índice de Calidad de Datos (DQS):</strong> 75% (Línea Base). Calculado como un índice ponderado de:
-                        <ul>
-                            <li>% Completitud (Tasa de Nulos).</li>
-                            <li>% Validez (Formato, Rango).</li>
-                            <li>% Unicidad (Duplicados).</li>
-                        </ul>
-                    </li>
-                    <li><strong>Y2: Tiempo de Ciclo del Pipeline (T_c):</strong> 12 horas (Media, Línea Base).</li>
-                    <li><strong>Nivel Sigma Actual:</strong> Basado en el DQS y la tasa de defectos, el proceso operaba a un Nivel Sigma de ~2.2 (demasiados defectos).</li>
-                </ul>
-
-                <h2>Análisis del Proceso: Value Stream Map (VSM)</h2>
-                <p>(Aquí iría una imagen de un VSM simplificado del pipeline, tal vez un DAG de Airflow anotado).</p>
-                <p><strong>Hallazgo:</strong> "Se mapeó el pipeline de datos completo. El análisis VSM reveló que el 80% del tiempo (9.6 horas) era Tiempo de No Valor Agregado (NVA), compuesto por "Esperas" entre tareas y "Re-procesamiento" manual (scripts de limpieza ad-hoc)."</p>
-                
-                <h2>Aplicación Estadística: MSA (Análisis de Sistema de Medición)</h2>
-                <p><strong>El Reto:</strong> ¿Cómo sabemos si nuestro "sistema de medición" (los scripts de validación de datos) es confiable?</p>
-                <p><strong>El "Gage" (Instrumento):</strong> Nuestros scripts de `dbt test` y `Great Expectations`.</p>
-                <h4>Método (Gage R&R de Atributos):</h4>
-                <ul>
-                    <li>Se creó un "Golden Set" de 100 registros.</li>
-                    <li>Se "plantaron" 20 defectos conocidos (Nulos, Formatos, Outliers).</li>
-                    <li>Se ejecutó el "Gage" (scripts) 3 veces contra el Golden Set (Repetibilidad).</li>
-                    <li>Se comparó contra una validación manual experta (Reproducibilidad).</li>
-                </ul>
-                <blockquote>
-                    <strong>Resultado del MSA:</strong> "El sistema de medición inicial falló. Solo detectó el 70% de los defectos conocidos (pobre efectividad) y generó 15% de falsos positivos. <strong>Acción:</strong> El proyecto se detuvo para calibrar (mejorar) los scripts de validación antes de proceder a la fase de Análisis."
-                </blockquote>
-            </div>
-
-            <hr class="section-divider">
-
-            <div class="animate-on-scroll">
-                <h1>Fase A: Analizando la Causa Raíz de los Defectos de Datos</h1>
-                <h2>Identificación de Causas Potenciales (Diagrama de Ishikawa)</h2>
-                <p>(Imagen de un Diagrama Causa-Efecto/Fishbone). Categorías: Fuentes de Datos (APIs, DBs), Infraestructura (Clusters, Red), Métodos (Scripts ETL, joins), Medición (Validaciones), Personas (Errores manuales).</p>
-                
-                <h2>Validación Estadística de las X's Vitales</h2>
-                <p>Se usaron pruebas estadísticas para movernos de "posibles causas" a "causas raíz validadas".</p>
-
-                <h4>Herramienta: ANOVA (Análisis de Varianza)</h4>
-                <p><strong>Pregunta:</strong> ¿La Fuente de Datos (X, categórica) tiene un impacto estadísticamente significativo en la Tasa de Defectos (Y, continua)?</p>
-                <p><strong>Análisis:</strong> $H_0$: $\mu_{\text{CRM}} = \mu_{\text{API}} = \mu_{\text{Logs}}$</p>
-                <p><strong>Resultado (p-value < 0.05):</strong> "Sí. La fuente 'API de Terceros' produce una media de defectos significativamente mayor. Esta es una X vital."</p>
-
-                <h4>Herramienta: Regresión Lineal Múltiple</h4>
-                <p><strong>Pregunta:</strong> ¿Qué factores (X's) predicen la Latencia del Pipeline (Y)?</p>
-                <p><strong>Análisis:</strong> Se corrió una regresión con $Y = \text{Latencia}$ vs. $X_1 = \text{Volumen de Datos (GB)}$, $X_2 = \text{# de VMs}$, $X_3 = \text{Hora del día}$.</p>
-                <p><strong>Resultado (R-sq = 0.82):</strong> "El Volumen de Datos y la Hora del día (correlacionada con la carga del cluster) fueron los predictores estadísticamente significativos de la alta latencia."</p>
-
-                <h4>Herramienta: Prueba de Chi-Cuadrado (Chi-Square)</h4>
-                <p><strong>Pregunta:</strong> ¿El Tipo de Error (X1) está asociado con el Día de la Semana (X2)?</p>
-                <p><strong>Resultado:</strong> "Sí. Se encontró una asociación significativa. Los errores de 'Formato' se disparan los lunes, coincidiendo con las cargas de fin de semana."</p>
-            </div>
-
-            <hr class="section-divider">
-
-            <div class="animate-on-scroll">
-                <h1>Fase I: Implementando la "Fábrica Digital" Optimizada</h1>
-                
-                <h2>Solución 1 (Estadística): Optimización de Parámetros con DOE</h2>
-                <h4>Herramienta: DOE (Diseño de Experimentos)</h4>
-                <p><strong>Objetivo:</strong> Optimizar los parámetros del pipeline de Spark (el "proceso") para encontrar la mejor combinación que minimice la Latencia (Y1) y el Costo de Cómputo (Y2).</p>
-                <p><strong>Factores (X's):</strong></p>
-                <ul>
-                    <li>X1: Número de executors (Nivel: 4, 16)</li>
-                    <li>X2: Memoria por executor (Nivel: 8GB, 32GB)</li>
-                    <li>X3: Tipo de join (Nivel: 'Broadcast', 'Sort Merge')</li>
-                </ul>
-                <p><strong>Resultado:</strong> (Mostrar un gráfico de Efectos Principales o de Optimización). "El DOE identificó la configuración óptima (12 executors, 24GB, Broadcast Join) que redujo la latencia en un 40% con un costo marginal."</p>
-
-                <h2>Solución 2 (Ingeniería): "Poka-Yoke" y Estandarización</h2>
-                <h4>Implementación de Poka-Yoke (Prevención de Errores)</h4>
-                <p><strong>Herramienta:</strong> `Great Expectations` y `dbt Tests`.</p>
-                <p><strong>Acción:</strong> Se implementaron "data quality gates" (barreras de calidad) en el pipeline de CI/CD. Si un batch de datos falla una prueba crítica (ej. `expect_column_values_to_not_be_null`), el pipeline falla y genera una alerta. Esto evita que el "defecto" llegue al "cliente" (el modelo).</p>
-                
-                <h4>Estandarización del Proceso (Standard Work)</h4>
-                <p><strong>Herramienta:</strong> `dbt` (Data Build Tool).</p>
-                <p><strong>Acción:</strong> Todas las transformaciones de datos se migraron a dbt. Esto actúa como el "Trabajo Estandarizado" de Lean, asegurando que todas las transformaciones sean consistentes, versionadas y probadas.</p>
-            </div>
-            
-            <hr class="section-divider">
-
-            <div class="animate-on-scroll">
-                <h1>Fase C: Sosteniendo las Ganancias (Gobernanza de Datos y MLOps)</h1>
-                <h2>Aplicación Estadística: Control Estadístico de Procesos (SPC)</h2>
-                <p>El SPC se implementó no como un análisis histórico, sino como un sistema de monitoreo en tiempo real (el núcleo de MLOps).</p>
-                
-                <h4>Gráfica U (para Tasa de Defectos)</h4>
-                <p><strong>Métrica:</strong> Tasa de Nulos por Batch (num_nulos / tamaño_batch).</p>
-                <p><strong>Uso:</strong> Monitorea la proporción de defectos. Una alerta se dispara si un punto excede el Límite de Control Superior (UCL), indicando una "causa especial" (ej. un cambio en la API fuente).</p>
-                
-                <h4>Gráfica XmR (para Deriva de Datos y Latencia)</h4>
-                <p><strong>Métrica 1:</strong> Media de la variable "Edad" por batch.</p>
-                <p><strong>Métrica 2:</strong> Latencia del Pipeline por ejecución.</p>
-                <p><strong>Uso:</strong> La gráfica XmR monitorea la media (I-Chart) y la variabilidad (MR-Chart). Es la herramienta perfecta para la detección de Data Drift. Si la media de "Edad" se sale de los límites de control, el proceso es estadísticamente inestable, y el modelo debe ser re-entrenado.</p>
-
-                <h2>Entregables de Control y Gobernanza</h2>
-                <ul>
-                    <li><strong>Plan de Control:</strong> Documento que transfiere la propiedad del proceso al "Dueño del Proceso" (DataOps Lead).</li>
-                    <li><strong>Plan de Respuesta:</strong> Define las acciones a tomar para cada alerta de SPC (ej. "Punto fuera de control en Gráfica U" -> "Notificar al Proveedor de API").</li>
-                    <li><strong>Stack Tecnológico de Control:</strong>
-                        <ul>
-                            <li><strong>Orquestación:</strong> Airflow</li>
-                            <li><strong>Monitoreo (SPC):</strong> Evidently AI, WhyLogs (integrados con Grafana).</li>
-                            <li><strong>Trazabilidad:</strong> MLflow (para registrar la calidad del dataset junto con el modelo).</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-
-            <hr class="section-divider">
-
-            <div class="animate-on-scroll">
-                <h1>Resultados: El Impacto Financiero del Nivel Sigma</h1>
+            <div class="animate-on-scroll fade-in-up">
+                <h1 class="section-header">Resultados: El Impacto Financiero del Nivel Sigma</h1>
                 <h2>Comparativa "Antes y Después"</h2>
                 <table class="styled-table">
                     <thead>
@@ -383,86 +398,71 @@
                             <td>Índice de Calidad de Datos (Y1)</td>
                             <td>75%</td>
                             <td>99.2%</td>
-                            <td>+24.2%</td>
+                            <td style="color: green; font-weight: bold;">+24.2%</td>
                         </tr>
                         <tr>
                             <td>Nivel Sigma (Calidad)</td>
                             <td>~2.2 Sigma</td>
                             <td>~4.6 Sigma</td>
-                            <td>+2.4 Sigma</td>
+                            <td style="color: green; font-weight: bold;">+2.4 Sigma</td>
                         </tr>
                         <tr>
                             <td>Tiempo de Ciclo del Pipeline (Y2)</td>
                             <td>12 horas</td>
                             <td>3.5 horas</td>
-                            <td>-70.8%</td>
+                            <td style="color: green; font-weight: bold;">-70.8%</td>
                         </tr>
                         <tr>
                             <td>Horas/Semana (CDs) en Limpieza</td>
                             <td>32 horas (80%)</td>
                             <td>8 horas (20%)</td>
-                            <td>-24 horas/semana</td>
+                            <td style="color: green; font-weight: bold;">-24 horas/semana</td>
                         </tr>
                     </tbody>
                 </table>
                 
                 <h2>Cuantificación del Retorno de Inversión (ROI)</h2>
                 <h4>Ahorros "Hard" (Tangibles)</h4>
-                <p><strong>Liberación de Horas-Hombre:</strong> (24 horas/semana/CD) * (5 CDs) * ($80/hora) * (52 semanas) = <strong>$499,200 USD/año</strong> en productividad recuperada, que ahora se dedica a la creación de nuevos modelos.</p>
-                
-                <h4>Costo Evitado (Intangibles)</h4>
-                <p><strong>Estabilidad del Modelo:</strong> Reducción del 90% en fallas de modelo en producción debidas a Data Drift.</p>
-                <p><strong>Confianza del Negocio:</strong> Mejora en la precisión del modelo 'Y' (Churn) del 85% al 92%, previniendo $Z en pérdida de clientes.</p>
+                <p><strong>Productividad Recuperada:</strong> (24 horas/semana/CD) * (5 CDs) * ($80/hora) * (52 semanas) = <strong>$499,200 USD/año</strong>.</p>
                 
                 <h3>Testimonio del Cliente (VOC Post-Proyecto)</h3>
                 <blockquote>
-                    "Este proyecto transformó nuestra forma de trabajar. Pasamos de ser 'limpiadores de datos' a ser 'científicos de datos'. Ahora confío en la plataforma, las alertas de SPC me dan control proactivo y puedo dedicar mi tiempo a experimentar y entregar valor real."
+                    "Este proyecto transformó nuestra forma de trabajar. Pasamos de ser 'limpiadores de datos' a ser 'científicos de datos'. Ahora confío en la plataforma y las alertas de SPC me dan control proactivo."
                 </blockquote>
             </div>
 
             <hr class="section-divider">
 
-            <div class="animate-on-scroll">
-                <h1>El Stack Tecnológico del Black Belt Moderno</h1>
+            <div class="animate-on-scroll fade-in-up">
+                <h1 class="section-header">El Stack Tecnológico del Black Belt Moderno</h1>
                 <h2>Uniendo Lean Six Sigma y Data/MLOps</h2>
                 <table class="styled-table">
                     <thead>
                         <tr>
                             <th>Categoría Lean Six Sigma</th>
                             <th>Herramienta de Ingeniería / IA</th>
-                            <th>Propósito en el Proyecto</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Mapeo de Proceso (VSM)</td>
                             <td>Airflow / Prefect (DAGs)</td>
-                            <td>Visualizar el flujo de valor y los desperdicios (NVA).</td>
                         </tr>
                         <tr>
                             <td>Medición (MSA / Gage)</td>
                             <td>Great Expectations, dbt test</td>
-                            <td>El "Gage" (calibrador) para medir la calidad del dato.</td>
                         </tr>
                         <tr>
                             <td>Análisis (Estadística)</td>
                             <td>Python (statsmodels, scipy, Minitab)</td>
-                            <td>Correr ANOVA, Regresión, Chi-Cuadrado en los metadatos.</td>
                         </tr>
                         <tr>
-                            <td>Mejora (DOE)</td>
-                            <td>Spark, MLflow (Experimentos)</td>
-                            <td>La "máquina" a optimizar (DOE) y el registro de experimentos.</td>
-                        </tr>
-                        <tr>
-                            <td>Mejora (Poka-Yoke)</td>
-                            <td>dbt + Pruebas de Calidad</td>
-                            <td>Implementar "barreras de error" y estandarizar el proceso (Standard Work).</td>
+                            <td>Mejora (DOE & Poka-Yoke)</td>
+                            <td>Spark, MLflow, dbt</td>
                         </tr>
                         <tr>
                             <td>Control (SPC)</td>
                             <td>Evidently AI, WhyLogs, Grafana</td>
-                            <td>Los "tableros de control" (XmR, U-charts) para monitorear el Data Drift.</td>
                         </tr>
                     </tbody>
                 </table>
