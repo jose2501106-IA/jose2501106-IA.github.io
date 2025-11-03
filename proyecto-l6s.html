@@ -47,10 +47,9 @@
         }
         .back-link:hover { text-decoration: underline; }
 
+        /* (CORREGIDO) Ya no ocultamos .note-content */
         .note-content {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            /* Esta clase ya no necesita reglas de opacidad */
         }
         
         .project-header {
@@ -148,7 +147,16 @@
             margin: 3rem 0;
         }
 
-        .show { opacity: 1; transform: none; }
+        /* (NUEVO) CSS de Animación (el correcto) */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .show { 
+            opacity: 1; 
+            transform: none; 
+        }
     </style>
 </head>
 <body>
@@ -157,14 +165,14 @@
     <div class="container">
         <a href="index.html" class="back-link">&larr; Volver al Portafolio Principal</a>
 
-        <div class="note-content animate-on-scroll">
+        <div class="note-content">
             
-            <div class="project-header">
+            <div class="project-header animate-on-scroll">
                 <h1>Lean Six Sigma en la Era de la IA: Optimizando el Pipeline de DataOps con DMAIC</h1>
                 <p class="slogan">"Tratando los datos como un proceso de manufactura: Del 'Muda' de datos a la producción de IA de Nivel Seis Sigma."</p>
             </div>
             
-            <div>
+            <div class="animate-on-scroll">
                 <h1>Proyecto Black Belt: Optimización del Pipeline de Datos (DataOps)</h1>
                 <h2>El Desafío de Negocio: El "Muda" Oculto en la Ciencia de Datos</h2>
                 <p>
@@ -187,7 +195,7 @@
 
             <hr class="section-divider">
 
-            <div>
+            <div class="animate-on-scroll">
                 <h1>Fase D: Definir el Proceso Digital</h1>
                 <h2>Entregables Clave de la Fase</h2>
                 
@@ -239,7 +247,7 @@
             
             <hr class="section-divider">
 
-            <div>
+            <div class="animate-on-scroll">
                 <h1>Fase M: Medir el "Gemba" Digital</h1>
                 <h2>Estableciendo la Línea Base (Baseline)</h2>
                 <p>Se estableció el rendimiento actual del proceso para cuantificar el problema.</p>
@@ -276,7 +284,7 @@
 
             <hr class="section-divider">
 
-            <div>
+            <div class="animate-on-scroll">
                 <h1>Fase A: Analizando la Causa Raíz de los Defectos de Datos</h1>
                 <h2>Identificación de Causas Potenciales (Diagrama de Ishikawa)</h2>
                 <p>(Imagen de un Diagrama Causa-Efecto/Fishbone). Categorías: Fuentes de Datos (APIs, DBs), Infraestructura (Clusters, Red), Métodos (Scripts ETL, joins), Medición (Validaciones), Personas (Errores manuales).</p>
@@ -301,7 +309,7 @@
 
             <hr class="section-divider">
 
-            <div>
+            <div class="animate-on-scroll">
                 <h1>Fase I: Implementando la "Fábrica Digital" Optimizada</h1>
                 
                 <h2>Solución 1 (Estadística): Optimización de Parámetros con DOE</h2>
@@ -327,7 +335,7 @@
             
             <hr class="section-divider">
 
-            <div>
+            <div class="animate-on-scroll">
                 <h1>Fase C: Sosteniendo las Ganancias (Gobernanza de Datos y MLOps)</h1>
                 <h2>Aplicación Estadística: Control Estadístico de Procesos (SPC)</h2>
                 <p>El SPC se implementó no como un análisis histórico, sino como un sistema de monitoreo en tiempo real (el núcleo de MLOps).</p>
@@ -357,7 +365,7 @@
 
             <hr class="section-divider">
 
-            <div>
+            <div class="animate-on-scroll">
                 <h1>Resultados: El Impacto Financiero del Nivel Sigma</h1>
                 <h2>Comparativa "Antes y Después"</h2>
                 <table class="styled-table">
@@ -413,7 +421,7 @@
 
             <hr class="section-divider">
 
-            <div>
+            <div class="animate-on-scroll">
                 <h1>El Stack Tecnológico del Black Belt Moderno</h1>
                 <h2>Uniendo Lean Six Sigma y Data/MLOps</h2>
                 <table class="styled-table">
@@ -476,14 +484,18 @@
                 shootingStarsContainer.appendChild(star);
             }
             
+            // (CORREGIDO) Este JS ahora encontrará cada sección
             const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
+                entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
+                        // (NUEVO) Agregamos un pequeño retraso escalonado
+                        entry.target.style.transitionDelay = `${index * 100}ms`;
                         entry.target.classList.add('show');
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.1 });
+            }, { threshold: 0.1 }); // Se dispara al 10%
+            
             const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
             elementsToAnimate.forEach((el) => observer.observe(el));
         });
