@@ -102,7 +102,6 @@
         .links-center {
             text-align: center;
             margin-top: 2.5rem;
-            /* (ACTUALIZADO) Para apilar los botones */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -118,7 +117,8 @@
             border-radius: 8px; 
             font-weight: bold; 
             transition: all 0.2s ease;
-            width: 250px; /* Ancho fijo para que los botones se vean iguales */
+            width: 300px; /* Ancho fijo para que los botones se vean iguales */
+            box-sizing: border-box; /* Para que el padding no afecte el ancho */
         }
         .btn-primary-ghost:hover {
             background-color: var(--primary-color);
@@ -509,6 +509,7 @@
             <div class="links-center animate-on-scroll fade-in-up">
                 <a href="apuntes.html" class="btn-primary-ghost">Ver Apuntes Personales</a>
                 <a href="curiosidades.html" class="btn-primary-ghost">💡 Datos Curiosos</a>
+                <a href="proyecto-l6s.html" class="btn-primary-ghost">🛠️ Proyecto L6S (En Proceso)</a>
             </div>
         </div>
 
@@ -518,90 +519,18 @@
         <p>Diseñado y construido con curiosidad por José Hugo Meza.</p>
     </footer>
 
-    <div id="comunicacion" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('comunicacion')">&times;</span>
-            <h3>Comunicación Efectiva</h3>
-            <p>Para mí, comunicar no es solo hablar, es asegurar que el mensaje se entienda. En mi proyecto de automatización, tuve que traducir requerimientos no-técnicos en lógica de programación clara y documentar el proceso para que otros pudieran entenderlo. Escucho para entender, no solo para responder.</p>
-        </div>
-    </div>
-    <div id="liderazgo" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('liderazgo')">&times;</span>
-            <h3>Liderazgo Proactivo</h3>
-            <p>El liderazgo no se trata de tener un título, sino de tomar la iniciativa. Cuando identifiqué la necesidad de automatizar el registro de pases, no esperé a que me lo pidieran; investigué, aprendí la tecnología necesaria y construí la solución. Liderar es resolver problemas antes de que crezcan.</p>
-        </div>
-    </div>
-     <div id="resolucion" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('resolucion')">&times;</span>
-            <h3>Resolución de Problemas</h3>
-            <p>Disfruto desglosando un problema complejo en partes más pequeñas y manejables. Durante el desarrollo de mi script, me enfrenté a errores de integración con las APIs. Mi método fue aislar cada componente, probarlo individualmente y luego reintegrarlo, asegurando una solución robusta y funcional.</p>
-        </div>
-    </div>
-     <div id="ownership" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('ownership')">&times;</span>
-            <h3>Ownership</h3>
-            <p>Tomo cada tarea como si fuera mi propio proyecto. Desde la concepción de la idea hasta la implementación y las pruebas, me hago responsable del resultado final. Para mí, "ownership" significa que si algo sale mal, es mi responsabilidad arreglarlo, y si sale bien, es un éxito del equipo.</p>
-        </div>
-    </div>
-    <div id="colaboracion" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('colaboracion')">&times;</span>
-            <h3>Trabajo Colaborativo</h3>
-            <p>Entiendo que las mejores ideas surgen de la diversidad de perspectivas. Aunque trabajé solo en mi proyecto de automatización, me apoyé en comunidades en línea y pedí feedback para mejorar el código. Estoy convencido de que colaborar y compartir conocimiento es la forma más rápida de crecer.</p>
-        </div>
-    </div>
-    <div id="curiosidad" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('curiosidad')">&times;</span>
-            <h3>Curiosidad por Datos</h3>
-            <p>Mi curiosidad va más allá de los números; busco el "porqué" detrás de cada dato. En mi experiencia con inventarios, no me conformaba con corregir una discrepancia, investigaba la causa raíz en el proceso logístico. Para mí, gobernar datos es tener la curiosidad para prevenir errores, no solo para corregirlos.</p>
-        </div>
-    </div>
-    <div id="governance" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('governance')">&times;</span>
-            <h3>Data Governance</h3>
-            <p>Entiendo el Gobierno de Datos como la base para la confianza en la información. Se trata de establecer procesos para asegurar que los datos sean precisos, consistentes y seguros a lo largo de su ciclo de vida. Mi proyecto de automatización es un ejemplo práctico: valida y estandariza la información de entrada para garantizar la calidad del resultado final.</p>
-        </div>
-    </div>
-    <div id="pythonSql" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('pythonSql')">&times;</span>
-            <h3>Python & SQL</h3>
-            <p>Utilizo Python, con librerías como Pandas, para la limpieza y manipulación de datos, y SQL para realizar consultas complejas y extraer información valiosa de bases de datos relacionales. Son las herramientas fundamentales con las que transformo datos crudos en conocimiento accionable.</p>
-        </div>
-    </div>
-    <div id="dataops" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('dataops')">&times;</span>
-            <h3>DataOps</h3>
-            <p>Aplico la mentalidad de DataOps al tratar los flujos de datos como una línea de producción. Mi objetivo es automatizar, monitorear y mejorar continuamente la calidad y la velocidad con la que se entregan los datos. Mi script de automatización es un micro-sistema DataOps: automatiza un pipeline de datos desde la entrada hasta la entrega final.</p>
-        </div>
-    </div>
-    <div id="automation" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('automation')">&times;</span>
-            <h3>Process Automation</h3>
-            <p>Mi habilidad principal es identificar tareas manuales y repetitivas y construir soluciones de software para eliminarlas. Con Google Apps Script, pude integrar múltiples aplicaciones (Sheets, Slides, Gmail) para crear un flujo de trabajo autónomo que ahorra tiempo y reduce drásticamente el error humano.</p>
-        </div>
-    </div>
-    <div id="sixSigma" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('sixSigma')">&times;</span>
-            <h3>Lean Six Sigma</h3>
-            <p>Utilizo los principios de <strong>Lean Six Sigma</strong> como un marco estratégico para la resolución de problemas. Me enfoco en definir el problema, medir el estado actual, analizar la causa raíz, implementar mejoras y controlar los resultados. Esta metodología guía mi enfoque tanto en la optimización de procesos como en la mejora de la calidad de los datos.</p>
-        </div>
-    </div>
-    <div id="prompt" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('prompt')">&times;</span>
-            <h3>Prompt Engineering</h3>
-            <p>Utilizo la IA como una herramienta para acelerar el desarrollo. Sé cómo formular preguntas precisas y contextualizadas a modelos de lenguaje para generar código eficiente, depurar errores complejos y explorar diferentes enfoques para un problema. Es una habilidad que me permite aprender y construir soluciones de manera mucho más rápida.</p>
-        </div>
-    </div>
+    <div id="comunicacion" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('comunicacion')">&times;</span> <h3>Comunicación Efectiva</h3> <p>Para mí, comunicar no es solo hablar, es asegurar que el mensaje se entienda. En mi proyecto de automatización, tuve que traducir requerimientos no-técnicos en lógica de programación clara y documentar el proceso para que otros pudieran entenderlo. Escucho para entender, no solo para responder.</p> </div> </div>
+    <div id="liderazgo" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('liderazgo')">&times;</span> <h3>Liderazgo Proactivo</h3> <p>El liderazgo no se trata de tener un título, sino de tomar la iniciativa. Cuando identifiqué la necesidad de automatizar el registro de pases, no esperé a que me lo pidieran; investigué, aprendí la tecnología necesaria y construí la solución. Liderar es resolver problemas antes de que crezcan.</p> </div> </div>
+    <div id="resolucion" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('resolucion')">&times;</span> <h3>Resolución de Problemas</h3> <p>Disfruto desglosando un problema complejo en partes más pequeñas y manejables. Durante el desarrollo de mi script, me enfrenté a errores de integración con las APIs. Mi método fue aislar cada componente, probarlo individualmente y luego reintegrarlo, asegurando una solución robusta y funcional.</p> </div> </div>
+    <div id="ownership" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('ownership')">&times;</span> <h3>Ownership</h3> <p>Tomo cada tarea como si fuera mi propio proyecto. Desde la concepción de la idea hasta la implementación y las pruebas, me hago responsable del resultado final. Para mí, "ownership" significa que si algo sale mal, es mi responsabilidad arreglarlo, y si sale bien, es un éxito del equipo.</p> </div> </div>
+    <div id="colaboracion" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('colaboracion')">&times;</span> <h3>Trabajo Colaborativo</h3> <p>Entiendo que las mejores ideas surgen de la diversidad de perspectivas. Aunque trabajé solo en mi proyecto de automatización, me apoyé en comunidades en línea y pedí feedback para mejorar el código. Estoy convencido de que colaborar y compartir conocimiento es la forma más rápida de crecer.</p> </div> </div>
+    <div id="curiosidad" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('curiosidad')">&times;</span> <h3>Curiosidad por Datos</h3> <p>Mi curiosidad va más allá de los números; busco el "porqué" detrás de cada dato. En mi experiencia con inventarios, no me conformaba con corregir una discrepancia, investigaba la causa raíz en el proceso logístico. Para mí, gobernar datos es tener la curiosidad para prevenir errores, no solo para corregirlos.</p> </div> </div>
+    <div id="governance" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('governance')">&times;</span> <h3>Data Governance</h3> <p>Entiendo el Gobierno de Datos como la base para la confianza en la información. Se trata de establecer procesos para asegurar que los datos sean precisos, consistentes y seguros a lo largo de su ciclo de vida. Mi proyecto de automatización es un ejemplo práctico: valida y estandariza la información de entrada para garantizar la calidad del resultado final.</p> </div> </div>
+    <div id="pythonSql" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('pythonSql')">&times;</span> <h3>Python & SQL</h3> <p>Utilizo Python, con librerías como Pandas, para la limpieza y manipulación de datos, y SQL para realizar consultas complejas y extraer información valiosa de bases de datos relacionales. Son las herramientas fundamentales con las que transformo datos crudos en conocimiento accionable.</p> </div> </div>
+    <div id="dataops" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('dataops')">&times;</span> <h3>DataOps</h3> <p>Aplico la mentalidad de DataOps al tratar los flujos de datos como una línea de producción. Mi objetivo es automatizar, monitorear y mejorar continuamente la calidad y la velocidad con la que se entregan los datos. Mi script de automatización es un micro-sistema DataOps: automatiza un pipeline de datos desde la entrada hasta la entrega final.</p> </div> </div>
+    <div id="automation" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('automation')">&times;</span> <h3>Process Automation</h3> <p>Mi habilidad principal es identificar tareas manuales y repetitivas y construir soluciones de software para eliminarlas. Con Google Apps Script, pude integrar múltiples aplicaciones (Sheets, Slides, Gmail) para crear un flujo de trabajo autónomo que ahorra tiempo y reduce drásticamente el error humano.</p> </div> </div>
+    <div id="sixSigma" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('sixSigma')">&times;</span> <h3>Lean Six Sigma</h3> <p>Utilizo los principios de <strong>Lean Six Sigma</strong> como un marco estratégico para la resolución de problemas. Me enfoco en definir el problema, medir el estado actual, analizar la causa raíz, implementar mejoras y controlar los resultados. Esta metodología guía mi enfoque tanto en la optimización de procesos como en la mejora de la calidad de los datos.</p> </div> </div>
+    <div id="prompt" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('prompt')">&times;</span> <h3>Prompt Engineering</h3> <p>Utilizo la IA como una herramienta para acelerar el desarrollo. Sé cómo formular preguntas precisas y contextualizadas a modelos de lenguaje para generar código eficiente, depurar errores complejos y explorar diferentes enfoques para un problema. Es una habilidad que me permite aprender y construir soluciones de manera mucho más rápida.</p> </div> </div>
 
     <script>
         function setupCarousel(trackId, prevBtnId, nextBtnId) {
@@ -618,39 +547,25 @@
             function updateSlidePosition() {
                 track.style.transform = `translateX(-${currentIndex * 100}%)`;
             }
-
             function updateButtons() {
                 prevBtn.classList.toggle('hidden', currentIndex === 0);
                 nextBtn.classList.toggle('hidden', currentIndex === totalSlides - 1);
             }
-
             prevBtn.addEventListener('click', () => {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                    updateSlidePosition();
-                    updateButtons();
-                }
+                if (currentIndex > 0) { currentIndex--; updateSlidePosition(); updateButtons(); }
             });
-
             nextBtn.addEventListener('click', () => {
-                if (currentIndex < totalSlides - 1) {
-                    currentIndex++;
-                    updateSlidePosition();
-                    updateButtons();
-                }
+                if (currentIndex < totalSlides - 1) { currentIndex++; updateSlidePosition(); updateButtons(); }
             });
-
             updateButtons();
         }
 
         function openModal(modalId) {
             document.getElementById(modalId).style.display = "block";
         }
-
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = "none";
         }
-
         window.onclick = function(event) {
             const modals = document.getElementsByClassName('modal');
             for (let i = 0; i < modals.length; i++) {
