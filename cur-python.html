@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apuntes de Python - José Hugo Meza</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #26447d; --dark-blue: #2c3e50; --light-gray: #f8f9fa;
+            --text-color: #343a40; --secondary-text: #6c757d; --white: #ffffff;
+            --border-color: #e9ecef;
+        }
+        body { 
+            font-family: 'Inter', sans-serif; line-height: 1.7; color: var(--text-color); 
+            margin: 0; padding: 2rem;
+            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop');
+            background-size: cover; background-position: center center; background-attachment: fixed;
+            overflow-x: hidden;
+        }
+        .container { 
+            max-width: 800px; margin: 0 auto; background-color: var(--white); 
+            padding: 2.5rem; border-radius: 12px; 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.07); position: relative; z-index: 10;
+        }
+        .shooting-stars {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; overflow: hidden; z-index: 1;
+        }
+        .star {
+            position: absolute; background-color: var(--white); width: 2px; height: 2px;
+            border-radius: 50%; opacity: 0;
+            animation: 
+                star-fall var(--duration) linear var(--delay) infinite,
+                star-twinkle 2s ease-in-out var(--delay) infinite alternate;
+        }
+        @keyframes star-fall { 0% { transform: translate(0, 0) scale(1); opacity: 0; } 10% { opacity: 1; } 100% { transform: translate(100vw, 100vh) scale(0.5); opacity: 0; } }
+        @keyframes star-twinkle { 0%, 100% { opacity: 0.8; } 50% { opacity: 0.3; } }
+        
+        .back-link {
+            display: inline-block; color: var(--primary-color); text-decoration: none;
+            font-weight: bold; font-size: 1.1rem; margin-bottom: 1.5rem;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        .note-content {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .note-content h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .note-content h2 {
+            color: var(--dark-blue);
+            margin-top: 2.5rem;
+        }
+        .note-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        .note-content strong {
+            color: var(--primary-color);
+        }
+        .note-content code {
+            background-color: var(--light-gray);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: var(--dark-blue);
+        }
+        
+        /* (NUEVO) Estilo para el botón de enlace externo */
+        .btn-external {
+            display: inline-block;
+            text-decoration: none;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+        .btn-external:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(38, 68, 125, 0.4);
+        }
+
+        .show { opacity: 1; transform: none; }
+    </style>
+</head>
+<body>
+    <div class="shooting-stars"></div> 
+
+    <div class="container">
+        <a href="curiosidades.html" class="back-link">&larr; Volver a Datos Curiosos</a>
+        
+        <div class="note-content animate-on-scroll">
+            
+            <h1><span>🐍</span>Python: El Lenguaje de los Datos</h1>
+            
+            <p>
+                Python es mi herramienta principal para todo lo relacionado con datos. Su sintaxis limpia, su vasto ecosistema de librerías (como <strong>Pandas</strong>, <strong>NumPy</strong>, y <strong>SciKit-Learn</strong>) y su comunidad lo convierten en la opción ideal para la ciencia de datos, machine learning y gobernanza.
+            </p>
+            <p>
+                Aquí recopilo los conceptos, funciones y mejores prácticas que uso con más frecuencia.
+            </p>
+            
+            <h2>Funciones Esenciales</h2>
+            <p>
+                La librería estándar de Python es increíblemente poderosa. Conocer las funciones integradas ahorra tiempo y evita reinventar la rueda. Funciones como <code>map()</code>, <code>filter()</code>, <code>zip()</code>, y <code>enumerate()</code> son fundamentales para un código limpio y eficiente.
+            </p>
+            
+            <a href="https://docs.python.org/3/library/functions.html" class="btn-external" target="_blank" rel="noopener noreferrer">
+                Built-in-Functions (Documentación Oficial)
+            </a>
+
+            <h2 style="margin-top: 3rem;">Mis Librerías Favoritas</h2>
+            <p>
+                (Aquí puedes añadir tus notas sobre Pandas, Matplotlib, etc.)
+            </p>
+            
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const shootingStarsContainer = document.querySelector('.shooting-stars');
+            const numStars = 110; 
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.left = `${Math.random() * 100}vw`; 
+                star.style.top = `${Math.random() * 100}vh`;
+                star.style.setProperty('--delay', `${Math.random() * 15}s`);
+                star.style.setProperty('--duration', `${5 + Math.random() * 8}s`);
+                shootingStarsContainer.appendChild(star);
+            }
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+            elementsToAnimate.forEach((el) => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
