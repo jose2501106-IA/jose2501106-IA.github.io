@@ -81,7 +81,6 @@
         }
 
         h2 { color: var(--primary-color); font-size: 1.8rem; margin-bottom: 1.5rem; }
-        h3 { color: var(--dark-blue); font-size: 1.3rem; margin-top: 2rem; margin-bottom: 1rem; }
         
         .links a { 
             display: inline-block; 
@@ -153,42 +152,51 @@
             line-height: 1.6;
         }
 
-        /* --- (NUEVO) CSS para Habilidades (Tags) --- */
-        .skills-list-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            padding: 0;
-            margin: 0;
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
         }
-        .skill-tag {
+
+        .skill {
             background-color: var(--light-gray);
-            color: var(--dark-blue);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-        .skill-tag-tech {
-            background-color: var(--one-blue-pastel);
-            color: var(--primary-color);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
             font-weight: bold;
+            color: var(--dark-blue);
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
         }
-        /* --- FIN CSS Habilidades --- */
+        
+        .skill:hover {
+             background-color: #dde8f8;
+             transform: translateY(-2px);
+        }
         
         .education-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 1rem;
         }
+
         .education-item {
             background-color: var(--light-gray);
             padding: 1.5rem;
             border-radius: 8px;
             border-left: 5px solid var(--primary-color);
         }
-        .education-item h3 { margin: 0 0 0.25rem 0; color: var(--dark-blue); }
-        .education-item p { margin: 0; font-size: 1rem; color: var(--secondary-text); }
+        
+        .education-item h3 {
+            margin: 0 0 0.25rem 0;
+            color: var(--dark-blue);
+        }
+
+        .education-item p {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--secondary-text);
+        }
         
         .education-header {
             display: flex;
@@ -196,39 +204,83 @@
             align-items: center;
             margin-bottom: 0.5rem;
         }
-        .education-header h3 { margin: 0; }
+
+        .education-header h3 {
+            margin: 0;
+        }
 
         .progress-label {
-            font-size: 0.9rem; font-weight: bold; color: var(--primary-color);
-            background-color: #dde8f8; padding: 2px 8px; border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            background-color: #dde8f8;
+            padding: 2px 8px;
+            border-radius: 4px;
         }
+
         .progress-bar {
-            width: 100%; background-color: var(--border-color); border-radius: 5px;
-            height: 10px; margin-top: 1rem; overflow: hidden;
+            width: 100%;
+            background-color: var(--border-color);
+            border-radius: 5px;
+            height: 10px;
+            margin-top: 1rem;
+            overflow: hidden;
         }
+
         .progress {
-            height: 100%; background-color: var(--primary-color); border-radius: 5px;
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 5px;
             transition: width 0.5s ease-out;
         }
 
-        .carousel-container { position: relative; margin-top: 1rem; }
-        .carousel-viewport { overflow: hidden; border-radius: 12px; }
-        .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); }
-        .slide { flex: 0 0 100%; box-sizing: border-box; background-color: var(--light-gray); }
-        .program-card {
-            border-radius: 12px; padding: 2rem; color: var(--text-color);
-            min-height: 180px; display: flex; flex-direction: column; justify-content: center;
+        .carousel-container { 
+            position: relative; 
+            margin-top: 1rem; 
         }
-        .program-card h3 { font-size: 1.5rem; margin-top: 0; margin-bottom: 0.75rem; }
-        .program-card p { font-size: 1rem; line-height: 1.6; margin: 0; }
+        .carousel-viewport { 
+            overflow: hidden; 
+            border-radius: 12px; 
+        }
+        .carousel-track { 
+            display: flex; 
+            transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); 
+        }
+        .slide {
+            flex: 0 0 100%;
+            box-sizing: border-box;
+            background-color: var(--light-gray);
+        }
+        .program-card {
+            border-radius: 12px;
+            padding: 2rem;
+            color: var(--text-color);
+            min-height: 180px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .program-card h3 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+        }
+        .program-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
+        }
         
         .program-card-one {
-            background-color: var(--one-blue-pastel); color: var(--dark-blue);
+            background-color: var(--one-blue-pastel);
+            color: var(--dark-blue);
             border: 1px solid var(--one-blue-pastel-hover);
         }
         .program-card-one h3 { color: var(--primary-color); }
+
         .program-card-aspire {
-            background-color: var(--harvard-red-pastel); color: var(--dark-blue);
+            background-color: var(--harvard-red-pastel);
+            color: var(--dark-blue);
             border: 1px solid var(--harvard-red-pastel-hover);
         }
         .program-card-aspire h3 { color: var(--harvard-red); }
@@ -245,27 +297,63 @@
         .carousel-btn.next { right: 10px; }
         .carousel-btn.hidden { opacity: 0; pointer-events: none; }
 
+
         .shooting-stars {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; overflow: hidden; z-index: 1;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
         }
+
         .star {
-            position: absolute; background-color: var(--white); width: 2px; height: 2px;
-            border-radius: 50%; opacity: 0;
+            position: absolute;
+            background-color: var(--white);
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            opacity: 0;
             animation: 
                 star-fall var(--duration) linear var(--delay) infinite,
                 star-twinkle 2s ease-in-out var(--delay) infinite alternate;
         }
-        @keyframes star-fall { 0% { transform: translate(0, 0) scale(1); opacity: 0; } 10% { opacity: 1; } 100% { transform: translate(100vw, 100vh) scale(0.5); opacity: 0; } }
-        @keyframes star-twinkle { 0%, 100% { opacity: 0.8; } 50% { opacity: 0.3; } }
+
+        @keyframes star-fall {
+            0% { transform: translate(0, 0) scale(1); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translate(100vw, 100vh) scale(0.5); opacity: 0; }
+        }
+
+        @keyframes star-twinkle {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.3; }
+        }
         
-        /* --- (ELIMINADO) CSS de Modales --- */
+        .modal {
+            display: none; position: fixed; z-index: 1000; left: 0; top: 0;
+            width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+        .modal-content {
+            background-color: #fff; margin: 15% auto; padding: 25px;
+            border-radius: 10px; max-width: 500px; position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .close-btn {
+            color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;
+        }
+        .close-btn:hover, .close-btn:focus { color: black; }
         
         footer {
             text-align: center; margin-top: 2.5rem; padding-top: 1.5rem;
             border-top: 1px solid var(--border-color); color: var(--secondary-text);
             font-size: 0.9rem;
         }
+
+        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
 
         .animate-on-scroll {
             opacity: 0;
@@ -294,7 +382,7 @@
         
         <p class="animate-on-scroll fade-in-up">Mi misión es construir puentes entre la tecnología de datos y los procesos de negocio. Creo firmemente que los datos confiables son el activo más importante para la toma de decisiones inteligentes.</p>
 
-        <div classs="links animate-on-scroll fade-in-up">
+        <div class="links animate-on-scroll fade-in-up">
             <a href="https://drive.google.com/file/d/181wkopI_I6T0KGhwypm6gz5R9VVPEha4/view?usp=sharing" target="_blank">Descargar CV</a>
             <a href="https://www.linkedin.com/in/josehugomeza-ai" target="_blank">LinkedIn</a>
             <a href="https://github.com/jose2501106-IA" target="_blank">GitHub</a>
@@ -348,6 +436,11 @@
         </div>
         
         <div class="section animate-on-scroll fade-in-up">
+            <h2>Mi Filosofía</h2>
+            <p>Aplico principios de <strong>Lean Six Sigma</strong> para la mejora de procesos, buscando eliminar ineficiencias y optimizar flujos de trabajo. Mi enfoque en el Gobierno de Datos se basa en la misma idea: tratar los datos de mala calidad como un "desperdicio" que debe ser erradicado para construir sistemas robustos y eficientes.</p>
+        </div>
+        
+        <div class="section animate-on-scroll fade-in-up">
             <h2>Programas Destacados</h2>
             <div class="carousel-container">
                 <div class="carousel-viewport">
@@ -372,26 +465,26 @@
         </div>
 
         <div class="section animate-on-scroll fade-in-up">
-            <h2>Habilidades Clave</h2>
-            
-            <h3>💻 Técnicas</h3>
-            <div class="skills-list-container">
-                <span class="skill-tag skill-tag-tech">Data Governance</span>
-                <span class="skill-tag skill-tag-tech">Python & SQL</span>
-                <span class="skill-tag skill-tag-tech">DataOps</span>
-                <span class="skill-tag skill-tag-tech">Process Automation</span>
-                <span class="skill-tag skill-tag-tech">Lean Six Sigma</span>
-                <span class="skill-tag skill-tag-tech">Prompt Engineering</span>
+            <h2>🌟 Habilidades Blandas</h2>
+            <div class="skills-grid">
+                <div class="skill" onclick="openModal('comunicacion')">Comunicación Efectiva</div>
+                <div class="skill" onclick="openModal('liderazgo')">Liderazgo Proactivo</div>
+                <div class="skill" onclick="openModal('resolucion')">Resolución de Problemas</div>
+                <div class="skill" onclick="openModal('ownership')">Ownership</div>
+                <div class="skill" onclick="openModal('colaboracion')">Trabajo Colaborativo</div>
+                <div class="skill" onclick="openModal('curiosidad')">Curiosidad por Datos</div>
             </div>
-            
-            <h3>🌟 Blandas</h3>
-            <div class="skills-list-container">
-                <span class="skill-tag">Comunicación Efectiva</span>
-                <span class="skill-tag">Liderazgo Proactivo</span>
-                <span class="skill-tag">Resolución de Problemas</span>
-                <span class="skill-tag">Ownership</span>
-                <span class="skill-tag">Trabajo Colaborativo</span>
-                <span class="skill-tag">Curiosidad por Datos</span>
+        </div>
+
+        <div class="section animate-on-scroll fade-in-up">
+            <h2>💻 Habilidades Técnicas</h2>
+            <div class="skills-grid">
+                 <div class="skill" onclick="openModal('governance')">Data Governance</div>
+                 <div class="skill" onclick="openModal('pythonSql')">Python & SQL</div>
+                 <div class="skill" onclick="openModal('dataops')">DataOps</div>
+                 <div class="skill" onclick="openModal('automation')">Process Automation</div>
+                 <div class="skill" onclick="openModal('sixSigma')">Lean Six Sigma</div>
+                 <div class="skill" onclick="openModal('prompt')">Prompt Engineering</div>
             </div>
         </div>
 
@@ -405,12 +498,18 @@
         </div>
         
         <div class="section animate-on-scroll fade-in-up">
-            <h2>🧠 Mi Base de Conocimiento</h2>
-            <p>No solo aprendo, también documento. Aquí es donde conecto conceptos y comparto mi proceso de aprendizaje.</p>
-            <div class="links-center">
+            <h2>🧠 Más Allá del Código</h2>
+            <p>
+                Creo firmemente en la mejora continua, no solo en la tecnología, sino a nivel personal. Mi enfoque se basa en la introspección y la <strong>resiliencia</strong>; veo cada desafío como una oportunidad para aprender y levantarme más fuerte. Me impulsa un profundo deseo de encontrar la verdadera raíz de los problemas y construir soluciones que generen un impacto positivo y duradero.
+            </p>
+            <p>
+                Valoro la creación de entornos colaborativos y sanos, donde la conexión humana y la <strong>autenticidad</strong> son la base del éxito. Mi mayor motivación es hacer un trabajo que enorgullezca a mis mentores, mi familia y mi equipo.
+            </p>
+            
+            <div class="links-center animate-on-scroll fade-in-up">
                 <a href="apuntes.html" class="btn-primary-ghost">Ver Apuntes Personales</a>
                 <a href="curiosidades.html" class="btn-primary-ghost">💡 Datos Curiosos</a>
-                <a href="proyecto-l6s.html" class="btn-primary-ghost">🛠️ Proyecto L6S (DMAIC)</a>
+                <a href="proyecto-l6s.html" class="btn-primary-ghost">🛠️ Proyecto L6S (En Proceso)</a>
             </div>
         </div>
 
@@ -419,6 +518,19 @@
     <footer>
         <p>Diseñado y construido con curiosidad por José Hugo Meza.</p>
     </footer>
+
+    <div id="comunicacion" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('comunicacion')">&times;</span> <h3>Comunicación Efectiva</h3> <p>Para mí, comunicar no es solo hablar, es asegurar que el mensaje se entienda. En mi proyecto de automatización, tuve que traducir requerimientos no-técnicos en lógica de programación clara y documentar el proceso para que otros pudieran entenderlo. Escucho para entender, no solo para responder.</p> </div> </div>
+    <div id="liderazgo" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('liderazgo')">&times;</span> <h3>Liderazgo Proactivo</h3> <p>El liderazgo no se trata de tener un título, sino de tomar la iniciativa. Cuando identifiqué la necesidad de automatizar el registro de pases, no esperé a que me lo pidieran; investigué, aprendí la tecnología necesaria y construí la solución. Liderar es resolver problemas antes de que crezcan.</p> </div> </div>
+    <div id="resolucion" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('resolucion')">&times;</span> <h3>Resolución de Problemas</h3> <p>Disfruto desglosando un problema complejo en partes más pequeñas y manejables. Durante el desarrollo de mi script, me enfrenté a errores de integración con las APIs. Mi método fue aislar cada componente, probarlo individualmente y luego reintegrarlo, asegurando una solución robusta y funcional.</p> </div> </div>
+    <div id="ownership" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('ownership')">&times;</span> <h3>Ownership</h3> <p>Tomo cada tarea como si fuera mi propio proyecto. Desde la concepción de la idea hasta la implementación y las pruebas, me hago responsable del resultado final. Para mí, "ownership" significa que si algo sale mal, es mi responsabilidad arreglarlo, y si sale bien, es un éxito del equipo.</p> </div> </div>
+    <div id="colaboracion" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('colaboracion')">&times;</span> <h3>Trabajo Colaborativo</h3> <p>Entiendo que las mejores ideas surgen de la diversidad de perspectivas. Aunque trabajé solo en mi proyecto de automatización, me apoyé en comunidades en línea y pedí feedback para mejorar el código. Estoy convencido de que colaborar y compartir conocimiento es la forma más rápida de crecer.</p> </div> </div>
+    <div id="curiosidad" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('curiosidad')">&times;</span> <h3>Curiosidad por Datos</h3> <p>Mi curiosidad va más allá de los números; busco el "porqué" detrás de cada dato. En mi experiencia con inventarios, no me conformaba con corregir una discrepancia, investigaba la causa raíz en el proceso logístico. Para mí, gobernar datos es tener la curiosidad para prevenir errores, no solo para corregirlos.</p> </div> </div>
+    <div id="governance" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('governance')">&times;</span> <h3>Data Governance</h3> <p>Entiendo el Gobierno de Datos como la base para la confianza en la información. Se trata de establecer procesos para asegurar que los datos sean precisos, consistentes y seguros a lo largo de su ciclo de vida. Mi proyecto de automatización es un ejemplo práctico: valida y estandariza la información de entrada para garantizar la calidad del resultado final.</p> </div> </div>
+    <div id="pythonSql" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('pythonSql')">&times;</span> <h3>Python & SQL</h3> <p>Utilizo Python, con librerías como Pandas, para la limpieza y manipulación de datos, y SQL para realizar consultas complejas y extraer información valiosa de bases de datos relacionales. Son las herramientas fundamentales con las que transformo datos crudos en conocimiento accionable.</p> </div> </div>
+    <div id="dataops" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('dataops')">&times;</span> <h3>DataOps</h3> <p>Aplico la mentalidad de DataOps al tratar los flujos de datos como una línea de producción. Mi objetivo es automatizar, monitorear y mejorar continuamente la calidad y la velocidad con la que se entregan los datos. Mi script de automatización es un micro-sistema DataOps: automatiza un pipeline de datos desde la entrada hasta la entrega final.</p> </div> </div>
+    <div id="automation" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('automation')">&times;</span> <h3>Process Automation</h3> <p>Mi habilidad principal es identificar tareas manuales y repetitivas y construir soluciones de software para eliminarlas. Con Google Apps Script, pude integrar múltiples aplicaciones (Sheets, Slides, Gmail) para crear un flujo de trabajo autónomo que ahorra tiempo y reduce drásticamente el error humano.</p> </div> </div>
+    <div id="sixSigma" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('sixSigma')">&times;</span> <h3>Lean Six Sigma</h3> <p>Utilizo los principios de <strong>Lean Six Sigma</strong> como un marco estratégico para la resolución de problemas. Me enfoco en definir el problema, medir el estado actual, analizar la causa raíz, implementar mejoras y controlar los resultados. Esta metodología guía mi enfoque tanto en la optimización de procesos como en la mejora de la calidad de los datos.</p> </div> </div>
+    <div id="prompt" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('prompt')">&times;</span> <h3>Prompt Engineering</h3> <p>Utilizo la IA como una herramienta para acelerar el desarrollo. Sé cómo formular preguntas precisas y contextualizadas a modelos de lenguaje para generar código eficiente, depurar errores complejos y explorar diferentes enfoques para un problema. Es una habilidad que me permite aprender y construir soluciones de manera mucho más rápida.</p> </div> </div>
 
     <script>
         function setupCarousel(trackId, prevBtnId, nextBtnId) {
@@ -448,7 +560,20 @@
             updateButtons();
         }
 
-        // --- (ELIMINADAS) Funciones de Modales (openModal, closeModal, window.onclick) ---
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+        window.onclick = function(event) {
+            const modals = document.getElementsByClassName('modal');
+            for (let i = 0; i < modals.length; i++) {
+                if (event.target == modals[i]) {
+                    modals[i].style.display = "none";
+                }
+            }
+        }
 
         document.addEventListener('DOMContentLoaded', () => {
             const shootingStarsContainer = document.querySelector('.shooting-stars');
