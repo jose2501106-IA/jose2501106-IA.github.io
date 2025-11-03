@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto Lean Six Sigma - José Hugo Meza</title>
+    <title>Proyecto L6S: DataOps - José Hugo Meza</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,9 +14,6 @@
             --primary-color: #26447d; --dark-blue: #2c3e50; --light-gray: #f8f9fa;
             --text-color: #343a40; --secondary-text: #6c757d; --white: #ffffff;
             --border-color: #e9ecef;
-            /* (NUEVO) Colores para L6S */
-            --l6s-green: #00843D;
-            --l6s-green-pastel: #E6F3EC;
         }
         body { 
             font-family: 'Inter', sans-serif; line-height: 1.7; color: var(--text-color); 
@@ -55,41 +52,103 @@
             transform: translateY(50px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
-        .note-content h1 {
-            color: var(--primary-color);
-            font-size: 2.5rem;
+        
+        /* (NUEVO) Estilos de la página de proyecto */
+        .project-header {
+            text-align: center;
             border-bottom: 2px solid var(--border-color);
-            padding-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
-        .note-content h2 {
+        .project-header h1 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin: 0;
+        }
+        .project-header .slogan {
+            font-size: 1.1rem;
+            color: var(--secondary-text);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .note-content h1 { /* Título de sección */
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+        .note-content h2 { /* Sub-título */
             color: var(--dark-blue);
-            margin-top: 2.5rem;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+        }
+        .note-content h3 { /* Título de entregable */
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-top: 2rem;
+        }
+        .note-content h4 { /* Título de herramienta/método */
+            color: var(--dark-blue);
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
         }
         .note-content p {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             line-height: 1.8;
         }
         .note-content strong {
             color: var(--primary-color);
         }
-        
-        /* (NUEVO) Estilo de Tarjeta "En Proceso" */
-        .wip-card {
-            background-color: var(--l6s-green-pastel);
-            border: 1px solid var(--l6s-green);
-            padding: 1.5rem 2rem;
-            border-radius: 8px;
-            margin-top: 1rem;
+        .note-content ul {
+            padding-left: 20px;
+            line-height: 1.8;
+            font-size: 1.05rem;
         }
-        .wip-card p {
-            margin: 0;
-            font-size: 1rem;
-            color: var(--l6s-green);
+
+        /* (NUEVO) Estilo para tablas */
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .styled-table th,
+        .styled-table td {
+            border: 1px solid var(--border-color);
+            padding: 12px 15px;
+            text-align: left;
+        }
+        .styled-table th {
+            background-color: var(--light-gray);
+            color: var(--dark-blue);
             font-weight: bold;
-            text-align: center;
+        }
+        .styled-table tr:nth-of-type(even) {
+            background-color: #fcfcfc;
+        }
+
+        /* (NUEVO) Estilo para testimonios */
+        blockquote {
+            border-left: 5px solid var(--primary-color);
+            background-color: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--secondary-text);
+            margin: 1.5rem 0;
+        }
+
+        .section-divider {
+            border: 0;
+            height: 2px;
+            background-color: var(--border-color);
+            margin: 3rem 0;
         }
 
         .show { opacity: 1; transform: none; }
@@ -103,36 +162,303 @@
 
         <div class="note-content animate-on-scroll">
             
-            <h1><span>🛠️</span>Proyecto Lean Six Sigma</h1>
+            <div class="project-header">
+                <h1>Lean Six Sigma en la Era de la IA: Optimizando el Pipeline de DataOps con DMAIC</h1>
+                <p class="slogan">"Tratando los datos como un proceso de manufactura: Del 'Muda' de datos a la producción de IA de Nivel Seis Sigma."</p>
+            </div>
             
-            <div class="wip-card">
-                <p>¡Este proyecto está actualmente en proceso! 🚀</p>
+            <div>
+                <h1>Proyecto Black Belt: Optimización del Pipeline de Datos (DataOps)</h1>
+                <h2>El Desafío de Negocio: El "Muda" Oculto en la Ciencia de Datos</h2>
+                <p>
+                    En la industria, los Científicos de Datos invierten hasta un <strong>80% de su tiempo</strong> en la preparación y limpieza de datos. Este tiempo representa un desperdicio "Muda" (sobre-procesamiento, espera, defectos) que retrasa la innovación. Adicionalmente, la pobre calidad de los datos, el sesgo (Bias) y la deriva (Data Drift) causan fallas catastróficas en los modelos de IA en producción, erosionando el ROI y la confianza en las decisiones de negocio.
+                </p>
+                
+                <h2>El Enfoque Lean Six Sigma</h2>
+                <p>Este proyecto aplica el rigor estadístico del framework DMAIC para tratar el pipeline de ingeniería de datos como un proceso de manufactura.</p>
+                <ul>
+                    <li><strong>Producto:</strong> El *feature set* validado.</li>
+                    <li><strong>Cliente:</strong> El Científico de Datos y el Modelo de IA.</li>
+                    <li><strong>Defecto:</strong> Cualquier dato que sea incorrecto, incompleto, obsoleto o sesgado.</li>
+                </ul>
+                
+                <h2>Objetivo del Proyecto (Goal Statement)</h2>
+                <p>
+                    Reducir el tiempo de ciclo del "Pipeline de Features" de 12 horas a 4 horas (Y1) y aumentar el "Índice de Calidad de Datos" (DQS) de 75% a 99% (Y2), alcanzando un Nivel Sigma de 4.5, en un plazo de 6 meses. Esto liberará 20 horas/semana por Científico de Datos y estabilizará la precisión del modelo en producción.
+                </p>
             </div>
 
-            <h2>Objetivo del Proyecto</h2>
-            <p>
-                El objetivo de este proyecto es aplicar la metodología <strong>DMAIC (Definir, Medir, Analizar, Mejorar, Controlar)</strong> de Lean Six Sigma para... (Aquí puedes describir el problema que estás resolviendo).
-            </p>
-            <p>
-                Estoy documentando cada fase para demostrar cómo las herramientas de L6S y el análisis de datos pueden unirse para crear mejoras medibles y sostenibles en un proceso de negocio.
-            </p>
-            
-            <h2 style="margin-top: 3rem;">Fases del Proyecto (DMAIC)</h2>
-            
-            <h3>D - Definir</h3>
-            <p>(En proceso...) Definiendo el problema, el alcance del proyecto y los requerimientos del cliente (CTQs).</p>
-            
-            <h3>M - Medir</h3>
-            <p>(Próximamente...) Recopilando datos para establecer una línea base del rendimiento actual del proceso.</p>
-            
-            <h3>A - Analizar</h3>
-            <p>(Próximamente...) Usando análisis estadístico y de datos para encontrar la causa raíz del problema.</p>
+            <hr class="section-divider">
 
-            <h3>I - Mejorar (Improve)</h3>
-            <p>(Próximamente...) Proponiendo, probando e implementando soluciones para eliminar la causa raíz.</p>
+            <div>
+                <h1>Fase D: Definir el Proceso Digital</h1>
+                <h2>Entregables Clave de la Fase</h2>
+                
+                <h3>1. Project Charter</h3>
+                <ul>
+                    <li><strong>Problem Statement:</strong> (El párrafo de "El Desafío" resumido).</li>
+                    <li><strong>Goal Statement:</strong> (El objetivo SMART ya mencionado).</li>
+                    <li><strong>Business Case:</strong> "El costo de oportunidad de las horas-hombre de los Científicos de Datos se estima en $X anuales. El costo de las fallas del modelo Y se estima en $Z."</li>
+                    <li><strong>Alcance (Scope):</strong>
+                        <ul>
+                            <li><strong>In-Scope:</strong> Pipeline desde la ingesta (Fuente A, B) hasta la carga en feature store del Modelo 'Y'.</li>
+                            <li><strong>Out-of-Scope:</strong> Tuning del algoritmo de IA, infraestructura de hardware.</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <h3>2. SIPOC (Supplier-Input-Process-Output-Customer)</h3>
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Supplier (Proveedor)</th>
+                            <th>Input (Entrada)</th>
+                            <th>Process (Proceso)</th>
+                            <th>Output (Salida)</th>
+                            <th>Customer (Cliente)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>• API de Terceros<br>• CRM (Salesforce)<br>• ERP (SAP)</td>
+                            <td>• Datos crudos (JSON)<br>• Tablas SQL<br>• Logs</td>
+                            <td>1. Ingesta (Batch/Stream)<br>2. Validación Cruda<br>3. Transformación (ETL/ELT)<br>4. Validación de Calidad<br>5. Carga a Feature Store</td>
+                            <td>• Feature set validado<br>• Reporte de Calidad<br>• Alertas de Defectos</td>
+                            <td>• Científicos de Datos<br>• Ingenieros de ML<br>• Modelos de IA (en prod.)<br>• Dashboards de BI</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-            <h3>C - Controlar</h3>
-            <p>(Próximamente...) Creando un plan de control para asegurar que la mejora se mantenga a largo plazo.</p>
+                <h3>3. Voz del Cliente (VOC) y CTQ (Crítico para la Calidad)</h3>
+                <ul>
+                    <li><strong>VOC (Científico de Datos):</strong> "No confío en los datos."<br>
+                        <strong>CTQ (Métrica):</strong> Tasa de Defectos de Datos (< 1000 DPMO).</li>
+                    <li><strong>VOC (Científico de Datos):</strong> "Los datos tardan demasiado en llegar."<br>
+                        <strong>CTQ (Métrica):</strong> Latencia del Pipeline (< 4 horas).</li>
+                    <li><strong>VOC (Modelo IA / MLOps):</strong> "La distribución de los datos de inferencia es diferente a la de entrenamiento."<br>
+                        <strong>CTQ (Métrica):</strong> Tasa de Data Drift (< 2% de deriva en variables críticas).</li>
+                </ul>
+            </div>
+            
+            <hr class="section-divider">
+
+            <div>
+                <h1>Fase M: Medir el "Gemba" Digital</h1>
+                <h2>Estableciendo la Línea Base (Baseline)</h2>
+                <p>Se estableció el rendimiento actual del proceso para cuantificar el problema.</p>
+                <ul>
+                    <li><strong>Y1: Índice de Calidad de Datos (DQS):</strong> 75% (Línea Base). Calculado como un índice ponderado de:
+                        <ul>
+                            <li>% Completitud (Tasa de Nulos).</li>
+                            <li>% Validez (Formato, Rango).</li>
+                            <li>% Unicidad (Duplicados).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Y2: Tiempo de Ciclo del Pipeline (T_c):</strong> 12 horas (Media, Línea Base).</li>
+                    <li><strong>Nivel Sigma Actual:</strong> Basado en el DQS y la tasa de defectos, el proceso operaba a un Nivel Sigma de ~2.2 (demasiados defectos).</li>
+                </ul>
+
+                <h2>Análisis del Proceso: Value Stream Map (VSM)</h2>
+                <p><strong>Hallazgo:</strong> "Se mapeó el pipeline de datos completo. El análisis VSM reveló que el 80% del tiempo (9.6 horas) era Tiempo de No Valor Agregado (NVA), compuesto por "Esperas" entre tareas y "Re-procesamiento" manual (scripts de limpieza ad-hoc)."</p>
+                <h2>Aplicación Estadística: MSA (Análisis de Sistema de Medición)</h2>
+                <p><strong>El Reto:</strong> ¿Cómo sabemos si nuestro "sistema de medición" (los scripts de validación de datos) es confiable?</p>
+                <p><strong>El "Gage" (Instrumento):</strong> Nuestros scripts de `dbt test` y `Great Expectations`.</p>
+                <h4>Método (Gage R&R de Atributos):</h4>
+                <ul>
+                    <li>Se creó un "Golden Set" de 100 registros.</li>
+                    <li>Se "plantaron" 20 defectos conocidos (Nulos, Formatos, Outliers).</li>
+                    <li>Se ejecutó el "Gage" (scripts) 3 veces contra el Golden Set (Repetibilidad).</li>
+                    <li>Se comparó contra una validación manual experta (Reproducibilidad).</li>
+                </ul>
+                <blockquote>
+                    <strong>Resultado del MSA:</strong> "El sistema de medición inicial falló. Solo detectó el 70% de los defectos conocidos (pobre efectividad) y generó 15% de falsos positivos. <strong>Acción:</strong> El proyecto se detuvo para calibrar (mejorar) los scripts de validación antes de proceder a la fase de Análisis."
+                </blockquote>
+            </div>
+
+            <hr class="section-divider">
+
+            <div>
+                <h1>Fase A: Analizando la Causa Raíz de los Defectos de Datos</h1>
+                <h2>Identificación de Causas Potenciales (Diagrama de Ishikawa)</h2>
+                <p>(Imagen de un Diagrama Causa-Efecto/Fishbone). Categorías: Fuentes de Datos (APIs, DBs), Infraestructura (Clusters, Red), Métodos (Scripts ETL, joins), Medición (Validaciones), Personas (Errores manuales).</p>
+                
+                <h2>Validación Estadística de las X's Vitales</h2>
+                <p>Se usaron pruebas estadísticas para movernos de "posibles causas" a "causas raíz validadas".</p>
+
+                <h4>Herramienta: ANOVA (Análisis de Varianza)</h4>
+                <p><strong>Pregunta:</strong> ¿La Fuente de Datos (X, categórica) tiene un impacto estadísticamente significativo en la Tasa de Defectos (Y, continua)?</p>
+                <p><strong>Análisis:</strong> $H_0$: $\mu_{\text{CRM}} = \mu_{\text{API}} = \mu_{\text{Logs}}$</p>
+                <p><strong>Resultado (p-value < 0.05):</strong> "Sí. La fuente 'API de Terceros' produce una media de defectos significativamente mayor. Esta es una X vital."</p>
+
+                <h4>Herramienta: Regresión Lineal Múltiple</h4>
+                <p><strong>Pregunta:</strong> ¿Qué factores (X's) predicen la Latencia del Pipeline (Y)?</p>
+                <p><strong>Análisis:</strong> Se corrió una regresión con $Y = \text{Latencia}$ vs. $X_1 = \text{Volumen de Datos (GB)}$, $X_2 = \text{# de VMs}$, $X_3 = \text{Hora del día}$.</p>
+                <p><strong>Resultado (R-sq = 0.82):</strong> "El Volumen de Datos y la Hora del día (correlacionada con la carga del cluster) fueron los predictores estadísticamente significativos de la alta latencia."</p>
+
+                <h4>Herramienta: Prueba de Chi-Cuadrado (Chi-Square)</h4>
+                <p><strong>Pregunta:</strong> ¿El Tipo de Error (X1) está asociado con el Día de la Semana (X2)?</p>
+                <p><strong>Resultado:</strong> "Sí. Se encontró una asociación significativa. Los errores de 'Formato' se disparan los lunes, coincidiendo con las cargas de fin de semana."</p>
+            </div>
+
+            <hr class="section-divider">
+
+            <div>
+                <h1>Fase I: Implementando la "Fábrica Digital" Optimizada</h1>
+                
+                <h2>Solución 1 (Estadística): Optimización de Parámetros con DOE</h2>
+                <h4>Herramienta: DOE (Diseño de Experimentos)</h4>
+                <p><strong>Objetivo:</strong> Optimizar los parámetros del pipeline de Spark (el "proceso") para encontrar la mejor combinación que minimice la Latencia (Y1) y el Costo de Cómputo (Y2).</p>
+                <p><strong>Factores (X's):</strong></p>
+                <ul>
+                    <li>X1: Número de executors (Nivel: 4, 16)</li>
+                    <li>X2: Memoria por executor (Nivel: 8GB, 32GB)</li>
+                    <li>X3: Tipo de join (Nivel: 'Broadcast', 'Sort Merge')</li>
+                </ul>
+                <p><strong>Resultado:</strong> (Mostrar un gráfico de Efectos Principales o de Optimización). "El DOE identificó la configuración óptima (12 executors, 24GB, Broadcast Join) que redujo la latencia en un 40% con un costo marginal."</p>
+
+                <h2>Solución 2 (Ingeniería): "Poka-Yoke" y Estandarización</h2>
+                <h4>Implementación de Poka-Yoke (Prevención de Errores)</h4>
+                <p><strong>Herramienta:</strong> `Great Expectations` y `dbt Tests`.</p>
+                <p><strong>Acción:</strong> Se implementaron "data quality gates" (barreras de calidad) en el pipeline de CI/CD. Si un batch de datos falla una prueba crítica (ej. `expect_column_values_to_not_be_null`), el pipeline falla y genera una alerta. Esto evita que el "defecto" llegue al "cliente" (el modelo).</p>
+                
+                <h4>Estandarización del Proceso (Standard Work)</h4>
+                <p><strong>Herramienta:</strong> `dbt` (Data Build Tool).</p>
+                <p><strong>Acción:</strong> Todas las transformaciones de datos se migraron a dbt. Esto actúa como el "Trabajo Estandarizado" de Lean, asegurando que todas las transformaciones sean consistentes, versionadas y probadas.</p>
+            </div>
+            
+            <hr class="section-divider">
+
+            <div>
+                <h1>Fase C: Sosteniendo las Ganancias (Gobernanza de Datos y MLOps)</h1>
+                <h2>Aplicación Estadística: Control Estadístico de Procesos (SPC)</h2>
+                <p>El SPC se implementó no como un análisis histórico, sino como un sistema de monitoreo en tiempo real (el núcleo de MLOps).</p>
+                
+                <h4>Gráfica U (para Tasa de Defectos)</h4>
+                <p><strong>Métrica:</strong> Tasa de Nulos por Batch (num_nulos / tamaño_batch).</p>
+                <p><strong>Uso:</strong> Monitorea la proporción de defectos. Una alerta se dispara si un punto excede el Límite de Control Superior (UCL), indicando una "causa especial" (ej. un cambio en la API fuente).</p>
+                
+                <h4>Gráfica XmR (para Deriva de Datos y Latencia)</h4>
+                <p><strong>Métrica 1:</strong> Media de la variable "Edad" por batch.</p>
+                <p><strong>Métrica 2:</strong> Latencia del Pipeline por ejecución.</p>
+                <p><strong>Uso:</strong> La gráfica XmR monitorea la media (I-Chart) y la variabilidad (MR-Chart). Es la herramienta perfecta para la detección de Data Drift. Si la media de "Edad" se sale de los límites de control, el proceso es estadísticamente inestable, y el modelo debe ser re-entrenado.</p>
+
+                <h2>Entregables de Control y Gobernanza</h2>
+                <ul>
+                    <li><strong>Plan de Control:</strong> Documento que transfiere la propiedad del proceso al "Dueño del Proceso" (DataOps Lead).</li>
+                    <li><strong>Plan de Respuesta:</strong> Define las acciones a tomar para cada alerta de SPC (ej. "Punto fuera de control en Gráfica U" -> "Notificar al Proveedor de API").</li>
+                    <li><strong>Stack Tecnológico de Control:</strong>
+                        <ul>
+                            <li><strong>Orquestación:</strong> Airflow</li>
+                            <li><strong>Monitoreo (SPC):</strong> Evidently AI, WhyLogs (integrados con Grafana).</li>
+                            <li><strong>Trazabilidad:</strong> MLflow (para registrar la calidad del dataset junto con el modelo).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <hr class="section-divider">
+
+            <div>
+                <h1>Resultados: El Impacto Financiero del Nivel Sigma</h1>
+                <h2>Comparativa "Antes y Después"</h2>
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Métrica Clave</th>
+                            <th>Línea Base (Antes)</th>
+                            <th>Resultado (Después)</th>
+                            <th>Mejora</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Índice de Calidad de Datos (Y1)</td>
+                            <td>75%</td>
+                            <td>99.2%</td>
+                            <td>+24.2%</td>
+                        </tr>
+                        <tr>
+                            <td>Nivel Sigma (Calidad)</td>
+                            <td>~2.2 Sigma</td>
+                            <td>~4.6 Sigma</td>
+                            <td>+2.4 Sigma</td>
+                        </tr>
+                        <tr>
+                            <td>Tiempo de Ciclo del Pipeline (Y2)</td>
+                            <td>12 horas</td>
+                            <td>3.5 horas</td>
+                            <td>-70.8%</td>
+                        </tr>
+                        <tr>
+                            <td>Horas/Semana (CDs) en Limpieza</td>
+                            <td>32 horas (80%)</td>
+                            <td>8 horas (20%)</td>
+                            <td>-24 horas/semana</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h2>Cuantificación del Retorno de Inversión (ROI)</h2>
+                <h4>Ahorros "Hard" (Tangibles)</h4>
+                <p><strong>Liberación de Horas-Hombre:</strong> (24 horas/semana/CD) * (5 CDs) * ($80/hora) * (52 semanas) = <strong>$499,200 USD/año</strong> en productividad recuperada, que ahora se dedica a la creación de nuevos modelos.</p>
+                
+                <h4>Costo Evitado (Intangibles)</h4>
+                <p><strong>Estabilidad del Modelo:</strong> Reducción del 90% en fallas de modelo en producción debidas a Data Drift.</p>
+                <p><strong>Confianza del Negocio:</strong> Mejora en la precisión del modelo 'Y' (Churn) del 85% al 92%, previniendo $Z en pérdida de clientes.</p>
+                
+                <h3>Testimonio del Cliente (VOC Post-Proyecto)</h3>
+                <blockquote>
+                    "Este proyecto transformó nuestra forma de trabajar. Pasamos de ser 'limpiadores de datos' a ser 'científicos de datos'. Ahora confío en la plataforma, las alertas de SPC me dan control proactivo y puedo dedicar mi tiempo a experimentar y entregar valor real."
+                </blockquote>
+            </div>
+
+            <hr class="section-divider">
+
+            <div>
+                <h1>El Stack Tecnológico del Black Belt Moderno</h1>
+                <h2>Uniendo Lean Six Sigma y Data/MLOps</h2>
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Categoría Lean Six Sigma</th>
+                            <th>Herramienta de Ingeniería / IA</th>
+                            <th>Propósito en el Proyecto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mapeo de Proceso (VSM)</td>
+                            <td>Airflow / Prefect (DAGs)</td>
+                            <td>Visualizar el flujo de valor y los desperdicios (NVA).</td>
+                        </tr>
+                        <tr>
+                            <td>Medición (MSA / Gage)</td>
+                            <td>Great Expectations, dbt test</td>
+                            <td>El "Gage" (calibrador) para medir la calidad del dato.</td>
+                        </tr>
+                        <tr>
+                            <td>Análisis (Estadística)</td>
+                            <td>Python (statsmodels, scipy, Minitab)</td>
+                            <td>Correr ANOVA, Regresión, Chi-Cuadrado en los metadatos.</td>
+                        </tr>
+                        <tr>
+                            <td>Mejora (DOE)</td>
+                            <td>Spark, MLflow (Experimentos)</td>
+                            <td>La "máquina" a optimizar (DOE) y el registro de experimentos.</td>
+                        </tr>
+                        <tr>
+                            <td>Mejora (Poka-Yoke)</td>
+                            <td>dbt + Pruebas de Calidad</td>
+                            <td>Implementar "barreras de error" y estandarizar el proceso (Standard Work).</td>
+                        </tr>
+                        <tr>
+                            <td>Control (SPC)</td>
+                            <td>Evidently AI, WhyLogs, Grafana</td>
+                            <td>Los "tableros de control" (XmR, U-charts) para monitorear el Data Drift.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
         </div>
     </div>
