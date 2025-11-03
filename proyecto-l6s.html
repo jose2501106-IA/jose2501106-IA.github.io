@@ -69,6 +69,7 @@
             color: var(--secondary-text);
             margin-top: 0.75rem;
             font-style: italic;
+            line-height: 1.6;
         }
 
         .section-header {
@@ -252,7 +253,7 @@
             
             <div class="project-header animate-on-scroll fade-in-up">
                 <h1>Optimización del Pipeline de DataOps Lean Six Sigma</h1>
-                <p class="slogan">"Transformación del Muda de datos en un <strong>Training Set</strong> aplicando todas las herramientas de Lean SixSigma para el entrenamiento de Inteligencia Artificial de alto estándar."</p>
+                <p class="slogan">"Transformación del <strong>Muda de datos</strong> en un <strong>Training Set</strong> aplicando el rigor estadístico de Lean Six Sigma para el entrenamiento de Inteligencia Artificial de alto estándar."</p>
             </div>
             
             <div class="animate-on-scroll fade-in-up">
@@ -271,21 +272,21 @@
                 
                 <h2>El Objetivo 🎯 (Goal Statement)</h2>
                 <p>
-                    Este proyecto busca reducir el tiempo de ciclo del "Pipeline de Features" (Y1) de 12 a 4 horas y aumentar el "Índice de Calidad de Datos" (Y2) de 75% a 99%, alcanzando un Nivel Sigma de 4.5 en 6 meses.
+                    Reducir el tiempo de ciclo del pipeline de 12 a 4 horas (Y1) y aumentar nuestro <strong>"Índice de Calidad del Set de Entrenamiento" (TSQS)</strong> de 75% a 99% (Y2), alcanzando un Nivel Sigma de 4.5 en 6 meses.
                 </p>
             </div>
 
             <hr class="section-divider">
 
             <div>
-                <h1 class="section-header animate-on-scroll fade-in-up">El Proceso DMAIC (Paso a Paso)</h1>
+                <h1 class="section-header animate-on-scroll fade-in-up">⚙️ El Proceso DMAIC (Paso a Paso)</h1>
                 <div class="timeline-container">
                     
                     <div class="timeline-item timeline-item-left animate-on-scroll fade-in-left">
                         <div class="timeline-icon">D</div>
                         <div class="timeline-content">
                             <h3>Definir</h3>
-                            <p>Primero, definimos el problema y qué significaba "calidad" para nuestros clientes (los modelos de IA).</p>
+                            <p>Definimos el problema y qué significaba "calidad" para nuestros clientes (los modelos de IA).</p>
                             <ul>
                                 <li><strong>Herramienta:</strong> Árbol de CTQ (Crítico para la Calidad).</li>
                                 <li><strong>Hallazgo Clave:</strong> El éxito dependía de dos factores: <strong>1. Calidad del Dato</strong> (precisión, sin nulos) y <strong>2. Velocidad</strong> (disponible en < 4 horas).</li>
@@ -299,7 +300,7 @@
                             <h3>Medir</h3>
                             <p>Medimos el rendimiento actual para saber qué tan grande era el problema.</p>
                             <ul>
-                                <li><strong>Línea Base:</strong> Tasa de Calidad (DQS) = 75%. Latencia = 12 horas. (Nivel Sigma: ~2.2 📉).</li>
+                                <li><strong>Línea Base:</strong> Nuestro <strong>TSQS (Índice de Calidad)</strong> era de solo 75%. La latencia era de 12 horas. (Nivel Sigma: ~2.2 📉).</li>
                                 <li><strong>Herramienta:</strong> MSA (Análisis del Sistema de Medición).</li>
                                 <p class="explanation-text">Básicamente, "medimos nuestro sistema de medición".</p>
                                 <li><strong>Hallazgo Clave:</strong> ¡Nuestros scripts de validación (el "Gage") fallaban! Solo detectaban el 70% de los defectos. Tuvimos que parar y recalibrar nuestras herramientas de medición primero.</li>
@@ -314,7 +315,7 @@
                             <p>Usamos estadística para encontrar la verdadera "causa raíz" de los defectos y la lentitud.</p>
                             <ul>
                                 <li><strong>Herramienta:</strong> ANOVA (Análisis de Varianza).</li>
-                                <p class="explanation-text">Una prueba para ver si diferentes grupos (fuentes de datos) tenían resultados significativamente diferentes.</p>
+                                <p class="explanation-text">Comparamos grupos para ver si eran estadísticamente diferentes.</p>
                                 <li><strong>Hallazgo (Calidad):</strong> Con un <strong>p-value < 0.05</strong>, confirmamos que la 'API de Terceros' era la causa raíz de la mayoría de los defectos.</li>
                                 <li><strong>Herramienta:</strong> Regresión Lineal.</li>
                                 <li><strong>Hallazgo (Latencia):</strong> Confirmamos que el 'Volumen de Datos' y la 'Hora del Día' eran los predictores estadísticos de la lentitud (R-sq = 0.82).</li>
@@ -353,7 +354,7 @@
             <hr class="section-divider">
 
             <div class="animate-on-scroll fade-in-up">
-                <h1 class="section-header">Resultados y ROI 📈</h1>
+                <h1 class="section-header">📈 Resultados y ROI (Aproximación)</h1>
                 <h2>Comparativa "Antes y Después"</h2>
                 <table class="styled-table">
                     <thead>
@@ -366,7 +367,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Índice de Calidad de Datos (Y1)</td>
+                            <td>Índice de Calidad (TSQS)</td>
                             <td>75%</td>
                             <td>99.2%</td>
                             <td style="color: green; font-weight: bold;">+24.2%</td>
@@ -378,7 +379,7 @@
                             <td style="color: green; font-weight: bold;">+2.4 Sigma</td>
                         </tr>
                         <tr>
-                            <td>Tiempo de Ciclo del Pipeline (Y2)</td>
+                            <td>Tiempo de Ciclo del Pipeline</td>
                             <td>12 horas</td>
                             <td>3.5 horas</td>
                             <td style="color: green; font-weight: bold;">-70.8%</td>
@@ -402,7 +403,7 @@
             <hr class="section-divider">
 
             <div class="animate-on-scroll fade-in-up">
-                <h1 class="section-header">El Stack Tecnológico 🛠️</h1>
+                <h1 class="section-header">🛠️ El Stack Tecnológico</h1>
                 <h2>Uniendo Lean Six Sigma y Data/MLOps</h2>
                 <p>Así es como las herramientas L6S tradicionales se traducen a un stack de tecnología de datos moderno:</p>
                 <table class="styled-table">
