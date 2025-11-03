@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         :root {
             --primary-color: #26447d; --dark-blue: #2c3e50; --light-gray: #f8f9fa;
@@ -47,7 +49,6 @@
         }
         .back-link:hover { text-decoration: underline; }
 
-        /* (CORREGIDO) Ya no ocultamos .note-content */
         .note-content {
             /* Esta clase ya no necesita reglas de opacidad */
         }
@@ -147,7 +148,7 @@
             margin: 3rem 0;
         }
 
-        /* (NUEVO) CSS de Animación (el correcto) */
+        /* CSS de Animación */
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(50px);
@@ -472,32 +473,43 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const shootingStarsContainer = document.querySelector('.shooting-stars');
-            const numStars = 110; 
-            for (let i = 0; i < numStars; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                star.style.left = `${Math.random() * 100}vw`; 
-                star.style.top = `${Math.random() * 100}vh`;
-                star.style.setProperty('--delay', `${Math.random() * 15}s`);
-                star.style.setProperty('--duration', `${5 + Math.random() * 8}s`);
-                shootingStarsContainer.appendChild(star);
+            try {
+                const shootingStarsContainer = document.querySelector('.shooting-stars');
+                if (shootingStarsContainer) {
+                    const numStars = 110; 
+                    for (let i = 0; i < numStars; i++) {
+                        const star = document.createElement('div');
+                        star.classList.add('star');
+                        star.style.left = `${Math.random() * 100}vw`; 
+                        star.style.top = `${Math.random() * 100}vh`;
+                        star.style.setProperty('--delay', `${Math.random() * 15}s`);
+                        star.style.setProperty('--duration', `${5 + Math.random() * 8}s`);
+                        shootingStarsContainer.appendChild(star);
+                    }
+                }
+            } catch (e) {
+                console.error("Error al crear estrellas:", e);
             }
             
-            // (CORREGIDO) Este JS ahora encontrará cada sección
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        // (NUEVO) Agregamos un pequeño retraso escalonado
-                        entry.target.style.transitionDelay = `${index * 100}ms`;
-                        entry.target.classList.add('show');
-                        observer.unobserve(entry.target);
-                    }
+            try {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry, index) => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.transitionDelay = `${index * 100}ms`;
+                            entry.target.classList.add('show');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+                elementsToAnimate.forEach((el) => observer.observe(el));
+            } catch (e) {
+                console.error("Error al crear IntersectionObserver:", e);
+                document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                    el.classList.add('show');
                 });
-            }, { threshold: 0.1 }); // Se dispara al 10%
-            
-            const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
-            elementsToAnimate.forEach((el) => observer.observe(el));
+            }
         });
     </script>
 </body>
