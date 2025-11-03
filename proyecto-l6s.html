@@ -81,10 +81,19 @@
             padding-bottom: 0.5rem;
         }
         
+        /* (NUEVO) Contenedor de sección para agrupar */
+        .section-box {
+            background-color: var(--light-gray);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-top: 1.5rem;
+        }
+        
         .note-content h2 {
             color: var(--dark-blue);
             font-size: 1.5rem;
-            margin-top: 2rem;
+            margin-top: 0.5rem;
         }
         .note-content h3 {
             color: var(--primary-color);
@@ -103,6 +112,47 @@
             font-size: 1.05rem;
         }
         
+        /* (NUEVO) Grid para KPIs */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .kpi-card {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+        .kpi-card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+        .kpi-card-title span { font-size: 1.5rem; margin-right: 0.5rem; }
+        .kpi-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+            color: var(--secondary-text);
+        }
+        
+        /* (NUEVO) Caja de Fórmula */
+        .formula-box {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-family: monospace;
+        }
+
         .explanation-text {
             font-size: 0.95rem;
             color: var(--secondary-text);
@@ -112,107 +162,59 @@
             border-left: 3px solid var(--border-color);
         }
 
-        .timeline-container {
-            position: relative;
-            margin-top: 2.5rem;
-        }
+        /* --- Estilos de Línea de Tiempo (Sin cambios) --- */
+        .timeline-container { position: relative; margin-top: 2.5rem; }
         .timeline-container::before {
-            content: '';
-            position: absolute;
-            top: 20px; left: 50%; bottom: 20px;
-            width: 4px; background: var(--border-color);
-            transform: translateX(-50%); z-index: 1;
+            content: ''; position: absolute; top: 20px; left: 50%; bottom: 20px;
+            width: 4px; background: var(--border-color); transform: translateX(-50%); z-index: 1;
         }
-        
-        .timeline-item {
-            padding: 1rem 3rem;
-            position: relative;
-            width: 50%;
-            box-sizing: border-box;
-        }
+        .timeline-item { padding: 1rem 3rem; position: relative; width: 50%; box-sizing: border-box; }
         .timeline-icon {
-            position: absolute;
-            top: 20px; width: 60px; height: 60px;
-            border-radius: 50%;
-            background: var(--primary-color);
-            color: var(--white);
-            font-size: 2rem; font-weight: 700;
-            display: flex; align-items: center; justify-content: center;
-            z-index: 2; border: 4px solid var(--white);
+            position: absolute; top: 20px; width: 60px; height: 60px;
+            border-radius: 50%; background: var(--primary-color); color: var(--white);
+            font-size: 2rem; font-weight: 700; display: flex; align-items: center;
+            justify-content: center; z-index: 2; border: 4px solid var(--white);
         }
-        
         .timeline-content {
-            padding: 1.5rem;
-            background: var(--light-gray);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 1.5rem; background: var(--light-gray); border: 1px solid var(--border-color);
+            border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
-        .timeline-content h3 {
-            margin-top: 0;
-            font-size: 1.5rem;
-            color: var(--dark-blue);
-        }
-        .timeline-content p, .timeline-content ul {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            margin-bottom: 0;
-        }
+        .timeline-content h3 { margin-top: 0; font-size: 1.5rem; color: var(--dark-blue); }
+        .timeline-content p, .timeline-content ul { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0; }
         .timeline-content li { margin-bottom: 0.5rem; }
-
         .timeline-item-left { left: 0; padding-right: 4rem; }
         .timeline-item-right { left: 50%; padding-left: 4rem; }
-        
         .timeline-item-left .timeline-icon { right: -30px; transform: translateX(0); }
         .timeline-item-right .timeline-icon { left: -30px; transform: translateX(0); }
-
         .timeline-content::before {
-            content: ''; position: absolute;
-            top: 30px; width: 0; height: 0;
-            border-style: solid;
+            content: ''; position: absolute; top: 30px; width: 0; height: 0; border-style: solid;
         }
         .timeline-item-left .timeline-content::before {
-            right: -10px;
-            border-width: 10px 0 10px 10px;
+            right: -10px; border-width: 10px 0 10px 10px;
             border-color: transparent transparent transparent var(--border-color);
         }
         .timeline-item-right .timeline-content::before {
-            left: -10px;
-            border-width: 10px 10px 10px 0;
+            left: -10px; border-width: 10px 10px 10px 0;
             border-color: transparent var(--border-color) transparent transparent;
         }
-
         @media (max-width: 768px) {
             .timeline-container::before { left: 30px; }
-            .timeline-item,
-            .timeline-item-right,
-            .timeline-item-left {
-                width: 100%; left: 0;
-                padding-left: 5rem;
-                padding-right: 0.5rem;
-                margin-bottom: 1rem;
+            .timeline-item, .timeline-item-right, .timeline-item-left {
+                width: 100%; left: 0; padding-left: 5rem; padding-right: 0.5rem; margin-bottom: 1rem;
             }
-            .timeline-icon,
-            .timeline-item-left .timeline-icon,
-            .timeline-item-right .timeline-icon {
-                left: 0;
-                transform: translateX(0);
+            .timeline-icon, .timeline-item-left .timeline-icon, .timeline-item-right .timeline-icon {
+                left: 0; transform: translateX(0);
             }
-            .timeline-content::before,
-            .timeline-item-left .timeline-content::before,
-            .timeline-item-right .timeline-content::before {
-                left: -10px; right: auto;
-                border-width: 10px 10px 10px 0;
+            .timeline-content::before, .timeline-item-left .timeline-content::before, .timeline-item-right .timeline-content::before {
+                left: -10px; right: auto; border-width: 10px 10px 10px 0;
                 border-color: transparent var(--border-color) transparent transparent;
             }
         }
+        /* --- FIN Estilos Línea de Tiempo --- */
 
         .styled-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            font-size: 0.95rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            width: 100%; border-collapse: collapse; margin: 1.5rem 0;
+            font-size: 0.95rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
         .styled-table th, .styled-table td {
             border: 1px solid var(--border-color); padding: 12px 15px; text-align: left;
@@ -225,11 +227,26 @@
         }
         
         .roi-note {
-            font-size: 0.9rem;
-            color: var(--secondary-text);
-            text-align: center;
-            margin-top: 1.5rem;
-            font-style: italic;
+            font-size: 0.9rem; color: var(--secondary-text);
+            text-align: center; margin-top: 1.5rem; font-style: italic;
+        }
+        
+        /* (NUEVO) Botón para el Deep Dive */
+        .btn-secondary {
+            display: inline-block;
+            text-decoration: none;
+            background-color: var(--light-gray);
+            color: var(--dark-blue);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
         .animate-on-scroll {
@@ -256,24 +273,58 @@
                 <p class="slogan">"Transformación del <strong>Muda de datos</strong> en un <strong>Training Set</strong> aplicando el rigor estadístico de Lean Six Sigma para el entrenamiento de Inteligencia Artificial de alto estándar."</p>
             </div>
             
-            <div class="animate-on-scroll fade-in-up">
-                <h1 class="section-header">📊 Resumen Ejecutivo</h1>
+            <div class="section-box animate-on-scroll fade-in-up">
                 <h2>El Problema: El "Desperdicio" Oculto en los Datos</h2>
-                <p>
-                    En la industria, los Científicos de Datos invierten hasta un <strong>80% de su tiempo</strong> en preparar y limpiar datos. Este tiempo es un "desperdicio" (o "Muda" en Lean) que retrasa la innovación y cuesta millones. Además, los datos de mala calidad pueden "envenenar" a los modelos de IA, llevando a decisiones de negocio erróneas.
-                </p>
-                
-                <h2>El Enfoque: Una Fábrica de Datos</h2>
-                <p>Este proyecto (aún en desarrollo) aplica el método <strong>DMAIC</strong> de Lean Six Sigma para tratar el "pipeline" de datos como una línea de ensamblaje. El objetivo es simple: producir datos de alta calidad de forma rápida y consistente.</p>
-                <ul>
-                    <li><strong>Defecto:</strong> Cualquier dato incorrecto, incompleto u obsoleto.</li>
-                    <li><strong>Cliente:</strong> El Científico de Datos y el Modelo de IA.</li>
-                </ul>
-                
-                <h2>El Objetivo 🎯 (Goal Statement)</h2>
-                <p>
-                    Reducir el tiempo de ciclo del pipeline de 12 a 4 horas (Y1) y aumentar nuestro <strong>"Índice de Calidad del Set de Entrenamiento" (TSQS)</strong> de 75% a 99% (Y2), alcanzando un Nivel Sigma de 4.5 en 6 meses.
-                </p>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-card-title"><span>🗑️</span>Desperdicio (Muda)</div>
+                        <p>Los Científicos de Datos gastan hasta el <strong>80% de su tiempo</strong> limpiando datos. Es un desperdicio de talento y retrasa la innovación.</p>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-card-title"><span>📉</span>Defectos (Fallas de IA)</div>
+                        <p>Datos de mala calidad, sesgados o "viejos" (Drift) "envenenan" los modelos de IA, causando decisiones de negocio erróneas y pérdida de confianza.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-box animate-on-scroll fade-in-up">
+                <h2>La Solución: Una "Fábrica de Datos"</h2>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-card-title"><span>🏭</span>El Enfoque</div>
+                        <p>Aplicar <strong>Lean Six Sigma (DMAIC)</strong> para tratar el pipeline de datos como una línea de ensamblaje: un proceso repetible, medible y optimizable.</p>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-card-title"><span>🎯</span>El Objetivo</div>
+                        <p>Producir <strong>Training Sets de Nivel Sigma 4.5+</strong> (menos de 233 defectos por millón), de forma rápida y consistente, para entrenar IA confiable.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="animate-on-scroll fade-in-up">
+                <h1 class="section-header">💡 Definiendo la Y Maestra: El TSQS</h1>
+                <p>Para medir el éxito, creamos una métrica maestra: el <strong>TSQS (Training Set Quality Score)</strong>. Es un índice de 0 a 100 que mide la "salud total" de nuestro producto final (el dataset).</p>
+                <div class="formula-box">
+                    TSQS = <i>f</i> (Calidad, Estabilidad, Equidad, Puntualidad)
+                </div>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-card-title"><span>✅</span>Calidad Clásica</div>
+                        <p>¿Están los datos limpios? (Completitud, Validez, Unicidad).<br><i>Medido con: `dbt test`</i></p>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-card-title"><span>🌊</span>Estabilidad (Drift)</div>
+                        <p>¿Son los datos consistentes con la realidad? (Índice PSI).<br><i>Medido con: `Evidently AI`</i></p>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-card-title"><span>⚖️</span>Equidad (Bias)</div>
+                        <p>¿Los datos están libres de sesgos en grupos protegidos? (Impacto Dispar).<br><i>Medido con: `Fairlearn`</i></p>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-card-title"><span>⏱️</span>Puntualidad</div>
+                        <p>¿Llegaron los datos a tiempo para ser relevantes?<br><i>Medido con: `Airflow Timestamps`</i></p>
+                    </div>
+                </div>
             </div>
 
             <hr class="section-divider">
@@ -286,11 +337,7 @@
                         <div class="timeline-icon">D</div>
                         <div class="timeline-content">
                             <h3>Definir</h3>
-                            <p>Definimos el problema y qué significaba "calidad" para nuestros clientes (los modelos de IA).</p>
-                            <ul>
-                                <li><strong>Herramienta:</strong> Árbol de CTQ (Crítico para la Calidad).</li>
-                                <li><strong>Hallazgo Clave:</strong> El éxito dependía de dos factores: <strong>1. Calidad del Dato</strong> (precisión, sin nulos) y <strong>2. Velocidad</strong> (disponible en < 4 horas).</li>
-                            </ul>
+                            <p>Definimos el "Training Set" como el producto y al "Modelo de IA" como el cliente. El objetivo fue claro: mover el <strong>TSQS de 60 a 95</strong>.</p>
                         </div>
                     </div>
                     
@@ -298,13 +345,9 @@
                         <div class="timeline-icon">M</div>
                         <div class="timeline-content">
                             <h3>Medir</h3>
-                            <p>Medimos el rendimiento actual para saber qué tan grande era el problema.</p>
-                            <ul>
-                                <li><strong>Línea Base:</strong> Nuestro <strong>TSQS (Índice de Calidad)</strong> era de solo 75%. La latencia era de 12 horas. (Nivel Sigma: ~2.2 📉).</li>
-                                <li><strong>Herramienta:</strong> MSA (Análisis del Sistema de Medición).</li>
-                                <p class="explanation-text">Básicamente, "medimos nuestro sistema de medición".</p>
-                                <li><strong>Hallazgo Clave:</strong> ¡Nuestros scripts de validación (el "Gage") fallaban! Solo detectaban el 70% de los defectos. Tuvimos que parar y recalibrar nuestras herramientas de medición primero.</li>
-                            </ul>
+                            <p>Medimos la línea base (TSQS = 60%) y validamos nuestras herramientas de medición.</p>
+                            <p class="explanation-text"><strong>(MSA Crítico):</strong> Probamos nuestras herramientas (como `Evidently AI`) contra datasets sintéticos con "defectos plantados" para asegurar que pudieran detectar el *Drift* y *Bias* de forma confiable.</p>
+                            <a href="l6s-msa-deep-dive.html" class="btn-secondary">Ver Deep Dive del MSA 🔬</a>
                         </div>
                     </div>
                     
@@ -312,13 +355,10 @@
                         <div class="timeline-icon">A</div>
                         <div class="timeline-content">
                             <h3>Analizar</h3>
-                            <p>Usamos estadística para encontrar la verdadera "causa raíz" de los defectos y la lentitud.</p>
+                            <p>Usamos estadística (ANOVA, Regresión) para encontrar las causas raíz (X's vitales) que afectaban nuestro TSQS.</p>
                             <ul>
-                                <li><strong>Herramienta:</strong> ANOVA (Análisis de Varianza).</li>
-                                <p class="explanation-text">Comparamos grupos para ver si eran estadísticamente diferentes.</p>
-                                <li><strong>Hallazgo (Calidad):</strong> Con un <strong>p-value < 0.05</strong>, confirmamos que la 'API de Terceros' era la causa raíz de la mayoría de los defectos.</li>
-                                <li><strong>Herramienta:</strong> Regresión Lineal.</li>
-                                <li><strong>Hallazgo (Latencia):</strong> Confirmamos que el 'Volumen de Datos' y la 'Hora del Día' eran los predictores estadísticos de la lentitud (R-sq = 0.82).</li>
+                                <li><strong>Hallazgo (Calidad):</strong> Una 'API de Terceros' fue confirmada como la causa raíz de la mayoría de defectos (p-value < 0.05).</li>
+                                <li><strong>Hallazgo (Latencia):</strong> El 'Volumen de Datos' fue el predictor estadístico de la lentitud.</li>
                             </ul>
                         </div>
                     </div>
@@ -327,11 +367,11 @@
                         <div class="timeline-icon">I</div>
                         <div class="timeline-content">
                             <h3>Mejorar</h3>
-                            <p>Diseñamos e implementamos soluciones para arreglar las causas raíz.</p>
+                            <p>Implementamos soluciones de ingeniería y estadística para arreglar las causas raíz.</p>
                             <ul>
-                                <li><strong>Solución 1 (DOE):</strong> Usamos un <strong>Diseño de Experimentos</strong> para probar combinaciones y encontrar la configuración óptima de Spark (memoria, procesadores, etc.), reduciendo la latencia un 40%.</li>
-                                <li><strong>Solución 2 (Poka-Yoke):</strong> Implementamos "barreras de error" 🛡️ con `Great Expectations`. Si un dato es malo, el pipeline se detiene automáticamente, evitando que el "defecto" llegue al cliente.</li>
-                                <li><strong>Solución 3 (Standard Work):</strong> Migramos los procesos a `dbt` para estandarizar las transformaciones, asegurando que sean consistentes y repetibles.</li>
+                                <li><strong>DOE:</strong> Usamos un <strong>Diseño de Experimentos</strong> para encontrar la configuración óptima de Spark que maximizara el TSQS y minimizara el costo.</li>
+                                <li><strong>Poka-Yoke:</strong> Implementamos "barreras de error" 🛡️ con `Great Expectations` para detener los datos malos automáticamente.</li>
+                                <li><strong>Standard Work:</strong> Migramos los procesos a `dbt` para estandarizar las transformaciones.</li>
                             </ul>
                         </div>
                     </div>
@@ -340,11 +380,10 @@
                         <div class="timeline-icon">C</div>
                         <div class="timeline-content">
                             <h3>Controlar</h3>
-                            <p>Implementamos un tablero de control (SPC) para asegurar que las mejoras se mantengan. (¡Esto es MLOps en la práctica!).</p>
+                            <p>Implementamos un tablero de control (SPC) para asegurar que el proceso se mantenga optimizado (¡Esto es MLOps en la práctica!).</p>
                             <ul>
-                                <li><strong>Herramienta:</strong> Gráficas de Control Estadístico de Procesos (SPC).</li>
-                                <li><strong>Acción (Data Drift):</strong> Una <strong>Gráfica XmR</strong> monitorea la media de las variables. Si una variable (ej. 'Edad') se sale de control, se activa una alerta de "Data Drift" 🚨 para re-entrenar el modelo.</li>
-                                <li><strong>Acción (Calidad):</strong> Una <strong>Gráfica U</strong> monitorea la tasa de defectos por batch.</li>
+                                <li><strong>Herramienta:</strong> Gráficas de Control (SPC).</li>
+                                <li><strong>Acción:</strong> Una <strong>Gráfica XmR</strong> monitorea el Data Drift en tiempo real. Si una métrica sale de control 🚨, se activa una alerta para re-entrenar el modelo.</li>
                             </ul>
                         </div>
                     </div>
@@ -368,9 +407,9 @@
                     <tbody>
                         <tr>
                             <td>Índice de Calidad (TSQS)</td>
-                            <td>75%</td>
+                            <td>60%</td>
                             <td>99.2%</td>
-                            <td style="color: green; font-weight: bold;">+24.2%</td>
+                            <td style="color: green; font-weight: bold;">+39.2%</td>
                         </tr>
                         <tr>
                             <td>Nivel Sigma (Calidad)</td>
@@ -397,7 +436,6 @@
                 <h4>Ahorros "Hard" (Tangibles)</h4>
                 <p><strong>Productividad Recuperada:</strong> (24 horas/semana/CD) * (5 CDs) * ($80/hora) * (52 semanas) = <strong>$499,200 USD/año</strong>.</p>
                 <p class="roi-note">(Cálculo aproximado basado en 5 Científicos de Datos con un costo estándar de $80/hr).</p>
-                
             </div>
 
             <hr class="section-divider">
@@ -405,7 +443,6 @@
             <div class="animate-on-scroll fade-in-up">
                 <h1 class="section-header">🛠️ El Stack Tecnológico</h1>
                 <h2>Uniendo Lean Six Sigma y Data/MLOps</h2>
-                <p>Así es como las herramientas L6S tradicionales se traducen a un stack de tecnología de datos moderno:</p>
                 <table class="styled-table">
                     <thead>
                         <tr>
