@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase C: Controlar - José Hugo Meza</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #26447d; --dark-blue: #2c3e50; --light-gray: #f8f9fa;
+            --text-color: #343a40; --secondary-text: #6c757d; --white: #ffffff;
+            --border-color: #e9ecef;
+            --success-color: #00843D; /* Verde L6S */
+        }
+        body { 
+            font-family: 'Inter', sans-serif; line-height: 1.7; color: var(--text-color); 
+            margin: 0; padding: 2rem;
+            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop');
+            background-size: cover; background-position: center center; background-attachment: fixed;
+            overflow-x: hidden;
+        }
+        .container { 
+            max-width: 800px; margin: 0 auto; background-color: var(--white); 
+            padding: 2.5rem; border-radius: 12px; 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.07); position: relative; z-index: 10;
+        }
+        .shooting-stars {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; overflow: hidden; z-index: 1;
+        }
+        .star {
+            position: absolute; background-color: var(--white); width: 2px; height: 2px;
+            border-radius: 50%; opacity: 0;
+            animation: 
+                star-fall var(--duration) linear var(--delay) infinite,
+                star-twinkle 2s ease-in-out var(--delay) infinite alternate;
+        }
+        @keyframes star-fall { 0% { transform: translate(0, 0) scale(1); opacity: 0; } 10% { opacity: 1; } 100% { transform: translate(100vw, 100vh) scale(0.5); opacity: 0; } }
+        @keyframes star-twinkle { 0%, 100% { opacity: 0.8; } 50% { opacity: 0.3; } }
+        
+        .back-link {
+            display: inline-block; color: var(--primary-color); text-decoration: none;
+            font-weight: bold; font-size: 1.1rem; margin-bottom: 1.5rem;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        .note-content {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .note-content h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .note-content h2 {
+            color: var(--dark-blue);
+            margin-top: 2.5rem;
+            font-size: 1.5rem;
+        }
+        .note-content h3 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-top: 2rem;
+        }
+        .note-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        .note-content strong {
+            color: var(--primary-color);
+        }
+        .note-content ul {
+            padding-left: 20px;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .kpi-card {
+            background-color: var(--light-gray);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary-color);
+        }
+        .kpi-card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+        .kpi-card-title span { font-size: 1.5rem; margin-right: 0.75rem; }
+        .kpi-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin: 0;
+            color: var(--secondary-text);
+        }
+        .kpi-card p strong {
+            color: var(--dark-blue);
+        }
+        @media (max-width: 768px) {
+            .kpi-grid { grid-template-columns: 1fr; }
+        }
+
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem; /* Más pequeño para que quepa */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            table-layout: auto;
+        }
+        .styled-table th,
+        .styled-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            text-align: left;
+            word-wrap: break-word;
+        }
+        .styled-table th {
+            background-color: var(--light-gray);
+            color: var(--dark-blue);
+            font-weight: bold;
+        }
+        .styled-table tr:nth-of-type(even) {
+            background-color: #fcfcfc;
+        }
+        
+        .conclusion-box {
+            background-color: var(--success-color); /* Verde L6S */
+            color: var(--white);
+            border-radius: 12px;
+            padding: 2rem 2.5rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+        .conclusion-box h2 {
+            color: var(--white);
+            margin-top: 0;
+        }
+        .conclusion-box p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .show { opacity: 1; transform: none; }
+    </style>
+</head>
+<body>
+    <div class="shooting-stars"></div> 
+
+    <div class="container">
+        <a href="proyecto-l6s.html" class="back-link">&larr; Volver al Proyecto L6S (Resumen)</a>
+
+        <div class="note-content animate-on-scroll">
+            
+            <h1>📋 Fase C: Controlar (Sostener las Ganancias)</h1>
+            
+            <p>
+                Un Black Belt no solo arregla un problema: crea un sistema para que <strong>el problema no regrese jamás</strong>. La Fase de Control transfiere la propiedad del "proyecto" al "proceso diario", asegurando que las ganancias sean sostenibles.
+            </p>
+            
+            <h2>1. Estandarización y Prevención de Errores (Poka-Yoke)</h2>
+            <p>
+                Primero, "blindamos" (hard-code) las ganancias de la Fase de Mejora. No podemos esperar que la gente *recuerde* la nueva "receta"; debemos hacer imposible que usen la antigua.
+            </p>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-card-title"><span>📜</span>Trabajo Estandarizado</div>
+                    <p>
+                        <strong>Acción:</strong> El <code>Script B</code> (el nuevo) se convierte en la única versión en la rama <code>main</code> del repositorio. La configuración óptima de Spark se graba en el archivo de configuración del DAG de Airflow.
+                    </p>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-title"><span>🛡️</span>Poka-Yoke (A prueba de error)</div>
+                    <p>
+                        <strong>Acción:</strong> Se implementa una prueba de CI/CD que <strong>falla automáticamente</strong> si alguien intenta modificar los parámetros óptimos sin aprobación. Es un "Poka-Yoke" digital.
+                    </p>
+                </div>
+            </div>
+
+            <h2>2. Control Estadístico de Procesos (SPC) en Tiempo Real</h2>
+            <p>
+                Implementamos "tableros de control" para monitorear la salud de nuestra "fábrica de datos" en vivo.
+            </p>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-card-title"><span>📈</span>Monitoreo de Salida (Y)</div>
+                    <p>
+                        <strong>Herramienta:</strong> Gráfica I-MR del <strong>TSQS</strong>.
+                        <br><br>
+                        <strong>Propósito:</strong> Monitorea la calidad final. Nos dice inmediatamente si la media del TSQS (Gráfica I) o su variabilidad (Gráfica MR) se salen de control.
+                    </p>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-title"><span>📉</span>Monitoreo de Entrada (X)</div>
+                    <p>
+                        <strong>Herramienta:</strong> Gráfica P de la <strong>Tasa de Defectos</strong>.
+                        <br><br>
+                        <strong>Propósito:</strong> Es nuestra alarma temprana. Monitorea la calidad de la "materia prima" (ej. % de nulos de la API-B). Si se sale de control, sabemos que el proveedor tiene un problema *antes* de que afecte nuestro producto final.
+                    </p>
+                </div>
+            </div>
+            
+            <h2>3. El Documento de Gobernanza: El Plan de Control</h2>
+            <p>
+                Este es el manual de operaciones que transfiere la propiedad al Dueño del Proceso (Lead DataOps Engineer).
+            </p>
+            <div style="overflow-x: auto;"> <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Característica del Proceso</th>
+                            <th>Especificación / Tolerancia</th>
+                            <th>Herramienta de Medición</th>
+                            <th>Frecuencia</th>
+                            <th>Dueño</th>
+                            <th>Plan de Respuesta (OCAP)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Salida (Y): TSQS</strong></td>
+                            <td>LCL=95.0, UCL=99.8</td>
+                            <td>Dashboard I-MR (Grafana)</td>
+                            <td>Por Ejecución</td>
+                            <td>DataOps Lead</td>
+                            <td>Ver OCAP-1</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Entrada (X): Tasa Defectos API-B</strong></td>
+                            <td>LCL=0.5%, UCL=2.5%</td>
+                            <td>Dashboard Gráfica P</td>
+                            <td>Por Batch</td>
+                            <td>DataOps Ing.</td>
+                            <td>Ver OCAP-2</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Proceso (X): Config Spark</strong></td>
+                            <td>Debe ser "Setting 2"</td>
+                            <td>Script de Alerta (CI/CD)</td>
+                            <td>Por Ejecución</td>
+                            <td>DataOps Lead</td>
+                            <td>Rechazar build. Notificar.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>4. El Plan de Acción: OCAP (Out-of-Control Action Plan)</h2>
+            <p>
+                El Plan de Control te dice *si* algo está mal. El OCAP te dice *qué hacer* a las 3 AM cuando suena la alarma.
+            </p>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-card-title"><span>🚨</span>OCAP-1: Alerta de "TSQS Fuera de Control"</div>
+                    <p>
+                        1. <strong>Acción Inmediata:</strong> Poner el Training Set en "Cuarentena". No promoverlo al modelo de IA.
+                        <br>
+                        2. <strong>Diagnóstico:</strong> ¿La Gráfica P (API-B) también está fuera de control?
+                        <br>
+                        3. <strong>Respuesta:</strong> Si SÍ, es un problema del proveedor. Si NO, es un problema interno (Causa Especial nueva). Iniciar mini-proyecto (PDCA).
+                    </p>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-title"><span>🔔</span>OCAP-2: Alerta de "API-B Fuera de Control"</div>
+                    <p>
+                        1. <strong>Acción Inmediata:</strong> Notificar al Dueño del Proceso y al Proveedor.
+                        <br>
+                        2. <strong>Acción del Proceso:</strong> El pipeline continúa, pero se marca como "en riesgo".
+                        <br>
+                        3. <strong>Resultado:</strong> Si el TSQS final sigue *dentro* de control, nuestro proceso fue lo suficientemente robusto para manejar el problema. Si falla, se activa el OCAP-1.
+                    </s:p>
+                </div>
+            </div>
+
+            <div class="conclusion-box animate-on-scroll fade-in-up">
+                <h2>Conclusión de la Fase C: Sostenibilidad 🔒</h2>
+                <p>
+                    Con este sistema de control, el proyecto se cierra formalmente. Se ha demostrado que el proceso es:
+                </p>
+                <p>
+                    <strong>Capaz</strong> (opera a ~4.6 Sigma), <strong>Estable</strong> (bajo control estadístico) y <strong>Sostenible</strong> (gracias a un Dueño, un Plan de Control y un Plan de Respuesta).
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const shootingStarsContainer = document.querySelector('.shooting-stars');
+                if (shootingStarsContainer) {
+                    const numStars = 110; 
+                    for (let i = 0; i < numStars; i++) {
+                        const star = document.createElement('div');
+                        star.classList.add('star');
+                        star.style.left = `${Math.random() * 100}vw`; 
+                        star.style.top = `${Math.random() * 100}vh`;
+                        star.style.setProperty('--delay', `${Math.random() * 15}s`);
+                        star.style.setProperty('--duration', `${5 + Math.random() * 8}s`);
+                        shootingStarsContainer.appendChild(star);
+                    }
+                }
+            } catch (e) { console.error("Error al crear estrellas:", e); }
+            
+            try {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('show');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+                elementsToAnimate.forEach((el) => observer.observe(el));
+            } catch (e) {
+                console.error("Error al crear IntersectionObserver:", e);
+                document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                    el.classList.add('show');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
