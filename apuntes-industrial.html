@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apuntes de Ing. Industrial - José Hugo Meza</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #26447d; --dark-blue: #2c3e50; --light-gray: #f8f9fa;
+            --text-color: #343a40; --secondary-text: #6c757d; --white: #ffffff;
+            --border-color: #e9ecef;
+        }
+        body { 
+            font-family: 'Inter', sans-serif; line-height: 1.7; color: var(--text-color); 
+            margin: 0; padding: 2rem;
+            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop');
+            background-size: cover; background-position: center center; background-attachment: fixed;
+            overflow-x: hidden;
+        }
+        .shooting-stars {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; overflow: hidden; z-index: 1;
+        }
+        .star {
+            position: absolute; background-color: var(--white); width: 2px; height: 2px;
+            border-radius: 50%; opacity: 0;
+            animation: 
+                star-fall var(--duration) linear var(--delay) infinite,
+                star-twinkle 2s ease-in-out var(--delay) infinite alternate;
+        }
+        @keyframes star-fall { 0% { transform: translate(0, 0) scale(1); opacity: 0; } 10% { opacity: 1; } 100% { transform: translate(100vw, 100vh) scale(0.5); opacity: 0; } }
+        @keyframes star-twinkle { 0%, 100% { opacity: 0.8; } 50% { opacity: 0.3; } }
+        
+        .container-apuntes {
+            max-width: 1200px; margin: 0 auto; background-color: var(--white); 
+            padding: 2.5rem; border-radius: 12px; 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.07); position: relative; z-index: 10;
+        }
+        .back-link {
+            display: inline-block; color: var(--primary-color); text-decoration: none;
+            font-weight: bold; font-size: 1.1rem; margin-bottom: 1.5rem;
+        }
+        .back-link:hover { text-decoration: underline; }
+        .apuntes-header {
+            text-align: center; margin-bottom: 1.5rem;
+        }
+        .apuntes-header h2 {
+            color: var(--primary-color); font-size: 2.2rem; margin: 0;
+            display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+        }
+        .carousel-container { position: relative; margin-top: 2rem; }
+        .carousel-viewport { overflow: hidden; border-radius: 12px; border: 1px solid var(--border-color); background-color: #fdfdfd; }
+        .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .slide {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+            flex: 0 0 100%; padding: 1.5rem; box-sizing: border-box; 
+        }
+        .semester-card {
+            background-color: var(--white); border: 1px solid var(--border-color);
+            padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            opacity: 0; transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .semester-card h3 {
+            font-size: 0.9rem; color: var(--secondary-text); text-transform: uppercase;
+            letter-spacing: 0.5px; margin: 0 0 1.5rem 0;
+            border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;
+        }
+        .subject-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem; }
+        .subject-list li a {
+            display: block; text-decoration: none; color: var(--text-color);
+            font-weight: 500; font-size: 1rem; padding: 0.75rem;
+            border-radius: 6px; transition: all 0.2s ease;
+        }
+        .subject-list li a:hover { background-color: var(--light-gray); color: var(--primary-color); transform: translateX(4px); }
+        .carousel-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.9); border: 1px solid var(--border-color);
+            border-radius: 50%; width: 44px; height: 44px; font-size: 1.5rem;
+            color: var(--primary-color); cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.2s ease; z-index: 20;
+        }
+        .carousel-btn:hover { background-color: var(--white); transform: translateY(-50%) scale(1.05); }
+        .carousel-btn.prev { left: -22px; }
+        .carousel-btn.next { right: -22px; }
+        .carousel-btn.hidden { opacity: 0; pointer-events: none; }
+        @media (max-width: 992px) { .slide { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { .slide { grid-template-columns: 1fr; } .carousel-btn.prev { left: 5px; } .carousel-btn.next { right: 5px; } }
+        .show { opacity: 1; transform: none; }
+    </style>
+</head>
+<body>
+    <div class="shooting-stars"></div> 
+
+    <div class="container-apuntes">
+        <a href="index.html" class="back-link">&larr; Volver al Portafolio Principal</a>
+        
+        <div class="carousel-container">
+            <div class="apuntes-header">
+                <h2><span>⚙️</span>Ingeniería Industrial</h2>
+            </div>
+            
+            <div class="carousel-viewport">
+                <div class="carousel-track" id="ind-track">
+                    
+                    <div class="slide">
+                        <div class="semester-card">
+                            <h3>Fundamentos de Ingeniería</h3>
+                            <ul class="subject-list">
+                                <li><a href="ind-computacion.html">Introducción a computación</a></li>
+                                <li><a href="ind-intro-industrial.html">Introducción a la ingeniería industrial</a></li>
+                                <li><a href="ind-matematicas-basicas.html">Matemáticas básicas</a></li>
+                                <li><a href="ind-matematicas-ingenieros.html">Matemáticas para ingenieros</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>Matemáticas y Estadística</h3>
+                            <ul class="subject-list">
+                                <li><a href="ind-calculo-diferencial.html">Cálculo diferencial</a></li>
+                                <li><a href="ind-calculo-integral.html">Cálculo integral</a></li>
+                                <li><a href="ind-probabilidad-estadistica.html">Probabilidad y estadística</a></li>
+                                <li><a href="ind-estadistica-inferencial.html">Estadística inferencial</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>Habilidades Base</h3>
+                            <ul class="subject-list">
+                                <li><a href="ind-lectura-redaccion.html">Taller de lectura y redacción</a></li>
+                                <li><a href="ind-comunicacion-efectiva.html">Taller de comunicación efectiva</a></li>
+                                <li><a href="ind-idioma-extranjero-1.html">Idioma extranjero I</a></li>
+                                <li><a href="ind-idioma-extranjero-2.html">Idioma extranjero II</a></li>
+                                <li><a href="ind-idioma-extranjero-3.html">Idioma extranjero III</a></li>
+                                <li><a href="ind-idioma-extranjero-4.html">Idioma extranjero IV</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="semester-card">
+                            <h3>Sistemas y Producción</h3>
+                            <ul class="subject-list">
+                                <li><a href="ind-sistemas-produccion.html">Sistemas de producción</a></li>
+                                <li><a href="ind-pensamiento-sistemico.html">El pensamiento sistémico</a></li>
+                                <li><a href="ind-analisis-operaciones.html">Análisis de operaciones</a></li>
+                                <li><a href="ind-diseno-procesos.html">Diseño de procesos</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>Gestión de Calidad</h3>
+                            <ul class="subject-list">
+                                <li><a href="ind-intro-calidad.html">Introducción a la calidad</a></li>
+                                <li><a href="ind-sistemas-gestion-calidad.html">Sistemas de gestión de la calidad</a></li>
+                                <li><a href="ind-control-calidad.html">Control de la calidad</a></li>
+                                <li><a href="ind-sistemas-esbeltos.html">Sistemas esbeltos de manufactura</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>Logística y Suministro</h3>
+                            <ul class="subject-list">
+                                <li><a href="ind-inventarios-almacenes.html">Administración de inventarios y almacenes</a></li>
+                                <li><a href="ind-logistica-distribucion.html">Logística y sistemas de distribución</a></li>
+                                <li><a href="ind-cadena-suministro.html">Administración de la cadena de suministro</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="semester-card">
+                            <h3>Administración y Gestión</h3>
+                            <ul class="subject-list">
+                                <li><a href="ind-proceso-administrativo.html">El proceso administrativo</a></li>
+                                <li><a href="ind-capital-humano-liderazgo.html">Gestión del capital humano y liderazgo</a></li>
+                                <li><a href="ind-admin-operaciones.html">Administración de operaciones</a></li>
+                                <li><a href="ind-gestion-operaciones-calidad.html">Gestión de operaciones y calidad</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>Finanzas y Proyectos</h3>
+                            <ul class="subject-list">
+                                <li><a href="ind-contabilidad.html">Contabilidad aplicada a los negocios</a></li>
+                                <li><a href="ind-costos-ingenieria.html">Costos para ingeniería</a></li>
+                                <li><a href="ind-evaluacion-proyectos.html">Factibilidad y evaluación de proyectos</a></li>
+                                <li><a href="ind-localizacion-planta.html">Localización y distribución de planta</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>Estrategia y Mercados</h3>
+                            <ul class="subject-list">
+                                <li><a href="ind-mercadotecnia.html">Mercadotecnia</a></li>
+                                <li><a href="ind-inteligencia-mercados.html">Inteligencia de mercados</a></li>
+                                <li><a href="ind-servicio-cliente.html">Técnicas de servicio al cliente</a></li>
+                                <li><a href="ind-coaching-empresarial.html">Coaching empresarial</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="semester-card">
+                            <h3>Tópicos Avanzados</h3>
+                            <ul class="subject-list">
+                                <li><a href="ind-investigacion-operaciones.html">Fundamentos de investigación de operaciones</a></li>
+                                <li><a href="ind-seguridad-industrial.html">Seguridad industrial</a></li>
+                                <li><a href="ind-diseno-producto-servicio.html">Diseño de producto y servicio</a></li>
+                                <li><a href="ind-economia.html">Economía</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>Desarrollo Profesional</h3>
+                            <ul class="subject-list">
+                                <li><a href="ind-desarrollo-sustentable.html">Desarrollo sustentable</a></li>
+                                <li><a href="ind-emprendimiento.html">Emprendimiento</a></li>
+                                <li><a href="ind-capacitacion-estrategica.html">Capacitación estratégica</a></li>
+                                <li><a href="ind-etica-profesional.html">Ética profesional y de negocios</a></li>
+                            </ul>
+                        </div>
+                        <div class="semester-card">
+                            <h3>Cierre</h3>
+                            <ul class="subject-list">
+                                <li><a href="ind-estadia-profesional.html">Estadía profesional</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="carousel-btn prev" id="ind-prev" aria-label="Anterior">&#10094;</button>
+            <button class="carousel-btn next" id="ind-next" aria-label="Siguiente">&#10095;</button>
+        </div>
+        
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const shootingStarsContainer = document.querySelector('.shooting-stars');
+            const numStars = 110; 
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.left = `${Math.random() * 100}vw`; 
+                star.style.top = `${Math.random() * 100}vh`;
+                star.style.setProperty('--delay', `${Math.random() * 15}s`);
+                star.style.setProperty('--duration', `${5 + Math.random() * 8}s`);
+                shootingStarsContainer.appendChild(star);
+            }
+            
+            function setupCarousel(trackId, prevBtnId, nextBtnId) {
+                const track = document.getElementById(trackId);
+                const prevBtn = document.getElementById(prevBtnId);
+                const nextBtn = document.getElementById(nextBtnId);
+                
+                if (!track || !prevBtn || !nextBtn) return;
+
+                const slides = Array.from(track.children);
+                const totalSlides = slides.length;
+                let currentIndex = 0;
+
+                function updateSlidePosition() {
+                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                }
+                function updateButtons() {
+                    prevBtn.classList.toggle('hidden', currentIndex === 0);
+                    nextBtn.classList.toggle('hidden', currentIndex === totalSlides - 1);
+                }
+                prevBtn.addEventListener('click', () => {
+                    if (currentIndex > 0) { currentIndex--; updateSlidePosition(); updateButtons(); }
+                });
+                nextBtn.addEventListener('click', () => {
+                    if (currentIndex < totalSlides - 1) { currentIndex++; updateSlidePosition(); updateButtons(); }
+                });
+                updateButtons();
+            }
+
+            // (JS ACTUALIZADO) Solo inicializa el carrusel de Industrial
+            setupCarousel('ind-track', 'ind-prev', 'ind-next');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.transitionDelay = `${index * 50}ms`;
+                        entry.target.classList.add('show');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            const elementsToAnimate = document.querySelectorAll('.semester-card');
+            elementsToAnimate.forEach((el) => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
