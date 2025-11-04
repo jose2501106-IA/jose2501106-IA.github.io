@@ -72,7 +72,6 @@
             line-height: 1.6;
         }
 
-        /* (NUEVO) Grid para la Metodología */
         .methodology-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -109,7 +108,6 @@
                 grid-template-columns: 1fr;
             }
         }
-        /* --- FIN Grid Metodología --- */
 
         .section-header {
             color: var(--primary-color);
@@ -335,12 +333,12 @@
             
             <div class="methodology-grid animate-on-scroll fade-in-up">
                 <div class="methodology-card">
-                    <h3><span>🚀</span>El Enfoque LEAN</h3>
-                    <p><strong>El objetivo es la VELOCIDAD.</strong> Se trata de eliminar el "desperdicio" (Muda). Se analiza el pipeline de datos como una línea de ensamblaje para eliminar cuellos de botella, esperas y re-procesos manuales, reduciendo el tiempo de entrega de 12 a 4 horas.</p>
+                    <h3><span>🚀</span>¿Qué obtendremos de LEAN?</h3>
+                    <p><strong>EFICIENCIA Y VELOCIDAD.</strong> Al aplicar Lean, se obtendrá un mapa del "desperdicio" (Muda) de tiempo. El resultado es un pipeline que reduce el ciclo de entrega de 12 a 4 horas, liberando horas-hombre de Científicos de Datos y acelerando la innovación.</p>
                 </div>
                 <div class="methodology-card">
-                    <h3><span>🎯</span>El Enfoque SIX SIGMA</h3>
-                    <p><strong>El objetivo es la CALIDAD.</strong> Se trata de eliminar los "defectos". Se define un dato erróneo, sesgado o con "drift" como un defecto y se usa estadística para reducir la variación del proceso hasta alcanzar una calidad predecible y de nivel 4.5 Sigma.</p>
+                    <h3><span>🎯</span>¿Qué obtendremos de SIX SIGMA?</h3>
+                    <p><strong>CALIDAD Y CONFIANZA.</strong> Se obtendrá un "Training Set" de calidad medible y predecible. El resultado es un proceso controlado (SPC) que previene "defectos" (como Data Drift y Bias), garantizando una IA confiable y reduciendo el riesgo del negocio.</p>
                 </div>
             </div>
             
@@ -362,198 +360,3 @@
                 <h2>La Oportunidad: El Retorno de la Inversión (ROI) 💸</h2>
                 <div class="kpi-grid">
                     <div class="kpi-card">
-                        <div class="kpi-card-title"><span>💸</span>Ahorro Tangible (Proyectado)</div>
-                        <p><strong>~$499,000 USD/año</strong> en productividad recuperada al automatizar la limpieza y validación de datos (basado en un equipo de 5 CDs).</p>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-card-title"><span>🎯</span>Mejora del Proceso (Meta)</div>
-                        <p>Producir <strong>Training Sets de Nivel Sigma 4.5+</strong> (calidad casi perfecta), reduciendo el tiempo de entrega de 12 horas a menos de 4.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="animate-on-scroll fade-in-up">
-                <h1 class="section-header">💡 Definiendo la Métrica Clave (Y)</h1>
-                <p>Para medir el éxito, se necesita una métrica maestra: el <strong>TSQS (Training Set Quality Score)</strong>. Es un índice de 0 a 100 que mide la "salud total" del producto final (el dataset) basado en lo que el negocio valora.</p>
-                <div class="formula-box">
-                    TSQS = <i>f</i> (Calidad, Estabilidad, Equidad, Puntualidad)
-                </div>
-                <div class="deep-dive-links">
-                    <a href="l6s-tsqs-matrix.html" class="btn-secondary">Ver cómo se calcula el TSQS (Matriz de Priorización)</a>
-                </div>
-                <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <div class="kpi-card-title"><span>✅</span>Calidad</div>
-                        <p>¿Están los datos limpios? (Nulos, Duplicados, etc.)</p>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-card-title"><span>🌊</span>Estabilidad (Drift)</div>
-                        <p>¿Los datos de hoy se parecen a los de ayer? ¿Son consistentes?</p>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-card-title"><span>⚖️</span>Equidad (Bias)</div>
-                        <p>¿Los datos están libres de sesgos injustos en grupos protegidos?</p>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-card-title"><span>⏱️</span>Puntualidad</div>
-                        <p>¿Llegaron los datos a tiempo para ser relevantes?</p>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="section-divider">
-
-            <div>
-                <h1 class="section-header animate-on-scroll fade-in-up">⚙️ El Plan de Proyecto (DMAIC)</h1>
-                <p class="animate-on-scroll fade-in-up">Este es el plan paso a paso, basado en el método Lean Six Sigma, para ejecutar esta optimización.</p>
-                <div class="timeline-container">
-                    
-                    <div class="timeline-item timeline-item-left animate-on-scroll fade-in-left">
-                        <div class="timeline-icon">D</div>
-                        <div class="timeline-content">
-                            <h3>Definir</h3>
-                            <p><strong>El objetivo:</strong> Definir claramente el problema, el alcance y las métricas críticas para el éxito (CTQs) en un "Project Charter".</p>
-                            <ul>
-                                <li><strong>Entregable:</strong> El cálculo del TSQS (ver arriba) y el mapa del proceso (SIPOC).</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item timeline-item-right animate-on-scroll fade-in-right">
-                        <div class="timeline-icon">M</div>
-                        <div class="timeline-content">
-                            <h3>Medir</h3>
-                            <p><strong>El objetivo:</strong> Medir el rendimiento actual (Línea Base) y, crucialmente, <strong>validar nuestro sistema de medición</strong>.</p>
-                            <p class="explanation-text"><strong>(MSA Crítico):</strong> Antes de medir, se debe probar que nuestras herramientas (ej. `Evidently AI`) son confiables para detectar *Drift* y *Bias*. Usamos "datos sintéticos" para calibrarlas.</p>
-                            <div class="deep-dive-links">
-                                <a href="l6s-msa-deep-dive.html" class="btn-secondary">Ver Deep Dive del MSA 🔬</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item timeline-item-left animate-on-scroll fade-in-left">
-                        <div class="timeline-icon">A</div>
-                        <div class="timeline-content">
-                            <h3>Analizar</h3>
-                            <p><strong>El objetivo:</strong> Usar estadística para encontrar la verdadera "causa raíz" de los problemas (las "X's vitales").</p>
-                            <ul>
-                                <li><strong>Acción:</strong> Aplicar análisis (como ANOVA o Regresión) para probar qué factores (ej. 'Fuente de Datos', 'Volumen') tienen un impacto estadísticamente significativo en la calidad (TSQS).</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item timeline-item-right animate-on-scroll fade-in-right">
-                        <div class="timeline-icon">I</div>
-                        <div class="timeline-content">
-                            <h3>Mejorar</h3>
-                            <p><strong>El objetivo:</strong> Diseñar e implementar soluciones que ataquen la causa raíz.</p>
-                            <ul>
-                                <li><strong>Solución (Poka-Yoke):</strong> Implementar "barreras de error" 🛡️ con `Great Expectations` para detener los datos malos automáticamente.</li>
-                                <li><strong>Solución (Standard Work):</strong> Migrar los procesos a `dbt` para estandarizar las transformaciones de datos.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item timeline-item-left animate-on-scroll fade-in-left">
-                        <div class="timeline-icon">C</div>
-                        <div class="timeline-content">
-                            <h3>Controlar</h3>
-                            <p><strong>El objetivo:</strong> Asegurar que las mejoras se mantengan en el tiempo usando tableros de control (SPC).</p>
-                            <ul>
-                                <li><strong>Acción (MLOps):</strong> Implementar una <strong>Gráfica de Control XmR</strong> para monitorear el "Data Drift" 🚨. Si una métrica clave se sale de control, se activa una alerta para re-entrenar el modelo.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <hr class="section-divider">
-
-            <div class="animate-on-scroll fade-in-up">
-                <h1 class="section-header">🛠️ El Stack Tecnológico</h1>
-                <h2>Uniendo Lean Six Sigma y Data/MLOps</h2>
-                <p>Así es como los conceptos L6S se traducen a un stack de tecnología de datos moderno:</p>
-                <table class="styled-table">
-                    <thead>
-                        <tr>
-                            <th>Categoría Lean Six Sigma</th>
-                            <th>Herramienta de Ingeniería / IA</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Mapeo de Proceso (VSM)</td>
-                            <td>Airflow / Prefect (DAGs)</td>
-                        </tr>
-                        <tr>
-                            <td>Medición (MSA / Gage)</td>
-                            <td>Great Expectations, dbt test</td>
-                        </tr>
-                        <tr>
-                            <td>Análisis (Estadística)</td>
-                            <td>Python (statsmodels, scipy)</td>
-                        </tr>
-                        <tr>
-                            <td>Mejora (DOE & Poka-Yoke)</td>
-                            <td>Spark, MLflow, dbt</td>
-                        </tr>
-                        <tr>
-                            <td>Control (SPC)</td>
-                            <td>Evidently AI, WhyLogs, Grafana</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="conclusion-box animate-on-scroll fade-in-up">
-                <h2>El Siguiente Paso 🚀</h2>
-                <p>Este plan de proyecto demuestra la aplicación estratégica del pensamiento Lean Six Sigma a los problemas más caros y complejos de la Inteligencia Artificial.</p>
-                <p>La inversión en una certificación <strong>Black Belt</strong> es el siguiente paso lógico para adquirir las herramientas de ejecución y liderazgo necesarias para implementar esta visión y generar un valor cuantificable para el negocio.</p>
-            </div>
-
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            try {
-                const shootingStarsContainer = document.querySelector('.shooting-stars');
-                if (shootingStarsContainer) {
-                    const numStars = 110; 
-                    for (let i = 0; i < numStars; i++) {
-                        const star = document.createElement('div');
-                        star.classList.add('star');
-                        star.style.left = `${Math.random() * 100}vw`; 
-                        star.style.top = `${Math.random() * 100}vh`;
-                        star.style.setProperty('--delay', `${Math.random() * 15}s`);
-                        star.style.setProperty('--duration', `${5 + Math.random() * 8}s`);
-                        shootingStarsContainer.appendChild(star);
-                    }
-                }
-            } catch (e) {
-                console.error("Error al crear estrellas:", e);
-            }
-            
-            try {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach((entry, index) => {
-                        if (entry.isIntersecting) {
-                            entry.target.style.transitionDelay = `${index * 100}ms`;
-                            entry.target.classList.add('show');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.1 });
-                
-                const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
-                elementsToAnimate.forEach((el) => observer.observe(el));
-            } catch (e) {
-                console.error("Error al crear IntersectionObserver:", e);
-                document.querySelectorAll('.animate-on-scroll').forEach(el => {
-                    el.classList.add('show');
-                });
-            }
-        });
-    </script>
-</body>
-</html>
