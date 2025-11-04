@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deep Dive: Validando la Métrica (MSA) - José Hugo Meza</title>
+    <title>Deep Dive: MSA para IA - José Hugo Meza</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -73,57 +73,17 @@
         .note-content strong {
             color: var(--primary-color);
         }
-        
-        /* (NUEVO) CSS para las tarjetas de analogía */
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: 1fr; /* Una sola columna para las tarjetas de explicación */
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-        .kpi-card {
+        .note-content code, .note-content pre {
             background-color: var(--light-gray);
-            border: 1px solid var(--border-color);
-            padding: 1.5rem 2rem;
-            border-radius: 8px;
-            border-left: 5px solid var(--primary-color);
-        }
-        .kpi-card-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-        }
-        .kpi-card-title span { font-size: 1.5rem; margin-right: 0.75rem; }
-        .kpi-card p {
-            font-size: 1rem;
-            line-height: 1.7;
-            margin: 0;
-            color: var(--secondary-text);
-        }
-        .kpi-card p strong {
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
             color: var(--dark-blue);
         }
-        
-        /* (NUEVO) Caja de Conclusión / Inversión */
-        .conclusion-box {
-            background-color: var(--dark-blue);
-            color: var(--white);
-            border-radius: 12px;
-            padding: 2rem 2.5rem;
-            margin-top: 3rem;
-            text-align: center;
-        }
-        .conclusion-box h2 {
-            color: var(--white);
-            margin-top: 0;
-        }
-        .conclusion-box p {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: rgba(255, 255, 255, 0.9);
+        .note-content pre {
+            padding: 1rem;
+            white-space: pre-wrap;
+            border: 1px solid var(--border-color);
         }
 
         .show { opacity: 1; transform: none; }
@@ -137,71 +97,61 @@
 
         <div class="note-content animate-on-scroll">
             
-            <h1>🔬 Deep Dive: ¿Cómo Medimos la Calidad de los Datos?</h1>
+            <h1>🔬 Deep Dive: MSA para Métricas de IA</h1>
             
-            <h2>El Problema: "Basura entra, basura sale" (GIGO)</h2>
             <p>
-                Un modelo de IA es como un chef: no importa qué tan bueno sea, si sus ingredientes (los datos) están podridos, la comida (la predicción) será mala. El Retorno de Inversión (ROI) del proyecto depende de medir la calidad de esos ingredientes.
+                Como Black Belt, no puedo iniciar la Fase de Análisis si mi sistema de medición (MSA) falla. Si mi herramienta para medir el *drift* tiene un 30% de falsos positivos (Error Tipo I), pasaré la Fase de Análisis persiguiendo "causas especiales" que no existen, perdiendo tiempo y dinero.
             </p>
             <p>
-                Pero, ¿cómo confiamos en nuestras herramientas de medición?
-            </p>
-
-            <h2>La Solución: Probar la "Báscula" antes de Pesar el "Oro" (MSA)</h2>
-            <p>
-                En Six Sigma, antes de medir un proceso, debemos probar que nuestro instrumento de medición (el "Gage") es confiable. Esto se llama un <strong>Análisis de Sistema de Medición (MSA)</strong>.
+                El primer paso en la Fase M no es medir el proceso; es <strong>probar que podemos medir el proceso confiablemente</strong>.
             </p>
             <p>
-                En este proyecto, nuestro "Gage" no es una báscula física, es nuestro software: `Great Expectations`, `Evidently AI` y nuestros scripts de Python. El MSA responde: <strong>"¿Nuestro software es capaz de encontrar los defectos de forma confiable?"</strong>
+                El problema: Mi "Gage" (instrumento de medición) no es un calibrador físico. Mi "Gage" es mi stack de software: `Evidently AI`, `Great Expectations`, y mi script de Python.
             </p>
             
-            <div class="kpi-grid">
-                
-                <div class="kpi-card">
-                    <div class="kpi-card-title"><span>1.</span>Prueba de Calidad (¿Detecta Billetes Falsos?)</div>
-                    <p>
-                        <strong>El Método:</strong> Creamos un "Golden Set" (un set de datos de prueba) e "plantamos" <strong>defectos conocidos</strong> (ej. 15 emails rotos, 10 duplicados).
-                        <br><br>
-                        <strong>La Prueba:</strong> Pasamos nuestro "Gage" (`Great Expectations`) por los datos.
-                        <br><br>
-                        <strong>El Resultado:</strong> Si el Gage solo encuentra 10 de los 15 emails rotos, <strong>falla el MSA</strong>. Significa que nuestro sistema de medición es defectuoso y debe ser "calibrado" (mejorar las reglas) antes de medir el proceso real.
-                    </p>
-                </div>
+            <h2>A. MSA para Calidad Clásica (Gage R&R de Atributos)</h2>
+            <p>Esto es lo más fácil. ¿Mi "Gage" (`Great Expectations`) encuentra los defectos que yo sé que existen?</p>
+            <pre>
+1. Crear Golden Set: Genero un archivo de 100 registros.
+2. Plantar Defectos (El Estándar): Introduzco 15 Nulos, 10 emails incorrectos, 5 duplicados.
+   (Mi "Verdad Conocida" = 30 defectos).
+3. Correr el "Gage": Ejecuto mi suite de Great Expectations 3 veces (Repetibilidad).
+4. Analizar (Análisis de Concordancia):
+   - ¿El Gage encontró los 30 defectos las 3 veces? (Efectividad).
+   - ¿Generó falsos positivos? (Tasa de Falsa Alarma).
+5. Decisión: Si mi Gage solo encuentra 25 de 30, falla el MSA. Debo mejorar mis reglas de `Great Expectations` antes de medir mi proceso real.
+            </pre>
 
-                <div class="kpi-card">
-                    <div class="kpi-card-title"><span>2.</span>Prueba de Estabilidad (¿Detecta el "Drift"?)</div>
-                    <p>
-                        <strong>El Método:</strong> Creamos dos sets de datos. Uno "Normal" (Clientes de 30 años) y uno con un "Drift Conocido" (Clientes de 40 años).
-                        <br><br>
-                        <strong>La Prueba:</strong> Le pedimos a nuestro "Gage" (`Evidently AI`) que compare los dos.
-                        <br><br>
-                        <strong>El Resultado:</strong> El Gage DEBE ser lo suficientemente sensible para sonar una alarma 🚨 y decir: "¡Atención, los datos han cambiado!". Si no lo detecta, es "ciego" (un Falso Negativo) y falla el MSA.
-                    </p>
-                </div>
-                
-                <div class="kpi-card">
-                    <div class="kpi-card-title"><span>3.</span>Prueba de Equidad (¿La "Balanza" está Equilibrada?)</div>
-                    <p>
-                        <strong>El Método:</strong> Creamos un set de datos <strong>perfectamente justo</strong> (50% de aprobación para Grupo A, 50% para Grupo B).
-                        <br><br>
-                        <strong>La Prueba:</strong> Le pedimos a nuestro "Gage" (`Fairlearn`) que mida el sesgo (Bias).
-                        <br><br>
-                        <strong>El Resultado:</strong> El Gage DEBE medir 50/50. Si mide 55/45, sabemos que el propio instrumento de medición está sesgado y no es confiable.
-                    </p>
-                </div>
+            <h2>B. MSA para Data Drift (El Desafío Estadístico)</h2>
+            <p>¿Cómo sé si mi herramienta de medición de drift (ej. `Evidently AI` usando una prueba K-S) es confiable?</p>
+            <pre>
+1. Crear Estándar de "No Drift":
+   - Dataset A (Referencia): 10,000 filas con Edad, N(μ=30, σ=5).
+   - Dataset B (Prueba 1): 10,000 filas con la *misma* distribución N(μ=30, σ=5).
+2. Crear Estándar de "Drift Conocido":
+   - Dataset C (Prueba 2): 10,000 filas con un *drift ligero* N(μ=31, σ=5).
+3. Correr el "Gage": Pido a `Evidently AI` que compare A vs. B y A vs. C.
+4. Analizar (Capacidad del Sistema):
+   - Gage en (A vs. B): El Gage DEBE concluir "No Hay Drift" (p-value > 0.05). Si falla, es un Falso Positivo (Error Tipo I).
+   - Gage en (A vs. C): El Gage DEBE detectar el "Drift" (p-value < 0.05). Si falla, es un Falso Negativo (Error Tipo II).
+5. Decisión: Si mi Gage es demasiado "ruidoso" (muchos falsos positivos) o "ciego" (muchos falsos negativos), falla el MSA.
+            </pre>
 
-            </div>
-
-            <div class="conclusion-box animate-on-scroll fade-in-up">
-                <h2>¿Por qué esto es una buena Inversión? 💡</h2>
-                <p>
-                    Cualquiera puede ejecutar un script. Pero iniciar un proyecto de datos multimillonario sin saber si sus herramientas de medición son confiables es apostar a ciegas.
-                </p>
-                <p>
-                    Esta metodología (MSA para IA) es la diferencia entre <strong>adivinar</strong> y <strong>saber</strong>. Es un pilar central del entrenamiento Black Belt y la única forma de garantizar que el ROI del proyecto sea real, auditable y defendible.
-                </p>
-            </div>
-
+            <h2>C. MSA para Bias (Equidad)</h2>
+            <p>Es el mismo principio que el de Drift. ¿Mi herramienta (`Fairlearn`) mide el sesgo correctamente?</p>
+            <pre>
+1. Crear Estándar de "No Bias":
+   - Genero un dataset sintético donde "Aprobado" es 50% para Grupo A y 50% para Grupo B.
+   - (Verdad Conocida: Impacto Dispar = 1.0).
+2. Crear Estándar de "Bias Conocido":
+   - Genero un dataset donde "Aprobado" es 70% para A y 35% para B.
+   - (Verdad Conocida: Impacto Dispar = 0.35 / 0.70 = 0.5).
+3. Correr el "Gage": Pido a `Fairlearn` que mida el Impacto Dispar en ambos.
+4. Analizar (Precisión y Exactitud):
+   - En el set "No Bias", ¿el Gage midió 1.0?
+   - En el set "Bias Conocido", ¿midió 0.5? Si mide 0.55, tiene un sesgo de +0.05.
+            </pre>
+            
         </div>
     </div>
 
