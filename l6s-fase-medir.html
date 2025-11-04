@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase M: Medir - José Hugo Meza</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #26447d; --dark-blue: #2c3e50; --light-gray: #f8f9fa;
+            --text-color: #343a40; --secondary-text: #6c757d; --white: #ffffff;
+            --border-color: #e9ecef;
+            --danger-color: #A51C30; /* Color de Harvard para "Defectos" */
+        }
+        body { 
+            font-family: 'Inter', sans-serif; line-height: 1.7; color: var(--text-color); 
+            margin: 0; padding: 2rem;
+            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop');
+            background-size: cover; background-position: center center; background-attachment: fixed;
+            overflow-x: hidden;
+        }
+        .container { 
+            max-width: 800px; margin: 0 auto; background-color: var(--white); 
+            padding: 2.5rem; border-radius: 12px; 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.07); position: relative; z-index: 10;
+        }
+        .shooting-stars {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; overflow: hidden; z-index: 1;
+        }
+        .star {
+            position: absolute; background-color: var(--white); width: 2px; height: 2px;
+            border-radius: 50%; opacity: 0;
+            animation: 
+                star-fall var(--duration) linear var(--delay) infinite,
+                star-twinkle 2s ease-in-out var(--delay) infinite alternate;
+        }
+        @keyframes star-fall { 0% { transform: translate(0, 0) scale(1); opacity: 0; } 10% { opacity: 1; } 100% { transform: translate(100vw, 100vh) scale(0.5); opacity: 0; } }
+        @keyframes star-twinkle { 0%, 100% { opacity: 0.8; } 50% { opacity: 0.3; } }
+        
+        .back-link {
+            display: inline-block; color: var(--primary-color); text-decoration: none;
+            font-weight: bold; font-size: 1.1rem; margin-bottom: 1.5rem;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        .note-content {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .note-content h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .note-content h2 {
+            color: var(--dark-blue);
+            margin-top: 2.5rem;
+            font-size: 1.5rem;
+        }
+        .note-content h3 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-top: 2rem;
+        }
+        .note-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        .note-content strong {
+            color: var(--primary-color);
+        }
+        
+        .formula-box {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-family: monospace;
+            margin-top: 1.5rem;
+            overflow-x: auto;
+        }
+        .formula-box-small {
+            background-color: var(--light-gray);
+            border: 1px solid var(--border-color);
+            color: var(--dark-blue);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-family: monospace;
+            margin-top: 1.5rem;
+            overflow-x: auto;
+        }
+
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .styled-table th,
+        .styled-table td {
+            border: 1px solid var(--border-color);
+            padding: 12px 15px;
+            text-align: left;
+        }
+        .styled-table th {
+            background-color: var(--light-gray);
+            color: var(--dark-blue);
+            font-weight: bold;
+        }
+        .styled-table tr:nth-of-type(even) {
+            background-color: #fcfcfc;
+        }
+        .styled-table td:nth-child(3) {
+            font-weight: bold;
+            color: var(--danger-color); /* Resaltar resultado Inaceptable */
+        }
+        .styled-table .pass {
+            color: green;
+            font-weight: bold;
+        }
+        .styled-table .fail {
+            color: var(--danger-color);
+            font-weight: bold;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .kpi-card {
+            background-color: var(--light-gray);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .kpi-card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--secondary-text);
+            margin-bottom: 0.5rem;
+        }
+        .kpi-card-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+            line-height: 1.2;
+        }
+        .kpi-card-value.bad {
+            color: var(--danger-color);
+        }
+
+        .section-divider {
+            border: 0;
+            height: 2px;
+            background-color: var(--border-color);
+            margin: 3rem 0;
+        }
+
+        .show { opacity: 1; transform: none; }
+    </style>
+</head>
+<body>
+    <div class="shooting-stars"></div> 
+
+    <div class="container">
+        <a href="proyecto-l6s.html" class="back-link">&larr; Volver al Proyecto L6S (Resumen)</a>
+
+        <div class="note-content animate-on-scroll">
+            
+            <h1>📏 Fase M: Medir</h1>
+            
+            <h2>1. Recapitulación: ¿Qué estamos midiendo?</h2>
+            <p>
+                De la Fase de Definición, establecimos que nuestro "producto" es el <strong>Set de Entrenamiento (Training Set)</strong>. Su calidad se mide con el <strong>TSQS (Training Set Quality Score)</strong>, una fórmula que traduce las necesidades del negocio en un número medible.
+            </p>
+            <div class="formula-box">
+                TSQS = (0.365 * Estabilidad) + (0.25 * Calidad) + (0.25 * Equidad) + (0.135 * Puntualidad)
+            </div>
+
+            <hr class="section-divider">
+            
+            <h2>2. ¿Son Confiables nuestras Herramientas de Medición? (MSA)</h2>
+            <p>
+                Antes de medir el proceso real, debemos probar que nuestras herramientas de software (nuestro "Gage" o "Báscula") son confiables. Si la báscula está rota, los datos son inútiles.
+            </p>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Tipo de Medición</th>
+                        <th>Método de Prueba (MSA)</th>
+                        <th>Resultado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Calidad Clásica</strong> (Nulos, Errores)</td>
+                        <td>Gage R&R de Atributos (Prueba con "defectos plantados")</td>
+                        <td class="pass">APROBADO (100% de efectividad)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data Drift</strong> (Estabilidad)</td>
+                        <td>Análisis de Poder (Prueba con "drift sintético")</td>
+                        <td class="pass">APROBADO (99% de detección)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bias / Equidad</strong></td>
+                        <td>Análisis de Precisión (Prueba con "bias sintético")</td>
+                        <td class="pass">APROBADO (Gage Bias documentado)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Conclusión del MSA:</h3>
+            <p><strong>Luz verde.</strong> Nuestro sistema de medición es confiable y preciso. Podemos proceder a medir el proceso real.</p>
+            
+            <hr class="section-divider">
+
+            <h2>3. Línea Base: ¿Qué tan bien (o mal) lo estamos haciendo?</h2>
+            <p>
+                Analizamos las últimas 60 ejecuciones del pipeline para establecer el rendimiento actual (Línea Base) y escuchar la "Voz del Proceso".
+            </p>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-card-title">Media (TSQS)</div>
+                    <div class="kpi-card-value">82.5</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-title">Peor Ejecución</div>
+                    <div class="kpi-card-value bad">65.2</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-title">Mejor Ejecución</div>
+                    <div class="kpi-card-value">91.3</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-title">Estabilidad</div>
+                    <div class="kpi-card-value bad">INCONTROLADO</div>
+                </div>
+            </div>
+            <p style="margin-top: 1.5rem;">
+                <strong>Interpretación:</strong> La "Voz del Proceso" nos dice que es <strong>inestable y caótico</strong> (con 7 puntos fuera de control) y su desempeño promedio (82.5) es bajo.
+            </p>
+
+            <hr class="section-divider">
+
+            <h2>4. Análisis de Capacidad: ¿Cumplimos con el Cliente?</h2>
+            <p>
+                Finalmente, comparamos la "Voz del Proceso" (lo que hacemos) con la "Voz del Cliente" (lo que nos pidieron).
+            </p>
+            <ul>
+                <li><strong>Voz del Cliente (LSL):</strong> Un TSQS menor a <strong>90</strong> se considera un "DEFECTO".</li>
+                <li><strong>Voz del Proceso (Media):</strong> Lo hacemos a <strong>82.5</strong>.</li>
+            </ul>
+            
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Estadístico</th>
+                        <th>Cálculo</th>
+                        <th>Resultado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Z-Score (Largo Plazo)</strong></td>
+                        <td>(LSL - Media) / Desv. Est.</td>
+                        <td><strong>1.56</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tasa de Defectos (DPMO)</strong></td>
+                        <td>(Defectos por Millón)</td>
+                        <td class="fail"><strong>59,380 DPMO</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nivel Sigma (Largo Plazo)</strong></td>
+                        <td>Z-Score + 1.5 Shift</td>
+                        <td class="fail"><strong>3.06 Sigma</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>Conclusión de la Fase M (El Veredicto Final)</h2>
+            <p>
+                <strong>Veredicto:</strong> El proceso es <strong>incapaz</strong> de cumplir con los requisitos del negocio. Opera a un Nivel Sigma de <strong>3.06</strong>, lo que significa que casi el <strong>6% de nuestros Training Sets son "defectuosos"</strong>.
+            </p>
+            <p>
+                <strong>Próximos Pasos:</strong> Habiendo medido y cuantificado el problema ($), solicitamos aprobación para proceder a la <strong>Fase de Análisis</strong>, donde encontraremos las causas raíz (las X's vitales) que provocan este pobre desempeño.
+            </p>
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const shootingStarsContainer = document.querySelector('.shooting-stars');
+                if (shootingStarsContainer) {
+                    const numStars = 110; 
+                    for (let i = 0; i < numStars; i++) {
+                        const star = document.createElement('div');
+                        star.classList.add('star');
+                        star.style.left = `${Math.random() * 100}vw`; 
+                        star.style.top = `${Math.random() * 100}vh`;
+                        star.style.setProperty('--delay', `${Math.random() * 15}s`);
+                        star.style.setProperty('--duration', `${5 + Math.random() * 8}s`);
+                        shootingStarsContainer.appendChild(star);
+                    }
+                }
+            } catch (e) { console.error("Error al crear estrellas:", e); }
+            
+            try {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('show');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+                elementsToAnimate.forEach((el) => observer.observe(el));
+            } catch (e) {
+                console.error("Error al crear IntersectionObserver:", e);
+                document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                    el.classList.add('show');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
