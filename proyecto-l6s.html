@@ -72,6 +72,45 @@
             line-height: 1.6;
         }
 
+        /* (NUEVO) Grid para la Metodología */
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .methodology-card {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+        .methodology-card h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: var(--dark-blue);
+            display: flex;
+            align-items: center;
+        }
+        .methodology-card h3 span {
+            font-size: 1.8rem;
+            margin-right: 0.75rem;
+        }
+        .methodology-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .methodology-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* --- FIN Grid Metodología --- */
+
         .section-header {
             color: var(--primary-color);
             font-size: 2rem;
@@ -81,7 +120,6 @@
             padding-bottom: 0.5rem;
         }
         
-        /* (NUEVO) Contenedor de sección para agrupar */
         .section-box {
             background-color: var(--light-gray);
             border: 1px solid var(--border-color);
@@ -112,7 +150,6 @@
             font-size: 1.05rem;
         }
         
-        /* (NUEVO) Grid para KPIs */
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -142,7 +179,6 @@
             color: var(--secondary-text);
         }
         
-        /* (NUEVO) Caja de Fórmula */
         .formula-box {
             background-color: var(--dark-blue);
             color: var(--white);
@@ -164,7 +200,6 @@
             border-left: 3px solid var(--border-color);
         }
 
-        /* --- Estilos de Línea de Tiempo (Sin cambios) --- */
         .timeline-container { position: relative; margin-top: 2.5rem; }
         .timeline-container::before {
             content: ''; position: absolute; top: 20px; left: 50%; bottom: 20px;
@@ -212,7 +247,6 @@
                 border-color: transparent var(--border-color) transparent transparent;
             }
         }
-        /* --- FIN Estilos Línea de Tiempo --- */
 
         .styled-table {
             width: 100%; border-collapse: collapse; margin: 1.5rem 0;
@@ -257,7 +291,6 @@
             flex-wrap: wrap;
         }
         
-        /* (NUEVO) Estilo para la Conclusión / Siguiente Paso */
         .conclusion-box {
             background-color: var(--dark-blue);
             color: var(--white);
@@ -300,12 +333,23 @@
                 <p class="slogan">"Transformación del <strong>Muda de datos</strong> en un <strong>Training Set</strong> aplicando el rigor estadístico de Lean Six Sigma para el entrenamiento de Inteligencia Artificial de alto estándar."</p>
             </div>
             
-            <div class="section-box animate-on-scroll fade-in-up">
+            <div class="methodology-grid animate-on-scroll fade-in-up">
+                <div class="methodology-card">
+                    <h3><span>🚀</span>El Enfoque LEAN</h3>
+                    <p><strong>El objetivo es la VELOCIDAD.</strong> Se trata de eliminar el "desperdicio" (Muda). Se analiza el pipeline de datos como una línea de ensamblaje para eliminar cuellos de botella, esperas y re-procesos manuales, reduciendo el tiempo de entrega de 12 a 4 horas.</p>
+                </div>
+                <div class="methodology-card">
+                    <h3><span>🎯</span>El Enfoque SIX SIGMA</h3>
+                    <p><strong>El objetivo es la CALIDAD.</strong> Se trata de eliminar los "defectos". Se define un dato erróneo, sesgado o con "drift" como un defecto y se usa estadística para reducir la variación del proceso hasta alcanzar una calidad predecible y de nivel 4.5 Sigma.</p>
+                </div>
+            </div>
+            
+            <div class="section-box animate-on-scroll fade-in-up" style="margin-top: 2.5rem;">
                 <h2>El Problema: El "Desperdicio" Oculto 💰</h2>
                 <div class="kpi-grid">
                     <div class="kpi-card">
                         <div class="kpi-card-title"><span>🕒</span>Costo de Tiempo (Muda)</div>
-                        <p>Los Científicos de Datos gastan hasta el <strong>80% de su tiempo</strong> en limpieza. Es un desperdicio de talento que retrasa la innovación.</p>
+                        <p>Los Científicos de Datos gastan hasta el <strong>80% de su tiempo</strong> limpiando datos. Es un desperdicio de talento que retrasa la innovación.</p>
                     </div>
                     <div class="kpi-card">
                         <div class="kpi-card-title"><span>📉</span>Costo de Calidad (Defectos)</div>
