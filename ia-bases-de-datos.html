@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bases de Datos - José Hugo Meza</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #26447d; --dark-blue: #2c3e50; --light-gray: #f8f9fa;
+            --text-color: #343a40; --secondary-text: #6c757d; --white: #ffffff;
+            --border-color: #e9ecef;
+        }
+        body { 
+            font-family: 'Inter', sans-serif; line-height: 1.7; color: var(--text-color); 
+            margin: 0; padding: 2rem;
+            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop');
+            background-size: cover; background-position: center center; background-attachment: fixed;
+            overflow-x: hidden;
+        }
+        .container { 
+            max-width: 900px; margin: 0 auto; background-color: var(--white); 
+            padding: 2.5rem; border-radius: 12px; 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.07); position: relative; z-index: 10;
+        }
+        .shooting-stars {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; overflow: hidden; z-index: 1;
+        }
+        .star {
+            position: absolute; background-color: var(--white); width: 2px; height: 2px;
+            border-radius: 50%; opacity: 0;
+            animation: 
+                star-fall var(--duration) linear var(--delay) infinite,
+                star-twinkle 2s ease-in-out var(--delay) infinite alternate;
+        }
+        @keyframes star-fall { 0% { transform: translate(0, 0) scale(1); opacity: 0; } 10% { opacity: 1; } 100% { transform: translate(100vw, 100vh) scale(0.5); opacity: 0; } }
+        @keyframes star-twinkle { 0%, 100% { opacity: 0.8; } 50% { opacity: 0.3; } }
+        
+        .back-link {
+            display: inline-block; color: var(--primary-color); text-decoration: none;
+            font-weight: bold; font-size: 1.1rem; margin-bottom: 1.5rem;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        .note-header {
+            text-align: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .note-header h1 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            line-height: 1.3;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .note-header p {
+            font-size: 1.1rem;
+            color: var(--secondary-text);
+            margin-top: 0.5rem;
+        }
+
+        /* --- (NUEVO) CSS para Pestañas (Tabs) --- */
+        .tab-navigation {
+            display: flex;
+            flex-wrap: wrap; /* Para que quepa en móviles */
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .tab-btn {
+            background-color: var(--light-gray);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--secondary-text);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .tab-btn:hover {
+            background-color: var(--border-color);
+            color: var(--dark-blue);
+        }
+        .tab-btn.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+        /* --- FIN CSS Pestañas --- */
+        
+        /* --- (NUEVO) CSS para Carrusel de Apuntes --- */
+        .carousel-container { position: relative; }
+        .carousel-viewport { 
+            overflow: hidden; 
+            border-radius: 12px; 
+            border: 1px solid var(--border-color);
+            background-color: var(--light-gray);
+        }
+        .carousel-track { 
+            display: flex; 
+            transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); 
+        }
+        .slide {
+            flex: 0 0 100%;
+            box-sizing: border-box;
+            padding: 2rem 2.5rem;
+            opacity: 0; /* Se animará con JS */
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: none;
+        }
+        
+        .slide-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .slide-icon {
+            font-size: 3rem;
+            line-height: 1;
+        }
+        .slide-header div {
+            flex-grow: 1;
+        }
+        .slide-header h2 {
+            font-size: 1.8rem;
+            color: var(--dark-blue);
+            margin: 0;
+        }
+        .slide-header p {
+            font-size: 1rem;
+            color: var(--secondary-text);
+            margin: 0.25rem 0 0 0;
+            font-style: italic;
+        }
+        .slide-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        .slide-content ul {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            padding-left: 20px;
+        }
+
+        .carousel-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.9); border: 1px solid var(--border-color);
+            border-radius: 50%; width: 44px; height: 44px; font-size: 1.5rem;
+            color: var(--primary-color); cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.2s ease; z-index: 20;
+        }
+        .carousel-btn:hover { background-color: var(--white); transform: translateY(-50%) scale(1.05); }
+        .carousel-btn.prev { left: 10px; }
+        .carousel-btn.next { right: 10px; }
+        .carousel-btn.hidden { opacity: 0; pointer-events: none; }
+        /* --- FIN CSS Carrusel --- */
+
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(50px);
+        }
+        .show { opacity: 1; transform: none; }
+    </style>
+</head>
+<body>
+    <div class="shooting-stars"></div> 
+
+    <div class="container">
+        <a href="apuntes-ia.html" class="back-link">&larr; Volver a Ing. en Inteligencia Artificial</a>
+
+        <div class="note-content">
+            
+            <div class="note-header animate-on-scroll">
+                <h1><span>💾</span>Bases de Datos</h1>
+                <p>Módulos de aprendizaje del Segundo Cuatrimestre</p>
+            </div>
+            
+            <div class="tab-navigation animate-on-scroll" id="db-tabs">
+                <button class="tab-btn active" data-slide="0">Núcleo de Datos</button>
+                <button class="tab-btn" data-slide="1">Explorador de Entidades</button>
+                <button class="tab-btn" data-slide="2">Guardián de Integridad</button>
+                <button class="tab-btn" data-slide="3">Sistemas Galácticos</button>
+                <button class="tab-btn" data-slide="4">Políglota Consultor</button>
+                <button class="tab-btn" data-slide="5">Arquera de Uniones</button>
+                <button class="tab-btn" data-slide="6">Vidente de Datos Lejanos</button>
+                <button class="tab-btn" data-slide="7">El Final del Camino</button>
+            </div>
+
+            <div class="carousel-container animate-on-scroll">
+                <div class="carousel-viewport">
+                    <div class="carousel-track" id="db-track">
+                        
+                        <div class="slide active">
+                            <div class="slide-header">
+                                <span class="slide-icon">🌱</span>
+                                <div>
+                                    <h2>Núcleo de Datos</h2>
+                                    <p>Terminar antes del 14 de julio de 2025</p>
+                                </div>
+                            </div>
+                            <div class="slide-content">
+                                <p>Aquí puedes poner toda la información sobre este módulo. Puedes añadir:</p>
+                                <ul>
+                                    <li>Definiciones clave (¿Qué es una base de datos?).</li>
+                                    <li>Diferencias entre SQL y NoSQL.</li>
+                                    <li>Conceptos de Tablas, Filas y Columnas.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="slide">
+                            <div class="slide-header">
+                                <span class="slide-icon">🗺️</span>
+                                <div>
+                                    <h2>Explorador de Entidades</h2>
+                                    <p>Terminar antes del 21 de julio de 2025</p>
+                                </div>
+                            </div>
+                            <div class="slide-content">
+                                <p>Este módulo se enfoca en el <strong>Modelo Entidad-Relación (ERM)</strong>.</p>
+                                <ul>
+                                    <li>Qué es una Entidad (ej. "Cliente", "Producto").</li>
+                                    <li>Qué es un Atributo (ej. "Nombre", "Precio").</li>
+                                    <li>Cómo se dibujan los diagramas ER.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="slide">
+                            <div class="slide-header">
+                                <span class="slide-icon">🛡️</span>
+                                <div>
+                                    <h2>Guardián de la Integridad Relacional</h2>
+                                    <p>Terminar antes del 28 de julio de 2025</p>
+                                </div>
+                            </div>
+                            <div class="slide-content">
+                                <p>Este módulo trata sobre las <strong>Reglas</strong> que mantienen los datos limpios y consistentes.</p>
+                                <ul>
+                                    <li>Llaves Primarias (Primary Keys).</li>
+                                    <li>Llaves Foráneas (Foreign Keys).</li>
+                                    <li>Restricciones (Constraints) como `NOT NULL` y `UNIQUE`.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="slide">
+                            <div class="slide-header">
+                                <span class="slide-icon">🌌</span>
+                                <div>
+                                    <h2>Explorador de Sistemas Galácticos</h2>
+                                    <p>Terminar antes del 4 de agosto de 2025</p>
+                                </div>
+                            </div>
+                            <div class="slide-content">
+                                <p>Este módulo se enfoca en el <strong>Diseño de Data Warehouses</strong>.</p>
+                                <ul>
+                                    <li>Diferencia entre OLTP y OLAP.</li>
+                                    <li>Concepto de Esquema de Estrella (Star Schema).</li>
+                                    <li>Tablas de Hechos (Facts) y Dimensiones (Dimensions).</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="slide">
+                            <div class="slide-header">
+                                <span class="slide-icon">🗣️</span>
+                                <div>
+                                    <h2>Políglota Consultor</h2>
+                                    <p>Terminar antes del 11 de agosto de 2025</p>
+                                </div>
+                            </div>
+                            <div class="slide-content">
+                                <p>Este módulo es sobre <strong>SQL (Structured Query Language)</strong>.</p>
+                                <ul>
+                                    <li>Comandos DML: `SELECT`, `INSERT`, `UPDATE`, `DELETE`.</li>
+                                    <li>Comandos DDL: `CREATE`, `ALTER`, `DROP`.</li>
+                                    <li>Filtrado con `WHERE` y ordenado con `ORDER BY`.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="slide">
+                            <div class="slide-header">
+                                <span class="slide-icon">🏹</span>
+                                <div>
+                                    <h2>Arquera de las Uniones</h2>
+                                    <p>Terminar antes del 18 de agosto de 2025</p>
+                                </div>
+                            </div>
+                            <div class="slide-content">
+                                <p>Este módulo se enfoca en la parte más poderosa de SQL: <strong>JOINs</strong>.</p>
+                                <ul>
+                                    <li><code>INNER JOIN</code></li>
+                                    <li><code>LEFT JOIN</code> y <code>RIGHT JOIN</code></li>
+                                    <li><code>FULL OUTER JOIN</code></li>
+                                    <li><code>UNION</code> vs <code>UNION ALL</code></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="slide">
+                            <div class="slide-header">
+                                <span class="slide-icon">🔮</span>
+                                <div>
+                                    <h2>Vidente de los Datos Lejanos</h2>
+                                    <p>Terminar antes del 25 de agosto de 2025</p>
+                                </div>
+                            </div>
+                            <div class="slide-content">
+                                <p>Este módulo se enfoca en <strong>Bases de Datos NoSQL</strong>.</p>
+                                <ul>
+                                    <li>Bases de Datos Documentales (ej. MongoDB).</li>
+                                    <li>Bases de Datos Columnares (ej. Cassandra).</li>
+                                    <li>Bases de Datos Clave-Valor (ej. Redis).</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="slide">
+                            <div class="slide-header">
+                                <span class="slide-icon">🏁</span>
+                                <div>
+                                    <h2>El Final del Camino</h2>
+                                    <p>Terminar antes del 1 de septiembre de 2025</p>
+                                </div>
+                            </div>
+                            <div class="slide-content">
+                                <p>Este es el <strong>Proyecto Final</strong> de la materia.</p>
+                                <ul>
+                                    <li>Diseñar un Data Warehouse completo.</li>
+                                    <li>Crear un pipeline ETL simple.</li>
+                                    <li>Ejecutar consultas analíticas complejas.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+                <button class="carousel-btn prev" id="db-prev" aria-label="Anterior">&#10094;</button>
+                <button class="carousel-btn next" id="db-next" aria-label="Siguiente">&#10095;</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Código de estrellas ---
+            try {
+                const shootingStarsContainer = document.querySelector('.shooting-stars');
+                if (shootingStarsContainer) {
+                    const numStars = 110; 
+                    for (let i = 0; i < numStars; i++) {
+                        const star = document.createElement('div');
+                        star.classList.add('star');
+                        star.style.left = `${Math.random() * 100}vw`; 
+                        star.style.top = `${Math.random() * 100}vh`;
+                        star.style.setProperty('--delay', `${Math.random() * 15}s`);
+                        star.style.setProperty('--duration', `${5 + Math.random() * 8}s`);
+                        shootingStarsContainer.appendChild(star);
+                    }
+                }
+            } catch (e) { console.error("Error al crear estrellas:", e); }
+            
+            // --- Código de Animación de Entrada ---
+            try {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry, index) => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.transitionDelay = `${index * 100}ms`;
+                            entry.target.classList.add('show');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+                elementsToAnimate.forEach((el) => observer.observe(el));
+            } catch (e) {
+                console.error("Error al crear IntersectionObserver:", e);
+                document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                    el.classList.add('show');
+                });
+            }
+
+            // --- (NUEVO) Lógica del Carrusel y Pestañas ---
+            const track = document.getElementById('db-track');
+            const prevBtn = document.getElementById('db-prev');
+            const nextBtn = document.getElementById('db-next');
+            const tabs = document.querySelectorAll('.tab-btn');
+            const slides = Array.from(track.children);
+            const totalSlides = slides.length;
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                // 1. Mover el carrusel
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                // 2. Actualizar botones de carrusel
+                prevBtn.classList.toggle('hidden', currentIndex === 0);
+                nextBtn.classList.toggle('hidden', currentIndex === totalSlides - 1);
+
+                // 3. Actualizar la pestaña (tab) activa
+                tabs.forEach((tab, index) => {
+                    tab.classList.toggle('active', index === currentIndex);
+                });
+                
+                // 4. Actualizar el slide activo (para animación)
+                slides.forEach((slide, index) => {
+                    slide.classList.toggle('active', index === currentIndex);
+                });
+            }
+
+            // Event Listeners para botones Siguiente/Anterior
+            prevBtn.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateCarousel();
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentIndex < totalSlides - 1) {
+                    currentIndex++;
+                    updateCarousel();
+                }
+            });
+
+            // Event Listeners para las pestañas (tabs)
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    currentIndex = parseInt(tab.dataset.slide);
+                    updateCarousel();
+                });
+            });
+
+            // Inicializar estado
+            updateCarousel();
+        });
+    </script>
+</body>
+</html>
