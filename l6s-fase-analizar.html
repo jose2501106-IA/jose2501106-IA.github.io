@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase A: Analizar - José Hugo Meza</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #26447d; --dark-blue: #2c3e50; --light-gray: #f8f9fa;
+            --text-color: #343a40; --secondary-text: #6c757d; --white: #ffffff;
+            --border-color: #e9ecef;
+        }
+        body { 
+            font-family: 'Inter', sans-serif; line-height: 1.7; color: var(--text-color); 
+            margin: 0; padding: 2rem;
+            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop');
+            background-size: cover; background-position: center center; background-attachment: fixed;
+            overflow-x: hidden;
+        }
+        .container { 
+            max-width: 800px; margin: 0 auto; background-color: var(--white); 
+            padding: 2.5rem; border-radius: 12px; 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.07); position: relative; z-index: 10;
+        }
+        .shooting-stars {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; overflow: hidden; z-index: 1;
+        }
+        .star {
+            position: absolute; background-color: var(--white); width: 2px; height: 2px;
+            border-radius: 50%; opacity: 0;
+            animation: 
+                star-fall var(--duration) linear var(--delay) infinite,
+                star-twinkle 2s ease-in-out var(--delay) infinite alternate;
+        }
+        @keyframes star-fall { 0% { transform: translate(0, 0) scale(1); opacity: 0; } 10% { opacity: 1; } 100% { transform: translate(100vw, 100vh) scale(0.5); opacity: 0; } }
+        @keyframes star-twinkle { 0%, 100% { opacity: 0.8; } 50% { opacity: 0.3; } }
+        
+        .back-link {
+            display: inline-block; color: var(--primary-color); text-decoration: none;
+            font-weight: bold; font-size: 1.1rem; margin-bottom: 1.5rem;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        .note-content {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .note-content h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .note-content h2 {
+            color: var(--dark-blue);
+            margin-top: 2.5rem;
+            font-size: 1.5rem;
+        }
+        .note-content h3 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-top: 2rem;
+        }
+        .note-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        .note-content strong {
+            color: var(--primary-color);
+        }
+        
+        .formula-box-small {
+            background-color: var(--light-gray);
+            border: 1px solid var(--border-color);
+            color: var(--dark-blue);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-family: monospace;
+            margin-top: 1.5rem;
+            overflow-x: auto;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Una sola columna para las tarjetas de explicación */
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .kpi-card {
+            background-color: var(--light-gray);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary-color);
+        }
+        .kpi-card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+        .kpi-card-title span { font-size: 1.5rem; margin-right: 0.75rem; }
+        .kpi-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin: 0;
+            color: var(--secondary-text);
+        }
+        .kpi-card p strong {
+            color: var(--dark-blue);
+        }
+        
+        .conclusion-box {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            border-radius: 12px;
+            padding: 2rem 2.5rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+        .conclusion-box h2 {
+            color: var(--white);
+            margin-top: 0;
+        }
+        .conclusion-box p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .show { opacity: 1; transform: none; }
+    </style>
+</head>
+<body>
+    <div class="shooting-stars"></div> 
+
+    <div class="container">
+        <a href="proyecto-l6s.html" class="back-link">&larr; Volver al Proyecto L6S (Resumen)</a>
+
+        <div class="note-content animate-on-scroll">
+            
+            <h1>📊 Fase A: Analizar (El Detective Estadístico)</h1>
+            
+            <h2>1. El Arsenal: Del Brainstorming al Análisis</h2>
+            <p>
+                En la Fase M, probamos que nuestro proceso es <strong>incapaz y está fuera de control</strong>. Ahora, en la Fase A, nos convertimos en detectives para encontrar *por qué*.
+            </p>
+            <p>
+                El objetivo no es adivinar, sino <strong>probar estadísticamente</strong> cuáles son las pocas "X's vitales" (causas) que provocan la mayor parte de la variación en nuestra "Y" (el TSQS).
+            </p>
+            <p>
+                Se genera una lista de "sospechosos" (X's potenciales) usando un Diagrama de Ishikawa (Causa-Efecto), agrupándolos por: <strong>Fuentes de Datos</strong>, <strong>Métodos (Scripts)</strong>, <strong>Infraestructura</strong>, etc.
+            </p>
+            
+            <h2>2. Hipótesis Clave y Herramientas Estadísticas</h2>
+            <p>
+                Aquí es donde se aplican las herramientas de Black Belt. Analizamos las "X's" (causas) en función de su impacto en nuestra "Y" (el TSQS y sus subcomponentes).
+            </p>
+
+            <div class="kpi-grid">
+                
+                <div class="kpi-card">
+                    <div class="kpi-card-title"><span>1.</span>Herramienta: ANOVA (Análisis de Varianza)</div>
+                    <p>
+                        <strong>Propósito:</strong> Comparar si las medias de 3 o más grupos son diferentes.
+                        <br><br>
+                        <strong>Pregunta de Negocio:</strong> ¿La <strong>Fuente de Datos</strong> (una X categórica) tiene un impacto estadísticamente significativo en la <strong>Calidad</strong> (una Y continua)?
+                        <br><br>
+                        <strong>Hipótesis (en simple):</strong>
+                        <br>
+                        $H_0$: "La fuente NO importa. La calidad promedio de CRM, API y Logs es la misma."
+                        <br>
+                        $H_a$: "La fuente SÍ importa. Al menos una fuente es peor que las demás."
+                        <br><br>
+                        <strong>Acción:</strong> Si el <strong>p-value < 0.05</strong>, rechazamos $H_0$. ¡Bingo! Acabamos de validar una X vital.
+                    </p>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-card-title"><span>2.</span>Herramienta: Regresión Lineal Múltiple</div>
+                    <p>
+                        <strong>Propósito:</strong> Modelar la relación entre múltiples "X's" (causas) y una "Y" (resultado).
+                        <br><br>
+                        <strong>Pregunta de Negocio:</strong> ¿Qué factores predicen mejor nuestra métrica principal, el <strong>TSQS</strong>?
+                        <br><br>
+                        <strong>Modelo de Regresión (conceptual):</strong>
+                        <br>
+                        $TSQS (Y) = \beta_0 + \beta_1(X_1) + \beta_2(X_2) + \dots$
+                        <br>
+                        (Donde $X_1$ = Volumen de Datos, $X_2$ = Hora del Día, etc.)
+                        <br><br>
+                        <strong>Acción:</strong> Corremos la regresión. Las "X's" con un <strong>p-value < 0.05</strong> son los predictores estadísticamente significativos. La ecuación resultante se convierte en nuestra "función de transferencia" del proceso.
+                    </p>
+                </div>
+                
+                <div class="kpi-card">
+                    <div class="kpi-card-title"><span>3.</span>Herramienta: Prueba de Chi-Cuadrado (Chi-Square)</div>
+                    <p>
+                        <strong>Propósito:</strong> Comprobar si dos variables categóricas están asociadas.
+                        <br><br>
+                        <strong>Pregunta de Negocio:</strong> ¿El <strong>Tipo de Defecto</strong> (ej. 'Nulo', 'Formato') está asociado con el <strong>Proveedor de API</strong> (ej. 'Prov A', 'Prov B')?
+                        <br><br>
+                        <strong>Hipótesis (en simple):</strong>
+                        <br>
+                        $H_0$: "No hay relación. Los defectos ocurren al azar."
+                        <br>
+                        $H_a$: "Sí hay relación. Un proveedor específico está asociado con un tipo de defecto."
+                        <br><br>
+                        <strong>Acción:</strong> Si el <strong>p-value < 0.05</strong>, sabemos que "El Proveedor A está estadísticamente asociado con una mayor incidencia de defectos de 'Formato'". Otra X vital identificada.
+                    </p>
+                </div>
+            </div>
+
+            <div class="conclusion-box animate-on-scroll fade-in-up">
+                <h2>Conclusión de la Fase A: Las "X" Vitales 🎯</h2>
+                <p>
+                    Al final de esta fase, no tendremos opiniones. Tendremos una lista corta (3-5) de <strong>"X's Vitales" validadas estadísticamente</strong>.
+                </p>
+                <p>
+                    Esto es la esencia del Principio de Pareto (80/20): habremos probado que el 80% de nuestros problemas de calidad (la Y) son causados por el 20% de las causas (estas X's vitales).
+                </p>
+                <p>
+                    <strong>Estas son las "palancas" que ahora tenemos permiso para mover en la Fase de Mejora (Improve).</strong>
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const shootingStarsContainer = document.querySelector('.shooting-stars');
+                if (shootingStarsContainer) {
+                    const numStars = 110; 
+                    for (let i = 0; i < numStars; i++) {
+                        const star = document.createElement('div');
+                        star.classList.add('star');
+                        star.style.left = `${Math.random() * 100}vw`; 
+                        star.style.top = `${Math.random() * 100}vh`;
+                        star.style.setProperty('--delay', `${Math.random() * 15}s`);
+                        star.style.setProperty('--duration', `${5 + Math.random() * 8}s`);
+                        shootingStarsContainer.appendChild(star);
+                    }
+                }
+            } catch (e) { console.error("Error al crear estrellas:", e); }
+            
+            try {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('show');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+                elementsToAnimate.forEach((el) => observer.observe(el));
+            } catch (e) {
+                console.error("Error al crear IntersectionObserver:", e);
+                document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                    el.classList.add('show');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
