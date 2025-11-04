@@ -211,7 +211,6 @@
             justify-content: center; z-index: 2; border: 4px solid var(--white);
         }
         
-        /* (CSS ACTUALIZADO) Tarjeta de timeline como enlace */
         .timeline-content {
             display: block;
             text-decoration: none;
@@ -220,7 +219,6 @@
             border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-        /* (NUEVO) Efecto Hover para tarjetas clicables */
         .timeline-content-linkable:hover {
             transform: translateY(-5px) scale(1.02);
             box-shadow: 0 8px 20px rgba(0,0,0,0.08);
@@ -425,7 +423,8 @@
                     
                     <div class="timeline-item timeline-item-left animate-on-scroll fade-in-left">
                         <div class="timeline-icon">D</div>
-                        <a href="l6s-tsqs-matrix.html" class="timeline-content timeline-content-linkable"> <h3>Definir</h3>
+                        <a href="l6s-tsqs-matrix.html" class="timeline-content timeline-content-linkable">
+                            <h3>Definir</h3>
                             <p><strong>El objetivo:</strong> Definir claramente el problema, el alcance y las métricas críticas para el éxito (CTQs) en un "Project Charter".</p>
                             <ul>
                                 <li><strong>Entregable:</strong> El cálculo del TSQS (ver arriba) y el mapa del proceso (SIPOC).</li>
@@ -438,38 +437,36 @@
                         <a href="l6s-fase-medir.html" class="timeline-content timeline-content-linkable">
                             <h3>Medir</h3>
                             <p><strong>El objetivo:</strong> Medir el rendimiento actual (Línea Base) y, crucialmente, <strong>validar nuestro sistema de medición</strong>.</p>
-                            <p class="explanation-text"><strong>(MSA Crítico):</strong> Antes de medir, se debe probar que nuestras herramientas (ej. `Evidently AI`) son confiables para detectar *Drift* y *Bias*.</p>
+                            <p class="explanation-text"><strong>(MSA Crítico):</strong> Antes de medir, se debe probar que nuestras herramientas son confiables para detectar *Drift* y *Bias*.</p>
                             <p style="color: var(--primary-color); font-weight: bold; margin-top: 10px;">Haz clic para ver el "Deep Dive" del MSA 🔬</p>
                         </a>
                     </div>
                     
                     <div class="timeline-item timeline-item-left animate-on-scroll fade-in-left">
                         <div class="timeline-icon">A</div>
-                        <div class="timeline-content">
-                            <h3>Analizar</h3>
-                            <p><strong>El objetivo:</strong> Usar estadística para encontrar la verdadera "causa raíz" de los problemas (las "X's vitales").</p>
+                        <div class="timeline-content"> <h3>Analizar</h3>
+                            <p><strong>El objetivo:</strong> Usar estadística para encontrar la verdadera "causa raíz" de los problemas (las "X's vitales").</ar>
                             <ul>
-                                <li><strong>Acción:</strong> Aplicar análisis (como ANOVA o Regresión) para probar qué factores (ej. 'Fuente de Datos', 'Volumen') tienen un impacto estadísticamente significativo en la calidad (TSQS).</li>
+                                <li><strong>Acción:</strong> Aplicar análisis (como ANOVA o Regresión) para probar qué factores (ej. 'Fuente de Datos') tienen un impacto estadístico en la calidad (TSQS).</li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="timeline-item timeline-item-right animate-on-scroll fade-in-right">
                         <div class="timeline-icon">I</div>
-                        <div class="timeline-content">
+                        <a href="l6s-fase-mejorar.html" class="timeline-content timeline-content-linkable">
                             <h3>Mejorar</h3>
-                            <p><strong>El objetivo:</strong> Diseñar e implementar soluciones que ataquen la causa raíz.</p>
+                            <p><strong>El objetivo:</strong> Usar un <strong>Diseño de Experimentos (DOE)</strong> para encontrar la "receta" óptima de los factores que maximice la calidad y minimice el costo.</p>
                             <ul>
-                                <li><strong>Solución (Poka-Yoke):</strong> Implementar "barreras de error" 🛡️ con `Great Expectations` para detener los datos malos automáticamente.</li>
-                                <li><strong>Solución (Standard Work):</strong> Migrar los procesos a `dbt` para estandarizar las transformaciones de datos.</li>
+                                <li><strong>Solución:</strong> Implementar "barreras de error" (Poka-Yoke) con `Great Expectations` y estandarizar el proceso con `dbt`.</li>
                             </ul>
-                        </div>
+                             <p style="color: var(--primary-color); font-weight: bold; margin-top: 10px;">Haz clic para ver el "Deep Dive" del DOE 🧪</p>
+                        </a>
                     </div>
 
                     <div class="timeline-item timeline-item-left animate-on-scroll fade-in-left">
                         <div class="timeline-icon">C</div>
-                        <div class="timeline-content">
-                            <h3>Controlar</h3>
+                        <div class="timeline-content"> <h3>Controlar</h3>
                             <p><strong>El objetivo:</strong> Asegurar que las mejoras se mantengan en el tiempo usando tableros de control (SPC).</p>
                             <ul>
                                 <li><strong>Acción (MLOps):</strong> Implementar una <strong>Gráfica de Control XmR</strong> para monitorear el "Data Drift" 🚨. Si una métrica clave se sale de control, se activa una alerta para re-entrenar el modelo.</li>
