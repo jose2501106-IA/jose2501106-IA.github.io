@@ -16,16 +16,17 @@
             --border-color: #e9ecef;
             --mindmap-node-bg: #e0f2f7; /* Color de fondo para los nodos del mindmap */
             --mindmap-node-border: #a7d9e9;
-            --line-color-oracle: #8e44ad;
-            --line-color-mysql: #3498db;
-            --line-color-mssql: #27ae60;
-            --line-color-postgres: #e67e22;
-            --line-color-db2: #f1c40f;
-            --line-color-sqlite: #e74c3c;
-            --line-color-mariadb: #7d3c98;
-            --line-color-mongo: #6a5acb;
-            --line-color-redis: #4682b4;
-            --line-color-cassandra: #8b4513;
+            /* Colores de línea de tu imagen de referencia */
+            --line-color-oracle: #8e44ad; /* Púrpura */
+            --line-color-mysql: #3498db; /* Azul */
+            --line-color-mssql: #27ae60; /* Verde teal */
+            --line-color-postgres: #e67e22; /* Naranja */
+            --line-color-db2: #f1c40f; /* Amarillo */
+            --line-color-sqlite: #e74c3c; /* Rojo */
+            --line-color-mariadb: #7d3c98; /* Púrpura oscuro */
+            --line-color-mongo: #6a5acb; /* Azul-Púrpura */
+            --line-color-redis: #4682b4; /* Azul acerado */
+            --line-color-cassandra: #8b4513; /* Marrón */
         }
         body { 
             font-family: 'Inter', sans-serif; line-height: 1.7; color: var(--text-color); 
@@ -256,14 +257,17 @@
             color: var(--secondary-text);
         }
         
-        /* --- (NUEVO) CSS para el Diagrama de Mapa Mental --- */
-        .mindmap-container {
+        /* --- CSS para el Diagrama de Mapa Mental (más cercano a la imagen) --- */
+        .mindmap-diagram-container {
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Alineación arriba para que las líneas no se superpongan */
+            align-items: flex-start; /* Alineación arriba para el nodo central */
             padding: 2rem 0;
             position: relative;
-            min-height: 550px; /* Suficiente espacio para el diagrama */
+            min-height: 600px; /* Espacio suficiente para todas las líneas */
+            width: 100%;
+            max-width: 700px; /* Para controlar el ancho general del diagrama */
+            margin: 0 auto;
         }
 
         .mindmap-center-node {
@@ -275,36 +279,29 @@
             font-weight: bold;
             color: var(--dark-blue);
             position: absolute;
-            top: 50px; /* Ajusta según necesidad */
+            top: 70px; /* Ajusta la posición vertical del nodo central */
             left: 50%;
             transform: translateX(-50%);
             z-index: 10;
+            white-space: nowrap; /* Evita que el texto se rompa */
         }
 
-        .dbms-list {
+        .dbms-list-container {
             position: absolute;
+            top: 0; /* Controlamos la posición de cada item individualmente */
             left: 50%;
             transform: translateX(-50%);
-            top: 150px; /* Empieza debajo del nodo central */
-            width: 100%;
-            max-width: 600px;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem; /* Espacio entre los elementos de la lista */
-            z-index: 5;
+            width: 100%; /* Para que los items se posicionen con relación a este contenedor */
         }
-        .dbms-item {
+        
+        .dbms-item-wrapper {
+            position: absolute;
             display: flex;
             align-items: center;
-            position: relative;
-            padding-left: 60px; /* Espacio para las líneas curvadas */
-            margin-bottom: 0.5rem; /* Espacio entre cada ítem para que las líneas se vean bien */
         }
-        .dbms-item.nosql-start { margin-top: 2rem; /* Espacio antes de NoSQL */ }
-        .dbms-item:first-child { margin-top: 0; }
 
         .dbms-name-btn {
-            background-color: transparent; /* Fondo transparente para parecerse a la imagen */
+            background-color: transparent;
             border: none;
             cursor: pointer;
             font-size: 1rem;
@@ -314,9 +311,12 @@
             border-radius: 6px;
             transition: all 0.2s ease;
             text-align: left;
-            position: relative; /* Para que la línea se ancle aquí */
-            z-index: 6; /* Asegura que el texto esté sobre la línea */
-            border: 1px solid transparent; /* Para el hover */
+            display: flex;
+            align-items: center;
+            gap: 0.5rem; /* Espacio entre emoji y texto */
+            z-index: 6;
+            border: 1px solid transparent; 
+            white-space: nowrap; /* Evita que el texto se rompa */
         }
         .dbms-name-btn:hover {
             color: var(--primary-color);
@@ -324,64 +324,39 @@
             border-color: var(--border-color);
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
-
-        /* Líneas curvadas */
-        .dbms-item::before {
-            content: '';
-            position: absolute;
-            left: -20px; /* Posición del inicio de la curva */
-            top: 50%;
-            transform: translateY(-50%);
-            width: 60px; /* Ancho total de la curva */
-            height: 3px; /* Grosor de la línea horizontal */
-            background-color: currentColor; /* El color se define en las clases específicas */
-            border-radius: 5px;
-            z-index: 5;
-        }
-        .dbms-item::after {
-            content: '';
-            position: absolute;
-            left: 20px; /* Donde la línea curva se une a la horizontal */
-            top: 50%;
-            transform: translateY(-50%);
-            width: 30px; /* Ajusta este ancho */
-            height: 100%; /* La altura de la parte vertical de la curva */
-            border-left: 3px solid currentColor;
-            border-top: 3px solid currentColor;
-            border-radius: 0 0 0 20px; /* Curva inferior izquierda */
-            z-index: 5;
+        .dbms-name-btn span { /* Para los emojis */
+            font-size: 1.2em; /* Haz los emojis un poco más grandes */
+            line-height: 1;
         }
 
-        /* Colores específicos de las líneas y ajustes de curva */
-        .dbms-item.oracle-line { color: var(--line-color-oracle); }
-        .dbms-item.mysql-line { color: var(--line-color-mysql); }
-        .dbms-item.mssql-line { color: var(--line-color-mssql); }
-        .dbms-item.postgres-line { color: var(--line-color-postgres); }
-        .dbms-item.db2-line { color: var(--line-color-db2); }
-        .dbms-item.sqlite-line { color: var(--line-color-sqlite); }
-        .dbms-item.mariadb-line { color: var(--line-color-mariadb); }
-        .dbms-item.mongo-line { color: var(--line-color-mongo); }
-        .dbms-item.redis-line { color: var(--line-color-redis); }
-        .dbms-item.cassandra-line { color: var(--line-color-cassandra); }
+        /* Líneas curvas */
+        .line {
+            position: absolute;
+            height: 3px; /* Grosor de la línea */
+            background-color: transparent; /* El color se asignará por JS o clases */
+            z-index: 5;
+            left: 50%; /* Punto de origen para todas las líneas */
+            top: 95px; /* Altura del nodo central */
+            transform-origin: 0 0; /* Punto de pivote para rotación */
+        }
 
-        /* Ajustes específicos para las curvas hacia arriba y abajo */
-        .dbms-item.oracle-line::after { border-top: none; border-bottom: 3px solid currentColor; border-radius: 0 0 20px 0; top: auto; bottom: 50%; }
-        .dbms-item.mysql-line::after { border-radius: 0 0 20px 0; top: 0; height: 100%; }
-        .dbms-item.mssql-line::after { border-radius: 0 0 20px 0; top: 0; height: 100%; }
-        .dbms-item.postgres-line::after { border-radius: 0 0 20px 0; top: 0; height: 100%; }
-        .dbms-item.db2-line::after { border-radius: 0 0 20px 0; top: 0; height: 100%; }
-        .dbms-item.sqlite-line::after { border-radius: 0 0 20px 0; top: 0; height: 100%; }
-        .dbms-item.mariadb-line::after { border-radius: 0 0 20px 0; top: 0; height: 100%; }
-        .dbms-item.mongo-line::after { border-radius: 0 0 20px 0; top: 0; height: 100%; }
-        .dbms-item.redis-line::after { border-radius: 0 0 20px 0; top: 0; height: 100%; }
-        .dbms-item.cassandra-line::after { border-radius: 0 0 20px 0; top: 0; height: 100%; }
-
+        /* Colores específicos para cada línea (se sobrescriben con JS) */
+        .line.oracle { background-color: var(--line-color-oracle); }
+        .line.mysql { background-color: var(--line-color-mysql); }
+        .line.mssql { background-color: var(--line-color-mssql); }
+        .line.postgres { background-color: var(--line-color-postgres); }
+        .line.db2 { background-color: var(--line-color-db2); }
+        .line.sqlite { background-color: var(--line-color-sqlite); }
+        .line.mariadb { background-color: var(--line-color-mariadb); }
+        .line.mongo { background-color: var(--line-color-mongo); }
+        .line.redis { background-color: var(--line-color-redis); }
+        .line.cassandra { background-color: var(--line-color-cassandra); }
 
         /* Llave NoSQL */
         .nosql-brace-group {
             position: absolute;
-            right: calc(50% - 300px); /* Ajusta la posición horizontal de la llave */
-            top: 480px; /* Ajusta para que la llave abarque los 3 NoSQL */
+            right: 0; /* Ajusta la posición horizontal de la llave */
+            top: 485px; /* Ajusta para que la llave abarque los 3 NoSQL */
             display: flex;
             align-items: flex-start;
             z-index: 7;
@@ -449,36 +424,37 @@
         }
         .close-btn:hover, .close-btn:focus { color: black; }
         @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-        /* --- FIN CSS Modales --- */
         
-        /* --- Responsivo --- */
+        /* --- Responsivo para el diagrama del mindmap --- */
         @media (max-width: 768px) {
             .methodology-grid {
                 grid-template-columns: 1fr;
             }
-            .mindmap-container {
+            .mindmap-diagram-container {
                 min-height: auto;
                 flex-direction: column;
                 align-items: center;
+                padding: 1rem 0;
             }
             .mindmap-center-node {
                 position: static;
                 transform: none;
                 margin-bottom: 2rem;
             }
-            .dbms-list {
+            .dbms-list-container {
                 position: static;
                 transform: none;
                 width: 100%;
                 padding: 0 1rem;
+                display: flex;
+                flex-direction: column;
                 align-items: center;
             }
-            .dbms-item {
-                padding-left: 0;
-                justify-content: center;
-                margin-bottom: 1rem;
+            .dbms-item-wrapper {
+                position: static; /* Quita el posicionamiento absoluto */
+                margin-bottom: 0.8rem;
             }
-            .dbms-item::before, .dbms-item::after {
+            .line {
                 display: none; /* Oculta las líneas curvadas en móvil */
             }
             .dbms-name-btn {
@@ -498,7 +474,7 @@
             .nosql-brace::before {
                 position: static;
                 transform: none;
-                margin-bottom: 1rem; /* Espacio entre el título y los botones */
+                margin-bottom: 1rem;
             }
         }
     </style>
@@ -586,40 +562,50 @@
                                     "DBMS" significa "Sistema Gestor de Bases de Datos". Es el software específico que usamos. Haz clic en uno para ver sus detalles:
                                 </p>
                                 
-                                <div class="mindmap-container">
+                                <div class="mindmap-diagram-container">
                                     <div class="mindmap-center-node">DBMS populares</div>
                                     
-                                    <div class="dbms-list">
-                                        <div class="dbms-item oracle-line">
-                                            <button class="dbms-name-btn" onclick="openModal('modal-oracle')">Oracle Database</button>
+                                    <div class="dbms-list-container">
+                                        <div class="dbms-item-wrapper" style="top: 0px; left: 60%; /* Ajusta la posición de cada elemento */">
+                                            <div class="line oracle" id="line-oracle"></div>
+                                            <button class="dbms-name-btn" onclick="openModal('modal-oracle')"><span>🐘</span>Oracle Database</button>
                                         </div>
-                                        <div class="dbms-item mysql-line">
-                                            <button class="dbms-name-btn" onclick="openModal('modal-mysql')">MySQL</button>
+                                        <div class="dbms-item-wrapper" style="top: 50px; left: 60%;">
+                                            <div class="line mysql" id="line-mysql"></div>
+                                            <button class="dbms-name-btn" onclick="openModal('modal-mysql')"><span>🐬</span>MySQL</button>
                                         </div>
-                                        <div class="dbms-item mssql-line">
-                                            <button class="dbms-name-btn" onclick="openModal('modal-mssql')">Microsoft SQL Server</button>
+                                        <div class="dbms-item-wrapper" style="top: 100px; left: 60%;">
+                                            <div class="line mssql" id="line-mssql"></div>
+                                            <button class="dbms-name-btn" onclick="openModal('modal-mssql')"><span>🪟</span>Microsoft SQL Server</button>
                                         </div>
-                                        <div class="dbms-item postgres-line">
-                                            <button class="dbms-name-btn" onclick="openModal('modal-postgres')">PostgreSQL</button>
+                                        <div class="dbms-item-wrapper" style="top: 150px; left: 60%;">
+                                            <div class="line postgres" id="line-postgres"></div>
+                                            <button class="dbms-name-btn" onclick="openModal('modal-postgres')"><span>🐘</span>PostgreSQL</button>
                                         </div>
-                                        <div class="dbms-item db2-line">
-                                            <button class="dbms-name-btn" onclick="openModal('modal-db2')">IBM DB2</button>
+                                        <div class="dbms-item-wrapper" style="top: 200px; left: 60%;">
+                                            <div class="line db2" id="line-db2"></div>
+                                            <button class="dbms-name-btn" onclick="openModal('modal-db2')"><span>💻</span>IBM DB2</button>
                                         </div>
-                                        <div class="dbms-item sqlite-line">
-                                            <button class="dbms-name-btn" onclick="openModal('modal-sqlite')">SQLite</button>
+                                        <div class="dbms-item-wrapper" style="top: 250px; left: 60%;">
+                                            <div class="line sqlite" id="line-sqlite"></div>
+                                            <button class="dbms-name-btn" onclick="openModal('modal-sqlite')"><span>🪶</span>SQLite</button>
                                         </div>
-                                        <div class="dbms-item mariadb-line">
-                                            <button class="dbms-name-btn" onclick="openModal('modal-mariadb')">MariaDB</button>
+                                        <div class="dbms-item-wrapper" style="top: 300px; left: 60%;">
+                                            <div class="line mariadb" id="line-mariadb"></div>
+                                            <button class="dbms-name-btn" onclick="openModal('modal-mariadb')"><span>🌊</span>MariaDB</button>
                                         </div>
                                         
-                                        <div class="dbms-item mongo-line nosql-start">
-                                            <button class="dbms-name-btn" onclick="openModal('modal-mongo')">MongoDB</button>
+                                        <div class="dbms-item-wrapper" style="top: 400px; left: 60%;">
+                                            <div class="line mongo" id="line-mongo"></div>
+                                            <button class="dbms-name-btn" onclick="openModal('modal-mongo')"><span>🍃</span>MongoDB</button>
                                         </div>
-                                        <div class="dbms-item redis-line">
-                                            <button class="dbms-name-btn" onclick="openModal('modal-redis')">Redis</button>
+                                        <div class="dbms-item-wrapper" style="top: 450px; left: 60%;">
+                                            <div class="line redis" id="line-redis"></div>
+                                            <button class="dbms-name-btn" onclick="openModal('modal-redis')"><span>🟥</span>Redis</button>
                                         </div>
-                                        <div class="dbms-item cassandra-line">
-                                            <button class="dbms-name-btn" onclick="openModal('modal-cassandra')">Cassandra</button>
+                                        <div class="dbms-item-wrapper" style="top: 500px; left: 60%;">
+                                            <div class="line cassandra" id="line-cassandra"></div>
+                                            <button class="dbms-name-btn" onclick="openModal('modal-cassandra')"><span>🏛️</span>Cassandra</button>
                                         </div>
                                     </div>
 
@@ -635,7 +621,7 @@
                                 <span class="slide-icon">🗺️</span>
                                 <div>
                                     <h2>Explorador de Entidades</h2>
-                                    <p>Terminar antes del 21 de julio de 2025</p>
+                                    <p>Modelado Entidad-Relación (ERM).</p>
                                 </div>
                             </div>
                             <div class="slide-content">
@@ -653,7 +639,7 @@
                                 <span class="slide-icon">🛡️</span>
                                 <div>
                                     <h2>Guardián de la Integridad Relacional</h2>
-                                    <p>Terminar antes del 28 de julio de 2025</p>
+                                    <p>Reglas y restricciones de datos.</p>
                                 </div>
                             </div>
                             <div class="slide-content">
@@ -671,7 +657,7 @@
                                 <span class="slide-icon">🌌</span>
                                 <div>
                                     <h2>Explorador de Sistemas Galácticos</h2>
-                                    <p>Terminar antes del 4 de agosto de 2025</p>
+                                    <p>Diseño de Data Warehouses.</p>
                                 </div>
                             </div>
                             <div class="slide-content">
@@ -689,7 +675,7 @@
                                 <span class="slide-icon">🗣️</span>
                                 <div>
                                     <h2>Políglota Consultor</h2>
-                                    <p>Terminar antes del 11 de agosto de 2025</p>
+                                    <p>Lenguaje de Consulta Estructurado (SQL).</p>
                                 </div>
                             </div>
                             <div class="slide-content">
@@ -707,7 +693,7 @@
                                 <span class="slide-icon">🏹</span>
                                 <div>
                                     <h2>Arquera de las Uniones</h2>
-                                    <p>Terminar antes del 18 de agosto de 2025</p>
+                                    <p>Combinación de datos con JOINs.</p>
                                 </div>
                             </div>
                             <div class="slide-content">
@@ -726,7 +712,7 @@
                                 <span class="slide-icon">🔮</span>
                                 <div>
                                     <h2>Vidente de los Datos Lejanos</h2>
-                                    <p>Terminar antes del 25 de agosto de 2025</p>
+                                    <p>Introducción a bases de datos NoSQL.</p>
                                 </div>
                             </div>
                             <div class="slide-content">
@@ -744,7 +730,7 @@
                                 <span class="slide-icon">🏁</span>
                                 <div>
                                     <h2>El Final del Camino</h2>
-                                    <p>Terminar antes del 1 de septiembre de 2025</p>
+                                    <p>Proyecto final de la materia.</p>
                                 </div>
                             </div>
                             <div class="slide-content">
@@ -769,7 +755,7 @@
     <div id="modal-oracle" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('modal-oracle')">&times;</span>
-            <h3>Oracle Database</h3>
+            <h3>🐘 Oracle Database</h3>
             <p>Conocido por su robustez y ampliamente utilizado en grandes empresas para manejar grandes volúmenes de datos y transacciones complejas.</p>
         </div>
     </div>
@@ -777,7 +763,7 @@
     <div id="modal-mysql" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('modal-mysql')">&times;</span>
-            <h3>MySQL</h3>
+            <h3>🐬 MySQL</h3>
             <p>Es un sistema de gestión de bases de datos relacional de código abierto muy popular, especialmente en aplicaciones web y como parte de la pila LAMP (Linux, Apache, MySQL, PHP/Python/Perl).</p>
         </div>
     </div>
@@ -785,7 +771,7 @@
     <div id="modal-mssql" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('modal-mssql')">&times;</span>
-            <h3>Microsoft SQL Server</h3>
+            <h3>🪟 Microsoft SQL Server</h3>
             <p>Un producto de Microsoft, es muy utilizado en entornos empresariales, especialmente aquellos que dependen de otros productos de software de Microsoft.</p>
         </div>
     </div>
@@ -793,7 +779,7 @@
     <div id="modal-postgres" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('modal-postgres')">&times;</span>
-            <h3>PostgreSQL</h3>
+            <h3>🐘 PostgreSQL</h3>
             <p>Un sistema de gestión de bases de datos relacional de código abierto que se destaca por su conformidad con los estándares y su soporte para características avanzadas.</p>
         </div>
     </div>
@@ -801,7 +787,7 @@
     <div id="modal-db2" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('modal-db2')">&times;</span>
-            <h3>IBM DB2</h3>
+            <h3>💻 IBM DB2</h3>
             <p>Utilizado principalmente por empresas para almacenar y recuperar datos en entornos de mainframe y servidores.</p>
         </div>
     </div>
@@ -809,7 +795,7 @@
     <div id="modal-sqlite" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('modal-sqlite')">&times;</span>
-            <h3>SQLite</h3>
+            <h3>🪶 SQLite</h3>
             <p>Es una biblioteca en lenguaje C que proporciona un sistema de gestión de bases de datos relacional ligero y sin servidor, muy utilizado en aplicaciones móviles y de escritorio.</p>
         </div>
     </div>
@@ -817,7 +803,7 @@
     <div id="modal-mariadb" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('modal-mariadb')">&times;</span>
-            <h3>MariaDB</h3>
+            <h3>🌊 MariaDB</h3>
             <p>Un fork de MySQL, creado por los desarrolladores originales de MySQL y diseñado para mantener la compatibilidad y mejorar el rendimiento.</p>
         </div>
     </div>
@@ -825,7 +811,7 @@
     <div id="modal-mongo" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('modal-mongo')">&times;</span>
-            <h3>MongoDB</h3>
+            <h3>🍃 MongoDB</h3>
             <p>Una de las bases de datos NoSQL más populares, utiliza un formato de almacenamiento de tipo documento y es conocida por su flexibilidad y escalabilidad.</p>
         </div>
     </div>
@@ -833,7 +819,7 @@
     <div id="modal-redis" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('modal-redis')">&times;</span>
-            <h3>Redis</h3>
+            <h3>🟥 Redis</h3>
             <p>Un almacén de estructura de datos en memoria, utilizado como base de datos, caché y agente de mensajes. Es conocido por su rapidez y se utiliza en situaciones donde se requiere un acceso rápido a los datos.</p>
         </div>
     </div>
@@ -841,7 +827,7 @@
     <div id="modal-cassandra" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('modal-cassandra')">&times;</span>
-            <h3>Cassandra</h3>
+            <h3>🏛️ Cassandra</h3>
             <p>Un sistema de gestión de bases de datos NoSQL diseñado para manejar grandes cantidades de datos distribuidos en muchos servidores.</p>
         </div>
     </div>
@@ -946,6 +932,86 @@
                     event.target.style.display = "none";
                 }
             }
+
+            // --- Lógica para dibujar las líneas del mindmap con SVG ---
+            // Esta función se moverá al final del script para asegurar que el DOM esté cargado
+
+            function drawMindmapLines() {
+                const centerNode = document.querySelector('.mindmap-center-node');
+                if (!centerNode) return;
+
+                const centerRect = centerNode.getBoundingClientRect();
+                const centerMidX = centerRect.left + centerRect.width / 2;
+                const centerMidY = centerRect.top + centerRect.height / 2;
+
+                const dbmsItems = document.querySelectorAll('.dbms-item-wrapper');
+                const svgContainer = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svgContainer.setAttribute('width', '100%');
+                svgContainer.setAttribute('height', '100%');
+                svgContainer.style.position = 'absolute';
+                svgContainer.style.top = '0';
+                svgContainer.style.left = '0';
+                svgContainer.style.zIndex = '4'; // Detrás de los botones
+
+                document.querySelector('.mindmap-diagram-container').appendChild(svgContainer);
+
+                dbmsItems.forEach(item => {
+                    const itemBtn = item.querySelector('.dbms-name-btn');
+                    if (!itemBtn) return;
+
+                    const itemRect = itemBtn.getBoundingClientRect();
+                    const itemMidX = itemRect.left; // Queremos que la línea llegue al inicio del botón
+                    const itemMidY = itemRect.top + itemRect.height / 2;
+
+                    // Ajustar coordenadas relativas al SVG
+                    const startX = centerMidX - svgContainer.getBoundingClientRect().left;
+                    const startY = centerMidY - svgContainer.getBoundingClientRect().top;
+                    const endX = itemMidX - svgContainer.getBoundingClientRect().left;
+                    const endY = itemMidY - svgContainer.getBoundingClientRect().top;
+
+                    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    path.setAttribute('fill', 'none');
+                    path.setAttribute('stroke-width', '3');
+                    path.setAttribute('stroke-linecap', 'round');
+
+                    // Obtener el color de la línea desde el CSS
+                    let lineColor;
+                    if (item.querySelector('.line.oracle')) lineColor = getComputedStyle(document.documentElement).getPropertyValue('--line-color-oracle').trim();
+                    else if (item.querySelector('.line.mysql')) lineColor = getComputedStyle(document.documentElement).getPropertyValue('--line-color-mysql').trim();
+                    else if (item.querySelector('.line.mssql')) lineColor = getComputedStyle(document.documentElement).getPropertyValue('--line-color-mssql').trim();
+                    else if (item.querySelector('.line.postgres')) lineColor = getComputedStyle(document.documentElement).getPropertyValue('--line-color-postgres').trim();
+                    else if (item.querySelector('.line.db2')) lineColor = getComputedStyle(document.documentElement).getPropertyValue('--line-color-db2').trim();
+                    else if (item.querySelector('.line.sqlite')) lineColor = getComputedStyle(document.documentElement).getPropertyValue('--line-color-sqlite').trim();
+                    else if (item.querySelector('.line.mariadb')) lineColor = getComputedStyle(document.documentElement).getPropertyValue('--line-color-mariadb').trim();
+                    else if (item.querySelector('.line.mongo')) lineColor = getComputedStyle(document.documentElement).getPropertyValue('--line-color-mongo').trim();
+                    else if (item.querySelector('.line.redis')) lineColor = getComputedStyle(document.documentElement).getPropertyValue('--line-color-redis').trim();
+                    else if (item.querySelector('.line.cassandra')) lineColor = getComputedStyle(document.documentElement).getPropertyValue('--line-color-cassandra').trim();
+
+                    path.setAttribute('stroke', lineColor || '#ccc'); // Fallback color
+
+                    // Creamos una curva que se asemeja a la imagen
+                    // La curva empieza desde el centro del nodo, va hacia la derecha y luego baja o sube a la posición del item
+                    const controlX1 = startX + 50; // Punto de control para la curva horizontal
+                    const controlY1 = startY;
+                    const controlX2 = startX + 50;
+                    const controlY2 = endY;
+                    
+                    const d = `M ${startX},${startY} C ${controlX1},${controlY1} ${controlX2},${controlY2} ${endX},${endY}`;
+                    path.setAttribute('d', d);
+                    svgContainer.appendChild(path);
+                });
+            }
+
+            // Para que las líneas se dibujen correctamente, necesitamos esperar a que el layout se asiente.
+            // Se puede llamar después de un pequeño retraso o en eventos de redimensionamiento.
+            setTimeout(drawMindmapLines, 100); 
+            window.addEventListener('resize', () => {
+                // Eliminar el SVG existente y redibujar
+                const existingSvg = document.querySelector('.mindmap-diagram-container svg');
+                if (existingSvg) existingSvg.remove();
+                drawMindmapLines();
+            });
+
         });
     </script>
 </body>
