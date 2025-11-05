@@ -244,20 +244,34 @@
             color: var(--secondary-text);
         }
         
-        @media (max-width: 768px) {
-            .methodology-grid {
-                grid-template-columns: 1fr;
-            }
+        /* --- (NUEVO) CSS para el Esquema DBMS --- */
+        .dbms-schema-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 columnas en desktop */
+            gap: 0.75rem;
         }
         
-        /* --- (NUEVO) CSS para la Cuadrícula de Botones DBMS --- */
-        .dbms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        .nosql-group {
+            display: flex;
+            align-items: center;
             gap: 1rem;
             margin-top: 1.5rem;
-            margin-bottom: 2rem;
         }
+        .nosql-brace {
+            width: 20px;
+            height: 140px; /* Alto para 3 botones apilados */
+            border-left: 3px solid var(--primary-color);
+            border-top: 3px solid var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            border-radius: 10px 0 0 10px;
+        }
+        .dbms-schema-grid-nosql {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+            flex: 1;
+        }
+        
         .dbms-btn {
             background-color: var(--white);
             border: 1px solid var(--border-color);
@@ -276,15 +290,16 @@
         }
         .dbms-btn span { /* Emoji */
             font-size: 1.5rem;
+            line-height: 1;
         }
         .dbms-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             border-color: var(--primary-color);
         }
-        /* --- FIN CSS Cuadrícula --- */
+        /* --- FIN CSS Esquema --- */
 
-        /* --- (NUEVO) CSS para el Sistema de Modales --- */
+        /* --- CSS para el Sistema de Modales --- */
         .modal {
             display: none; 
             position: fixed; 
@@ -325,6 +340,27 @@
         .close-btn:hover, .close-btn:focus { color: black; }
         @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
         /* --- FIN CSS Modales --- */
+        
+        /* --- (NUEVO) CSS Responsivo para el Esquema --- */
+        @media (max-width: 768px) {
+            .methodology-grid {
+                grid-template-columns: 1fr;
+            }
+            .dbms-schema-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 columnas en móvil */
+            }
+            .nosql-group {
+                flex-direction: column; /* Apila la llave (oculta) y los botones */
+                align-items: stretch; /* Ocupa todo el ancho */
+            }
+            .nosql-brace {
+                display: none; /* Oculta la llave en móvil, es muy difícil de hacer bien */
+            }
+            .dbms-schema-grid-nosql {
+                grid-template-columns: 1fr; /* Mantiene 1 columna */
+            }
+        }
+        /* --- FIN CSS Responsivo --- */
 
         .animate-on-scroll {
             opacity: 0;
@@ -377,9 +413,6 @@
                                 </p>
                                 
                                 <h3>¿Por qué son tan importantes? 💡</h3>
-                                <p>
-                                    Son el corazón de casi cualquier aplicación. Sus superpoderes son:
-                                </p>
                                 <div class="kpi-grid">
                                     <div class="kpi-card">
                                         <div class="kpi-card-title"><span>🗂️</span>Manejo de Volumen</div>
@@ -396,27 +429,21 @@
                                 </div>
 
                                 <h3 style="margin-top: 2.5rem;">La Gran División: SQL vs. NoSQL ⚔️</h3>
-                                <p>
-                                    No todas las bases de datos son iguales. La decisión más grande es entre dos "familias", cada una diseñada para un tipo de problema diferente.
-                                </p>
-                                
                                 <div class="methodology-grid">
                                     <div class="methodology-card">
                                         <h3><span>📊</span>Relacional (SQL)</h3>
                                         <p><strong>Analogía:</strong> Una colección de hojas de Excel (tablas) interconectadas por reglas estrictas.</p>
                                         <ul>
                                             <li><strong>Estructura:</strong> Rígida (Tablas, filas, columnas).</li>
-                                            <li><strong>Integridad:</strong> Alta (Sigue principios ACID).</li>
-                                            <li><strong>Ideal para:</strong> Datos estructurados, transacciones financieras, sistemas donde la consistencia es crítica.</li>
+                                            <li><strong>Ideal para:</strong> Datos estructurados, transacciones financieras, consistencia crítica.</li>
                                         </ul>
                                     </div>
                                     <div class="methodology-card">
                                         <h3><span>🚀</span>No Relacional (NoSQL)</h3>
                                         <p><strong>Analogía:</strong> Una carpeta de archivos (documentos, listas, etc.) con total flexibilidad.</p>
                                         <ul>
-                                            <li><strong>Estructura:</strong> Flexible (Documentos, Grafos, Clave-Valor).</li>
-                                            <li><strong>Escalabilidad:</strong> Masiva (Horizontal).</li>
-                                            <li><strong>Ideal para:</strong> Big Data, redes sociales, IoT, datos no estructurados o que cambian constantemente.</li>
+                                            <li><strong>Estructura:</strong> Flexible (Documentos, Grafos, etc.).</li>
+                                            <li><strong>Ideal para:</strong> Big Data, redes sociales, IoT, datos no estructurados.</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -426,7 +453,8 @@
                                     "DBMS" significa "Sistema Gestor de Bases de Datos". Es el software específico que usamos. Haz clic en uno para ver sus detalles:
                                 </p>
                                 
-                                <div class="dbms-grid">
+                                <h3 style="font-size: 1.1rem; color: var(--secondary-text);">SQL (Relacionales)</h3>
+                                <div class="dbms-schema-grid">
                                     <button class="dbms-btn" onclick="openModal('modal-oracle')"><span>🐘</span>Oracle</button>
                                     <button class="dbms-btn" onclick="openModal('modal-mysql')"><span>🐬</span>MySQL</button>
                                     <button class="dbms-btn" onclick="openModal('modal-mssql')"><span>🪟</span>MS SQL Server</button>
@@ -434,10 +462,18 @@
                                     <button class="dbms-btn" onclick="openModal('modal-db2')"><span>💻</span>IBM DB2</button>
                                     <button class="dbms-btn" onclick="openModal('modal-sqlite')"><span>🪶</span>SQLite</button>
                                     <button class="dbms-btn" onclick="openModal('modal-mariadb')"><span>🌊</span>MariaDB</button>
-                                    <button class="dbms-btn" onclick="openModal('modal-mongo')"><span>🍃</span>MongoDB</button>
-                                    <button class="dbms-btn" onclick="openModal('modal-redis')"><span>🟥</span>Redis</button>
-                                    <button class="dbms-btn" onclick="openModal('modal-cassandra')"><span>🏛️</span>Cassandra</button>
                                 </div>
+                                
+                                <h3 style="font-size: 1.1rem; color: var(--secondary-text); margin-top: 2rem;">NoSQL (No Relacionales)</h3>
+                                <div class="nosql-group">
+                                    <div class="nosql-brace"></div>
+                                    <div class="dbms-schema-grid-nosql">
+                                        <button class="dbms-btn" onclick="openModal('modal-mongo')"><span>🍃</span>MongoDB</button>
+                                        <button class="dbms-btn" onclick="openModal('modal-redis')"><span>🟥</span>Redis</button>
+                                        <button class="dbms-btn" onclick="openModal('modal-cassandra')"><span>🏛️</span>Cassandra</button>
+                                    </div>
+                                </div>
+                                
                             </div>
                         </div>
                         <div class="slide">
