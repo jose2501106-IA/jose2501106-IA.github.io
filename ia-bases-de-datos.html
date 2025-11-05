@@ -69,10 +69,10 @@
             margin-top: 0.5rem;
         }
 
-        /* --- (NUEVO) CSS para Pestañas (Tabs) --- */
+        /* --- CSS para Pestañas (Tabs) --- */
         .tab-navigation {
             display: flex;
-            flex-wrap: wrap; /* Para que quepa en móviles */
+            flex-wrap: wrap; 
             gap: 0.5rem;
             justify-content: center;
             margin-bottom: 1.5rem;
@@ -97,9 +97,8 @@
             color: var(--white);
             border-color: var(--primary-color);
         }
-        /* --- FIN CSS Pestañas --- */
         
-        /* --- (NUEVO) CSS para Carrusel de Apuntes --- */
+        /* --- CSS para Carrusel de Apuntes --- */
         .carousel-container { position: relative; }
         .carousel-viewport { 
             overflow: hidden; 
@@ -115,13 +114,15 @@
             flex: 0 0 100%;
             box-sizing: border-box;
             padding: 2rem 2.5rem;
-            opacity: 0; /* Se animará con JS */
+            opacity: 0; 
             transform: translateY(20px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            display: none; /* (NUEVO) Oculta slides inactivos */
         }
         .slide.active {
             opacity: 1;
             transform: none;
+            display: block; /* (NUEVO) Muestra solo slide activo */
         }
         
         .slide-header {
@@ -150,9 +151,17 @@
             margin: 0.25rem 0 0 0;
             font-style: italic;
         }
+        /* (CSS ACTUALIZADO) Estilos para el contenido del slide */
+        .slide-content h3 {
+            color: var(--dark-blue);
+            font-size: 1.3rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
         .slide-content p {
             font-size: 1.1rem;
             line-height: 1.8;
+            margin-bottom: 1rem;
         }
         .slide-content ul {
             font-size: 1.1rem;
@@ -171,7 +180,96 @@
         .carousel-btn.prev { left: 10px; }
         .carousel-btn.next { right: 10px; }
         .carousel-btn.hidden { opacity: 0; pointer-events: none; }
-        /* --- FIN CSS Carrusel --- */
+        
+        /* --- (NUEVO) CSS AÑADIDO para Tarjetas, Diagrama y Columnas --- */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .kpi-card {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            border-left: 4px solid var(--primary-color);
+        }
+        .kpi-card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .kpi-card-title span { font-size: 1.2rem; }
+        .kpi-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--secondary-text);
+            margin: 0;
+        }
+
+        .db-types-diagram {
+            padding: 1rem;
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .db-types-diagram img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .methodology-card {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+        .methodology-card h3 {
+            margin-top: 0;
+            font-size: 1.3rem;
+            color: var(--dark-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .methodology-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 0.5rem;
+        }
+        .methodology-card ul {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            padding-left: 18px;
+            margin: 0;
+            color: var(--secondary-text);
+        }
+        
+        @media (max-width: 768px) {
+            .methodology-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* --- FIN CSS Nuevo --- */
 
         .animate-on-scroll {
             opacity: 0;
@@ -214,19 +312,67 @@
                                 <span class="slide-icon">🌱</span>
                                 <div>
                                     <h2>Núcleo de Datos</h2>
-                                    <p>Terminar antes del 14 de julio de 2025</p>
+                                    <p>Fundamentos y tipos de bases de datos.</p>
                                 </div>
                             </div>
                             <div class="slide-content">
-                                <p>Aquí puedes poner toda la información sobre este módulo. Puedes añadir:</p>
-                                <ul>
-                                    <li>Definiciones clave (¿Qué es una base de datos?).</li>
-                                    <li>Diferencias entre SQL y NoSQL.</li>
-                                    <li>Conceptos de Tablas, Filas y Columnas.</li>
-                                </ul>
+                                <h3>¿Qué es una Base de Datos? 🤔</h3>
+                                <p>
+                                    Piensa en una <strong>Base de Datos (DB)</strong> como una biblioteca digital ultra-organizada. Es un sistema diseñado para <strong>almacenar, organizar, modificar y recuperar</strong> grandes volúmenes de datos de forma rápida, eficiente y segura.
+                                </p>
+                                
+                                <h3>¿Por qué son tan importantes? 💡</h3>
+                                <p>
+                                    Son el corazón de casi cualquier aplicación. Sus superpoderes son:
+                                </p>
+                                <div class="kpi-grid">
+                                    <div class="kpi-card">
+                                        <div class="kpi-card-title"><span>🗂️</span>Manejo de Volumen</div>
+                                        <p>Gestionan millones de registros sin esfuerzo, algo imposible para una hoja de cálculo.</p>
+                                    </div>
+                                    <div class="kpi-card">
+                                        <div class="kpi-card-title"><span>♻️</span>Evitar Redundancia</div>
+                                        <p>Permiten centralizar los datos para que no haya múltiples versiones de la verdad (SSoT).</p>
+                                    </div>
+                                    <div class="kpi-card">
+                                        <div class="kpi-card-title"><span>🔒</span>Seguridad e Integridad</div>
+                                        <p>Protegen los datos y aseguran que las relaciones (ej. un "Pedido" y un "Cliente") sean consistentes.</p>
+                                    </div>
+                                </div>
+
+                                <h3 style="margin-top: 2.5rem;">La Gran División: SQL vs. NoSQL ⚔️</h3>
+                                <p>
+                                    No todas las bases de datos son iguales. La decisión más grande es entre dos "familias", cada una diseñada para un tipo de problema diferente.
+                                </p>
+                                
+                                <div class="db-types-diagram">
+                                    
+                                </div>
+                                
+                                <div class="methodology-grid">
+                                    <div class="methodology-card">
+                                        <h3><span>📊</span>Relacional (SQL)</h3>
+                                        <p><strong>Analogía:</strong> Una colección de hojas de Excel (tablas) interconectadas por reglas estrictas.</p>
+                                        <ul>
+                                            <li><strong>Estructura:</strong> Rígida (Tablas, filas, columnas).</li>
+                                            <li><strong>Integridad:</strong> Alta (Sigue principios ACID).</li>
+                                            <li><strong>Ideal para:</strong> Datos estructurados, transacciones financieras, sistemas donde la consistencia es crítica.</li>
+                                            <li><strong>Ejemplos:</strong> MySQL, PostgreSQL.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="methodology-card">
+                                        <h3><span>🚀</span>No Relacional (NoSQL)</h3>
+                                        <p><strong>Analogía:</strong> Una carpeta de archivos (documentos, listas, etc.) con total flexibilidad.</p>
+                                        <ul>
+                                            <li><strong>Estructura:</strong> Flexible (Documentos, Grafos, Clave-Valor).</li>
+                                            <li><strong>Escalabilidad:</strong> Masiva (Horizontal).</li>
+                                            <li><strong>Ideal para:</strong> Big Data, redes sociales, IoT, datos no estructurados o que cambian constantemente.</li>
+                                            <li><strong>Ejemplos:</strong> MongoDB, Redis.</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        
                         <div class="slide">
                             <div class="slide-header">
                                 <span class="slide-icon">🗺️</span>
@@ -403,7 +549,7 @@
                 });
             }
 
-            // --- (NUEVO) Lógica del Carrusel y Pestañas ---
+            // --- Lógica del Carrusel y Pestañas ---
             const track = document.getElementById('db-track');
             const prevBtn = document.getElementById('db-prev');
             const nextBtn = document.getElementById('db-next');
@@ -425,13 +571,12 @@
                     tab.classList.toggle('active', index === currentIndex);
                 });
                 
-                // 4. Actualizar el slide activo (para animación)
+                // 4. Actualizar el slide activo (para animación y visibilidad)
                 slides.forEach((slide, index) => {
                     slide.classList.toggle('active', index === currentIndex);
                 });
             }
 
-            // Event Listeners para botones Siguiente/Anterior
             prevBtn.addEventListener('click', () => {
                 if (currentIndex > 0) {
                     currentIndex--;
@@ -446,7 +591,6 @@
                 }
             });
 
-            // Event Listeners para las pestañas (tabs)
             tabs.forEach(tab => {
                 tab.addEventListener('click', () => {
                     currentIndex = parseInt(tab.dataset.slide);
@@ -454,7 +598,6 @@
                 });
             });
 
-            // Inicializar estado
             updateCarousel();
         });
     </script>
