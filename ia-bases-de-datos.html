@@ -280,7 +280,7 @@
             color: var(--dark-blue);
             position: absolute;
             top: 50%; 
-            left: 30%; /* MOVIDO MÁS A LA IZQUIERDA */
+            left: 30%; 
             transform: translate(-50%, -50%); 
             z-index: 10;
             white-space: nowrap; 
@@ -293,8 +293,8 @@
             display: flex;
             flex-direction: column; 
             justify-content: center; 
-            align-items: flex-start; /* Alinear a la izquierda */
-            padding-left: 50%; /* MOVIDO LOS BOTONES MÁS A LA DERECHA */
+            align-items: flex-start; 
+            padding-left: 50%; 
             box-sizing: border-box;
         }
         
@@ -347,19 +347,16 @@
         .nosql-brace-group {
             position: absolute;
             right: 15px; 
-            top: 50%; 
-            transform: translateY(-50%); 
             display: flex;
             align-items: center; 
-            height: 100%; 
             pointer-events: none; 
             z-index: 7;
+            /* Estos estilos se ajustarán dinámicamente con JS */
         }
 
         .nosql-brace {
             position: relative;
             width: 20px;
-            min-height: 180px; 
             border-right: 3px solid var(--primary-color);
             border-top: 3px solid var(--primary-color);
             border-bottom: 3px solid var(--primary-color);
@@ -369,6 +366,7 @@
             display: flex; 
             align-items: center;
             justify-content: center;
+            /* La altura y el top se ajustarán dinámicamente */
         }
         .nosql-brace::before {
             content: 'NoSQL';
@@ -960,7 +958,7 @@
 
                     const itemRect = itemBtn.getBoundingClientRect();
                     const itemPoint = {
-                        x: itemRect.left - containerRect.left, // El punto final es el borde izquierdo del botón
+                        x: itemRect.left - containerRect.left, 
                         y: itemRect.top + itemRect.height / 2 - containerRect.top
                     };
 
@@ -974,11 +972,9 @@
                     let lineColor = getComputedStyle(document.documentElement).getPropertyValue(`--line-color-${dbmsName}`).trim();
                     path.setAttribute('stroke', lineColor || '#ccc');
 
-                    // Define control points for a smooth curve
-                    // The curve now needs to move from the center node, curve outwards, and then towards the left edge of the target button
-                    const controlX1 = centerPoint.x + 50; // Move right from center
+                    const controlX1 = centerPoint.x + 50; 
                     const controlY1 = centerPoint.y;
-                    const controlX2 = itemPoint.x - 50; // Move left before hitting the item
+                    const controlX2 = itemPoint.x - 50; 
                     const controlY2 = itemPoint.y;
 
                     const d = `M ${centerPoint.x},${centerPoint.y} C ${controlX1},${controlY1} ${controlX2},${controlY2} ${itemPoint.x},${itemPoint.y}`;
@@ -986,7 +982,7 @@
                     svg.appendChild(path);
                 });
 
-                // Ajustar la posición de la llave NoSQL después de que los elementos estén renderizados
+                // Ajustar la posición de la llave NoSQL
                 const mongoItem = document.querySelector('[data-dbms-name="mongo"]');
                 const cassandraItem = document.querySelector('[data-dbms-name="cassandra"]');
 
@@ -994,15 +990,18 @@
                     const mongoRect = mongoItem.getBoundingClientRect();
                     const cassandraRect = cassandraItem.getBoundingClientRect();
 
-                    const topOfBrace = mongoRect.top + mongoRect.height / 2 - containerRect.top;
-                    const bottomOfBrace = cassandraRect.top + cassandraRect.height / 2 - containerRect.top;
-                    const braceHeight = bottomOfBrace - topOfBrace;
+                    // Calculamos el punto medio vertical de cada elemento
+                    const topOfBraceY = mongoRect.top + mongoRect.height / 2 - containerRect.top;
+                    const bottomOfBraceY = cassandraRect.top + cassandraRect.height / 2 - containerRect.top;
+                    
+                    const braceHeight = bottomOfBraceY - topOfBraceY;
 
                     const braceElement = nosqlBraceGroup.querySelector('.nosql-brace');
                     if (braceElement) {
                         braceElement.style.height = `${braceHeight}px`;
-                        nosqlBraceGroup.style.top = `${topOfBrace}px`;
-                        nosqlBraceGroup.style.transform = `none`; 
+                        // Posicionamos el grupo de la llave en la parte superior del primer elemento (MongoDB)
+                        nosqlBraceGroup.style.top = `${topOfBraceY}px`;
+                        nosqlBraceGroup.style.transform = `none`; // Eliminar transform para no interferir con 'top'
                     }
                 }
             }
