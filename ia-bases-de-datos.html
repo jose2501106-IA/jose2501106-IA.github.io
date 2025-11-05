@@ -261,12 +261,12 @@
         .mindmap-diagram-container {
             display: flex;
             justify-content: center;
-            align-items: center; /* Centrar verticalmente también */
+            align-items: center; 
             padding: 2rem 0;
             position: relative;
-            min-height: 600px; /* Espacio suficiente para todas las líneas */
+            min-height: 600px; 
             width: 100%;
-            max-width: 700px; /* Para controlar el ancho general del diagrama */
+            max-width: 700px; 
             margin: 0 auto;
         }
 
@@ -279,31 +279,31 @@
             font-weight: bold;
             color: var(--dark-blue);
             position: absolute;
-            top: 50%; /* Centrado vertical */
-            left: 50%;
-            transform: translate(-50%, -50%); /* Centrado exacto */
+            top: 50%; 
+            left: 30%; /* MOVIDO MÁS A LA IZQUIERDA */
+            transform: translate(-50%, -50%); 
             z-index: 10;
-            white-space: nowrap; /* Evita que el texto se rompa */
+            white-space: nowrap; 
         }
 
         .dbms-list-container {
-            position: relative; /* Cambiado a relative para controlar los elementos internos */
+            position: relative; 
             width: 100%;
             height: 100%;
             display: flex;
-            flex-direction: column; /* Apilar elementos verticalmente */
-            justify-content: center; /* Centrar en el espacio disponible */
-            align-items: flex-start; /* Alinear a la izquierda para los elementos */
-            padding-left: 150px; /* Espacio para que las líneas se desplieguen */
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: flex-start; /* Alinear a la izquierda */
+            padding-left: 50%; /* MOVIDO LOS BOTONES MÁS A LA DERECHA */
             box-sizing: border-box;
         }
         
         .dbms-item-wrapper {
-            position: relative; /* Para poder posicionar la línea internamente si fuera necesario */
+            position: relative; 
             display: flex;
             align-items: center;
-            margin-bottom: 0.5rem; /* Espacio entre los elementos */
-            width: max-content; /* Ajustar al contenido para no ocupar todo el ancho */
+            margin-bottom: 0.5rem; 
+            width: max-content; 
         }
         .dbms-item-wrapper:last-of-type {
             margin-bottom: 0;
@@ -322,10 +322,10 @@
             text-align: left;
             display: flex;
             align-items: center;
-            gap: 0.5rem; /* Espacio entre emoji y texto */
+            gap: 0.5rem; 
             z-index: 6;
             border: 1px solid transparent; 
-            white-space: nowrap; /* Evita que el texto se rompa */
+            white-space: nowrap; 
         }
         .dbms-name-btn:hover {
             color: var(--primary-color);
@@ -333,55 +333,55 @@
             border-color: var(--border-color);
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
-        .dbms-name-btn span { /* Para los emojis */
-            font-size: 1.2em; /* Haz los emojis un poco más grandes */
+        .dbms-name-btn span { 
+            font-size: 1.2em; 
             line-height: 1;
         }
 
         /* Líneas curvadas - estas serán dibujadas por SVG */
         .line {
-            display: none; /* Ocultamos los divs de línea ya que usaremos SVG */
+            display: none; 
         }
 
         /* Llave NoSQL */
         .nosql-brace-group {
             position: absolute;
-            right: 15px; /* Más cerca del borde del contenedor */
-            top: 50%; /* Centrado vertical */
-            transform: translateY(-50%); /* Centrado exacto */
+            right: 15px; 
+            top: 50%; 
+            transform: translateY(-50%); 
             display: flex;
-            align-items: center; /* Alineación vertical */
-            height: 100%; /* Para que la llave pueda abarcar los elementos */
-            pointer-events: none; /* Para no interferir con clics */
+            align-items: center; 
+            height: 100%; 
+            pointer-events: none; 
             z-index: 7;
         }
 
         .nosql-brace {
             position: relative;
             width: 20px;
-            min-height: 180px; /* Ajusta la altura mínima para la llave */
+            min-height: 180px; 
             border-right: 3px solid var(--primary-color);
             border-top: 3px solid var(--primary-color);
             border-bottom: 3px solid var(--primary-color);
             border-top-right-radius: 10px; 
             border-bottom-right-radius: 10px;
-            margin-right: 50px; /* Espacio entre la llave y el texto "NoSQL" */
-            display: flex; /* Para centrar el texto NoSQL */
+            margin-right: 50px; 
+            display: flex; 
             align-items: center;
             justify-content: center;
         }
         .nosql-brace::before {
             content: 'NoSQL';
             position: absolute;
-            left: 100%; /* Coloca el texto a la derecha de la llave */
-            transform: rotate(-90deg) translateX(-50%); /* Rota para que el texto sea vertical */
+            left: 100%; 
+            transform: rotate(-90deg) translateX(-50%); 
             transform-origin: 0 0;
             font-weight: bold;
             color: var(--primary-color);
             font-size: 1.1rem;
             white-space: nowrap;
-            top: 50%; /* Centrar el texto en la altura de la llave */
-            left: calc(100% + 20px); /* Ajusta la posición para que esté más a la derecha */
+            top: 50%; 
+            left: calc(100% + 20px); 
         }
         
         /* --- CSS para el Sistema de Modales --- */
@@ -451,11 +451,11 @@
                 align-items: center;
             }
             .dbms-item-wrapper {
-                position: static; /* Quita el posicionamiento absoluto */
+                position: static; 
                 margin-bottom: 0.8rem;
             }
             .line {
-                display: none; /* Oculta las líneas curvadas en móvil */
+                display: none; 
             }
             .dbms-name-btn {
                 padding: 0.5rem 1rem;
@@ -469,7 +469,7 @@
                 margin-top: 2rem;
             }
             .nosql-brace {
-                display: none; /* Oculta la llave en móvil */
+                display: none; 
             }
             .nosql-brace::before {
                 position: static;
@@ -960,7 +960,7 @@
 
                     const itemRect = itemBtn.getBoundingClientRect();
                     const itemPoint = {
-                        x: itemRect.left - containerRect.left,
+                        x: itemRect.left - containerRect.left, // El punto final es el borde izquierdo del botón
                         y: itemRect.top + itemRect.height / 2 - containerRect.top
                     };
 
@@ -975,7 +975,7 @@
                     path.setAttribute('stroke', lineColor || '#ccc');
 
                     // Define control points for a smooth curve
-                    // This creates an S-like curve, going slightly right then down/up to the item
+                    // The curve now needs to move from the center node, curve outwards, and then towards the left edge of the target button
                     const controlX1 = centerPoint.x + 50; // Move right from center
                     const controlY1 = centerPoint.y;
                     const controlX2 = itemPoint.x - 50; // Move left before hitting the item
@@ -1002,7 +1002,7 @@
                     if (braceElement) {
                         braceElement.style.height = `${braceHeight}px`;
                         nosqlBraceGroup.style.top = `${topOfBrace}px`;
-                        nosqlBraceGroup.style.transform = `none`; // Remove transform since we are setting top directly
+                        nosqlBraceGroup.style.transform = `none`; 
                     }
                 }
             }
@@ -1017,7 +1017,7 @@
                 };
             };
 
-            const debouncedDrawMindmapLines = debounce(drawMindmapLines, 150); // Pequeño retraso para asegurar el renderizado
+            const debouncedDrawMindmapLines = debounce(drawMindmapLines, 150); 
 
             // Llama la función cuando la ventana se carga o se redimensiona
             window.addEventListener('load', debouncedDrawMindmapLines);
