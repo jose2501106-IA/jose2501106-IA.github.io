@@ -261,7 +261,7 @@
         .mindmap-diagram-container {
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Alineación arriba para el nodo central */
+            align-items: center; /* Centrar verticalmente también */
             padding: 2rem 0;
             position: relative;
             min-height: 600px; /* Espacio suficiente para todas las líneas */
@@ -279,25 +279,34 @@
             font-weight: bold;
             color: var(--dark-blue);
             position: absolute;
-            top: 70px; /* Ajusta la posición vertical del nodo central */
+            top: 50%; /* Centrado vertical */
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%); /* Centrado exacto */
             z-index: 10;
             white-space: nowrap; /* Evita que el texto se rompa */
         }
 
         .dbms-list-container {
-            position: absolute;
-            top: 0; /* Controlamos la posición de cada item individualmente */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%; /* Para que los items se posicionen con relación a este contenedor */
+            position: relative; /* Cambiado a relative para controlar los elementos internos */
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column; /* Apilar elementos verticalmente */
+            justify-content: center; /* Centrar en el espacio disponible */
+            align-items: flex-start; /* Alinear a la izquierda para los elementos */
+            padding-left: 150px; /* Espacio para que las líneas se desplieguen */
+            box-sizing: border-box;
         }
         
         .dbms-item-wrapper {
-            position: absolute;
+            position: relative; /* Para poder posicionar la línea internamente si fuera necesario */
             display: flex;
             align-items: center;
+            margin-bottom: 0.5rem; /* Espacio entre los elementos */
+            width: max-content; /* Ajustar al contenido para no ocupar todo el ancho */
+        }
+        .dbms-item-wrapper:last-of-type {
+            margin-bottom: 0;
         }
 
         .dbms-name-btn {
@@ -329,59 +338,50 @@
             line-height: 1;
         }
 
-        /* Líneas curvas */
+        /* Líneas curvadas - estas serán dibujadas por SVG */
         .line {
-            position: absolute;
-            height: 3px; /* Grosor de la línea */
-            background-color: transparent; /* El color se asignará por JS o clases */
-            z-index: 5;
-            left: 50%; /* Punto de origen para todas las líneas */
-            top: 95px; /* Altura del nodo central */
-            transform-origin: 0 0; /* Punto de pivote para rotación */
+            display: none; /* Ocultamos los divs de línea ya que usaremos SVG */
         }
-
-        /* Colores específicos para cada línea (se sobrescriben con JS) */
-        .line.oracle { background-color: var(--line-color-oracle); }
-        .line.mysql { background-color: var(--line-color-mysql); }
-        .line.mssql { background-color: var(--line-color-mssql); }
-        .line.postgres { background-color: var(--line-color-postgres); }
-        .line.db2 { background-color: var(--line-color-db2); }
-        .line.sqlite { background-color: var(--line-color-sqlite); }
-        .line.mariadb { background-color: var(--line-color-mariadb); }
-        .line.mongo { background-color: var(--line-color-mongo); }
-        .line.redis { background-color: var(--line-color-redis); }
-        .line.cassandra { background-color: var(--line-color-cassandra); }
 
         /* Llave NoSQL */
         .nosql-brace-group {
             position: absolute;
-            right: 0; /* Ajusta la posición horizontal de la llave */
-            top: 485px; /* Ajusta para que la llave abarque los 3 NoSQL */
+            right: 15px; /* Más cerca del borde del contenedor */
+            top: 50%; /* Centrado vertical */
+            transform: translateY(-50%); /* Centrado exacto */
             display: flex;
-            align-items: flex-start;
+            align-items: center; /* Alineación vertical */
+            height: 100%; /* Para que la llave pueda abarcar los elementos */
+            pointer-events: none; /* Para no interferir con clics */
             z-index: 7;
         }
 
         .nosql-brace {
+            position: relative;
             width: 20px;
-            height: 140px; /* Ajusta la altura para abarcar los 3 elementos NoSQL */
+            min-height: 180px; /* Ajusta la altura mínima para la llave */
             border-right: 3px solid var(--primary-color);
             border-top: 3px solid var(--primary-color);
             border-bottom: 3px solid var(--primary-color);
-            border-radius: 0 10px 10px 0; /* Curva a la derecha */
-            position: relative;
-            margin-right: 10px; /* Espacio entre la llave y el texto "NoSQL" */
+            border-top-right-radius: 10px; 
+            border-bottom-right-radius: 10px;
+            margin-right: 50px; /* Espacio entre la llave y el texto "NoSQL" */
+            display: flex; /* Para centrar el texto NoSQL */
+            align-items: center;
+            justify-content: center;
         }
         .nosql-brace::before {
             content: 'NoSQL';
             position: absolute;
-            top: 50%;
-            right: -60px; /* Ajusta para que "NoSQL" esté al lado de la llave */
-            transform: translateY(-50%);
+            left: 100%; /* Coloca el texto a la derecha de la llave */
+            transform: rotate(-90deg) translateX(-50%); /* Rota para que el texto sea vertical */
+            transform-origin: 0 0;
             font-weight: bold;
             color: var(--primary-color);
             font-size: 1.1rem;
             white-space: nowrap;
+            top: 50%; /* Centrar el texto en la altura de la llave */
+            left: calc(100% + 20px); /* Ajusta la posición para que esté más a la derecha */
         }
         
         /* --- CSS para el Sistema de Modales --- */
@@ -563,53 +563,43 @@
                                 </p>
                                 
                                 <div class="mindmap-diagram-container">
-                                    <div class="mindmap-center-node">DBMS populares</div>
+                                    <div class="mindmap-center-node" id="center-node">DBMS populares</div>
                                     
                                     <div class="dbms-list-container">
-                                        <div class="dbms-item-wrapper" style="top: 0px; left: 60%; /* Ajusta la posición de cada elemento */">
-                                            <div class="line oracle" id="line-oracle"></div>
+                                        <div class="dbms-item-wrapper" data-dbms-name="oracle">
                                             <button class="dbms-name-btn" onclick="openModal('modal-oracle')"><span>🐘</span>Oracle Database</button>
                                         </div>
-                                        <div class="dbms-item-wrapper" style="top: 50px; left: 60%;">
-                                            <div class="line mysql" id="line-mysql"></div>
+                                        <div class="dbms-item-wrapper" data-dbms-name="mysql">
                                             <button class="dbms-name-btn" onclick="openModal('modal-mysql')"><span>🐬</span>MySQL</button>
                                         </div>
-                                        <div class="dbms-item-wrapper" style="top: 100px; left: 60%;">
-                                            <div class="line mssql" id="line-mssql"></div>
+                                        <div class="dbms-item-wrapper" data-dbms-name="mssql">
                                             <button class="dbms-name-btn" onclick="openModal('modal-mssql')"><span>🪟</span>Microsoft SQL Server</button>
                                         </div>
-                                        <div class="dbms-item-wrapper" style="top: 150px; left: 60%;">
-                                            <div class="line postgres" id="line-postgres"></div>
+                                        <div class="dbms-item-wrapper" data-dbms-name="postgres">
                                             <button class="dbms-name-btn" onclick="openModal('modal-postgres')"><span>🐘</span>PostgreSQL</button>
                                         </div>
-                                        <div class="dbms-item-wrapper" style="top: 200px; left: 60%;">
-                                            <div class="line db2" id="line-db2"></div>
+                                        <div class="dbms-item-wrapper" data-dbms-name="db2">
                                             <button class="dbms-name-btn" onclick="openModal('modal-db2')"><span>💻</span>IBM DB2</button>
                                         </div>
-                                        <div class="dbms-item-wrapper" style="top: 250px; left: 60%;">
-                                            <div class="line sqlite" id="line-sqlite"></div>
+                                        <div class="dbms-item-wrapper" data-dbms-name="sqlite">
                                             <button class="dbms-name-btn" onclick="openModal('modal-sqlite')"><span>🪶</span>SQLite</button>
                                         </div>
-                                        <div class="dbms-item-wrapper" style="top: 300px; left: 60%;">
-                                            <div class="line mariadb" id="line-mariadb"></div>
+                                        <div class="dbms-item-wrapper" data-dbms-name="mariadb">
                                             <button class="dbms-name-btn" onclick="openModal('modal-mariadb')"><span>🌊</span>MariaDB</button>
                                         </div>
                                         
-                                        <div class="dbms-item-wrapper" style="top: 400px; left: 60%;">
-                                            <div class="line mongo" id="line-mongo"></div>
+                                        <div class="dbms-item-wrapper" data-dbms-name="mongo">
                                             <button class="dbms-name-btn" onclick="openModal('modal-mongo')"><span>🍃</span>MongoDB</button>
                                         </div>
-                                        <div class="dbms-item-wrapper" style="top: 450px; left: 60%;">
-                                            <div class="line redis" id="line-redis"></div>
+                                        <div class="dbms-item-wrapper" data-dbms-name="redis">
                                             <button class="dbms-name-btn" onclick="openModal('modal-redis')"><span>🟥</span>Redis</button>
                                         </div>
-                                        <div class="dbms-item-wrapper" style="top: 500px; left: 60%;">
-                                            <div class="line cassandra" id="line-cassandra"></div>
+                                        <div class="dbms-item-wrapper" data-dbms-name="cassandra">
                                             <button class="dbms-name-btn" onclick="openModal('modal-cassandra')"><span>🏛️</span>Cassandra</button>
                                         </div>
                                     </div>
 
-                                    <div class="nosql-brace-group">
+                                    <div class="nosql-brace-group" id="nosql-brace-group">
                                         <div class="nosql-brace"></div>
                                     </div>
                                 </div>
@@ -934,84 +924,116 @@
             }
 
             // --- Lógica para dibujar las líneas del mindmap con SVG ---
-            // Esta función se moverá al final del script para asegurar que el DOM esté cargado
-
             function drawMindmapLines() {
-                const centerNode = document.querySelector('.mindmap-center-node');
-                if (!centerNode) return;
+                // Remove existing SVG to redraw
+                const existingSvg = document.querySelector('.mindmap-diagram-container svg');
+                if (existingSvg) existingSvg.remove();
 
-                const centerRect = centerNode.getBoundingClientRect();
-                const centerMidX = centerRect.left + centerRect.width / 2;
-                const centerMidY = centerRect.top + centerRect.height / 2;
-
+                const diagramContainer = document.querySelector('.mindmap-diagram-container');
+                const centerNode = document.getElementById('center-node');
                 const dbmsItems = document.querySelectorAll('.dbms-item-wrapper');
-                const svgContainer = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-                svgContainer.setAttribute('width', '100%');
-                svgContainer.setAttribute('height', '100%');
-                svgContainer.style.position = 'absolute';
-                svgContainer.style.top = '0';
-                svgContainer.style.left = '0';
-                svgContainer.style.zIndex = '4'; // Detrás de los botones
+                const nosqlBraceGroup = document.getElementById('nosql-brace-group');
 
-                document.querySelector('.mindmap-diagram-container').appendChild(svgContainer);
+                if (!diagramContainer || !centerNode || dbmsItems.length === 0 || !nosqlBraceGroup) return;
 
+                const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.setAttribute('width', '100%');
+                svg.setAttribute('height', '100%');
+                svg.style.position = 'absolute';
+                svg.style.top = '0';
+                svg.style.left = '0';
+                svg.style.zIndex = '4';
+                diagramContainer.prepend(svg); // Agrega SVG al inicio para que esté debajo de los elementos
+
+                const containerRect = diagramContainer.getBoundingClientRect();
+                const centerRect = centerNode.getBoundingClientRect();
+
+                const centerPoint = {
+                    x: centerRect.left + centerRect.width / 2 - containerRect.left,
+                    y: centerRect.top + centerRect.height / 2 - containerRect.top
+                };
+
+                // Dibuja las líneas para cada DBMS
                 dbmsItems.forEach(item => {
                     const itemBtn = item.querySelector('.dbms-name-btn');
                     if (!itemBtn) return;
 
                     const itemRect = itemBtn.getBoundingClientRect();
-                    const itemMidX = itemRect.left; // Queremos que la línea llegue al inicio del botón
-                    const itemMidY = itemRect.top + itemRect.height / 2;
-
-                    // Ajustar coordenadas relativas al SVG
-                    const startX = centerMidX - svgContainer.getBoundingClientRect().left;
-                    const startY = centerMidY - svgContainer.getBoundingClientRect().top;
-                    const endX = itemMidX - svgContainer.getBoundingClientRect().left;
-                    const endY = itemMidY - svgContainer.getBoundingClientRect().top;
+                    const itemPoint = {
+                        x: itemRect.left - containerRect.left,
+                        y: itemRect.top + itemRect.height / 2 - containerRect.top
+                    };
 
                     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
                     path.setAttribute('fill', 'none');
                     path.setAttribute('stroke-width', '3');
                     path.setAttribute('stroke-linecap', 'round');
 
-                    // Obtener el color de la línea desde el CSS
-                    let lineColor;
-                    if (item.querySelector('.line.oracle')) lineColor = getComputedStyle(document.documentElement).getPropertyValue('--line-color-oracle').trim();
-                    else if (item.querySelector('.line.mysql')) lineColor = getComputedStyle(document.documentElement).getPropertyValue('--line-color-mysql').trim();
-                    else if (item.querySelector('.line.mssql')) lineColor = getComputedStyle(document.documentElement).getPropertyValue('--line-color-mssql').trim();
-                    else if (item.querySelector('.line.postgres')) lineColor = getComputedStyle(document.documentElement).getPropertyValue('--line-color-postgres').trim();
-                    else if (item.querySelector('.line.db2')) lineColor = getComputedStyle(document.documentElement).getPropertyValue('--line-color-db2').trim();
-                    else if (item.querySelector('.line.sqlite')) lineColor = getComputedStyle(document.documentElement).getPropertyValue('--line-color-sqlite').trim();
-                    else if (item.querySelector('.line.mariadb')) lineColor = getComputedStyle(document.documentElement).getPropertyValue('--line-color-mariadb').trim();
-                    else if (item.querySelector('.line.mongo')) lineColor = getComputedStyle(document.documentElement).getPropertyValue('--line-color-mongo').trim();
-                    else if (item.querySelector('.line.redis')) lineColor = getComputedStyle(document.documentElement).getPropertyValue('--line-color-redis').trim();
-                    else if (item.querySelector('.line.cassandra')) lineColor = getComputedStyle(document.documentElement).getPropertyValue('--line-color-cassandra').trim();
+                    // Get line color from CSS variables based on data-dbms-name
+                    const dbmsName = item.dataset.dbmsName;
+                    let lineColor = getComputedStyle(document.documentElement).getPropertyValue(`--line-color-${dbmsName}`).trim();
+                    path.setAttribute('stroke', lineColor || '#ccc');
 
-                    path.setAttribute('stroke', lineColor || '#ccc'); // Fallback color
+                    // Define control points for a smooth curve
+                    // This creates an S-like curve, going slightly right then down/up to the item
+                    const controlX1 = centerPoint.x + 50; // Move right from center
+                    const controlY1 = centerPoint.y;
+                    const controlX2 = itemPoint.x - 50; // Move left before hitting the item
+                    const controlY2 = itemPoint.y;
 
-                    // Creamos una curva que se asemeja a la imagen
-                    // La curva empieza desde el centro del nodo, va hacia la derecha y luego baja o sube a la posición del item
-                    const controlX1 = startX + 50; // Punto de control para la curva horizontal
-                    const controlY1 = startY;
-                    const controlX2 = startX + 50;
-                    const controlY2 = endY;
-                    
-                    const d = `M ${startX},${startY} C ${controlX1},${controlY1} ${controlX2},${controlY2} ${endX},${endY}`;
+                    const d = `M ${centerPoint.x},${centerPoint.y} C ${controlX1},${controlY1} ${controlX2},${controlY2} ${itemPoint.x},${itemPoint.y}`;
                     path.setAttribute('d', d);
-                    svgContainer.appendChild(path);
+                    svg.appendChild(path);
                 });
+
+                // Ajustar la posición de la llave NoSQL después de que los elementos estén renderizados
+                const mongoItem = document.querySelector('[data-dbms-name="mongo"]');
+                const cassandraItem = document.querySelector('[data-dbms-name="cassandra"]');
+
+                if (mongoItem && cassandraItem) {
+                    const mongoRect = mongoItem.getBoundingClientRect();
+                    const cassandraRect = cassandraItem.getBoundingClientRect();
+
+                    const topOfBrace = mongoRect.top + mongoRect.height / 2 - containerRect.top;
+                    const bottomOfBrace = cassandraRect.top + cassandraRect.height / 2 - containerRect.top;
+                    const braceHeight = bottomOfBrace - topOfBrace;
+
+                    const braceElement = nosqlBraceGroup.querySelector('.nosql-brace');
+                    if (braceElement) {
+                        braceElement.style.height = `${braceHeight}px`;
+                        nosqlBraceGroup.style.top = `${topOfBrace}px`;
+                        nosqlBraceGroup.style.transform = `none`; // Remove transform since we are setting top directly
+                    }
+                }
             }
 
-            // Para que las líneas se dibujen correctamente, necesitamos esperar a que el layout se asiente.
-            // Se puede llamar después de un pequeño retraso o en eventos de redimensionamiento.
-            setTimeout(drawMindmapLines, 100); 
-            window.addEventListener('resize', () => {
-                // Eliminar el SVG existente y redibujar
-                const existingSvg = document.querySelector('.mindmap-diagram-container svg');
-                if (existingSvg) existingSvg.remove();
-                drawMindmapLines();
-            });
+            // Llamar a drawMindmapLines después de que el DOM esté completamente cargado y renderizado
+            const debounce = (func, delay) => {
+                let timeout;
+                return function(...args) {
+                    const context = this;
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => func.apply(context, args), delay);
+                };
+            };
 
+            const debouncedDrawMindmapLines = debounce(drawMindmapLines, 150); // Pequeño retraso para asegurar el renderizado
+
+            // Llama la función cuando la ventana se carga o se redimensiona
+            window.addEventListener('load', debouncedDrawMindmapLines);
+            window.addEventListener('resize', debouncedDrawMindmapLines);
+            
+            // También al cambiar de slide por si acaso los elementos no están visibles
+            const carouselObserver = new MutationObserver((mutationsList) => {
+                for (let mutation of mutationsList) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        if (mutation.target.classList.contains('active')) {
+                            debouncedDrawMindmapLines();
+                        }
+                    }
+                }
+            });
+            slides.forEach(slide => carouselObserver.observe(slide, { attributes: true }));
         });
     </script>
 </body>
