@@ -69,7 +69,6 @@
             margin-top: 0.5rem;
         }
 
-        /* --- CSS para Pestañas (Tabs) --- */
         .tab-navigation {
             display: flex;
             flex-wrap: wrap; 
@@ -98,7 +97,6 @@
             border-color: var(--primary-color);
         }
         
-        /* --- CSS para Carrusel de Apuntes --- */
         .carousel-container { position: relative; }
         .carousel-viewport { 
             overflow: hidden; 
@@ -117,12 +115,12 @@
             opacity: 0; 
             transform: translateY(20px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-            display: none; /* (NUEVO) Oculta slides inactivos */
+            display: none;
         }
         .slide.active {
             opacity: 1;
             transform: none;
-            display: block; /* (NUEVO) Muestra solo slide activo */
+            display: block;
         }
         
         .slide-header {
@@ -151,7 +149,6 @@
             margin: 0.25rem 0 0 0;
             font-style: italic;
         }
-        /* (CSS ACTUALIZADO) Estilos para el contenido del slide */
         .slide-content h3 {
             color: var(--dark-blue);
             font-size: 1.3rem;
@@ -181,7 +178,6 @@
         .carousel-btn.next { right: 10px; }
         .carousel-btn.hidden { opacity: 0; pointer-events: none; }
         
-        /* --- (NUEVO) CSS AÑADIDO para Tarjetas, Diagrama y Columnas --- */
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -211,22 +207,6 @@
             line-height: 1.6;
             color: var(--secondary-text);
             margin: 0;
-        }
-
-        .db-diagram-box {
-            padding: 1rem;
-            background-color: var(--white);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            margin-top: 1rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-        .db-diagram-box img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
         }
         
         .methodology-grid {
@@ -269,7 +249,82 @@
                 grid-template-columns: 1fr;
             }
         }
-        /* --- FIN CSS Nuevo --- */
+        
+        /* --- (NUEVO) CSS para la Cuadrícula de Botones DBMS --- */
+        .dbms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .dbms-btn {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            line-height: 1.3;
+        }
+        .dbms-btn span { /* Emoji */
+            font-size: 1.5rem;
+        }
+        .dbms-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-color: var(--primary-color);
+        }
+        /* --- FIN CSS Cuadrícula --- */
+
+        /* --- (NUEVO) CSS para el Sistema de Modales --- */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0; top: 0;
+            width: 100%; height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+        .modal-content {
+            background-color: #fff; 
+            margin: 10% auto; 
+            padding: 2rem 2.5rem;
+            border-radius: 10px; 
+            max-width: 600px; 
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border-top: 5px solid var(--primary-color);
+        }
+        .modal-content h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+        .modal-content p {
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        .close-btn {
+            color: #aaa; 
+            float: right; 
+            font-size: 28px; 
+            font-weight: bold; 
+            cursor: pointer;
+            line-height: 1;
+        }
+        .close-btn:hover, .close-btn:focus { color: black; }
+        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+        /* --- FIN CSS Modales --- */
 
         .animate-on-scroll {
             opacity: 0;
@@ -368,10 +423,21 @@
                                 
                                 <h3 style="margin-top: 2.5rem;">DBMS Populares (El Ecosistema) 🌎</h3>
                                 <p>
-                                    "DBMS" significa "Sistema Gestor de Bases de Datos". Es el software específico que usamos.
+                                    "DBMS" significa "Sistema Gestor de Bases de Datos". Es el software específico que usamos. Haz clic en uno para ver sus detalles:
                                 </p>
-                                <div class="db-diagram-box">
-                                                                    </div>
+                                
+                                <div class="dbms-grid">
+                                    <button class="dbms-btn" onclick="openModal('modal-oracle')"><span>🐘</span>Oracle</button>
+                                    <button class="dbms-btn" onclick="openModal('modal-mysql')"><span>🐬</span>MySQL</button>
+                                    <button class="dbms-btn" onclick="openModal('modal-mssql')"><span>🪟</span>MS SQL Server</button>
+                                    <button class="dbms-btn" onclick="openModal('modal-postgres')"><span>🐘</span>PostgreSQL</button>
+                                    <button class="dbms-btn" onclick="openModal('modal-db2')"><span>💻</span>IBM DB2</button>
+                                    <button class="dbms-btn" onclick="openModal('modal-sqlite')"><span>🪶</span>SQLite</button>
+                                    <button class="dbms-btn" onclick="openModal('modal-mariadb')"><span>🌊</span>MariaDB</button>
+                                    <button class="dbms-btn" onclick="openModal('modal-mongo')"><span>🍃</span>MongoDB</button>
+                                    <button class="dbms-btn" onclick="openModal('modal-redis')"><span>🟥</span>Redis</button>
+                                    <button class="dbms-btn" onclick="openModal('modal-cassandra')"><span>🏛️</span>Cassandra</button>
+                                </div>
                             </div>
                         </div>
                         <div class="slide">
@@ -509,7 +575,87 @@
             </div>
         </div>
     </div>
-
+    
+    <div id="modal-oracle" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-oracle')">&times;</span>
+            <h3>🐘 Oracle Database</h3>
+            <p>Conocido por su robustez y ampliamente utilizado en grandes empresas para manejar grandes volúmenes de datos y transacciones complejas.</p>
+        </div>
+    </div>
+    
+    <div id="modal-mysql" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-mysql')">&times;</span>
+            <h3>🐬 MySQL</h3>
+            <p>Es un sistema de gestión de bases de datos relacional de código abierto muy popular, especialmente en aplicaciones web y como parte de la pila LAMP (Linux, Apache, MySQL, PHP/Python/Perl).</p>
+        </div>
+    </div>
+    
+    <div id="modal-mssql" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-mssql')">&times;</span>
+            <h3>🪟 Microsoft SQL Server</h3>
+            <p>Un producto de Microsoft, es muy utilizado en entornos empresariales, especialmente aquellos que dependen de otros productos de software de Microsoft.</p>
+        </div>
+    </div>
+    
+    <div id="modal-postgres" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-postgres')">&times;</span>
+            <h3>🐘 PostgreSQL</h3>
+            <p>Un sistema de gestión de bases de datos relacional de código abierto que se destaca por su conformidad con los estándares y su soporte para características avanzadas.</p>
+        </div>
+    </div>
+    
+    <div id="modal-db2" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-db2')">&times;</span>
+            <h3>💻 IBM DB2</h3>
+            <p>Utilizado principalmente por empresas para almacenar y recuperar datos en entornos de mainframe y servidores.</p>
+        </div>
+    </div>
+    
+    <div id="modal-sqlite" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-sqlite')">&times;</span>
+            <h3>🪶 SQLite</h3>
+            <p>Es una biblioteca en lenguaje C que proporciona un sistema de gestión de bases de datos relacional ligero y sin servidor, muy utilizado en aplicaciones móviles y de escritorio.</p>
+        </div>
+    </div>
+    
+    <div id="modal-mariadb" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-mariadb')">&times;</span>
+            <h3>🌊 MariaDB</h3>
+            <p>Un fork de MySQL, creado por los desarrolladores originales de MySQL y diseñado para mantener la compatibilidad y mejorar el rendimiento.</p>
+        </div>
+    </div>
+    
+    <div id="modal-mongo" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-mongo')">&times;</span>
+            <h3>🍃 MongoDB</h3>
+            <p>Una de las bases de datos NoSQL más populares, utiliza un formato de almacenamiento de tipo documento y es conocida por su flexibilidad y escalabilidad.</p>
+        </div>
+    </div>
+    
+    <div id="modal-redis" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-redis')">&times;</span>
+            <h3>🟥 Redis</h3>
+            <p>Un almacén de estructura de datos en memoria, utilizado como base de datos, caché y agente de mensajes. Es conocido por su rapidez y se utiliza en situaciones donde se requiere un acceso rápido a los datos.</p>
+        </div>
+    </div>
+    
+    <div id="modal-cassandra" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-cassandra')">&times;</span>
+            <h3>🏛️ Cassandra</h3>
+            <p>Un sistema de gestión de bases de datos NoSQL diseñado para manejar grandes cantidades de datos distribuidos en muchos servidores.</p>
+        </div>
+    </div>
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- Código de estrellas ---
@@ -562,16 +708,13 @@
             function updateCarousel() {
                 // 1. Mover el carrusel
                 track.style.transform = `translateX(-${currentIndex * 100}%)`;
-
                 // 2. Actualizar botones de carrusel
                 prevBtn.classList.toggle('hidden', currentIndex === 0);
                 nextBtn.classList.toggle('hidden', currentIndex === totalSlides - 1);
-
                 // 3. Actualizar la pestaña (tab) activa
                 tabs.forEach((tab, index) => {
                     tab.classList.toggle('active', index === currentIndex);
                 });
-                
                 // 4. Actualizar el slide activo (para animación y visibilidad)
                 slides.forEach((slide, index) => {
                     slide.classList.toggle('active', index === currentIndex);
@@ -600,6 +743,27 @@
             });
 
             updateCarousel();
+            
+            // --- (NUEVO) Lógica para Modales ---
+            
+            // (La función de cerrar se declara aquí para que los botones la puedan llamar)
+            window.openModal = function(modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) modal.style.display = "block";
+            }
+            
+            window.closeModal = function(modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) modal.style.display = "none";
+            }
+            
+            // Cierre al hacer clic fuera
+            window.onclick = function(event) {
+                if (event.target.classList.contains('modal')) {
+                    event.target.style.display = "none";
+                }
+            }
+            // --- FIN Lógica de Modales ---
         });
     </script>
 </body>
