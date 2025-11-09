@@ -3,265 +3,298 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apuntes de IA - José Hugo Meza</title>
+    <title>Apuntes de Ingeniería en Inteligencia Artificial</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary-color: #26447d; --dark-blue: #2c3e50; --light-gray: #f8f9fa;
-            --text-color: #343a40; --secondary-text: #6c757d; --white: #ffffff;
-            --border-color: #e9ecef;
+            --primary-color: #26447d; /* Azul oscuro */
+            --dark-blue: #2c3e50; /* Azul casi negro */
+            --light-gray: #f8f9fa; /* Gris muy claro */
+            --text-color: #343a40; /* Gris oscuro para el texto */
+            --secondary-text: #6c757d; /* Gris medio para texto secundario */
+            --white: #ffffff;
+            --border-color: #e9ecef; /* Color de borde ligero */
         }
-        body { 
-            font-family: 'Inter', sans-serif; line-height: 1.7; color: var(--text-color); 
-            margin: 0; padding: 2rem;
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            margin: 0;
+            padding: 2rem;
             background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop');
-            background-size: cover; background-position: center center; background-attachment: fixed;
-            overflow-x: hidden;
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            overflow-x: hidden; /* Evita scroll horizontal */
         }
+
         .shooting-stars {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; overflow: hidden; z-index: 1;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Las estrellas no deben interferir con clics */
+            overflow: hidden;
+            z-index: 1; /* Asegura que estén detrás del contenido */
         }
+
         .star {
-            position: absolute; background-color: var(--white); width: 2px; height: 2px;
-            border-radius: 50%; opacity: 0;
+            position: absolute;
+            background-color: var(--white);
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            opacity: 0; /* Empiezan invisibles */
             animation: 
                 star-fall var(--duration) linear var(--delay) infinite,
                 star-twinkle 2s ease-in-out var(--delay) infinite alternate;
         }
-        @keyframes star-fall { 0% { transform: translate(0, 0) scale(1); opacity: 0; } 10% { opacity: 1; } 100% { transform: translate(100vw, 100vh) scale(0.5); opacity: 0; } }
-        @keyframes star-twinkle { 0%, 100% { opacity: 0.8; } 50% { opacity: 0.3; } }
-        
-        .container-apuntes {
-            max-width: 1200px; margin: 0 auto; background-color: var(--white); 
-            padding: 2.5rem; border-radius: 12px; 
-            box-shadow: 0 8px 32px rgba(0,0,0,0.07); position: relative; z-index: 10;
+
+        @keyframes star-fall {
+            0% { transform: translate(0, 0) scale(1); opacity: 0; }
+            10% { opacity: 1; } /* Se hacen visibles brevemente */
+            100% { transform: translate(100vw, 100vh) scale(0.5); opacity: 0; }
         }
-        .back-link {
-            display: inline-block; color: var(--primary-color); text-decoration: none;
-            font-weight: bold; font-size: 1.1rem; margin-bottom: 1.5rem;
+
+        @keyframes star-twinkle {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.3; }
         }
-        .back-link:hover { text-decoration: underline; }
-        .apuntes-header {
-            text-align: center; margin-bottom: 1.5rem;
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            /* CAMBIO: Aclarar el fondo blanco con rgba */
+            background-color: rgba(255, 255, 255, 0.8); 
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+            position: relative;
+            z-index: 10; /* Asegura que el contenido esté encima de las estrellas */
         }
-        .apuntes-header h2 {
-            color: var(--primary-color); font-size: 2.2rem; margin: 0;
-            display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+
+        .main-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1.5rem;
         }
-        .carousel-container { position: relative; margin-top: 2rem; }
-        .carousel-viewport { overflow: hidden; border-radius: 12px; border: 1px solid var(--border-color); background-color: #fdfdfd; }
-        .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); }
-        .slide {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
-            flex: 0 0 100%; padding: 1.5rem; box-sizing: border-box; 
+
+        .main-header h1 {
+            color: var(--primary-color);
+            font-size: 2.8rem;
+            line-height: 1.3;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
         }
-        .semester-card {
-            background-color: var(--white); border: 1px solid var(--border-color);
-            padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            opacity: 0; transform: translateY(50px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+
+        .main-header h1 span {
+            font-size: 3.5rem;
+            line-height: 1;
         }
-        .semester-card h3 {
-            font-size: 0.9rem; color: var(--secondary-text); text-transform: uppercase;
-            letter-spacing: 0.5px; margin: 0 0 1.5rem 0;
-            border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;
+
+        .main-header p {
+            font-size: 1.2rem;
+            color: var(--secondary-text);
+            margin-top: 0.75rem;
+            font-style: italic;
         }
-        .subject-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem; }
-        .subject-list li a {
-            display: block; text-decoration: none; color: var(--text-color);
-            font-weight: 500; font-size: 1rem; padding: 0.75rem;
-            border-radius: 6px; transition: all 0.2s ease;
+
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
         }
-        .subject-list li a:hover { background-color: var(--light-gray); color: var(--primary-color); transform: translateX(4px); }
-        .carousel-btn {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.9); border: 1px solid var(--border-color);
-            border-radius: 50%; width: 44px; height: 44px; font-size: 1.5rem;
-            color: var(--primary-color); cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: all 0.2s ease; z-index: 20;
+
+        .module-card {
+            background-color: var(--light-gray);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
         }
-        .carousel-btn:hover { background-color: var(--white); transform: translateY(-50%) scale(1.05); }
-        .carousel-btn.prev { left: -22px; }
-        .carousel-btn.next { right: -22px; }
-        .carousel-btn.hidden { opacity: 0; pointer-events: none; }
-        @media (max-width: 992px) { .slide { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 768px) { .slide { grid-template-columns: 1fr; } .carousel-btn.prev { left: 5px; } .carousel-btn.next { right: 5px; } }
-        .show { opacity: 1; transform: none; }
+
+        .module-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .module-icon {
+            font-size: 3rem;
+            text-align: center;
+            padding: 1.5rem 0;
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .module-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .module-content h2 {
+            font-size: 1.6rem;
+            color: var(--dark-blue);
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+        }
+
+        .module-content p {
+            font-size: 1rem;
+            color: var(--secondary-text);
+            margin-bottom: 0;
+        }
+
+        /* Animación de entrada para elementos */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-on-scroll.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Media queries para responsividad */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            .container {
+                padding: 1.5rem;
+            }
+            .main-header h1 {
+                font-size: 2.2rem;
+            }
+            .main-header h1 span {
+                font-size: 3rem;
+            }
+            .main-header p {
+                font-size: 1rem;
+            }
+            .module-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="shooting-stars"></div> 
 
-    <div class="container-apuntes">
-        <a href="index.html" class="back-link">&larr; Volver al Portafolio Principal</a>
-        
-        <div class="carousel-container">
-            <div class="apuntes-header">
-                <h2><span>🤖</span>Ing. en Inteligencia Artificial</h2>
-            </div>
-            
-            <div class="carousel-viewport">
-                <div class="carousel-track" id="ia-track">
-                    <div class="slide">
-                        <div class="semester-card">
-                            <h3>Primer Cuatrimestre</h3>
-                            <ul class="subject-list">
-                                <li><a href="ia-intro-ingenieria-ia.html">Introducción a la Ingeniería en IA</a></li>
-                                <li><a href="ia-experiencia-usuario.html">Experiencia de Usuario</a></li>
-                                <li><a href="ia-tec-sociedad-1.html">Tecnología, Sociedad y Futuros Posibles I</a></li>
-                                <li><a href="ia-algoritmos.html">Análisis y Diseño de Algoritmos</a></li>
-                                <li><a href="ia-matematicas-ingenieria.html">Matemáticas para Ingeniería</a></li>
-                            </ul>
-                        </div>
-                        <div class="semester-card">
-                            <h3>Segundo Cuatrimestre</h3>
-                            <ul class="subject-list">
-                                <li><a href="ia-redes-computacionales.html">Fundamentos de Redes Computacionales</a></li>
-                                <li><a href="ia-probabilidad-estadistica.html">Probabilidad y Estadística</a></li>
-                                <li><a href="ia-tec-sociedad-2.html">Tecnología, Sociedad y Futuros Posibles II</a></li>
-                                <li><a href="ia-programacion-orientada-objetos.html">Programación Orientada a Objetos</a></li>
-                                <li><a href="ia-bases-de-datos.html">Bases de Datos</a></li>
-                            </ul>
-                        </div>
-                        <div class="semester-card">
-                            <h3>Tercer Cuatrimestre</h3>
-                            <ul class="subject-list">
-                                <li><a href="ia-cloud-computing.html">Cloud Computing y Redes Virtuales</a></li>
-                                <li><a href="ia-ciencia-de-datos.html">Ciencia de Datos</a></li>
-                                <li><a href="ia-programacion-avanzada.html">Programación Avanzada</a></li>
-                                <li><a href="ia-algebra-lineal.html">Álgebra Lineal</a></li>
-                                <li><a href="ia-persona-sociedad.html">Persona y Sociedad</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="semester-card">
-                            <h3>Cuarto Cuatrimestre</h3>
-                            <ul class="subject-list">
-                                <li><a href="ia-arquitectura-software.html">Arquitectura y Patrones de Diseño</a></li>
-                                <li><a href="ia-inteligencia-artificial.html">Inteligencia Artificial</a></li>
-                                <li><a href="ia-desarrollo-web.html">Fundamentos de Desarrollo Web</a></li>
-                                <li><a href="ia-calculo-diferencial.html">Cálculo Diferencial</a></li>
-                                <li><a href="ia-mundo-contemporaneo.html">Mundo Contemporáneo</a></li>
-                            </ul>
-                        </div>
-                        <div class="semester-card">
-                            <h3>Quinto Cuatrimestre</h3>
-                            <ul class="subject-list">
-                                <li><a href="ia-sistemas-operativos.html">Adm. de Sistemas Operativos y Servidores</a></li>
-                                <li><a href="ia-machine-learning.html">Aprendizaje de Máquina</a></li>
-                                <li><a href="ia-backend.html">Desarrollo Web Back-end</a></li>
-                                <li><a href="ia-calculo-integral.html">Cálculo Integral</a></li>
-                                <li><a href="ia-comunicacion.html">Comunicación Oral y Escrita</a></li>
-                            </ul>
-                        </div>
-                        <div class="semester-card">
-                            <h3>Sexto Cuatrimestre</h3>
-                            <ul class="subject-list">
-                                <li><a href="ia-pruebas-software.html">Pruebas Unitarias y Funcionales de Software</a></li>
-                                <li><a href="ia-deep-learning.html">Sistemas de Aprendizaje Profundo</a></li>
-                                <li><a href="ia-analisis-datos.html">Análisis y Procesamiento de Datos</a></li>
-                                <li><a href="ia-open-source-ia.html">Código Abierto para Inteligencia Artificial</a></li>
-                                <li><a href="ia-ecuaciones-diferenciales.html">Ecuaciones Diferenciales</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="semester-card">
-                            <h3>Séptimo Cuatrimestre</h3>
-                            <ul class="subject-list">
-                                <li><a href="ia-devops.html">Herramientas para DevOps</a></li>
-                                <li><a href="ia-nlp.html">Lenguaje Natural</a></li>
-                                <li><a href="ia-mineria-datos.html">Minería de Datos</a></li>
-                                <li><a href="ia-estadistica-bayesiana.html">Estadística Bayesiana</a></li>
-                                <li><a href="ia-derecho-digital.html">Derecho en el Mundo Digital</a></li>
-                            </ul>
-                        </div>
-                        <div class="semester-card">
-                            <h3>Octavo Cuatrimestre</h3>
-                            <ul class="subject-list">
-                                <li><a href="ia-arquitectura-producto.html">Arquitectura de Producto</a></li>
-                                <li><a href="ia-business-intelligence.html">Business Intelligence</a></li>
-                                <li><a href="ia-metodologias-agiles.html">Metodologías y Marcos de Trabajo Ágiles</a></li>
-                                <li><a href="ia-etica-digital.html">Ética en el Mundo Digital</a></li>
-                                <li><a href="ia-plan-de-vida.html">Plan de Vida y Carrera</a></li>
-                            </ul>
-                        </div>
-                        <div class="semester-card">
-                            <h3>Noveno Cuatrimestre</h3>
-                            <ul class="subject-list">
-                                <li><a href="ia-seminario.html">Seminario</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <button class="carousel-btn prev" id="ia-prev" aria-label="Anterior">&#10094;</button>
-            <button class="carousel-btn next" id="ia-next" aria-label="Siguiente">&#10095;</button>
+    <div class="container">
+        <div class="main-header animate-on-scroll">
+            <h1><span>🤖</span>Ing. en Inteligencia Artificial</h1>
+            <p>Apuntes del segundo cuatrimestre</p>
         </div>
-        
-    </div>
 
+        <div class="module-grid">
+            
+            <a href="ia-algoritmos-optimizacion.html" class="module-card animate-on-scroll" style="--delay: 100ms;">
+                <div class="module-icon">🧠</div>
+                <div class="module-content">
+                    <h2>Algoritmos de Optimización</h2>
+                    <p>Explora cómo las IA toman las mejores decisiones.</p>
+                </div>
+            </a>
+
+            <a href="ia-bases-de-datos.html" class="module-card animate-on-scroll" style="--delay: 200ms;">
+                <div class="module-icon">🗄️</div>
+                <div class="module-content">
+                    <h2>Bases de Datos</h2>
+                    <p>Aprende a estructurar y gestionar la información vital.</p>
+                </div>
+            </a>
+
+            <a href="ia-redes.html" class="module-card animate-on-scroll" style="--delay: 300ms;">
+                <div class="module-icon">🌐</div>
+                <div class="module-content">
+                    <h2>Redes y Conectividad</h2>
+                    <p>Conecta sistemas y datos para una IA distribuida.</p>
+                </div>
+            </a>
+
+            <a href="ia-sistemas-operativos.html" class="module-card animate-on-scroll" style="--delay: 400ms;">
+                <div class="module-icon">⚙️</div>
+                <div class="module-content">
+                    <h2>Sistemas Operativos</h2>
+                    <p>El terreno donde viven y respiran nuestras inteligencias.</p>
+                </div>
+            </a>
+
+            <a href="ia-programacion-avanzada.html" class="module-card animate-on-scroll" style="--delay: 500ms;">
+                <div class="module-icon">💻</div>
+                <div class="module-content">
+                    <h2>Programación Avanzada</h2>
+                    <p>Dominando lenguajes para construir el futuro de la IA.</p>
+                </div>
+            </a>
+
+            <a href="ia-metodologia-investigacion.html" class="module-card animate-on-scroll" style="--delay: 600ms;">
+                <div class="module-icon">🔬</div>
+                <div class="module-content">
+                    <h2>Metodología de la Investigación</h2>
+                    <p>La base científica para innovar y validar ideas en IA.</p>
+                </div>
+            </a>
+
+        </div>
+    </div>
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const shootingStarsContainer = document.querySelector('.shooting-stars');
-            const numStars = 110; 
-            for (let i = 0; i < numStars; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                star.style.left = `${Math.random() * 100}vw`; 
-                star.style.top = `${Math.random() * 100}vh`;
-                star.style.setProperty('--delay', `${Math.random() * 15}s`);
-                star.style.setProperty('--duration', `${5 + Math.random() * 8}s`);
-                shootingStarsContainer.appendChild(star);
-            }
-            
-            function setupCarousel(trackId, prevBtnId, nextBtnId) {
-                const track = document.getElementById(trackId);
-                const prevBtn = document.getElementById(prevBtnId);
-                const nextBtn = document.getElementById(nextBtnId);
-                
-                if (!track || !prevBtn || !nextBtn) return;
-
-                const slides = Array.from(track.children);
-                const totalSlides = slides.length;
-                let currentIndex = 0;
-
-                function updateSlidePosition() {
-                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-                }
-                function updateButtons() {
-                    prevBtn.classList.toggle('hidden', currentIndex === 0);
-                    nextBtn.classList.toggle('hidden', currentIndex === totalSlides - 1);
-                }
-                prevBtn.addEventListener('click', () => {
-                    if (currentIndex > 0) { currentIndex--; updateSlidePosition(); updateButtons(); }
-                });
-                nextBtn.addEventListener('click', () => {
-                    if (currentIndex < totalSlides - 1) { currentIndex++; updateSlidePosition(); updateButtons(); }
-                });
-                updateButtons();
-            }
-
-            // (JS ACTUALIZADO) Solo inicializa el carrusel de IA
-            setupCarousel('ia-track', 'ia-prev', 'ia-next');
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.transitionDelay = `${index * 50}ms`;
-                        entry.target.classList.add('show');
-                        observer.unobserve(entry.target);
+            // --- Código de estrellas ---
+            try {
+                const shootingStarsContainer = document.querySelector('.shooting-stars');
+                if (shootingStarsContainer) {
+                    const numStars = 400; // AUMENTADO: x40 más estrellas
+                    for (let i = 0; i < numStars; i++) {
+                        const star = document.createElement('div');
+                        star.classList.add('star');
+                        star.style.left = `${Math.random() * 100}vw`; 
+                        star.style.top = `${Math.random() * 100}vh`;
+                        star.style.setProperty('--delay', `${Math.random() * 15}s`);
+                        star.style.setProperty('--duration', `${5 + Math.random() * 8}s`);
+                        shootingStarsContainer.appendChild(star);
                     }
+                }
+            } catch (e) { console.error("Error al crear estrellas:", e); }
+            
+            // --- Código de Animación de Entrada ---
+            try {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry, index) => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.transitionDelay = `${index * 100}ms`;
+                            entry.target.classList.add('show');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 }); // Se activa cuando el 10% del elemento es visible
+                
+                const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+                elementsToAnimate.forEach((el) => observer.observe(el));
+            } catch (e) {
+                console.error("Error al crear IntersectionObserver:", e);
+                // Fallback para navegadores sin IntersectionObserver
+                document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                    el.classList.add('show');
                 });
-            }, { threshold: 0.1 });
-            const elementsToAnimate = document.querySelectorAll('.semester-card');
-            elementsToAnimate.forEach((el) => observer.observe(el));
+            }
         });
     </script>
 </body>
