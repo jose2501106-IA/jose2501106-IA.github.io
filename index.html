@@ -13,7 +13,7 @@
             --primary-color: #26447d; 
             --dark-blue: #2c3e50;
             --light-gray: #f8f9fa;
-            --text-color: #343a40;
+            --text-color: #343a40; /* Este color ahora será blanco para el texto flotante */
             --secondary-text: #6c757d;
             --white: #ffffff;
             --border-color: #e9ecef;
@@ -29,7 +29,8 @@
         body { 
             font-family: 'Inter', sans-serif; 
             line-height: 1.7; 
-            color: var(--text-color); 
+            /* (CAMBIO) Color de texto general ahora blanco para el fondo oscuro */
+            color: var(--white); 
             margin: 0; 
             padding: 2rem;
             background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop');
@@ -42,11 +43,12 @@
         .container { 
             max-width: 800px; 
             margin: 0 auto; 
-            /* (CAMBIO) Fondo aclarado para ver estrellas */
-            background-color: rgba(255, 255, 255, 0.85); 
+            /* (CAMBIO) Fondo del contenedor completamente transparente */
+            background-color: transparent; 
             padding: 2.5rem; 
             border-radius: 12px; 
-            box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+            /* (AJUSTE) Sombra más sutil o eliminada si no se ve bien en fondo oscuro */
+            box-shadow: none; 
             position: relative;
             z-index: 10;
         }
@@ -56,6 +58,8 @@
             align-items: center;
             margin-bottom: 2rem;
             flex-wrap: wrap; 
+            /* (CAMBIO) Asegurar que el texto del header también sea blanco */
+            color: var(--white);
         }
 
         .profile-photo {
@@ -64,24 +68,33 @@
             border-radius: 8px;
             margin-right: 2rem;
             object-fit: cover;
-            border: 3px solid var(--border-color);
+            /* (AJUSTE) Borde blanco para la foto de perfil si el fondo es oscuro */
+            border: 3px solid var(--white);
         }
 
-        h1 { font-size: 2.5rem; color: var(--dark-blue); margin: 0; }
-        .subtitle { font-size: 1.15rem; color: var(--secondary-text); margin-top: 0.25rem; font-weight: 400; }
-        p { font-size: 1.1rem; }
+        h1 { font-size: 2.5rem; color: var(--white); margin: 0; } /* (CAMBIO) Título principal blanco */
+        .subtitle { font-size: 1.15rem; color: rgba(255, 255, 255, 0.8); margin-top: 0.25rem; font-weight: 400; } /* (CAMBIO) Subtítulo blanco más sutil */
+        p { font-size: 1.1rem; color: var(--white); } /* (CAMBIO) Párrafos flotantes blancos */
 
         strong {
+            color: var(--white); /* (CAMBIO) strong en texto flotante también blanco */
+        }
+        /* Asegurar que el color de texto de los párrafos dentro de las secciones con fondo no cambie */
+        .section p {
+            color: var(--text-color); /* Restaura el color oscuro para párrafos dentro de secciones con fondo */
+        }
+        /* Y que el strong dentro de esas secciones también sea el color principal */
+        .section p strong {
             color: var(--primary-color);
         }
 
         .section {
             margin-top: 2.5rem;
-            border-top: 1px solid var(--border-color);
+            border-top: 1px solid rgba(255, 255, 255, 0.2); /* (AJUSTE) Línea divisoria más sutil */
             padding-top: 2rem;
         }
 
-        h2 { color: var(--primary-color); font-size: 1.8rem; margin-bottom: 1.5rem; }
+        h2 { color: var(--white); font-size: 1.8rem; margin-bottom: 1.5rem; } /* (CAMBIO) Títulos de sección blancos */
         
         .links a { 
             display: inline-block; 
@@ -110,9 +123,9 @@
         }
         .btn-primary-ghost {
             display: inline-block;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-            background-color: var(--white);
+            color: var(--white); /* (CAMBIO) Botón ghost con texto blanco */
+            border: 2px solid var(--white); /* (CAMBIO) Borde blanco */
+            background-color: transparent; /* Fondo transparente */
             text-decoration: none; 
             padding: 12px 28px; 
             border-radius: 8px; 
@@ -122,10 +135,10 @@
             box-sizing: border-box; 
         }
         .btn-primary-ghost:hover {
-            background-color: var(--primary-color);
-            color: var(--white);
+            background-color: var(--white); /* Fondo blanco al hover */
+            color: var(--primary-color); /* Texto primary-color al hover */
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(38, 68, 125, 0.4);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4); /* Sombra clara al hover */
         }
 
         .value-grid {
@@ -135,21 +148,25 @@
             text-align: center;
         }
         .value-item {
-            background-color: var(--light-gray);
+            /* (CAMBIO) Fondo de las tarjetas de valor ligeramente oscuro para contrastar */
+            background-color: rgba(0, 0, 0, 0.5); 
             padding: 1.5rem;
             border-radius: 8px;
+            /* (CAMBIO) Color de texto de los items de valor */
+            color: var(--white);
         }
         .value-icon {
             font-size: 2.5rem;
             margin-bottom: 1rem;
+            color: var(--white); /* Iconos blancos */
         }
         .value-item h3 {
             margin: 0 0 0.5rem 0;
-            color: var(--primary-color);
+            color: var(--primary-color); /* H3 mantiene el color primario */
         }
         .value-item p {
             font-size: 0.95rem;
-            color: var(--secondary-text);
+            color: rgba(255, 255, 255, 0.8); /* Párrafos más claros */
             line-height: 1.6;
         }
 
@@ -160,18 +177,19 @@
         }
 
         .skill {
-            background-color: var(--light-gray);
+            /* (CAMBIO) Fondo de las habilidades ligeramente oscuro */
+            background-color: rgba(0, 0, 0, 0.5); 
             padding: 1rem;
             border-radius: 8px;
             text-align: center;
             font-weight: bold;
-            color: var(--dark-blue);
+            color: var(--white); /* Texto de habilidad blanco */
             cursor: pointer;
             transition: background-color 0.2s ease, transform 0.2s ease;
         }
         
         .skill:hover {
-             background-color: #dde8f8;
+             background-color: rgba(38, 68, 125, 0.7); /* Hover a primary-color transparente */
              transform: translateY(-2px);
         }
         
@@ -181,11 +199,11 @@
             gap: 1rem;
         }
 
-        /* (CSS ACTUALIZADO) Estilos para las tarjetas de educación clicables */
         .education-item {
             display: block;
             text-decoration: none;
-            background-color: var(--light-gray);
+            /* (CAMBIO) Fondo de las tarjetas de educación ligeramente oscuro */
+            background-color: rgba(0, 0, 0, 0.5); 
             padding: 1.5rem;
             border-radius: 8px;
             border-left: 5px solid var(--primary-color);
@@ -193,18 +211,18 @@
         }
         .education-item:hover {
             transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
         
         .education-item h3 {
             margin: 0 0 0.25rem 0;
-            color: var(--dark-blue);
+            color: var(--white); /* Título de educación blanco */
         }
 
         .education-item p {
             margin: 0;
             font-size: 1rem;
-            color: var(--secondary-text);
+            color: rgba(255, 255, 255, 0.8); /* Párrafos de educación más claros */
         }
         
         .education-header {
@@ -222,14 +240,14 @@
             font-size: 0.9rem;
             font-weight: bold;
             color: var(--primary-color);
-            background-color: #dde8f8;
+            background-color: rgba(38, 68, 125, 0.3); /* Fondo del label de progreso */
             padding: 2px 8px;
             border-radius: 4px;
         }
 
         .progress-bar {
             width: 100%;
-            background-color: var(--border-color);
+            background-color: rgba(255, 255, 255, 0.2); /* Fondo de la barra de progreso */
             border-radius: 5px;
             height: 10px;
             margin-top: 1rem;
@@ -258,12 +276,12 @@
         .slide {
             flex: 0 0 100%;
             box-sizing: border-box;
-            background-color: var(--light-gray);
+            background-color: transparent; /* Fondo transparente para los slides */
         }
         .program-card {
             border-radius: 12px;
             padding: 2rem;
-            color: var(--text-color);
+            color: var(--dark-blue); /* Color de texto predeterminado para tarjetas de programa */
             min-height: 180px; 
             display: flex;
             flex-direction: column;
@@ -278,6 +296,7 @@
             font-size: 1rem;
             line-height: 1.6;
             margin: 0;
+            color: var(--text-color); /* Párrafos dentro de tarjetas de programa */
         }
         
         .program-card-one {
@@ -296,12 +315,17 @@
 
         .carousel-btn {
             position: absolute; top: 50%; transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.9); border: 1px solid var(--border-color);
+            background-color: rgba(255, 255, 255, 0.2); /* Botones de carrusel más sutiles */
+            border: 1px solid rgba(255, 255, 255, 0.4);
             border-radius: 50%; width: 44px; height: 44px; font-size: 1.5rem;
-            color: var(--primary-color); cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            color: var(--white); /* Color de flecha blanco */
+            cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             transition: all 0.2s ease; z-index: 20;
         }
-        .carousel-btn:hover { background-color: var(--white); transform: translateY(-50%) scale(1.05); }
+        .carousel-btn:hover { 
+            background-color: rgba(255, 255, 255, 0.4); 
+            transform: translateY(-50%) scale(1.05); 
+        }
         .carousel-btn.prev { left: 10px; }
         .carousel-btn.next { right: 10px; }
         .carousel-btn.hidden { opacity: 0; pointer-events: none; }
@@ -343,13 +367,21 @@
         
         .modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0;
-            width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5);
+            width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7); /* Fondo modal más oscuro */
             animation: fadeIn 0.3s;
         }
         .modal-content {
-            background-color: #fff; margin: 15% auto; padding: 25px;
+            background-color: var(--white); /* Contenido del modal sigue siendo blanco */
+            margin: 15% auto; padding: 25px;
             border-radius: 10px; max-width: 500px; position: relative;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            color: var(--text-color); /* Asegurar que el texto dentro del modal sea oscuro */
+        }
+        .modal-content h3 {
+            color: var(--primary-color);
+        }
+        .modal-content p {
+            color: var(--text-color);
         }
         .close-btn {
             color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;
@@ -358,7 +390,8 @@
         
         footer {
             text-align: center; margin-top: 2.5rem; padding-top: 1.5rem;
-            border-top: 1px solid var(--border-color); color: var(--secondary-text);
+            border-top: 1px solid rgba(255, 255, 255, 0.2); /* (AJUSTE) Borde del footer sutil */
+            color: rgba(255, 255, 255, 0.7); /* Texto del footer más claro */
             font-size: 0.9rem;
         }
 
@@ -587,7 +620,6 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const shootingStarsContainer = document.querySelector('.shooting-stars');
-            // (CAMBIO) Número de estrellas aumentado
             const numStars = 440; 
             for (let i = 0; i < numStars; i++) {
                 const star = document.createElement('div');
