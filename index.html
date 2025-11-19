@@ -78,8 +78,11 @@
         p { font-size: 1.1rem; color: var(--white); }
 
         strong { color: var(--white); }
-        .section p { color: var(--text-color); }
-        .section p strong { color: var(--primary-color); }
+        
+        /* CORRECCIÓN 2: Párrafos de la sección en blanco */
+        .section p { color: var(--white); } 
+        /* CORRECCIÓN 2: Negritas de la sección en blanco */
+        .section p strong { color: var(--white); } 
 
         .section {
             margin-top: 2.5rem;
@@ -133,7 +136,7 @@
             box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
         }
 
-        /* Value Grid OPTIMIZADO */
+        /* Value Grid (Manteniendo el énfasis en azul para los conceptos clave) */
         .value-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -147,11 +150,6 @@
             color: var(--white);
             border-left: 4px solid var(--primary-color);
         }
-        .value-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--white); 
-        }
         .value-item h3 {
             margin: 0 0 0.5rem 0;
             color: var(--white); 
@@ -161,8 +159,9 @@
             color: var(--white); 
             line-height: 1.6;
         }
+        /* Énfasis en el Value Grid en azul (primario) */
         .value-item p strong {
-            color: var(--white);
+            color: var(--primary-color);
         }
         
         .skills-grid {
@@ -348,6 +347,28 @@
         .section ul li strong {
              color: var(--white);
         }
+        /* CSS para el Modal Personalizado */
+        #passwordInput {
+            width: 90%; 
+            padding: 10px; 
+            margin-bottom: 15px; 
+            border: 1px solid #ccc; 
+            border-radius: 4px;
+            box-sizing: border-box; 
+            color: var(--dark-blue); 
+        }
+        .modal-content button {
+            background-color: var(--primary-color); 
+            color: var(--white); 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .modal-content button:hover {
+            background-color: var(--dark-blue);
+        }
     </style>
 </head>
 <body>
@@ -385,8 +406,8 @@
                 </div>
                 <div class="value-item">
                     <div class="value-icon"></div>
-                    <h3>Gobernanza de Datos y *Green Lean* 🌱</h3>
-                    <p>Mi enfoque es <strong>Gobernanza como Green Lean</strong>: Elimino el <strong>desperdicio de Datos de Mala Calidad (Muda)</strong> en la fuente (Validación) para reducir los costos operacionales y el impacto de carbono del reprocesamiento de *pipelines*. Busco la <strong>veracidad en la fuente</strong>.</p>
+                    <h3>Gobernanza de Datos y <strong>Green Lean</strong> 🌱</h3>
+                    <p>Mi enfoque es <strong>Gobernanza como Green Lean</strong>: Elimino el <strong>desperdicio de Datos de Mala Calidad (Muda)</strong> en la fuente (Validación) para reducir los costos operacionales y el impacto de carbono del reprocesamiento de <strong>pipelines</strong>. Busco la <strong>veracidad en la fuente</strong>.</p>
                 </div>
             </div>
         </div>
@@ -421,7 +442,7 @@
         
         <div class="section animate-on-scroll fade-in-up">
             <h2>Mi Filosofía</h2>
-            <p>Aplico principios de <strong>Lean Six Sigma</strong> para la mejora de procesos, buscando eliminar ineficiencias y optimizar flujos de trabajo. Mi enfoque en el Gobierno de Datos se basa en la misma idea: tratar los datos de mala calidad como un "**desperdicio**" que debe ser erradicado para construir sistemas **robustos, eficientes y auditables**.</p>
+            <p>Aplico principios de <strong>Lean Six Sigma</strong> para la mejora de procesos, buscando eliminar ineficiencias y optimizar flujos de trabajo. Mi enfoque en el Gobierno de Datos se basa en la misma idea: tratar los datos de mala calidad como un "<strong>desperdicio</strong>" que debe ser erradicado para construir sistemas <strong>robustos, eficientes y auditables</strong>.</p>
         </div>
         
         <div class="section animate-on-scroll fade-in-up">
@@ -489,10 +510,10 @@
         <div class="section animate-on-scroll fade-in-up">
             <h2> Más Allá del Código</h2>
             <p>
-                Creo firmemente en la mejora continua, no solo en la tecnología, sino a nivel personal. Mi enfoque se basa en la introspección y la **resiliencia**; veo cada desafío como una oportunidad para aprender y levantarme más fuerte. Me impulsa un profundo deseo de encontrar la verdadera raíz de los problemas y construir soluciones que generen un impacto positivo y duradero.
+                Creo firmemente en la mejora continua, no solo en la tecnología, sino a nivel personal. Mi enfoque se basa en la introspección y la <strong>resiliencia</strong>; veo cada desafío como una oportunidad para aprender y levantarme más fuerte. Me impulsa un profundo deseo de encontrar la verdadera raíz de los problemas y construir soluciones que generen un impacto positivo y duradero.
             </p>
             <p>
-                Valoro la creación de entornos colaborativos y sanos, donde la conexión humana y la **autenticidad** son la base del éxito. Mi mayor motivación es hacer un trabajo que enorgullezca a mis mentores, mi familia y mi equipo.
+                Valoro la creación de entornos colaborativos y sanos, donde la conexión humana y la <strong>autenticidad</strong> son la base del éxito. Mi mayor motivación es hacer un trabajo que enorgullezca a mis mentores, mi familia y mi equipo.
             </p>
             
             <div class="links-center animate-on-scroll fade-in-up">
@@ -514,62 +535,57 @@
     <div id="colaboracion" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('colaboracion')">&times;</span> <h3>Trabajo Colaborativo</h3> <p>Entiendo que las mejores ideas surgen de la diversidad de perspectivas. Aunque trabajé solo en mi proyecto de automatización, me apoyé en comunidades en línea y pedí feedback para mejorar el código. Estoy convencido de que colaborar y compartir conocimiento es la forma más rápida de crecer.</p> </div> </div>
     <div id="curiosidad" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('curiosidad')">&times;</span> <h3>Curiosidad por Datos</h3> <p>Mi curiosidad va más allá de los números; busco el "porqué" detrás de cada dato. En mi experiencia con inventarios, no me conformaba con corregir una discrepancia, investigaba la causa raíz en el proceso logístico. Para mí, gobernar datos es tener la curiosidad para prevenir errores, no solo para corregirlos.</p> </div> </div>
     <div id="governance" class="modal"> 
-        <div class="modal-content"> 
-            <span class="close-btn" onclick="closeModal('governance')">&times;</span> 
-            <h3>Data Governance</h3> 
-            <p>Entiendo el Gobierno de Datos como la base para la confianza en la información. Se trata de establecer procesos para asegurar que los datos sean precisos, consistentes y seguros a lo largo de su ciclo de vida. Mi proyecto de automatización es un ejemplo práctico: valida y estandariza la información de entrada para garantizar la calidad del resultado final.</p> 
-        </div> 
+        <div class="modal-content"> <span class="close-btn" onclick="closeModal('governance')">&times;</span> <h3>Data Governance</h3> <p>Entiendo el Gobierno de Datos como la base para la confianza en la información. Se trata de establecer procesos para asegurar que los datos sean precisos, consistentes y seguros a lo largo de su ciclo de vida. Mi proyecto de automatización es un ejemplo práctico: valida y estandariza la información de entrada para garantizar la calidad del resultado final.</p> </div> 
     </div>
     <div id="pythonSql" class="modal"> 
-        <div class="modal-content"> 
-            <span class="close-btn" onclick="closeModal('pythonSql')">&times;</span> 
-            <h3>Python & SQL</h3> 
-            <p>Utilizo Python, con librerías como Pandas, para la limpieza y manipulación de datos, y SQL para realizar consultas complejas y extraer información valiosa de bases de datos relacionales. Son las herramientas fundamentales con las que transformo datos crudos en conocimiento accionable.</p> 
-        </div> 
+        <div class="modal-content"> <span class="close-btn" onclick="closeModal('pythonSql')">&times;</span> <h3>Python & SQL</h3> <p>Utilizo Python, con librerías como Pandas, para la limpieza y manipulación de datos, y SQL para realizar consultas complejas y extraer información valiosa de bases de datos relacionales. Son las herramientas fundamentales con las que transformo datos crudos en conocimiento accionable.</p> </div> 
     </div>
     <div id="dataops" class="modal"> 
-        <div class="modal-content"> 
-            <span class="close-btn" onclick="closeModal('dataops')">&times;</span> 
-            <h3>DataOps</h3> 
-            <p>Aplico DataOps integrando <strong>Git (Control de Versiones)</strong> y <strong>CI/CD</strong> para el *pipeline* de datos. Utilizo la lógica <strong>Test-Driven Development</strong> para la calidad del dato, enfocando la automatización en el monitoreo de <strong>Drift de Datos (Desviación)</strong>, lo que garantiza la estabilidad del proceso industrial digital.</p> 
-        </div> 
+        <div class="modal-content"> <span class="close-btn" onclick="closeModal('dataops')">&times;</span> <h3>DataOps</h3> <p>Aplico DataOps integrando <strong>Git (Control de Versiones)</strong> y <strong>CI/CD</strong> para el *pipeline* de datos. Utilizo la lógica <strong>Test-Driven Development</strong> para la calidad del dato, enfocando la automatización en el monitoreo de <strong>Drift de Datos (Desviación)</strong>, lo que garantiza la estabilidad del proceso industrial digital.</p> </div> 
     </div>
     <div id="automation" class="modal"> 
-        <div class="modal-content"> 
-            <span class="close-btn" onclick="closeModal('automation')">&times;</span> 
-            <h3>Process Automation</h3> 
-            <p>Mi habilidad principal es identificar tareas manuales y repetitivas y construir soluciones de software para eliminarlas. Con Google Apps Script, pude integrar múltiples aplicaciones (Sheets, Slides, Gmail) para crear un flujo de trabajo autónomo que ahorra tiempo y reduce drásticamente el error humano.</p> 
-        </div> 
+        <div class="modal-content"> <span class="close-btn" onclick="closeModal('automation')">&times;</span> <h3>Process Automation</h3> <p>Mi habilidad principal es identificar tareas manuales y repetitivas y construir soluciones de software para eliminarlas. Con Google Apps Script, pude integrar múltiples aplicaciones (Sheets, Slides, Gmail) para crear un flujo de trabajo autónomo que ahorra tiempo y reduce drásticamente el error humano.</p> </div> 
     </div>
     <div id="sixSigma" class="modal"> 
-        <div class="modal-content"> 
-            <span class="close-btn" onclick="closeModal('sixSigma')">&times;</span> 
-            <h3>Lean Six Sigma</h3> 
-            <p>Utilizo <strong>DMAIC</strong> como motor de mejora. Me especializo en <strong>Diseño de Experimentos (DOE)</strong> para optimización de variables críticas ($X$'s), <strong>Análisis de Capacidad ($C_pk$)</strong> para medir la estabilidad del proceso y <strong>Teoría de Restricciones (TOC)</strong> para maximizar el *throughput* de información, garantizando eficiencia estadística en los sistemas.</p>
-        </div> 
+        <div class="modal-content"> <span class="close-btn" onclick="closeModal('sixSigma')">&times;</span> <h3>Lean Six Sigma</h3> <p>Utilizo <strong>DMAIC</strong> como motor de mejora. Me especializo en <strong>Diseño de Experimentos (DOE)</strong> para optimización de variables críticas ($X$'s), <strong>Análisis de Capacidad ($C_pk$)</strong> para medir la estabilidad del proceso y <strong>Teoría de Restricciones (TOC)</strong> para maximizar el *throughput* de información, garantizando eficiencia estadística en los sistemas.</p></div> 
     </div>
     <div id="prompt" class="modal"> 
-        <div class="modal-content"> 
-            <span class="close-btn" onclick="closeModal('prompt')">&times;</span> 
-            <h3>Prompt Engineering</h3> 
-            <p>Aplico la <strong>Ingeniería del Prompt</strong> como una herramienta de <strong>Aceleración de Procesos (Lean)</strong>. Empleo *Zero/Few-Shot Learning* y técnicas de *Chain-of-Thought* para la generación eficiente de código y la exploración rápida de arquitecturas de IA, optimizando la *tasa de transferencia de conocimiento*.</p>
-        </div> 
+        <div class="modal-content"> <span class="close-btn" onclick="closeModal('prompt')">&times;</span> <h3>Prompt Engineering</h3> <p>Aplico la <strong>Ingeniería del Prompt</strong> como una herramienta de <strong>Aceleración de Procesos (Lean)</strong>. Empleo *Zero/Few-Shot Learning* y técnicas de *Chain-of-Thought* para la generación eficiente de código y la exploración rápida de arquitecturas de IA, optimizando la *tasa de transferencia de conocimiento*.</p></div> 
+    </div>
+
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('passwordModal')">&times;</span>
+            <h3>Acceso al CV Restringido</h3>
+            <p>Por favor, introduzca la contraseña proporcionada para acceder a mi CV:</p>
+            <input type="password" id="passwordInput" placeholder="Contraseña de Acceso">
+            <button onclick="submitPassword()">Acceder</button>
+        </div>
     </div>
 
     <script>
-        // FUNCIÓN DE CONTRASEÑA IMPLEMENTADA
+        // FUNCIÓN checkPassword AHORA ABRE EL MODAL
         function checkPassword(event) {
-            event.preventDefault(); // Evita la acción por defecto del enlace
-            const correctPassword = "Hybridge2501106"; // Contraseña propuesta por el usuario
-            
-            const enteredPassword = prompt("Introduzca la contraseña para descargar el CV:");
+            event.preventDefault(); 
+            document.getElementById('passwordModal').style.display = "block";
+            document.getElementById('passwordInput').value = ''; // Limpia el campo
+            document.getElementById('passwordInput').focus(); // Pone el foco en el campo
+        }
+
+        // FUNCIÓN submitPassword PROCESA LA CONTRASEÑA
+        function submitPassword() {
+            // Contraseña: Hybridge2501106
+            const correctPassword = "Hybridge2501106"; 
+            const enteredPassword = document.getElementById('passwordInput').value;
             
             if (enteredPassword === correctPassword) {
-                // Si la contraseña es correcta, redirige al enlace de descarga
+                // Si es correcta, abre el CV (URL de Google Drive)
                 window.open("https://drive.google.com/file/d/181wkopI_I6T0KGhwypm6gz5R9VVPEha4/view?usp=sharing", "_blank");
-            } else if (enteredPassword !== null) {
-                // Si la contraseña es incorrecta (y el usuario no pulsó Cancelar)
+                closeModal('passwordModal');
+            } else {
                 alert("Contraseña incorrecta. Acceso denegado.");
+                document.getElementById('passwordInput').value = ''; // Limpia el campo en caso de error
+                document.getElementById('passwordInput').focus(); 
             }
         }
         
