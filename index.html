@@ -282,7 +282,17 @@
         .carousel-btn.prev { left: 10px; }
         .carousel-btn.next { right: 10px; }
         .carousel-btn.hidden { opacity: 0; pointer-events: none; }
-        .shooting-stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; z-index: 1; }
+        
+        /* Contenedor para estrellas y galaxias */
+        .background-elements { 
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            pointer-events: none; 
+            overflow: hidden; 
+            z-index: 1; 
+        }
+
         .star {
             position: absolute;
             background-color: var(--white);
@@ -303,6 +313,32 @@
             0%, 100% { opacity: 0.8; }
             50% { opacity: 0.3; }
         }
+
+        /* Estilos para galaxias (nebulosas lejanas) */
+        .galaxy {
+            position: absolute;
+            /* Degradado para simular una nebulosa con un color principal y opacidad */
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(38,68,125,0.4) 30%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            opacity: 0;
+            animation: 
+                galaxy-move var(--duration-galaxy) linear var(--delay-galaxy) infinite,
+                galaxy-fade 8s ease-in-out var(--delay-galaxy) infinite alternate;
+        }
+
+        @keyframes galaxy-move {
+            /* Movimiento sutil y lento a través de CSS custom properties */
+            0% { transform: translate(var(--start-x), var(--start-y)) scale(0.1); }
+            100% { transform: translate(var(--end-x), var(--end-y)) scale(0.2); }
+        }
+
+        @keyframes galaxy-fade {
+            /* Cambio de opacidad sutil para dar la sensación de parpadeo lejano */
+            0%, 10% { opacity: 0; }
+            50% { opacity: var(--max-opacity); }
+            90%, 100% { opacity: 0; }
+        }
+
         .modal {
             display: none;
             position: fixed; z-index: 1000; left: 0; top: 0;
@@ -371,7 +407,8 @@
     </style>
 </head>
 <body>
-    <div class="shooting-stars"></div> 
+    <div class="background-elements">
+        </div> 
 
     <div class="container">
         <div class="header">
@@ -540,7 +577,7 @@
         <div class="modal-content"> <span class="close-btn" onclick="closeModal('pythonSql')">&times;</span> <h3>Python & SQL</h3> <p>Utilizo Python, con librerías como Pandas, para la limpieza y manipulación de datos, y SQL para realizar consultas complejas y extraer información valiosa de bases de datos relacionales. Son las herramientas fundamentales con las que transformo datos crudos en conocimiento accionable.</p> </div> 
     </div>
     <div id="dataops" class="modal"> 
-        <div class="modal-content"> <span class="close-btn" onclick="closeModal('dataops')">&times;</span> <h3>DataOps</h3> <p>Aplico DataOps integrando <strong>Git (Control de Versiones)</strong> y <strong>CI/CD</strong> para el *pipeline* de datos. Utilizo la lógica <strong>Test-Driven Development</strong> para la calidad del dato, enfocando la automatización en el monitoreo de <strong>Drift de Datos (Desviación)</strong>, lo que garantiza la estabilidad del proceso industrial digital.</p> </div> 
+        <div class="modal-content"> <span class="close-btn" onclick="closeModal('dataops')">&times;</span> <h3>DataOps</h3> <p>Aplico DataOps integrando <strong>Git (Control de Versiones)</strong> y <strong>CI/CD</strong> para el *pipeline* de datos. Utilizo la lógica <strong>Test-Driven Development</strong> para la calidad del dato, enfocando la automatización en el monitoreo de <strong>Drift de Datos (Desviación)</strong>, lo que garantiza la estabilidad del proceso industrial digital.</p> </div>
     </div>
     <div id="automation" class="modal"> 
         <div class="modal-content"> <span class="close-btn" onclick="closeModal('automation')">&times;</span> <h3>Process Automation</h3> <p>Mi habilidad principal es identificar tareas manuales y repetitivas y construir soluciones de software para eliminarlas. Con Google Apps Script, pude integrar múltiples aplicaciones (Sheets, Slides, Gmail) para crear un flujo de trabajo autónomo que ahorra tiempo y reduce drásticamente el error humano.</p> </div> 
@@ -633,7 +670,9 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const shootingStarsContainer = document.querySelector('.shooting-stars');
+            const backgroundElementsContainer = document.querySelector('.background-elements');
+            
+            // 1. Generar Estrellas Fugaces (Mantenido)
             const numStars = 440; 
             for (let i = 0; i < numStars; i++) {
                 const star = document.createElement('div');
@@ -642,9 +681,42 @@
                 star.style.top = `${Math.random() * 100}vh`;
                 star.style.setProperty('--delay', `${Math.random() * 15}s`);
                 star.style.setProperty('--duration', `${5 + Math.random() * 8}s`);
-                shootingStarsContainer.appendChild(star);
+                backgroundElementsContainer.appendChild(star);
+            }
+
+            // 2. Generar Galaxias Lejanas y en Movimiento (NUEVO)
+            const numGalaxies = 8; // Número pequeño de galaxias lejanas
+            for (let i = 0; i < numGalaxies; i++) {
+                const galaxy = document.createElement('div');
+                galaxy.classList.add('galaxy');
+                
+                // Tamaño y opacidad para dar el efecto de lejanía
+                const size = Math.random() * 80 + 80; 
+                galaxy.style.width = `${size}px`;
+                galaxy.style.height = `${size}px`;
+                
+                // Posición inicial aleatoria
+                const startX = Math.random() * 100;
+                const startY = Math.random() * 100;
+                galaxy.style.left = `${startX}vw`; 
+                galaxy.style.top = `${startY}vh`;
+                
+                // Variables de animación muy lentas
+                galaxy.style.setProperty('--delay-galaxy', `${Math.random() * 20}s`);
+                galaxy.style.setProperty('--duration-galaxy', `${30 + Math.random() * 30}s`); 
+                galaxy.style.setProperty('--max-opacity', `${0.1 + Math.random() * 0.2}`); 
+                
+                // Movimiento relativo
+                galaxy.style.setProperty('--start-x', `0vw`);
+                galaxy.style.setProperty('--start-y', `0vh`);
+                // Pequeño desplazamiento de +- 50vw/vh para el efecto de movimiento
+                galaxy.style.setProperty('--end-x', `${(Math.random() - 0.5) * 50}vw`);
+                galaxy.style.setProperty('--end-y', `${(Math.random() - 0.5) * 50}vh`);
+                
+                backgroundElementsContainer.appendChild(galaxy);
             }
             
+            // Lógica de Fade In on Scroll (Mantenida)
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
