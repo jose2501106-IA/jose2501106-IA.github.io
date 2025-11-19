@@ -365,7 +365,7 @@
         <p class="animate-on-scroll fade-in-up">Mi misión es construir puentes entre la tecnología de datos y los procesos de negocio. Creo firmemente que los datos confiables son el activo más importante para la toma de decisiones inteligentes.</p>
 
         <div class="links animate-on-scroll fade-in-up">
-            <a href="https://drive.google.com/file/d/181wkopI_I6T0KGhwypm6gz5R9VVPEha4/view?usp=sharing" target="_blank">Descargar CV</a>
+            <a href="#" onclick="checkPassword(event);">Descargar CV</a>
             <a href="https://www.linkedin.com/in/josehugomeza-ai" target="_blank">LinkedIn</a>
             <a href="https://github.com/jose2501106-IA" target="_blank">GitHub</a>
         </div>
@@ -557,6 +557,22 @@
     </div>
 
     <script>
+        // FUNCIÓN DE CONTRASEÑA IMPLEMENTADA
+        function checkPassword(event) {
+            event.preventDefault(); // Evita la acción por defecto del enlace
+            const correctPassword = "Hybridge2501106"; // Contraseña propuesta por el usuario
+            
+            const enteredPassword = prompt("Introduzca la contraseña para descargar el CV:");
+            
+            if (enteredPassword === correctPassword) {
+                // Si la contraseña es correcta, redirige al enlace de descarga
+                window.open("https://drive.google.com/file/d/181wkopI_I6T0KGhwypm6gz5R9VVPEha4/view?usp=sharing", "_blank");
+            } else if (enteredPassword !== null) {
+                // Si la contraseña es incorrecta (y el usuario no pulsó Cancelar)
+                alert("Contraseña incorrecta. Acceso denegado.");
+            }
+        }
+        
         // Funciones de Carousel y Modales (Mantenidas)
         function setupCarousel(trackId, prevBtnId, nextBtnId) {
             const track = document.getElementById(trackId);
