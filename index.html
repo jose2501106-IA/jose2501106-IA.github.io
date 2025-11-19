@@ -80,6 +80,7 @@
 
         strong { color: var(--white); }
         
+        /* Ajustes para texto dentro de secciones de fondo oscuro/transparente */
         .section p { color: var(--white); } 
         .section p strong { color: var(--white); } 
 
@@ -135,7 +136,7 @@
             box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
         }
 
-        /* Value Grid (Manteniendo el énfasis en azul para los conceptos clave) */
+        /* Value Grid (Mantenido el énfasis en azul para los conceptos clave) */
         .value-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -143,6 +144,7 @@
             text-align: left;
         }
         .value-item {
+            /* Fondo oscuro y transparente para las tarjetas de valor */
             background-color: rgba(0, 0, 0, 0.65); 
             padding: 1.5rem;
             border-radius: 8px;
@@ -263,9 +265,17 @@
             margin: 0;
             color: var(--text-color);
         }
-        .program-card-one { background-color: var(--one-blue-pastel); color: var(--dark-blue); border: 1px solid var(--one-blue-pastel-hover); }
+        .program-card-one { 
+            background-color: var(--one-blue-pastel); 
+            color: var(--dark-blue); 
+            border: 1px solid var(--one-blue-pastel-hover); 
+        }
         .program-card-one h3 { color: var(--primary-color); }
-        .program-card-aspire { background-color: var(--harvard-red-pastel); color: var(--dark-blue); border: 1px solid var(--harvard-red-pastel-hover); }
+        .program-card-aspire { 
+            background-color: var(--harvard-red-pastel); 
+            color: var(--dark-blue); 
+            border: 1px solid var(--harvard-red-pastel-hover); 
+        }
         .program-card-aspire h3 { color: var(--harvard-red); }
         .carousel-btn {
             position: absolute;
@@ -278,7 +288,10 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             transition: all 0.2s ease; z-index: 20;
         }
-        .carousel-btn:hover { background-color: rgba(255, 255, 255, 0.4); transform: translateY(-50%) scale(1.05); }
+        .carousel-btn:hover { 
+            background-color: rgba(255, 255, 255, 0.4); 
+            transform: translateY(-50%) scale(1.05); 
+        }
         .carousel-btn.prev { left: 10px; }
         .carousel-btn.next { right: 10px; }
         .carousel-btn.hidden { opacity: 0; pointer-events: none; }
@@ -293,6 +306,7 @@
             z-index: 1; 
         }
 
+        /* Estilos de las ESTRELLAS FUGAES */
         .star {
             position: absolute;
             background-color: var(--white);
@@ -314,7 +328,7 @@
             50% { opacity: 0.3; }
         }
 
-        /* Estilos para galaxias (nebulosas lejanas) */
+        /* Estilos para GALAXIAS LEJANAS (nebulosas lejanas) */
         .galaxy {
             position: absolute;
             /* Degradado para simular una nebulosa con un color principal y opacidad */
@@ -382,7 +396,7 @@
         .section ul li strong {
              color: var(--white);
         }
-        /* CSS para el Modal Personalizado */
+        /* CSS para el Modal Personalizado (Contraseña) */
         #passwordInput {
             width: 90%; 
             padding: 10px; 
@@ -672,7 +686,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const backgroundElementsContainer = document.querySelector('.background-elements');
             
-            // 1. Generar Estrellas Fugaces (Mantenido)
+            // 1. Generar Estrellas Fugaces 
             const numStars = 440; 
             for (let i = 0; i < numStars; i++) {
                 const star = document.createElement('div');
@@ -684,8 +698,8 @@
                 backgroundElementsContainer.appendChild(star);
             }
 
-            // 2. Generar Galaxias Lejanas y en Movimiento (NUEVO)
-            const numGalaxies = 8; // Número pequeño de galaxias lejanas
+            // 2. Generar Galaxias Lejanas y en Movimiento 
+            const numGalaxies = 8; 
             for (let i = 0; i < numGalaxies; i++) {
                 const galaxy = document.createElement('div');
                 galaxy.classList.add('galaxy');
