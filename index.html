@@ -1,4 +1,589 @@
-<div id="ownership" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('ownership')">&times;</span> <h3>Ownership</h3> <p>Tomo cada tarea como si fuera mi propio proyecto. Desde la concepción de la idea hasta la implementación y las pruebas, me hago responsable del resultado final. Para mí, "ownership" significa que si algo sale mal, es mi responsabilidad arreglarlo, y si sale bien, es un éxito del equipo.</p> </div> </div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>José Hugo Meza - Estudiante de Ingeniería: Convergencia IA & LSS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Variables y Estilos Generales */
+        :root {
+            --primary-color: #26447d;
+            --dark-blue: #2c3e50;
+            --light-gray: #f8f9fa;
+            --text-color: #343a40; 
+            --secondary-text: #6c757d;
+            --white: #ffffff;
+            --border-color: #e9ecef;
+            
+            --harvard-red: #A51C30;
+            --harvard-red-pastel: #FADADD;
+            --harvard-red-pastel-hover: #F8CFD3;
+
+            --one-blue-pastel: #E1F4FC;
+            --one-blue-pastel-hover: #D0EDF9;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7; 
+            color: var(--white);
+            margin: 0; 
+            padding: 2rem;
+            /* IMAGEN DE FONDO DE NEBULOSAS */
+            background-image: url('https://images.unsplash.com/photo-1508615070457-7ba35e122b51?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            overflow-x: hidden;
+            position: relative; 
+            z-index: 0; 
+        }
+
+        .container { 
+            max-width: 800px;
+            margin: 0 auto; 
+            background-color: transparent; 
+            padding: 2.5rem; 
+            border-radius: 12px; 
+            box-shadow: none;
+            position: relative;
+            z-index: 10; 
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap; 
+            color: var(--white);
+        }
+
+        .profile-photo {
+            width: 140px;
+            height: 175px;
+            border-radius: 8px;
+            margin-right: 2rem;
+            object-fit: cover;
+            border: 3px solid var(--white);
+        }
+
+        h1 { font-size: 2.5rem; color: var(--white); margin: 0; }
+        .subtitle { 
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.9); 
+            margin-top: 0.25rem; 
+            font-weight: 400; 
+        } 
+        p { font-size: 1.1rem; color: var(--white); }
+
+        strong { color: var(--white); }
+        
+        /* Ajustes para texto dentro de secciones de fondo oscuro/transparente */
+        .section p { color: var(--white); } 
+        .section p strong { color: var(--white); } 
+
+        .section {
+            margin-top: 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2); 
+            padding-top: 2rem;
+        }
+
+        h2 { color: var(--white); font-size: 1.8rem; margin-bottom: 1.5rem; }
+        
+        /* Enlaces */
+        .links a { 
+            display: inline-block;
+            background-color: var(--primary-color); 
+            color: var(--white); 
+            text-decoration: none; 
+            padding: 12px 24px; 
+            border-radius: 8px; 
+            margin: 10px 10px 10px 0; 
+            font-weight: bold;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .links a:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(38, 68, 125, 0.4);
+        }
+        .links-center {
+            text-align: center;
+            margin-top: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        .btn-primary-ghost {
+            display: inline-block;
+            color: var(--white); 
+            border: 2px solid var(--white);
+            background-color: transparent;
+            text-decoration: none; 
+            padding: 12px 28px;
+            border-radius: 8px; 
+            font-weight: bold; 
+            transition: all 0.2s ease;
+            width: 300px; 
+            box-sizing: border-box;
+        }
+        .btn-primary-ghost:hover {
+            background-color: var(--white);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Value Grid (Mantenido el énfasis en azul para los conceptos clave) */
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            text-align: left;
+        }
+        .value-item {
+            /* Fondo oscuro y transparente para las tarjetas de valor */
+            background-color: rgba(0, 0, 0, 0.65); 
+            padding: 1.5rem;
+            border-radius: 8px;
+            color: var(--white);
+            border-left: 4px solid var(--primary-color);
+        }
+        .value-item h3 {
+            margin: 0 0 0.5rem 0;
+            color: var(--white); 
+        }
+        .value-item p {
+            font-size: 0.95rem;
+            color: var(--white); 
+            line-height: 1.6;
+        }
+        /* Énfasis en el Value Grid en azul (primario) */
+        .value-item p strong {
+            color: var(--primary-color);
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+        .skill {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            color: var(--white);
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+        .skill:hover {
+             background-color: rgba(38, 68, 125, 0.7);
+             transform: translateY(-2px);
+        }
+        .education-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        .education-item {
+            display: block;
+            text-decoration: none;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .education-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .education-item h3 {
+            margin: 0 0 0.25rem 0;
+            color: var(--white);
+        }
+        .education-item p {
+            margin: 0;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .education-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .education-header h3 { margin: 0; }
+        .progress-label {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            background-color: rgba(38, 68, 125, 0.3);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            height: 10px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 5px;
+            transition: width 0.5s ease-out;
+        }
+        /* CARRUSEL Y MODALES */
+        .carousel-container { position: relative; margin-top: 1rem; }
+        .carousel-viewport { overflow: hidden; border-radius: 12px; }
+        .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .slide { flex: 0 0 100%; box-sizing: border-box; background-color: transparent; }
+        .program-card {
+            border-radius: 12px;
+            padding: 2rem;
+            color: var(--dark-blue); 
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .program-card h3 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+        }
+        .program-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
+            color: var(--text-color);
+        }
+        .program-card-one { 
+            background-color: var(--one-blue-pastel); 
+            color: var(--dark-blue); 
+            border: 1px solid var(--one-blue-pastel-hover); 
+        }
+        .program-card-one h3 { color: var(--primary-color); }
+        .program-card-aspire { 
+            background-color: var(--harvard-red-pastel); 
+            color: var(--dark-blue); 
+            border: 1px solid var(--harvard-red-pastel-hover); 
+        }
+        .program-card-aspire h3 { color: var(--harvard-red); }
+        .carousel-btn {
+            position: absolute;
+            top: 50%; transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.2); 
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%; width: 44px; height: 44px; font-size: 1.5rem;
+            color: var(--white);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.2s ease; z-index: 20;
+        }
+        .carousel-btn:hover { 
+            background-color: rgba(255, 255, 255, 0.4); 
+            transform: translateY(-50%) scale(1.05); 
+        }
+        .carousel-btn.prev { left: 10px; }
+        .carousel-btn.next { right: 10px; }
+        .carousel-btn.hidden { opacity: 0; pointer-events: none; }
+        
+        /* Contenedor para estrellas y galaxias */
+        .background-elements { 
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            pointer-events: none; 
+            overflow: hidden; 
+            z-index: 1; 
+        }
+
+        /* Estilos de las ESTRELLAS FUGAES */
+        .star {
+            position: absolute;
+            background-color: var(--white);
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            opacity: 0;
+            animation: 
+                star-fall var(--duration) linear var(--delay) infinite,
+                star-twinkle 2s ease-in-out var(--delay) infinite alternate;
+        }
+        @keyframes star-fall {
+            0% { transform: translate(0, 0) scale(1); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translate(100vw, 100vh) scale(0.5); opacity: 0; }
+        }
+        @keyframes star-twinkle {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Estilos para GALAXIAS LEJANAS (nebulosas lejanas) */
+        .galaxy {
+            position: absolute;
+            /* Degradado para simular una nebulosa con un color principal y opacidad */
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(38,68,125,0.4) 30%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            opacity: 0;
+            animation: 
+                galaxy-move var(--duration-galaxy) linear var(--delay-galaxy) infinite,
+                galaxy-fade 8s ease-in-out var(--delay-galaxy) infinite alternate;
+        }
+
+        @keyframes galaxy-move {
+            /* Movimiento sutil y lento a través de CSS custom properties */
+            0% { transform: translate(var(--start-x), var(--start-y)) scale(0.1); }
+            100% { transform: translate(var(--end-x), var(--end-y)) scale(0.2); }
+        }
+
+        @keyframes galaxy-fade {
+            /* Cambio de opacidad sutil para dar la sensación de parpadeo lejano */
+            0%, 10% { opacity: 0; }
+            50% { opacity: var(--max-opacity); }
+            90%, 100% { opacity: 0; }
+        }
+
+        .modal {
+            display: none;
+            position: fixed; z-index: 1000; left: 0; top: 0;
+            width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7);
+            animation: fadeIn 0.3s;
+        }
+        .modal-content {
+            background-color: var(--white);
+            margin: 15% auto;
+            padding: 25px;
+            border-radius: 10px; max-width: 500px; position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            color: var(--text-color);
+        }
+        .modal-content h3 { color: var(--primary-color); }
+        .modal-content p { color: var(--text-color); }
+        .close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .close-btn:hover, .close-btn:focus { color: black; }
+        footer {
+            text-align: center;
+            margin-top: 2.5rem; padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+        .animate-on-scroll { opacity: 0; transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in-up { transform: translateY(50px); }
+        .show { opacity: 1; transform: none; }
+
+        .section ul {
+            list-style: disc;
+            margin-left: 1.5rem;
+            color: var(--white);
+        }
+        .section ul li {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            color: var(--white);
+        }
+        .section ul li strong {
+             color: var(--white);
+        }
+        /* CSS para el Modal Personalizado (Contraseña) */
+        #passwordInput {
+            width: 90%; 
+            padding: 10px; 
+            margin-bottom: 15px; 
+            border: 1px solid #ccc; 
+            border-radius: 4px;
+            box-sizing: border-box; 
+            color: var(--dark-blue); 
+        }
+        .modal-content button {
+            background-color: var(--primary-color); 
+            color: var(--white); 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .modal-content button:hover {
+            background-color: var(--dark-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-elements">
+        </div> 
+
+    <div class="container">
+        <div class="header">
+            <img src="https://github.com/jose2501106-IA/jose2501106-IA.github.io/blob/main/Pepe.png?raw=true" alt="Foto de José Hugo Meza" class="profile-photo">
+            <div>
+                <h1>José Hugo Meza</h1>
+                <p class="subtitle">Estudiante de Ingeniería Industrial e Inteligencia Artificial | Especialista en Convergencia de Procesos y Data (LSS + IA)</p>
+            </div>
+        </div>
+        
+        <p class="animate-on-scroll fade-in-up">Mi misión es construir puentes entre la tecnología de datos y los procesos de negocio. Creo firmemente que los datos confiables son el activo más importante para la toma de decisiones inteligentes.</p>
+
+        <div class="links animate-on-scroll fade-in-up">
+            <a href="#" onclick="checkPassword(event);">Descargar CV</a>
+            <a href="https://www.linkedin.com/in/josehugomeza-ai" target="_blank">LinkedIn</a>
+            <a href="https://github.com/jose2501106-IA" target="_blank">GitHub</a>
+        </div>
+        
+        <div class="section value-proposition animate-on-scroll fade-in-up">
+            <h2>🎯 Mi Propuesta de Valor (Visión 2030)</h2>
+            <div class="value-grid">
+                <div class="value-item">
+                    <div class="value-icon"></div>
+                    <h3>Ingeniería de Flujo de Valor (Data VSM)</h3>
+                    <p>Aplico <strong>VSM (Value Stream Mapping)</strong> de LSS para mapear y optimizar el <strong>Data Lineage</strong> de extremo a extremo, <strong>cuantificando</strong> el <strong>Cycle Time</strong> de datos y los <strong>DPMO</strong> de calidad. Esto reduce el <strong>Waste</strong> estadístico y mejora el $C_pk$.</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon"></div>
+                    <h3>MLOps y Control Continuo (SPC)</h3>
+                    <p>Utilizo <strong>MLOps</strong> para transformar prototipos en <strong>Sistemas de Producción</strong>. Implemento <strong>Continuous Deployment</strong> y <strong>monitoreo estadístico</strong> (SPC) sobre las métricas de modelo (<strong>F1-Score</strong>) para asegurar la <strong>Estabilidad Operacional</strong> del sistema de IA.</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon"></div>
+                    <h3>Gobernanza de Datos y <strong>Green Lean</strong> 🌱</h3>
+                    <p>Mi enfoque es <strong>Gobernanza como Green Lean</strong>: Elimino el <strong>desperdicio de Datos de Mala Calidad (Muda)</strong> en la fuente (Validación) para reducir los costos operacionales y el impacto de carbono del reprocesamiento de <strong>pipelines</strong>. Busco la <strong>veracidad en la fuente</strong>.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section animate-on-scroll fade-in-up">
+            <h2>Formación Académica</h2>
+            <div class="education-grid">
+                
+                <a href="apuntes-ia.html" class="education-item">
+                    <div class="education-header">
+                        <h3>Hybridge Education</h3>
+                        <span class="progress-label">2/9 Cuatrimestres</span>
+                    </div>
+                    <p>Ingeniería en Inteligencia Artificial</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 22.2%;"></div> 
+                    </div>
+                </a>
+                
+                <a href="apuntes-industrial.html" class="education-item">
+                    <div class="education-header">
+                        <h3>Universidad Virtual del Estado de Guanajuato</h3>
+                        <span class="progress-label">32% Completado</span>
+                    </div>
+                    <p>Ingeniería Industrial</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 32%;"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="section animate-on-scroll fade-in-up">
+            <h2>Mi Filosofía</h2>
+            <p>Aplico principios de <strong>Lean Six Sigma</strong> para la mejora de procesos, buscando eliminar ineficiencias y optimizar flujos de trabajo. Mi enfoque en el Gobierno de Datos se basa en la misma idea: tratar los datos de mala calidad como un "<strong>desperdicio</strong>" que debe ser erradicado para construir sistemas <strong>robustos, eficientes y auditables</strong>.</p>
+        </div>
+        
+        <div class="section animate-on-scroll fade-in-up">
+            <h2>Programas Destacados</h2>
+            <div class="carousel-container">
+                
+                <div class="carousel-viewport">
+                    <div class="carousel-track" id="program-track">
+                        <div class="slide">
+                            <div class="program-card program-card-one">
+                                <h3>Oracle Next Education (ONE)</h3>
+                                <p>Participando en un programa intensivo de 6 meses donde he construido una base sólida en desarrollo full-stack, metodologías Ágiles y lógica de programación. Actualmente, me especializo en **Ciencia de Datos**, profundizando en la manipulación, análisis y visualización de datos para extraer insights de valor.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <div class="program-card program-card-aspire">
+                                <h3>Aspire Leaders Program (Harvard University)</h3>
+                                <p>Seleccionado para un programa global de desarrollo de liderazgo fundado por catedráticos de Harvard University, diseñado para potenciar el talento emergente a través de networking, mentorías y formación ejecutiva.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn prev" id="program-prev" aria-label="Anterior">&#10094;</button>
+                <button class="carousel-btn next" id="program-next" aria-label="Siguiente">&#10095;</button>
+            </div>
+        </div>
+
+        <div class="section animate-on-scroll fade-in-up">
+            <h2> Habilidades Blandas (Capacidad de Ejecución)</h2>
+            <div class="skills-grid">
+                <div class="skill" onclick="openModal('comunicacion')">Comunicación Efectiva</div>
+                <div class="skill" onclick="openModal('liderazgo')">Liderazgo Proactivo</div>
+                <div class="skill" onclick="openModal('resolucion')">Resolución de Problemas</div>
+                <div class="skill" onclick="openModal('ownership')">Ownership</div>
+                <div class="skill" onclick="openModal('colaboracion')">Trabajo Colaborativo</div>
+                <div class="skill" onclick="openModal('curiosidad')">Curiosidad por Datos</div>
+            </div>
+        </div>
+
+        <div class="section animate-on-scroll fade-in-up">
+            <h2> Habilidades Técnicas (Convergencia Industrial-IA)</h2>
+            <div class="skills-grid">
+                <div class="skill" onclick="openModal('governance')">Data Governance</div>
+                <div class="skill" onclick="openModal('pythonSql')">Python & SQL</div>
+                <div class="skill" onclick="openModal('dataops')">DataOps</div>
+                <div class="skill" onclick="openModal('automation')">Process Automation</div>
+                <div class="skill" onclick="openModal('sixSigma')">Lean Six Sigma</div>
+                <div class="skill" onclick="openModal('prompt')">Prompt Engineering</div>
+            </div>
+        </div>
+
+        <div class="section animate-on-scroll fade-in-up">
+            <h2> Proyecto Destacado (Impacto Cuantificable)</h2>
+            <h3>Automatización de Procesos (RPA): Reducción de <strong>Cycle Time</strong> y <strong>DPMO</strong></h3>
+            <p>Diseñé e implementé un sistema <strong>autónomo</strong> (RPA) que gestiona el ciclo de vida de los datos para el registro de asistentes, aplicando principios de <strong>DataOps</strong> y <strong>Lean</strong>. Los resultados del impacto operacional son:</p>
+            <ul>
+                <li><strong>Reducción de Desperdicio (Muda):</strong> Se eliminó el 100% del trabajo manual de captura, ahorrando un estimado de <strong>65 horas-hombre por ciclo</strong> y liberando recursos para actividades de valor añadido.</li>
+                <li><strong>Mejora de la Calidad (LSS):</strong> La implementación de validaciones en la entrada (Gobernanza) redujo los <strong>Defectos Por Millón de Oportunidades (DPMO)</strong> del <strong>Data Entry</strong> de <strong>2,500 DPMO a 250 DPMO</strong>, un incremento crítico en la confiabilidad de la información.</li>
+            </ul>
+            <div class="links">
+                <a href="https://github.com/jose2501106-IA/Automatizacion-google-apps-script" target="_blank">Ver en GitHub</a>
+            </div>
+        </div>
+        
+        <div class="section animate-on-scroll fade-in-up">
+            <h2> Más Allá del Código</h2>
+            <p>
+                Creo firmemente en la mejora continua, no solo en la tecnología, sino a nivel personal. Mi enfoque se basa en la introspección y la <strong>resiliencia</strong>; veo cada desafío como una oportunidad para aprender y levantarme más fuerte. Me impulsa un profundo deseo de encontrar la verdadera raíz de los problemas y construir soluciones que generen un impacto positivo y duradero.
+            </p>
+            <p>
+                Valoro la creación de entornos colaborativos y sanos, donde la conexión humana y la <strong>autenticidad</strong> son la base del éxito. Mi mayor motivación es hacer un trabajo que enorgullezca a mis mentores, mi familia y mi equipo.
+            </p>
+            
+            <div class="links-center animate-on-scroll fade-in-up">
+                <a href="curiosidades.html" class="btn-primary-ghost"> Datos Curiosos</a>
+                <a href="proyecto-l6s.html" class="btn-primary-ghost"> Proyecto L6S (En Proceso)</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Diseñado y construido con curiosidad y rigurosidad por José Hugo Meza.</p>
+    </footer>
+
+    <div id="comunicacion" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('comunicacion')">&times;</span> <h3>Comunicación Efectiva</h3> <p>Para mí, comunicar no es solo hablar, es asegurar que el mensaje se entienda. En mi proyecto de automatización, tuve que traducir requerimientos no-técnicos en lógica de programación clara y documentar el proceso para que otros pudieran entenderlo. Escucho para entender, no solo para responder.</p> </div> </div>
+    <div id="liderazgo" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('liderazgo')">&times;</span> <h3>Liderazgo Proactivo</h3> <p>El liderazgo no se trata de tener un título, sino de tomar la iniciativa. Cuando identifiqué la necesidad de automatizar el registro de pases, no esperé a que me lo pidieran; investigué, aprendí la tecnología necesaria y construí la solución. Liderar es resolver problemas antes de que crezcan.</p> </div> </div>
+    <div id="resolucion" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('resolucion')">&times;</span> <h3>Resolución de Problemas</h3> <p>Disfruto desglosando un problema complejo en partes más pequeñas y manejables. Durante el desarrollo de mi script, me enfrenté a errores de integración con las APIs. Mi método fue aislar cada componente, probarlo individualmente y luego reintegrarlo, asegurando una solución robusta y funcional.</p> </div> </div>
+    <div id="ownership" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('ownership')">&times;</span> <h3>Ownership</h3> <p>Tomo cada tarea como si fuera mi propio proyecto. Desde la concepción de la idea hasta la implementación y las pruebas, me hago responsable del resultado final. Para mí, "ownership" significa que si algo sale mal, es mi responsabilidad arreglarlo, y si sale bien, es un éxito del equipo.</p> </div> </div>
     <div id="colaboracion" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('colaboracion')">&times;</span> <h3>Trabajo Colaborativo</h3> <p>Entiendo que las mejores ideas surgen de la diversidad de perspectivas. Aunque trabajé solo en mi proyecto de automatización, me apoyé en comunidades en línea y pedí feedback para mejorar el código. Estoy convencido de que colaborar y compartir conocimiento es la forma más rápida de crecer.</p> </div> </div>
     <div id="curiosidad" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('curiosidad')">&times;</span> <h3>Curiosidad por Datos</h3> <p>Mi curiosidad va más allá de los números; busco el "porqué" detrás de cada dato. En mi experiencia con inventarios, no me conformaba con corregir una discrepancia, investigaba la causa raíz en el proceso logístico. Para mí, gobernar datos es tener la curiosidad para prevenir errores, no solo para corregirlos.</p> </div> </div>
     <div id="governance" class="modal"> 
