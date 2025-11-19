@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>José Hugo Meza - Ingeniero de Convergencia: Operaciones Inteligentes</title>
+    <title>José Hugo Meza - Estudiante de Ingeniería: Convergencia IA & LSS</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Variables y Estilos Generales (Mantenidos) */
+        /* Variables y Estilos Generales */
         :root {
             --primary-color: #26447d;
             --dark-blue: #2c3e50;
@@ -71,12 +71,11 @@
         h1 { font-size: 2.5rem; color: var(--white); margin: 0; }
         .subtitle { 
             font-size: 1.15rem;
-            /* SUBTÍTULO REVISADO */
             color: rgba(255, 255, 255, 0.9); 
             margin-top: 0.25rem; 
             font-weight: 400; 
         } 
-        p { font-size: 1.1rem; color: var(--white); } 
+        p { font-size: 1.1rem; color: var(--white); }
 
         strong { color: var(--white); }
         .section p { color: var(--text-color); }
@@ -139,15 +138,14 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 1.5rem;
-            text-align: left; /* Alineación a la izquierda para mejor lectura de contenido denso */
+            text-align: left;
         }
         .value-item {
-            /* Se reduce la opacidad para que el texto sea más claro, manteniendo el fondo */
             background-color: rgba(0, 0, 0, 0.65); 
             padding: 1.5rem;
             border-radius: 8px;
             color: var(--white);
-            border-left: 4px solid var(--primary-color); /* Indicador de importancia */
+            border-left: 4px solid var(--primary-color);
         }
         .value-icon {
             font-size: 2.5rem;
@@ -156,15 +154,17 @@
         }
         .value-item h3 {
             margin: 0 0 0.5rem 0;
-            color: var(--white); /* Títulos de item en blanco para foco */
+            color: var(--white); 
         }
         .value-item p {
             font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.85); /* Párrafos más claros */
+            color: var(--white); 
             line-height: 1.6;
         }
+        .value-item p strong {
+            color: var(--white);
+        }
         
-        /* El resto de estilos se mantienen para preservar la estética original */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -240,7 +240,7 @@
             border-radius: 5px;
             transition: width 0.5s ease-out;
         }
-        /* CARRUSEL Y MODALES (Mantenidos) */
+        /* CARRUSEL Y MODALES */
         .carousel-container { position: relative; margin-top: 1rem; }
         .carousel-viewport { overflow: hidden; border-radius: 12px; }
         .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); }
@@ -334,6 +334,20 @@
         .animate-on-scroll { opacity: 0; transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .fade-in-up { transform: translateY(50px); }
         .show { opacity: 1; transform: none; }
+
+        .section ul {
+            list-style: disc;
+            margin-left: 1.5rem;
+            color: var(--white);
+        }
+        .section ul li {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            color: var(--white);
+        }
+        .section ul li strong {
+             color: var(--white);
+        }
     </style>
 </head>
 <body>
@@ -344,7 +358,7 @@
             <img src="https://github.com/jose2501106-IA/jose2501106-IA.github.io/blob/main/Pepe.png?raw=true" alt="Foto de José Hugo Meza" class="profile-photo">
             <div>
                 <h1>José Hugo Meza</h1>
-                <p class="subtitle">Ingeniero de Sistemas de Convergencia | Especialista en **Operaciones Inteligentes y Auditables** (IA + LSS)</p>
+                <p class="subtitle">Estudiante de Ingeniería Industrial e Inteligencia Artificial | Especialista en Convergencia de Procesos y Data (LSS + IA)</p>
             </div>
         </div>
         
@@ -362,7 +376,7 @@
                 <div class="value-item">
                     <div class="value-icon"></div>
                     <h3>Ingeniería de Flujo de Valor (Data VSM)</h3>
-                    <p>Aplico <strong>VSM (Value Stream Mapping)</strong> para mapear y optimizar el <strong>Data Lineage</strong> de extremo a extremo, <strong>cuantificando</strong> el <strong>Cycle Time</strong> de datos y los <strong>DPMO</strong> de calidad. Esto reduce el <strong>Waste</strong> estadístico y mejora el $C_pk$.</p>
+                    <p>Aplico <strong>VSM (Value Stream Mapping)</strong> de LSS para mapear y optimizar el <strong>Data Lineage</strong> de extremo a extremo, <strong>cuantificando</strong> el <strong>Cycle Time</strong> de datos y los <strong>DPMO</strong> de calidad. Esto reduce el <strong>Waste</strong> estadístico y mejora el $C_pk$.</p>
                 </div>
                 <div class="value-item">
                     <div class="value-icon"></div>
@@ -461,11 +475,11 @@
 
         <div class="section animate-on-scroll fade-in-up">
             <h2> Proyecto Destacado (Impacto Cuantificable)</h2>
-            <h3>Automatización de Procesos (RPA): Reducción de *Cycle Time* y *DPMO*</h3>
-            <p>Diseñé e implementé un sistema **autónomo** (RPA) que gestiona el ciclo de vida de los datos para el registro de asistentes, aplicando principios de **DataOps** y **Lean**. Los resultados del impacto operacional son:</p>
+            <h3>Automatización de Procesos (RPA): Reducción de <strong>Cycle Time</strong> y <strong>DPMO</strong></h3>
+            <p>Diseñé e implementé un sistema <strong>autónomo</strong> (RPA) que gestiona el ciclo de vida de los datos para el registro de asistentes, aplicando principios de <strong>DataOps</strong> y <strong>Lean</strong>. Los resultados del impacto operacional son:</p>
             <ul>
-                <li>**Reducción de Desperdicio (Muda):** Se eliminó el 100% del trabajo manual de captura, ahorrando un estimado de **65 horas-hombre por ciclo** y liberando recursos para actividades de valor añadido.</li>
-                <li>**Mejora de la Calidad (LSS):** La implementación de validaciones en la entrada (Gobernanza) redujo los **Defectos Por Millón de Oportunidades (DPMO)** del *Data Entry* de **2,500 DPMO a 250 DPMO**, un incremento crítico en la confiabilidad de la información.</li>
+                <li><strong>Reducción de Desperdicio (Muda):</strong> Se eliminó el 100% del trabajo manual de captura, ahorrando un estimado de **65 horas-hombre por ciclo** y liberando recursos para actividades de valor añadido.</li>
+                <li><strong>Mejora de la Calidad (LSS):</strong> La implementación de validaciones en la entrada (Gobernanza) redujo los **Defectos Por Millón de Oportunidades (DPMO)** del **Data Entry** de **2,500 DPMO a 250 DPMO**, un incremento crítico en la confiabilidad de la información.</li>
             </ul>
             <div class="links">
                 <a href="https://github.com/jose2501106-IA/Automatizacion-google-apps-script" target="_blank">Ver en GitHub</a>
