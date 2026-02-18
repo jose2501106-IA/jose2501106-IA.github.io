@@ -25,6 +25,10 @@
 
             --one-blue-pastel: #E1F4FC;
             --one-blue-pastel-hover: #D0EDF9;
+            
+            --anahuac-gold: #FFD700;
+            --anahuac-gold-pastel: #FFF9E6;
+            --anahuac-gold-pastel-hover: #FFF4D1;
         }
 
         body { 
@@ -33,7 +37,6 @@
             color: var(--white);
             margin: 0; 
             padding: 2rem;
-            /* IMAGEN DE FONDO DE NEBULOSAS */
             background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop');
             background-size: cover;
             background-position: center center;
@@ -82,7 +85,6 @@
 
         strong { color: var(--white); }
         
-        /* Ajustes para texto dentro de secciones de fondo oscuro/transparente */
         .section p { color: var(--white); } 
         .section p strong { color: var(--white); } 
 
@@ -94,7 +96,6 @@
 
         h2 { color: var(--white); font-size: 1.8rem; margin-bottom: 1.5rem; }
         
-        /* Enlaces */
         .links a { 
             display: inline-block;
             background-color: var(--primary-color); 
@@ -138,7 +139,6 @@
             box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
         }
 
-        /* Value Grid (Mantenido el énfasis en azul para los conceptos clave) */
         .value-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -146,7 +146,6 @@
             text-align: left;
         }
         .value-item {
-            /* Fondo oscuro y transparente para las tarjetas de valor */
             background-color: rgba(0, 0, 0, 0.65); 
             padding: 1.5rem;
             border-radius: 8px;
@@ -162,7 +161,6 @@
             color: var(--white); 
             line-height: 1.6;
         }
-        /* Énfasis en el Value Grid en azul (primario) */
         .value-item p strong {
             color: var(--primary-color);
         }
@@ -242,6 +240,92 @@
             border-radius: 5px;
             transition: width 0.5s ease-out;
         }
+        
+        /* Experiencia Laboral */
+        .experience-card {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .experience-title h3 {
+            margin: 0 0 0.25rem 0;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+        .experience-company {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0.25rem 0;
+        }
+        .experience-duration {
+            background-color: rgba(38, 68, 125, 0.4);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--white);
+            font-weight: bold;
+        }
+        
+        /* Certificaciones LSS */
+        .cert-roadmap {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .cert-item {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-left: 4px solid var(--primary-color);
+        }
+        .cert-status {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-color);
+            background-color: transparent;
+            position: relative;
+        }
+        .cert-status.active {
+            background-color: var(--primary-color);
+        }
+        .cert-status.active::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--white);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .cert-info {
+            flex-grow: 1;
+        }
+        .cert-info h4 {
+            margin: 0 0 0.25rem 0;
+            color: var(--white);
+        }
+        .cert-info p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
         /* CARRUSEL Y MODALES */
         .carousel-container { position: relative; margin-top: 1rem; }
         .carousel-viewport { overflow: hidden; border-radius: 12px; }
@@ -279,6 +363,12 @@
             border: 1px solid var(--harvard-red-pastel-hover); 
         }
         .program-card-aspire h3 { color: var(--harvard-red); }
+        .program-card-anahuac {
+            background-color: var(--anahuac-gold-pastel);
+            color: var(--dark-blue);
+            border: 1px solid var(--anahuac-gold-pastel-hover);
+        }
+        .program-card-anahuac h3 { color: #B8860B; }
         .carousel-btn {
             position: absolute;
             top: 50%; transform: translateY(-50%);
@@ -298,7 +388,6 @@
         .carousel-btn.next { right: 10px; }
         .carousel-btn.hidden { opacity: 0; pointer-events: none; }
         
-        /* Contenedor para estrellas y galaxias */
         .background-elements { 
             position: fixed; 
             top: 0; left: 0; 
@@ -308,7 +397,6 @@
             z-index: 1; 
         }
 
-        /* Estilos de las ESTRELLAS FUGAES */
         .star {
             position: absolute;
             background-color: var(--white);
@@ -330,10 +418,8 @@
             50% { opacity: 0.3; }
         }
 
-        /* Estilos para GALAXIAS LEJANAS (nebulosas lejanas) */
         .galaxy {
             position: absolute;
-            /* Degradado para simular una nebulosa con un color principal y opacidad */
             background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(38,68,125,0.4) 30%, rgba(0,0,0,0) 70%);
             border-radius: 50%;
             opacity: 0;
@@ -343,13 +429,11 @@
         }
 
         @keyframes galaxy-move {
-            /* Movimiento sutil y lento a través de CSS custom properties */
             0% { transform: translate(var(--start-x), var(--start-y)) scale(0.1); }
             100% { transform: translate(var(--end-x), var(--end-y)) scale(0.2); }
         }
 
         @keyframes galaxy-fade {
-            /* Cambio de opacidad sutil para dar la sensación de parpadeo lejano */
             0%, 10% { opacity: 0; }
             50% { opacity: var(--max-opacity); }
             90%, 100% { opacity: 0; }
@@ -398,7 +482,6 @@
         .section ul li strong {
              color: var(--white);
         }
-        /* CSS para el Modal Personalizado (Contraseña) */
         #passwordInput {
             width: 90%; 
             padding: 10px; 
@@ -423,19 +506,18 @@
     </style>
 </head>
 <body>
-    <div class="background-elements">
-        </div> 
+    <div class="background-elements"></div> 
 
     <div class="container">
         <div class="header">
             <img src="https://github.com/jose2501106-IA/jose2501106-IA.github.io/blob/main/Pepe.png?raw=true" alt="Foto de José Hugo Meza" class="profile-photo">
             <div>
-                <h1>José Hugo Meza</h1>
-                <p class="subtitle">Estudiante de Ingeniería Industrial e Inteligencia Artificial | Especialista en Convergencia de Procesos y Data (LSS + IA)</p>
+                <h1>José Hugo Meza Vázquez</h1>
+                <p class="subtitle">Ingeniero Industrial en formación | Automatización de Procesos, Inteligencia Artificial y Análisis de Datos</p>
             </div>
         </div>
         
-        <p class="animate-on-scroll fade-in-up">Mi misión es construir puentes entre la tecnología de datos y los procesos de negocio. Creo firmemente que los datos confiables son el activo más importante para la toma de decisiones inteligentes.</p>
+        <p class="animate-on-scroll fade-in-up">Estudiante de Ingeniería Industrial e Ingeniería en Inteligencia Artificial con experiencia en automatización de procesos administrativos y análisis de datos. He diseñado e implementado sistemas automatizados que redujeron tiempos operativos en un 96% mediante Google Apps Script y Google Workspace.</p>
 
         <div class="links animate-on-scroll fade-in-up">
             <a href="#" onclick="checkPassword(event);">Descargar CV</a>
@@ -444,75 +526,140 @@
         </div>
         
         <div class="section value-proposition animate-on-scroll fade-in-up">
-            <h2>🎯 Mi Propuesta de Valor (Visión 2030)</h2>
+            <h2>🎯 Mi Propuesta de Valor</h2>
             <div class="value-grid">
                 <div class="value-item">
-                    <div class="value-icon"></div>
                     <h3>Ingeniería de Flujo de Valor (Data VSM)</h3>
-                    <p>Aplico <strong>VSM (Value Stream Mapping)</strong> de LSS para mapear y optimizar el <strong>Data Lineage</strong> de extremo a extremo, <strong>cuantificando</strong> el <strong>Cycle Time</strong> de datos y los <strong>DPMO</strong> de calidad. Esto reduce el <strong>Waste</strong> estadístico y mejora el $C_pk$.</p>
+                    <p>Aplico <strong>VSM (Value Stream Mapping)</strong> de LSS para mapear y optimizar el <strong>Data Lineage</strong> de extremo a extremo, cuantificando el <strong>Cycle Time</strong> de datos y los <strong>DPMO</strong> de calidad.</p>
                 </div>
                 <div class="value-item">
-                    <div class="value-icon"></div>
-                    <h3>MLOps y Control Continuo (SPC)</h3>
-                    <p>Utilizo <strong>MLOps</strong> para transformar prototipos en <strong>Sistemas de Producción</strong>. Implemento <strong>Continuous Deployment</strong> y <strong>monitoreo estadístico</strong> (SPC) sobre las métricas de modelo (<strong>F1-Score</strong>) para asegurar la <strong>Estabilidad Operacional</strong> del sistema de IA.</p>
+                    <h3>Automatización de Procesos</h3>
+                    <p>Diseño e implemento sistemas automatizados que eliminan procesos manuales, reducen errores al 0% y optimizan tiempos operativos. Expertise en <strong>Google Apps Script</strong>, <strong>Python</strong> y <strong>DataOps</strong>.</p>
                 </div>
                 <div class="value-item">
-                    <div class="value-icon"></div>
-                    <h3>Gobernanza de Datos y <strong>Green Lean</strong> 🌱</h3>
-                    <p>Mi enfoque es <strong>Gobernanza como Green Lean</strong>: Elimino el <strong>desperdicio de Datos de Mala Calidad (Muda)</strong> en la fuente (Validación) para reducir los costos operacionales y el impacto de carbono del reprocesamiento de <strong>pipelines</strong>. Busco la <strong>veracidad en la fuente</strong>.</p>
+                    <h3>Gobernanza de Datos (Green Lean)</h3>
+                    <p>Mi enfoque es <strong>Gobernanza como Green Lean</strong>: Elimino el desperdicio de Datos de Mala Calidad en la fuente mediante validación, reduciendo costos operacionales y asegurando la veracidad de la información.</p>
                 </div>
             </div>
         </div>
         
         <div class="section animate-on-scroll fade-in-up">
-            <h2>Formación Académica</h2>
+            <h2>💼 Experiencia Profesional</h2>
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-title">
+                        <h3>Asistente Administrativo</h3>
+                        <p class="experience-company">Casa Muñoz – Central de Abastos, Ciudad de México</p>
+                    </div>
+                    <span class="experience-duration">4 meses</span>
+                </div>
+                <h4 style="color: var(--white); margin-top: 1rem;">Funciones clave:</h4>
+                <ul style="color: var(--white); margin-left: 1.5rem;">
+                    <li>Administración de bases de datos operativas</li>
+                    <li>Generación de reportes administrativos</li>
+                    <li>Implementación de controles de calidad</li>
+                    <li>Coordinación con proveedores y áreas internas</li>
+                </ul>
+                <h4 style="color: var(--white); margin-top: 1rem;">Logros cuantificables:</h4>
+                <ul style="color: var(--white); margin-left: 1.5rem;">
+                    <li>Reducción significativa de errores en captura de datos</li>
+                    <li>Identificación de oportunidades de mejora de procesos</li>
+                    <li>Aseguramiento de integridad de información</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section animate-on-scroll fade-in-up">
+            <h2>🎓 Formación Académica</h2>
             <div class="education-grid">
-                
                 <a href="apuntes-ia.html" class="education-item">
                     <div class="education-header">
                         <h3>Hybridge Education</h3>
-                        <span class="progress-label">2/9 Cuatrimestres</span>
+                        <span class="progress-label">3er Semestre</span>
                     </div>
                     <p>Ingeniería en Inteligencia Artificial</p>
                     <div class="progress-bar">
-                        <div class="progress" style="width: 22.2%;"></div> 
+                        <div class="progress" style="width: 33%;"></div> 
                     </div>
                 </a>
                 
                 <a href="apuntes-industrial.html" class="education-item">
                     <div class="education-header">
-                        <h3>Universidad Virtual del Estado de Guanajuato</h3>
-                        <span class="progress-label">32% Completado</span>
+                        <h3>Universidad Virtual del Estado de Guanajuato (UVEG)</h3>
+                        <span class="progress-label">38% Completado</span>
                     </div>
                     <p>Ingeniería Industrial</p>
                     <div class="progress-bar">
-                        <div class="progress" style="width: 32%;"></div>
+                        <div class="progress" style="width: 38%;"></div>
                     </div>
                 </a>
             </div>
         </div>
         
         <div class="section animate-on-scroll fade-in-up">
-            <h2>Mi Filosofía</h2>
-            <p>Aplico principios de <strong>Lean Six Sigma</strong> para la mejora de procesos, buscando eliminar ineficiencias y optimizar flujos de trabajo. Mi enfoque en el Gobierno de Datos se basa en la misma idea: tratar los datos de mala calidad como un "<strong>desperdicio</strong>" que debe ser erradicado para construir sistemas <strong>robustos, eficientes y auditables</strong>.</p>
+            <h2>🏆 Certificaciones y Programas Especiales</h2>
+            
+            <h3 style="color: var(--white); margin-bottom: 1rem;">Lean Six Sigma (CSSC) - Roadmap</h3>
+            <div class="cert-roadmap">
+                <div class="cert-item">
+                    <div class="cert-status active"></div>
+                    <div class="cert-info">
+                        <h4>Lean Management</h4>
+                        <p>En curso • 60% completado</p>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-status"></div>
+                    <div class="cert-info">
+                        <h4>White Belt</h4>
+                        <p>Planeado</p>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-status"></div>
+                    <div class="cert-info">
+                        <h4>Yellow Belt</h4>
+                        <p>Planeado</p>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-status"></div>
+                    <div class="cert-info">
+                        <h4>Green Belt</h4>
+                        <p>Planeado</p>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-status"></div>
+                    <div class="cert-info">
+                        <h4>Black Belt</h4>
+                        <p>Planeado</p>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="section animate-on-scroll fade-in-up">
-            <h2>Programas Destacados</h2>
+            <h2>🌟 Programas Destacados</h2>
             <div class="carousel-container">
-                
                 <div class="carousel-viewport">
                     <div class="carousel-track" id="program-track">
                         <div class="slide">
+                            <div class="program-card program-card-anahuac">
+                                <h3>Seminario de IA y Ciencia de Datos</h3>
+                                <p><strong>Universidad Anáhuac México Norte</strong><br>Becario 100% del Seminario de IA y Ciencia de Datos (Programa Santander 2026). Formación avanzada en inteligencia artificial y análisis de datos aplicado a problemas de negocio.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
                             <div class="program-card program-card-one">
                                 <h3>Oracle Next Education (ONE)</h3>
-                                <p>Participando en un programa intensivo de 6 meses donde he construido una base sólida en desarrollo full-stack, metodologías Ágiles y lógica de programación. Actualmente, me especializo en **Ciencia de Datos**, profundizando en la manipulación, análisis y visualización de datos para extraer insights de valor.</p>
+                                <p>Programa intensivo de 6 meses en desarrollo full-stack, metodologías Ágiles y lógica de programación. Actualmente especializado en <strong>Ciencia de Datos</strong>, profundizando en manipulación, análisis y visualización de datos.</p>
                             </div>
                         </div>
                         <div class="slide">
                             <div class="program-card program-card-aspire">
-                                <h3>Aspire Leaders Program (Harvard University)</h3>
-                                <p>Seleccionado para un programa global de desarrollo de liderazgo fundado por catedráticos de Harvard University, diseñado para potenciar el talento emergente a través de networking, mentorías y formación ejecutiva.</p>
+                                <h3>AspireLeaders Program</h3>
+                                <p><strong>Harvard University</strong><br>Seleccionado para programa global de desarrollo de liderazgo fundado por catedráticos de Harvard University, diseñado para potenciar el talento emergente a través de networking, mentorías y formación ejecutiva.</p>
                             </div>
                         </div>
                     </div>
@@ -523,7 +670,7 @@
         </div>
 
         <div class="section animate-on-scroll fade-in-up">
-            <h2> Habilidades Blandas (Capacidad de Ejecución)</h2>
+            <h2>💡 Habilidades Blandas</h2>
             <div class="skills-grid">
                 <div class="skill" onclick="openModal('comunicacion')">Comunicación Efectiva</div>
                 <div class="skill" onclick="openModal('liderazgo')">Liderazgo Proactivo</div>
@@ -535,7 +682,7 @@
         </div>
 
         <div class="section animate-on-scroll fade-in-up">
-            <h2> Habilidades Técnicas (Convergencia Industrial-IA)</h2>
+            <h2>🛠️ Habilidades Técnicas</h2>
             <div class="skills-grid">
                 <div class="skill" onclick="openModal('governance')">Data Governance</div>
                 <div class="skill" onclick="openModal('pythonSql')">Python & SQL</div>
@@ -543,16 +690,20 @@
                 <div class="skill" onclick="openModal('automation')">Process Automation</div>
                 <div class="skill" onclick="openModal('sixSigma')">Lean Six Sigma</div>
                 <div class="skill" onclick="openModal('prompt')">Prompt Engineering</div>
+                <div class="skill" onclick="openModal('googleWorkspace')">Google Workspace</div>
+                <div class="skill" onclick="openModal('excel')">Excel Avanzado</div>
             </div>
         </div>
 
         <div class="section animate-on-scroll fade-in-up">
-            <h2> Proyecto Destacado (Impacto Cuantificable)</h2>
-            <h3>Automatización de Procesos (RPA): Reducción de <strong>Cycle Time</strong> y <strong>DPMO</strong></h3>
-            <p>Diseñé e implementé un sistema <strong>autónomo</strong> (RPA) que gestiona el ciclo de vida de los datos para el registro de asistentes, aplicando principios de <strong>DataOps</strong> y <strong>Lean</strong>. Los resultados del impacto operacional son:</p>
+            <h2>🚀 Proyecto Destacado</h2>
+            <h3>Automatización de Registro y Gestión Documental</h3>
+            <p><strong>Tecnologías:</strong> Google Apps Script, Google Sheets, Google Forms, Gmail API, JavaScript</p>
+            <p>Diseñé e implementé un sistema automatizado de registro que aplica principios de <strong>DataOps</strong> y <strong>Lean</strong>. Los resultados operacionales son:</p>
             <ul>
-                <li><strong>Reducción de Desperdicio (Muda):</strong> Se eliminó el 100% del trabajo manual de captura, ahorrando un estimado de <strong>65 horas-hombre por ciclo</strong> y liberando recursos para actividades de valor añadido.</li>
-                <li><strong>Mejora de la Calidad (LSS):</strong> La implementación de validaciones en la entrada (Gobernanza) redujo los <strong>Defectos Por Millón de Oportunidades (DPMO)</strong> del <strong>Data Entry</strong> de <strong>2,500 DPMO a 250 DPMO</strong>, un incremento crítico en la confiabilidad de la información.</li>
+                <li><strong>96% de reducción en tiempo de registro</strong> - Eliminación del 100% del trabajo manual de captura, ahorrando 65 horas-hombre por ciclo</li>
+                <li><strong>0% errores en captura de información</strong> - Reducción de DPMO de 2,500 a 250 mediante validaciones en la entrada</li>
+                <li><strong>120 participantes procesados exitosamente</strong> - Sistema probado en producción con 100% de tasa de éxito</li>
             </ul>
             <div class="links">
                 <a href="https://github.com/jose2501106-IA/Automatizacion-google-apps-script" target="_blank">Ver en GitHub</a>
@@ -560,32 +711,45 @@
         </div>
         
         <div class="section animate-on-scroll fade-in-up">
-            <h2> Más Allá del Código</h2>
+            <h2>🌱 Más Allá del Código</h2>
             <p>
-                Creo firmemente en la mejora continua, no solo en la tecnología, sino a nivel personal. Mi enfoque se basa en la introspección y la <strong>resiliencia</strong>; veo cada desafío como una oportunidad para aprender y levantarme más fuerte. Me impulsa un profundo deseo de encontrar la verdadera raíz de los problemas y construir soluciones que generen un impacto positivo y duradero.
+                Creo firmemente en la mejora continua, no solo en la tecnología, sino a nivel personal. Mi enfoque se basa en la introspección y la <strong>resiliencia</strong>; veo cada desafío como una oportunidad para aprender y levantarme más fuerte.
             </p>
             <p>
                 Valoro la creación de entornos colaborativos y sanos, donde la conexión humana y la <strong>autenticidad</strong> son la base del éxito. Mi mayor motivación es hacer un trabajo que enorgullezca a mis mentores, mi familia y mi equipo.
             </p>
             
             <div class="links-center animate-on-scroll fade-in-up">
-                <a href="curiosidades.html" class="btn-primary-ghost"> Datos Curiosos</a>
-                <a href="proyecto-l6s.html" class="btn-primary-ghost"> Proyecto L6S (En Proceso)</a>
+                <a href="curiosidades.html" class="btn-primary-ghost">📊 Datos Curiosos</a>
+                <a href="proyecto-l6s.html" class="btn-primary-ghost">🎯 Proyecto L6S (En Proceso)</a>
             </div>
+        </div>
+
+        <div class="section animate-on-scroll fade-in-up">
+            <h2>📍 Información de Contacto</h2>
+            <p><strong>Ubicación:</strong> Ciudad de México, México</p>
+            <p><strong>Disponibilidad:</strong> Inmediata</p>
+            <p><strong>Modalidad:</strong> Remoto, Híbrido o Presencial</p>
+            <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/josehugomeza-ai" target="_blank" style="color: var(--primary-color); text-decoration: underline;">linkedin.com/in/josehugomeza-ai</a></p>
+            <p style="margin-top: 1rem;">Abierto a oportunidades en automatización de procesos, análisis de datos, mejora continua e inteligencia artificial.</p>
         </div>
 
     </div>
 
     <footer>
-        <p>Diseñado y construido con curiosidad y rigurosidad por José Hugo Meza.</p>
+        <p>© 2026 José Hugo Meza Vázquez | "Transformando procesos, un sistema a la vez"</p>
+        <p>Diseñado y construido con curiosidad y rigurosidad</p>
     </footer>
 
+    <!-- Modales de Habilidades Blandas -->
     <div id="comunicacion" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('comunicacion')">&times;</span> <h3>Comunicación Efectiva</h3> <p>Para mí, comunicar no es solo hablar, es asegurar que el mensaje se entienda. En mi proyecto de automatización, tuve que traducir requerimientos no-técnicos en lógica de programación clara y documentar el proceso para que otros pudieran entenderlo. Escucho para entender, no solo para responder.</p> </div> </div>
     <div id="liderazgo" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('liderazgo')">&times;</span> <h3>Liderazgo Proactivo</h3> <p>El liderazgo no se trata de tener un título, sino de tomar la iniciativa. Cuando identifiqué la necesidad de automatizar el registro de pases, no esperé a que me lo pidieran; investigué, aprendí la tecnología necesaria y construí la solución. Liderar es resolver problemas antes de que crezcan.</p> </div> </div>
     <div id="resolucion" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('resolucion')">&times;</span> <h3>Resolución de Problemas</h3> <p>Disfruto desglosando un problema complejo en partes más pequeñas y manejables. Durante el desarrollo de mi script, me enfrenté a errores de integración con las APIs. Mi método fue aislar cada componente, probarlo individualmente y luego reintegrarlo, asegurando una solución robusta y funcional.</p> </div> </div>
     <div id="ownership" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('ownership')">&times;</span> <h3>Ownership</h3> <p>Tomo cada tarea como si fuera mi propio proyecto. Desde la concepción de la idea hasta la implementación y las pruebas, me hago responsable del resultado final. Para mí, "ownership" significa que si algo sale mal, es mi responsabilidad arreglarlo, y si sale bien, es un éxito del equipo.</p> </div> </div>
     <div id="colaboracion" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('colaboracion')">&times;</span> <h3>Trabajo Colaborativo</h3> <p>Entiendo que las mejores ideas surgen de la diversidad de perspectivas. Aunque trabajé solo en mi proyecto de automatización, me apoyé en comunidades en línea y pedí feedback para mejorar el código. Estoy convencido de que colaborar y compartir conocimiento es la forma más rápida de crecer.</p> </div> </div>
     <div id="curiosidad" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('curiosidad')">&times;</span> <h3>Curiosidad por Datos</h3> <p>Mi curiosidad va más allá de los números; busco el "porqué" detrás de cada dato. En mi experiencia con inventarios, no me conformaba con corregir una discrepancia, investigaba la causa raíz en el proceso logístico. Para mí, gobernar datos es tener la curiosidad para prevenir errores, no solo para corregirlos.</p> </div> </div>
+    
+    <!-- Modales de Habilidades Técnicas -->
     <div id="governance" class="modal"> 
         <div class="modal-content"> <span class="close-btn" onclick="closeModal('governance')">&times;</span> <h3>Data Governance</h3> <p>Entiendo el Gobierno de Datos como la base para la confianza en la información. Se trata de establecer procesos para asegurar que los datos sean precisos, consistentes y seguros a lo largo de su ciclo de vida. Mi proyecto de automatización es un ejemplo práctico: valida y estandariza la información de entrada para garantizar la calidad del resultado final.</p> </div> 
     </div>
@@ -593,19 +757,25 @@
         <div class="modal-content"> <span class="close-btn" onclick="closeModal('pythonSql')">&times;</span> <h3>Python & SQL</h3> <p>Utilizo Python, con librerías como Pandas, para la limpieza y manipulación de datos, y SQL para realizar consultas complejas y extraer información valiosa de bases de datos relacionales. Son las herramientas fundamentales con las que transformo datos crudos en conocimiento accionable.</p> </div> 
     </div>
     <div id="dataops" class="modal"> 
-        <div class="modal-content"> <span class="close-btn" onclick="closeModal('dataops')">&times;</span> <h3>DataOps</h3> <p>Aplico DataOps integrando <strong>Git (Control de Versiones)</strong> y <strong>CI/CD</strong> para el *pipeline* de datos. Utilizo la lógica <strong>Test-Driven Development</strong> para la calidad del dato, enfocando la automatización en el monitoreo de <strong>Drift de Datos (Desviación)</strong>, lo que garantiza la estabilidad del proceso industrial digital.</p> </div>
+        <div class="modal-content"> <span class="close-btn" onclick="closeModal('dataops')">&times;</span> <h3>DataOps</h3> <p>Aplico DataOps integrando <strong>Git (Control de Versiones)</strong> y <strong>CI/CD</strong> para el pipeline de datos. Utilizo la lógica <strong>Test-Driven Development</strong> para la calidad del dato, enfocando la automatización en el monitoreo de <strong>Drift de Datos</strong>, lo que garantiza la estabilidad del proceso industrial digital.</p> </div>
     </div>
     <div id="automation" class="modal"> 
         <div class="modal-content"> <span class="close-btn" onclick="closeModal('automation')">&times;</span> <h3>Process Automation</h3> <p>Mi habilidad principal es identificar tareas manuales y repetitivas y construir soluciones de software para eliminarlas. Con Google Apps Script, pude integrar múltiples aplicaciones (Sheets, Slides, Gmail) para crear un flujo de trabajo autónomo que ahorra tiempo y reduce drásticamente el error humano.</p> </div> 
     </div>
     <div id="sixSigma" class="modal"> 
-        <div class="modal-content"> <span class="close-btn" onclick="closeModal('sixSigma')">&times;</span> <h3>Lean Six Sigma</h3> <p>Utilizo <strong>DMAIC</strong> como motor de mejora. Me especializo en <strong>Diseño de Experimentos (DOE)</strong> para optimización de variables críticas ($X$'s), <strong>Análisis de Capacidad ($C_pk$)</strong> para medir la estabilidad del proceso y <strong>Teoría de Restricciones (TOC)</strong> para maximizar el *throughput* de información, garantizando eficiencia estadística en los sistemas.</p></div> 
+        <div class="modal-content"> <span class="close-btn" onclick="closeModal('sixSigma')">&times;</span> <h3>Lean Six Sigma</h3> <p>Utilizo <strong>DMAIC</strong> como motor de mejora. Me especializo en <strong>Diseño de Experimentos (DOE)</strong> para optimización de variables críticas, <strong>Análisis de Capacidad</strong> para medir la estabilidad del proceso y <strong>Teoría de Restricciones (TOC)</strong> para maximizar el throughput de información, garantizando eficiencia estadística en los sistemas.</p></div> 
     </div>
     <div id="prompt" class="modal"> 
-        <div class="modal-content"> <span class="close-btn" onclick="closeModal('prompt')">&times;</span> <h3>Prompt Engineering</h3> <p>Aplico la <strong>Ingeniería del Prompt</strong> como una herramienta de <strong>Aceleración de Procesos (Lean)</strong>. Empleo *Zero/Few-Shot Learning* y técnicas de *Chain-of-Thought* para la generación eficiente de código y la exploración rápida de arquitecturas de IA, optimizando la *tasa de transferencia de conocimiento*.</p></div> 
+        <div class="modal-content"> <span class="close-btn" onclick="closeModal('prompt')">&times;</span> <h3>Prompt Engineering</h3> <p>Aplico la <strong>Ingeniería del Prompt</strong> como una herramienta de <strong>Aceleración de Procesos (Lean)</strong>. Empleo Zero/Few-Shot Learning y técnicas de Chain-of-Thought para la generación eficiente de código y la exploración rápida de arquitecturas de IA, optimizando la tasa de transferencia de conocimiento.</p></div> 
+    </div>
+    <div id="googleWorkspace" class="modal">
+        <div class="modal-content"> <span class="close-btn" onclick="closeModal('googleWorkspace')">&times;</span> <h3>Google Workspace</h3> <p>Experto en la suite completa de Google Workspace (Sheets, Forms, Slides, Gmail, Drive) para automatización de flujos de trabajo y gestión colaborativa de proyectos. Implemento integraciones mediante Apps Script para conectar diferentes herramientas y crear sistemas autónomos.</p></div>
+    </div>
+    <div id="excel" class="modal">
+        <div class="modal-content"> <span class="close-btn" onclick="closeModal('excel')">&times;</span> <h3>Excel Avanzado</h3> <p>Dominio de Excel para análisis de datos, creación de dashboards interactivos, fórmulas avanzadas, tablas dinámicas y visualización de información. Utilizo Excel como herramienta fundamental para la toma de decisiones basada en datos y la presentación ejecutiva de resultados.</p></div>
     </div>
 
-
+    <!-- Modal de Contraseña -->
     <div id="passwordModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('passwordModal')">&times;</span>
@@ -617,32 +787,27 @@
     </div>
 
     <script>
-        // FUNCIÓN checkPassword AHORA ABRE EL MODAL
         function checkPassword(event) {
             event.preventDefault(); 
             document.getElementById('passwordModal').style.display = "block";
-            document.getElementById('passwordInput').value = ''; // Limpia el campo
-            document.getElementById('passwordInput').focus(); // Pone el foco en el campo
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('passwordInput').focus();
         }
 
-        // FUNCIÓN submitPassword PROCESA LA CONTRASEÑA
         function submitPassword() {
-            // Contraseña: Hybridge2501106
             const correctPassword = "Hybridge2501106"; 
             const enteredPassword = document.getElementById('passwordInput').value;
             
             if (enteredPassword === correctPassword) {
-                // Si es correcta, abre el CV (URL de Google Drive)
                 window.open("https://drive.google.com/file/d/181wkopI_I6T0KGhwypm6gz5R9VVPEha4/view?usp=sharing", "_blank");
                 closeModal('passwordModal');
             } else {
                 alert("Contraseña incorrecta. Acceso denegado.");
-                document.getElementById('passwordInput').value = ''; // Limpia el campo en caso de error
+                document.getElementById('passwordInput').value = '';
                 document.getElementById('passwordInput').focus(); 
             }
         }
         
-        // Funciones de Carousel y Modales (Mantenidas)
         function setupCarousel(trackId, prevBtnId, nextBtnId) {
             const track = document.getElementById(trackId);
             const prevBtn = document.getElementById(prevBtnId);
@@ -688,7 +853,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             const backgroundElementsContainer = document.querySelector('.background-elements');
             
-            // 1. Generar Estrellas Fugaces 
             const numStars = 440; 
             for (let i = 0; i < numStars; i++) {
                 const star = document.createElement('div');
@@ -700,39 +864,32 @@
                 backgroundElementsContainer.appendChild(star);
             }
 
-            // 2. Generar Galaxias Lejanas y en Movimiento 
             const numGalaxies = 8; 
             for (let i = 0; i < numGalaxies; i++) {
                 const galaxy = document.createElement('div');
                 galaxy.classList.add('galaxy');
                 
-                // Tamaño y opacidad para dar el efecto de lejanía
                 const size = Math.random() * 80 + 80; 
                 galaxy.style.width = `${size}px`;
                 galaxy.style.height = `${size}px`;
                 
-                // Posición inicial aleatoria
                 const startX = Math.random() * 100;
                 const startY = Math.random() * 100;
                 galaxy.style.left = `${startX}vw`; 
                 galaxy.style.top = `${startY}vh`;
                 
-                // Variables de animación muy lentas
                 galaxy.style.setProperty('--delay-galaxy', `${Math.random() * 20}s`);
                 galaxy.style.setProperty('--duration-galaxy', `${30 + Math.random() * 30}s`); 
                 galaxy.style.setProperty('--max-opacity', `${0.1 + Math.random() * 0.2}`); 
                 
-                // Movimiento relativo
                 galaxy.style.setProperty('--start-x', `0vw`);
                 galaxy.style.setProperty('--start-y', `0vh`);
-                // Pequeño desplazamiento de +- 50vw/vh para el efecto de movimiento
                 galaxy.style.setProperty('--end-x', `${(Math.random() - 0.5) * 50}vw`);
                 galaxy.style.setProperty('--end-y', `${(Math.random() - 0.5) * 50}vh`);
                 
                 backgroundElementsContainer.appendChild(galaxy);
             }
             
-            // Lógica de Fade In on Scroll (Mantenida)
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
