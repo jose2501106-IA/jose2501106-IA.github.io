@@ -132,7 +132,7 @@
     <button type="button" data-filtro="{{ clave }}" aria-pressed="false">{{ t(cat) }} <span>{{ conteo[clave] }}</span></button>
     {%- endfor %}
   </div>
-  <div class="proyectos">
+  <div class="proyectos{{ ' proyectos--pares' if s.proyectos|length in (2, 4) else '' }}">
     {%- for p in s.proyectos %}
     <article class="proy" id="{{ p.codigo | lower }}" data-cat="{{ p.categorias | join(' ') }}">
       <div class="proy__cab"><span>FIG. {{ p.codigo[2:] }} — {% for c in p.categorias %}{{ t(s.categorias[c].fig) }}{% if not loop.last %} · {% endif %}{% endfor %}</span><span>{{ t(p.estado) }}</span></div>

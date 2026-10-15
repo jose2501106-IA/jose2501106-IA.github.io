@@ -144,6 +144,8 @@ section[id], article[id] { scroll-margin-top: 72px; }
 .filtros button[aria-pressed="true"] { background: var(--azul); color: #fff; }
 .filtros button:not([aria-pressed="true"]):hover { background: var(--boton-suave); }
 .proyectos { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); gap: 20px; }
+/* Con 2 o 4 proyectos, rejilla de 2 columnas en pantallas anchas: evita una tarjeta sola en la última fila */
+@media (min-width: 900px) { .proyectos--pares { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .proy { background: #fff; border: 1.5px solid var(--azul); display: flex; flex-direction: column; }
 .proy__cab { display: flex; justify-content: space-between; gap: 12px; padding: 10px 16px; border-bottom: 1px solid var(--azul); font: 11px var(--mono); letter-spacing: 1.5px; color: var(--azul); }
 .proy__cab span:last-child { white-space: nowrap; }
