@@ -85,8 +85,8 @@ section[id], article[id] { scroll-margin-top: 72px; }
 .cota { display: flex; align-items: center; gap: 10px; font: 10px var(--mono); color: var(--gris); }
 .cota i { flex: 1 1 0; border-top: 1px dashed var(--punteada); }
 .nombre { font: 700 clamp(44px, 7vw, 92px)/.98 var(--mono); letter-spacing: -2px; color: var(--tinta); }
-.subtitulo { font-size: clamp(20px, 2.2vw, 26px); line-height: 1.35; font-weight: 600; color: var(--tinta); max-width: 560px; text-wrap: pretty; }
-.bajada { font-size: 16px; line-height: 1.45; font-weight: 600; color: var(--azul-vivo); max-width: 560px; text-wrap: pretty; }
+.subtitulo { font-size: clamp(20px, 2.2vw, 26px); line-height: 1.35; font-weight: 600; color: var(--tinta); max-width: 560px; text-wrap: balance; }
+.bajada { font-size: 16px; line-height: 1.45; font-weight: 600; color: var(--azul-vivo); max-width: 560px; text-wrap: balance; }
 .historia { font-size: 17px; line-height: 1.6; color: var(--gris-texto); max-width: 560px; text-wrap: pretty; }
 .botones { display: flex; gap: 12px; flex-wrap: wrap; }
 .btn { font: 700 13px var(--mono); letter-spacing: 1px; padding: 14px 20px; transition: background-color .15s, color .15s; }
