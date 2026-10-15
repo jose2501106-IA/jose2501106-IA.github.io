@@ -16,8 +16,8 @@ sitio:
     es: "José Hugo Meza · IA aplicada a operaciones reales"
     en: "José Hugo Meza · AI applied to real-world operations"
   descripcion:
-    es: "Desarrollador de IA y automatización. Construyo soluciones de IA para un negocio real de la Central de Abasto y estudio Ing. en IA e Industrial."
-    en: "AI and automation developer. I build AI tools for a real wholesale business in Mexico City while studying AI and Industrial Engineering."
+    es: "Desarrollador de IA y automatización. Automatizo la operación de un negocio real de la Central de Abasto y estudio Ing. en IA e Industrial."
+    en: "AI and automation developer. I automate operations for a real wholesale business in Mexico City while studying AI and Industrial Engineering."
   imagen_alt:
     es: "José Hugo Meza · IA aplicada a operaciones reales"
     en: "José Hugo Meza · AI applied to real-world operations"
@@ -67,15 +67,15 @@ portada:
   subtitulo: {es: "IA aplicada a operaciones reales.", en: "AI applied to real-world operations."}
   bajada: {es: "Agentes, automatización y datos · Estudiante de Ing. en IA e Industrial", en: "Agents, automation and data · AI & Industrial Engineering student"}
   historia:
-    es: "Entré a un negocio mayorista de la Central de Abasto como auxiliar administrativo y a los tres meses quedé al frente de su bodega. Hoy, como independiente, le construyo soluciones de IA y automatización que se usan todos los días, mientras estudio dos ingenierías: Inteligencia Artificial e Industrial."
-    en: "I joined a wholesale business at Mexico City's Central de Abasto market as an administrative assistant, and three months later I was running its warehouse. Today, as an independent developer, I build AI and automation tools that the business uses every day, while pursuing two engineering degrees: Artificial Intelligence and Industrial Engineering."
+    es: "Entré a un negocio mayorista de la Central de Abasto como auxiliar administrativo y a los tres meses quedé al frente de su bodega. Hoy, como independiente, le construyo automatizaciones que se usan todos los días y desarrollo sus primeras soluciones de IA, mientras estudio dos ingenierías: Inteligencia Artificial e Industrial."
+    en: "I joined a wholesale business at Mexico City's Central de Abasto market as an administrative assistant, and three months later I was running its warehouse. Today, as an independent developer, I build automation tools the business uses every day and I'm developing its first AI solutions, while pursuing two engineering degrees: Artificial Intelligence and Industrial Engineering."
   boton_principal: {es: "Ver proyectos", en: "See projects"}
   boton_secundario: {es: "Escríbeme", en: "Email me"}
   datos:
     - etiqueta: {es: "ESTUDIO", en: "STUDYING"}
       valor: {es: "Ing. en IA (Hybridge) · Ing. Industrial (UVEG)", en: "AI Engineering (Hybridge) · Industrial Engineering (UVEG)"}
     - etiqueta: {es: "HOY", en: "NOW"}
-      valor: {es: "IA y automatización para un negocio de la Central de Abasto", en: "AI & automation for a wholesale business in Mexico City"}
+      valor: {es: "Automatización para un negocio de la Central de Abasto", en: "Automation for a wholesale business in Mexico City"}
     - etiqueta: {es: "UBICACIÓN", en: "BASED IN"}
       valor: {es: "Ciudad de México", en: "Mexico City"}
   retrato:
@@ -189,7 +189,7 @@ experiencia:
     puesto: {es: "Desarrollador independiente de IA y automatización", en: "Independent AI & automation developer"}
     donde: {es: "Negocio mayorista · Central de Abasto · sep 2026 – actual", en: "Wholesale business · Central de Abasto · Sep 2026 – present"}
     puntos:
-      - {es: "Construyo soluciones de IA y automatización para la operación diaria del negocio.", en: "I build AI and automation tools for the business's daily operations."}
+      - {es: "Automatizo la operación diaria del negocio y desarrollo sus primeras soluciones de IA.", en: "I automate the business's daily operations and I'm developing its first AI solutions."}
       - {es: "Mantengo el pipeline de auditoría diaria en Python y Apps Script (v7, en producción).", en: "I maintain the daily audit pipeline in Python and Apps Script (v7, in production)."}
       - {es: "Desarrollo herramientas internas para pedidos y control de bodega.", en: "I build internal tools for orders and inventory control."}
   - etiqueta: {es: "AGO – SEP 2026", en: "AUG – SEP 2026"}
@@ -219,8 +219,8 @@ como_trabajo:
 
 perfil:
   intro:
-    es: "Estudio dos ingenierías al mismo tiempo: Inteligencia Artificial en Hybridge Education e Industrial en la UVEG. En paralelo construyo soluciones de IA y automatización para un negocio de la Central de Abasto, donde convierto lo que aprendo en sistemas que se usan todos los días."
-    en: "I'm pursuing two engineering degrees at the same time: Artificial Intelligence at Hybridge Education and Industrial Engineering at UVEG. Alongside my studies, I build AI and automation tools for a wholesale business at Mexico City's Central de Abasto market, where I turn what I learn into systems used every day."
+    es: "Estudio dos ingenierías al mismo tiempo: Inteligencia Artificial en Hybridge Education e Industrial en la UVEG. En paralelo automatizo la operación de un negocio de la Central de Abasto, donde convierto lo que aprendo en sistemas que se usan todos los días."
+    en: "I'm pursuing two engineering degrees at the same time: Artificial Intelligence at Hybridge Education and Industrial Engineering at UVEG. Alongside my studies, I automate operations for a wholesale business at Mexico City's Central de Abasto market, where I turn what I learn into systems used every day."
   habilidades_blandas:
     es: "Comunicación: dos competencias nacionales de oratoria y Parlamento Juvenil. Liderazgo: Aspire Leaders Program. Ritmo de operación real: decisiones diarias en un negocio con clientes y proveedores."
     en: "Communication: two national public-speaking competitions and Youth Parliament. Leadership: Aspire Leaders Program. Fast-paced operations: daily decisions in a business with customers and suppliers."
@@ -234,7 +234,7 @@ perfil:
     - grupo: {es: "CLOUD Y HARDWARE", en: "CLOUD & HARDWARE"}
       lista: ["AWS", "Docker", "Linux", "Arduino"]
     - grupo: {es: "PROCESOS", en: "PROCESS"}
-      lista: ["Lean Six Sigma", "DMAIC", "SPC", "DOE"]
+      lista: ["Lean Six Sigma", "DMAIC"]
   idiomas:
     - {es: "Español · nativo", en: "Spanish · native"}
     - {es: "Inglés · A2, en formación (beca Bécalos)", en: "English · A2, improving (Bécalos English scholarship)"}
