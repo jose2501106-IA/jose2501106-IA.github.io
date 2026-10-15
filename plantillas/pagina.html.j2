@@ -73,7 +73,7 @@
       </div>
       <div class="bloque-titulo">
         <p class="subtitulo">{{ t(s.portada.subtitulo) }}</p>
-        <p class="bajada">{{ t(s.portada.bajada) }}</p>
+        <p class="bajada">{{ t(s.portada.bajada)|replace(" · ", "&nbsp;· "|safe) }}</p>
       </div>
       <p class="historia">{{ t(s.portada.historia) }}</p>
       <div class="botones">

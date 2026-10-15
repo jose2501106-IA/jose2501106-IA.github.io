@@ -21,8 +21,8 @@
   .cota { display: flex; align-items: center; gap: 10px; font: 12px "Space Mono"; color: var(--gris); }
   .cota i { flex: 1; border-top: 1.5px dashed #9DB3DE; }
   h1 { font: 700 96px/.96 "Space Mono"; letter-spacing: -3px; }
-  .sub { font-size: 34px; line-height: 1.2; font-weight: 600; }
-  .bajada { font-size: 21px; line-height: 1.35; font-weight: 600; color: var(--vivo); }
+  .sub { font-size: 34px; line-height: 1.2; font-weight: 600; text-wrap: balance; }
+  .bajada { font-size: 21px; line-height: 1.35; font-weight: 600; color: var(--vivo); text-wrap: balance; }
   .foto { position: absolute; right: 64px; top: 92px; width: 352px; padding: 20px; }
   .foto .esq { position: absolute; width: 22px; height: 22px; border: 0 solid var(--azul); }
   .ti { top: 0; left: 0; border-top-width: 2.5px !important; border-left-width: 2.5px !important; }
@@ -47,7 +47,7 @@
       <div class="cota" style="margin-top:8px"><span>y 196</span><i></i></div>
     </div>
     <div class="sub">{{ sub }}</div>
-    <div class="bajada">{{ bajada }}</div>
+    <div class="bajada">{{ bajada|replace(" · ", "&nbsp;· "|safe) }}</div>
   </div>
   <div class="foto">
     <span class="esq ti"></span><span class="esq td"></span><span class="esq bi"></span><span class="esq bd"></span>
