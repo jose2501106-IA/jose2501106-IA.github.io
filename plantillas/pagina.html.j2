@@ -128,7 +128,7 @@
   <div class="filtros" role="group" aria-label="{{ t(s.ui.filtrar) }}">
     <span class="filtros__et">{{ t(s.ui.filtrar) }}</span>
     <button type="button" data-filtro="todos" aria-pressed="true">{{ t(s.ui.todos) }} <span>{{ s.proyectos | length }}</span></button>
-    {%- for clave, cat in s.categorias.items() %}
+    {%- for clave, cat in s.categorias.items() if conteo[clave] %}
     <button type="button" data-filtro="{{ clave }}" aria-pressed="false">{{ t(cat) }} <span>{{ conteo[clave] }}</span></button>
     {%- endfor %}
   </div>

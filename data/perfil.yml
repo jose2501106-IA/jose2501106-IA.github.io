@@ -100,12 +100,12 @@ roles:
     evidencia: ["P-03"]
   - codigo: "R-03"
     titulo: {es: "Mejora continua / Lean", en: "Continuous improvement / Lean"}
-    texto: {es: "DMAIC, control estadístico y diseño de experimentos aplicados a procesos y flujos de datos.", en: "DMAIC, statistical process control (SPC) and design of experiments applied to processes and data flows."}
-    evidencia: ["P-05"]
+    texto: {es: "Auditoría diaria de la operación del almacén, mejorada versión tras versión hasta la v7; formación en Lean Management (Lean Six Sigma Institute).", en: "A daily warehouse operations audit, improved version after version up to v7; training in Lean Management (Lean Six Sigma Institute)."}
+    evidencia: ["P-03"]
   - codigo: "R-04"
     titulo: {es: "Análisis de datos", en: "Data analysis"}
     texto: {es: "Limpieza y análisis con Pandas, y tableros para decidir con números.", en: "Data cleaning and analysis with Pandas, and dashboards for data-driven decisions."}
-    evidencia: ["P-01", "P-05"]
+    evidencia: ["P-01", "P-03"]
 
 # Categorías de los filtros (en este orden)
 categorias:
@@ -183,23 +183,6 @@ proyectos:
     enlaces:
       - {texto: {es: "Ver repositorio", en: "View repository (in Spanish)"}, url: "https://github.com/jose2501106-IA/goyahack_cuentas-claras"}
 
-  - codigo: "P-05"
-    nombre: {es: "DataOps con Lean Six Sigma", en: "DataOps with Lean Six Sigma"}
-    categorias: [lean, datos]
-    estado: {es: "EN PROCESO", en: "IN PROGRESS"}
-    subtitulo: {es: "Caso de estudio DMAIC sobre un pipeline de datos", en: "A DMAIC case study on a data pipeline"}
-    descripcion:
-      es: "Caso de estudio que aplica DMAIC a un pipeline de datos: MSA para medir, análisis estadístico de causas, diseño de experimentos 2³ y control con SPC y plan OCAP."
-      en: "A case study applying DMAIC to a data pipeline: MSA to measure, statistical root-cause analysis, a 2³ design of experiments and control with SPC and an OCAP plan."
-    demuestra: {es: "Estadística aplicada · DMAIC · control estadístico de procesos", en: "Applied statistics · DMAIC · statistical process control"}
-    cifras:
-      - {valor: "5", texto: {es: "fases DMAIC", en: "DMAIC phases"}}
-      - {valor: "2³", texto: {es: "diseño factorial", en: "factorial design"}}
-    tecnologias: ["Lean Six Sigma", "DMAIC", "SPC", "DOE", "Python"]
-    # Sin enlace hasta corregir las páginas del caso (dicen "Como Black Belt" y presentan resultados como reales).
-    enlaces: []
-    nota_sin_enlace: {es: "Documentación en revisión", en: "Write-up under review"}
-
 experiencia:
   - etiqueta: {es: "ACTUAL", en: "CURRENT"}
     lugar: {es: "CDMX", en: "MEXICO CITY"}
@@ -229,12 +212,6 @@ experiencia:
     donde: {es: "Goya Hack 2026 · Facultad de Ingeniería, UNAM", en: "Goya Hack 2026 · UNAM School of Engineering"}
     puntos:
       - {es: "Tercer lugar del Track Contenido con Cuentas Claras: bitácora de fiado cofirmada con un contrato inteligente en Stellar, presentada en un pitch de 3 minutos.", en: "Third place in the Content track with Cuentas Claras: a credit ledger signed by both parties and enforced by a Stellar smart contract, presented in a 3-minute pitch."}
-  - etiqueta: {es: "EN DESARROLLO", en: "IN DEVELOPMENT"}
-    lugar: {es: "CDMX", en: "MEXICO CITY"}
-    puesto: {es: "Emprendimiento · Industria 4.0", en: "Entrepreneurship · Industry 4.0"}
-    donde: {es: "Startup de automatización industrial", en: "Industrial automation startup"}
-    puntos:
-      - {es: "Prototipos de automatización con Arduino e IoT para procesos industriales.", en: "Automation prototypes with Arduino and IoT for industrial processes."}
 
 como_trabajo:
   es: "// Cómo trabajo: diagnóstico → diseño → construcción con IA y pruebas en 3 capas → control con DMAIC."
@@ -251,13 +228,13 @@ perfil:
     - grupo: {es: "PROGRAMACIÓN", en: "PROGRAMMING"}
       lista: ["Python", "JavaScript", "TypeScript", "SQL", "Bash"]
     - grupo: {es: "IA Y DATOS", en: "AI & DATA"}
-      lista: ["Claude API", "Claude Code", "OpenAI", "Pandas", "NumPy", "scikit-learn", "TensorFlow", "Streamlit"]
+      lista: ["Claude API", "Claude Code", "OpenAI", "Pandas", "NumPy", "Streamlit"]
     - grupo: {es: "AUTOMATIZACIÓN", en: "AUTOMATION"}
       lista: ["Apps Script", "Google Workspace", {es: "Excel avanzado", en: "Advanced Excel"}, "GitHub Actions"]
     - grupo: {es: "CLOUD Y HARDWARE", en: "CLOUD & HARDWARE"}
-      lista: ["AWS", "Docker", "Linux", "Arduino", "Raspberry Pi"]
+      lista: ["AWS", "Docker", "Linux", "Arduino"]
     - grupo: {es: "PROCESOS", en: "PROCESS"}
-      lista: ["Lean Six Sigma", "DMAIC", "SPC", "DOE", "VSM"]
+      lista: ["Lean Six Sigma", "DMAIC", "SPC", "DOE"]
   idiomas:
     - {es: "Español · nativo", en: "Spanish · native"}
     - {es: "Inglés · A2, en formación (beca Bécalos)", en: "English · A2, improving (Bécalos English scholarship)"}
