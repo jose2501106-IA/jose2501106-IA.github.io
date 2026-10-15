@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: "Space Mono"; font-weight: 400; src: url("{{ base }}assets/fuentes/space-mono-400.woff2") format("woff2"); }
+  @font-face { font-family: "Space Mono"; font-weight: 700; src: url("{{ base }}assets/fuentes/space-mono-700.woff2") format("woff2"); }
+  @font-face { font-family: "Titillium Web"; font-weight: 600; src: url("{{ base }}assets/fuentes/titillium-web-600.woff2") format("woff2"); }
+  :root { --azul: #0046B8; --vivo: #1166F2; --tinta: #0B1F4A; --gris: #5A6F9A; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; }
+  body {
+    position: relative; overflow: hidden; background-color: #fff; color: var(--tinta); font-family: "Titillium Web", sans-serif;
+    background-image: linear-gradient(#E3E9F5 1px, transparent 1px), linear-gradient(90deg, #E3E9F5 1px, transparent 1px),
+                      linear-gradient(#F3F6FB 1px, transparent 1px), linear-gradient(90deg, #F3F6FB 1px, transparent 1px);
+    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  }
+  .meta { position: absolute; left: 64px; right: 64px; top: 40px; display: flex; justify-content: space-between; font: 15px "Space Mono"; letter-spacing: 2px; color: var(--gris); }
+  .texto { position: absolute; left: 64px; top: 112px; width: 640px; display: flex; flex-direction: column; gap: 18px; }
+  .kicker { font: 17px "Space Mono"; letter-spacing: 3px; color: var(--azul); }
+  .cota { display: flex; align-items: center; gap: 10px; font: 12px "Space Mono"; color: var(--gris); }
+  .cota i { flex: 1; border-top: 1.5px dashed #9DB3DE; }
+  h1 { font: 700 96px/.96 "Space Mono"; letter-spacing: -3px; }
+  .sub { font-size: 34px; line-height: 1.2; font-weight: 600; }
+  .bajada { font-size: 21px; line-height: 1.35; font-weight: 600; color: var(--vivo); }
+  .foto { position: absolute; right: 64px; top: 92px; width: 352px; padding: 20px; }
+  .foto .esq { position: absolute; width: 22px; height: 22px; border: 0 solid var(--azul); }
+  .ti { top: 0; left: 0; border-top-width: 2.5px !important; border-left-width: 2.5px !important; }
+  .td { top: 0; right: 0; border-top-width: 2.5px !important; border-right-width: 2.5px !important; }
+  .bi { bottom: 0; left: 0; border-bottom-width: 2.5px !important; border-left-width: 2.5px !important; }
+  .bd { bottom: 0; right: 0; border-bottom-width: 2.5px !important; border-right-width: 2.5px !important; }
+  .marco { position: relative; border: 2px solid var(--azul); background: #fff; }
+  .marco img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; filter: saturate(1.08) contrast(1.03); }
+  .marco .rej { position: absolute; inset: 0; background-image: linear-gradient(rgba(0,70,184,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,70,184,.1) 1px, transparent 1px); background-size: 20% 20%; }
+  .marco .pie { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; padding: 7px 10px; background: rgba(255,255,255,.92); border-top: 2px solid var(--azul); font: 11px "Space Mono"; letter-spacing: 1.5px; color: var(--azul); }
+  .barra { position: absolute; left: 0; right: 0; bottom: 0; height: 64px; padding: 0 64px; display: flex; align-items: center; justify-content: space-between; background: var(--azul); color: #fff; font: 700 19px "Space Mono"; letter-spacing: 1px; }
+  .barra span:last-child { font-weight: 400; font-size: 15px; letter-spacing: 2px; opacity: .85; }
+</style>
+</head>
+<body>
+  <div class="meta"><span>{{ hoja }} 00 / {{ perfil }}</span><span>{{ escala }} 1:1 · REV {{ anio }}</span></div>
+  <div class="texto">
+    <div class="kicker">{{ kicker }}</div>
+    <div>
+      <div class="cota"><span>y 000</span><i></i></div>
+      <h1>{{ nombre[0] }}<br>{{ nombre[1] }}</h1>
+      <div class="cota" style="margin-top:8px"><span>y 196</span><i></i></div>
+    </div>
+    <div class="sub">{{ sub }}</div>
+    <div class="bajada">{{ bajada }}</div>
+  </div>
+  <div class="foto">
+    <span class="esq ti"></span><span class="esq td"></span><span class="esq bi"></span><span class="esq bd"></span>
+    <div class="marco"><img src="{{ base }}assets/img/retrato-864.webp" alt=""><div class="rej"></div><div class="pie"><span>{{ pie_izq }}</span><span>HYBRIDGE · UVEG</span></div></div>
+  </div>
+  <div class="barra"><span>jose2501106-ia.github.io{{ ruta }}</span><span>{{ idiomas }}</span></div>
+</body>
+</html>

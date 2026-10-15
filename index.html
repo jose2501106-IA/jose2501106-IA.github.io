@@ -1,910 +1,386 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>José Hugo Meza - Estudiante de Ingeniería: Convergencia IA & LSS</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* Variables y Estilos Generales */
-        :root {
-            --primary-color: #26447d;
-            --dark-blue: #2c3e50;
-            --light-gray: #f8f9fa;
-            --text-color: #343a40; 
-            --secondary-text: #6c757d;
-            --white: #ffffff;
-            --border-color: #e9ecef;
-            
-            --harvard-red: #A51C30;
-            --harvard-red-pastel: #FADADD;
-            --harvard-red-pastel-hover: #F8CFD3;
-
-            --one-blue-pastel: #E1F4FC;
-            --one-blue-pastel-hover: #D0EDF9;
-            
-            --anahuac-gold: #FFD700;
-            --anahuac-gold-pastel: #FFF9E6;
-            --anahuac-gold-pastel-hover: #FFF4D1;
-        }
-
-        body { 
-            font-family: 'Inter', sans-serif;
-            line-height: 1.7; 
-            color: var(--white);
-            margin: 0; 
-            padding: 2rem;
-            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center center;
-            background-attachment: fixed;
-            overflow-x: hidden;
-            position: relative; 
-            z-index: 0; 
-        }
-
-        .container { 
-            max-width: 800px;
-            margin: 0 auto; 
-            background-color: transparent; 
-            padding: 2.5rem; 
-            border-radius: 12px; 
-            box-shadow: none;
-            position: relative;
-            z-index: 10; 
-        }
-
-        .header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap; 
-            color: var(--white);
-        }
-
-        .profile-photo {
-            width: 140px;
-            height: 175px;
-            border-radius: 8px;
-            margin-right: 2rem;
-            object-fit: cover;
-            border: 3px solid var(--white);
-        }
-
-        h1 { font-size: 2.5rem; color: var(--white); margin: 0; }
-        .subtitle { 
-            font-size: 1.15rem;
-            color: rgba(255, 255, 255, 0.9); 
-            margin-top: 0.25rem; 
-            font-weight: 400; 
-        } 
-        p { font-size: 1.1rem; color: var(--white); }
-
-        strong { color: var(--white); }
-        
-        .section p { color: var(--white); } 
-        .section p strong { color: var(--white); } 
-
-        .section {
-            margin-top: 2.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.2); 
-            padding-top: 2rem;
-        }
-
-        h2 { color: var(--white); font-size: 1.8rem; margin-bottom: 1.5rem; }
-        
-        .links a { 
-            display: inline-block;
-            background-color: var(--primary-color); 
-            color: var(--white); 
-            text-decoration: none; 
-            padding: 12px 24px; 
-            border-radius: 8px; 
-            margin: 10px 10px 10px 0; 
-            font-weight: bold;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .links a:hover { 
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(38, 68, 125, 0.4);
-        }
-        .links-center {
-            text-align: center;
-            margin-top: 2.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-        .btn-primary-ghost {
-            display: inline-block;
-            color: var(--white); 
-            border: 2px solid var(--white);
-            background-color: transparent;
-            text-decoration: none; 
-            padding: 12px 28px;
-            border-radius: 8px; 
-            font-weight: bold; 
-            transition: all 0.2s ease;
-            width: 300px; 
-            box-sizing: border-box;
-        }
-        .btn-primary-ghost:hover {
-            background-color: var(--white);
-            color: var(--primary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
-        }
-
-        .value-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-            text-align: left;
-        }
-        .value-item {
-            background-color: rgba(0, 0, 0, 0.65); 
-            padding: 1.5rem;
-            border-radius: 8px;
-            color: var(--white);
-            border-left: 4px solid var(--primary-color);
-        }
-        .value-item h3 {
-            margin: 0 0 0.5rem 0;
-            color: var(--white); 
-        }
-        .value-item p {
-            font-size: 0.95rem;
-            color: var(--white); 
-            line-height: 1.6;
-        }
-        .value-item p strong {
-            color: var(--primary-color);
-        }
-        
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-        }
-        .skill {
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: bold;
-            color: var(--white);
-            cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.2s ease;
-        }
-        .skill:hover {
-             background-color: rgba(38, 68, 125, 0.7);
-             transform: translateY(-2px);
-        }
-        .education-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
-        .education-item {
-            display: block;
-            text-decoration: none;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 1.5rem;
-            border-radius: 8px;
-            border-left: 5px solid var(--primary-color);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .education-item:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-        .education-item h3 {
-            margin: 0 0 0.25rem 0;
-            color: var(--white);
-        }
-        .education-item p {
-            margin: 0;
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-        .education-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-        .education-header h3 { margin: 0; }
-        .progress-label {
-            font-size: 0.9rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            background-color: rgba(38, 68, 125, 0.3);
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
-        .progress-bar {
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
-            height: 10px;
-            margin-top: 1rem;
-            overflow: hidden;
-        }
-        .progress {
-            height: 100%;
-            background-color: var(--primary-color);
-            border-radius: 5px;
-            transition: width 0.5s ease-out;
-        }
-        
-        /* Experiencia Laboral */
-        .experience-card {
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 2rem;
-            border-radius: 12px;
-            border-left: 5px solid var(--primary-color);
-            margin-bottom: 1.5rem;
-        }
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-        .experience-title h3 {
-            margin: 0 0 0.25rem 0;
-            color: var(--white);
-            font-size: 1.5rem;
-        }
-        .experience-company {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin: 0.25rem 0;
-        }
-        .experience-duration {
-            background-color: rgba(38, 68, 125, 0.4);
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            color: var(--white);
-            font-weight: bold;
-        }
-        
-        /* Certificaciones LSS */
-        .cert-roadmap {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-        .cert-item {
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 1.5rem;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            border-left: 4px solid var(--primary-color);
-        }
-        .cert-status {
-            flex-shrink: 0;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            border: 3px solid var(--primary-color);
-            background-color: transparent;
-            position: relative;
-        }
-        .cert-status.active {
-            background-color: var(--primary-color);
-        }
-        .cert-status.active::after {
-            content: '✓';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--white);
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-        .cert-info {
-            flex-grow: 1;
-        }
-        .cert-info h4 {
-            margin: 0 0 0.25rem 0;
-            color: var(--white);
-        }
-        .cert-info p {
-            margin: 0;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        /* CARRUSEL Y MODALES */
-        .carousel-container { position: relative; margin-top: 1rem; }
-        .carousel-viewport { overflow: hidden; border-radius: 12px; }
-        .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); }
-        .slide { flex: 0 0 100%; box-sizing: border-box; background-color: transparent; }
-        .program-card {
-            border-radius: 12px;
-            padding: 2rem;
-            color: var(--dark-blue); 
-            min-height: 180px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .program-card h3 {
-            font-size: 1.5rem;
-            margin-top: 0;
-            margin-bottom: 0.75rem;
-        }
-        .program-card p {
-            font-size: 1rem;
-            line-height: 1.6;
-            margin: 0;
-            color: var(--text-color);
-        }
-        .program-card-one { 
-            background-color: var(--one-blue-pastel); 
-            color: var(--dark-blue); 
-            border: 1px solid var(--one-blue-pastel-hover); 
-        }
-        .program-card-one h3 { color: var(--primary-color); }
-        .program-card-aspire { 
-            background-color: var(--harvard-red-pastel); 
-            color: var(--dark-blue); 
-            border: 1px solid var(--harvard-red-pastel-hover); 
-        }
-        .program-card-aspire h3 { color: var(--harvard-red); }
-        .program-card-anahuac {
-            background-color: var(--anahuac-gold-pastel);
-            color: var(--dark-blue);
-            border: 1px solid var(--anahuac-gold-pastel-hover);
-        }
-        .program-card-anahuac h3 { color: #B8860B; }
-        .carousel-btn {
-            position: absolute;
-            top: 50%; transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.2); 
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 50%; width: 44px; height: 44px; font-size: 1.5rem;
-            color: var(--white);
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: all 0.2s ease; z-index: 20;
-        }
-        .carousel-btn:hover { 
-            background-color: rgba(255, 255, 255, 0.4); 
-            transform: translateY(-50%) scale(1.05); 
-        }
-        .carousel-btn.prev { left: 10px; }
-        .carousel-btn.next { right: 10px; }
-        .carousel-btn.hidden { opacity: 0; pointer-events: none; }
-        
-        .background-elements { 
-            position: fixed; 
-            top: 0; left: 0; 
-            width: 100%; height: 100%; 
-            pointer-events: none; 
-            overflow: hidden; 
-            z-index: 1; 
-        }
-
-        .star {
-            position: absolute;
-            background-color: var(--white);
-            width: 2px;
-            height: 2px;
-            border-radius: 50%;
-            opacity: 0;
-            animation: 
-                star-fall var(--duration) linear var(--delay) infinite,
-                star-twinkle 2s ease-in-out var(--delay) infinite alternate;
-        }
-        @keyframes star-fall {
-            0% { transform: translate(0, 0) scale(1); opacity: 0; }
-            10% { opacity: 1; }
-            100% { transform: translate(100vw, 100vh) scale(0.5); opacity: 0; }
-        }
-        @keyframes star-twinkle {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 0.3; }
-        }
-
-        .galaxy {
-            position: absolute;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(38,68,125,0.4) 30%, rgba(0,0,0,0) 70%);
-            border-radius: 50%;
-            opacity: 0;
-            animation: 
-                galaxy-move var(--duration-galaxy) linear var(--delay-galaxy) infinite,
-                galaxy-fade 8s ease-in-out var(--delay-galaxy) infinite alternate;
-        }
-
-        @keyframes galaxy-move {
-            0% { transform: translate(var(--start-x), var(--start-y)) scale(0.1); }
-            100% { transform: translate(var(--end-x), var(--end-y)) scale(0.2); }
-        }
-
-        @keyframes galaxy-fade {
-            0%, 10% { opacity: 0; }
-            50% { opacity: var(--max-opacity); }
-            90%, 100% { opacity: 0; }
-        }
-
-        .modal {
-            display: none;
-            position: fixed; z-index: 1000; left: 0; top: 0;
-            width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7);
-            animation: fadeIn 0.3s;
-        }
-        .modal-content {
-            background-color: var(--white);
-            margin: 15% auto;
-            padding: 25px;
-            border-radius: 10px; max-width: 500px; position: relative;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            color: var(--text-color);
-        }
-        .modal-content h3 { color: var(--primary-color); }
-        .modal-content p { color: var(--text-color); }
-        .close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
-        .close-btn:hover, .close-btn:focus { color: black; }
-        footer {
-            text-align: center;
-            margin-top: 2.5rem; padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-        }
-        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-        .animate-on-scroll { opacity: 0; transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-        .fade-in-up { transform: translateY(50px); }
-        .show { opacity: 1; transform: none; }
-
-        .section ul {
-            list-style: disc;
-            margin-left: 1.5rem;
-            color: var(--white);
-        }
-        .section ul li {
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
-            color: var(--white);
-        }
-        .section ul li strong {
-             color: var(--white);
-        }
-        #passwordInput {
-            width: 90%; 
-            padding: 10px; 
-            margin-bottom: 15px; 
-            border: 1px solid #ccc; 
-            border-radius: 4px;
-            box-sizing: border-box; 
-            color: var(--dark-blue); 
-        }
-        .modal-content button {
-            background-color: var(--primary-color); 
-            color: var(--white); 
-            padding: 10px 20px; 
-            border: none; 
-            border-radius: 4px; 
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-        .modal-content button:hover {
-            background-color: var(--dark-blue);
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>José Hugo Meza · IA aplicada a operaciones reales</title>
+<meta name="description" content="Desarrollador de IA y automatización. Construyo soluciones de IA para un negocio real de la Central de Abasto y estudio Ing. en IA e Industrial.">
+<meta name="author" content="José Hugo Meza Vázquez">
+<link rel="canonical" href="https://jose2501106-ia.github.io/">
+<link rel="alternate" hreflang="es" href="https://jose2501106-ia.github.io/">
+<link rel="alternate" hreflang="en" href="https://jose2501106-ia.github.io/en/">
+<link rel="alternate" hreflang="x-default" href="https://jose2501106-ia.github.io/">
+<meta name="theme-color" content="#0B1F4A">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="José Hugo Meza">
+<meta property="og:title" content="José Hugo Meza · IA aplicada a operaciones reales">
+<meta property="og:description" content="Desarrollador de IA y automatización. Construyo soluciones de IA para un negocio real de la Central de Abasto y estudio Ing. en IA e Industrial.">
+<meta property="og:url" content="https://jose2501106-ia.github.io/">
+<meta property="og:image" content="https://jose2501106-ia.github.io/assets/img/og-es.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="José Hugo Meza · IA aplicada a operaciones reales">
+<meta property="og:locale" content="es_MX">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="profile:first_name" content="José Hugo">
+<meta property="profile:last_name" content="Meza">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="José Hugo Meza · IA aplicada a operaciones reales">
+<meta name="twitter:description" content="Desarrollador de IA y automatización. Construyo soluciones de IA para un negocio real de la Central de Abasto y estudio Ing. en IA e Industrial.">
+<meta name="twitter:image" content="https://jose2501106-ia.github.io/assets/img/og-es.jpg">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="assets/fuentes/space-mono-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fuentes/titillium-web-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/sitio.css?v=2826cf74">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "José Hugo Meza Vázquez", "alternateName": "José Hugo Meza", "url": "https://jose2501106-ia.github.io/", "image": "https://jose2501106-ia.github.io/assets/img/retrato-864.webp", "jobTitle": "Desarrollador de IA y automatización", "description": "Desarrollador de IA y automatización. Construyo soluciones de IA para un negocio real de la Central de Abasto y estudio Ing. en IA e Industrial.", "email": "mailto:jose2501106@hybridge.education", "address": {"@type": "PostalAddress", "addressLocality": "Ciudad de México", "addressCountry": "MX"}, "sameAs": ["https://www.linkedin.com/in/josehugomeza-ai/", "https://github.com/jose2501106-IA"], "knowsLanguage": ["es", "en"]}</script>
 </head>
 <body>
-    <div class="background-elements"></div> 
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<div class="lienzo">
 
-    <div class="container">
-        <div class="header">
-            <img src="https://github.com/jose2501106-IA/jose2501106-IA.github.io/blob/main/Pepe.png?raw=true" alt="Foto de José Hugo Meza" class="profile-photo">
-            <div>
-                <h1>José Hugo Meza Vázquez</h1>
-                <p class="subtitle">Ingeniero Industrial en formación | Automatización de Procesos, Inteligencia Artificial y Análisis de Datos</p>
-            </div>
-        </div>
-        
-        <p class="animate-on-scroll fade-in-up">Estudiante de Ingeniería Industrial e Ingeniería en Inteligencia Artificial con experiencia en automatización de procesos administrativos y análisis de datos. He diseñado e implementado sistemas automatizados que redujeron tiempos operativos en un 96% mediante Google Apps Script y Google Workspace.</p>
-
-        <div class="links animate-on-scroll fade-in-up">
-            <a href="#" onclick="checkPassword(event);">Descargar CV</a>
-            <a href="https://www.linkedin.com/in/josehugomeza-ai" target="_blank">LinkedIn</a>
-            <a href="https://github.com/jose2501106-IA" target="_blank">GitHub</a>
-        </div>
-        
-        <div class="section value-proposition animate-on-scroll fade-in-up">
-            <h2>🎯 Mi Propuesta de Valor</h2>
-            <div class="value-grid">
-                <div class="value-item">
-                    <h3>Ingeniería de Flujo de Valor (Data VSM)</h3>
-                    <p>Aplico <strong>VSM (Value Stream Mapping)</strong> de LSS para mapear y optimizar el <strong>Data Lineage</strong> de extremo a extremo, cuantificando el <strong>Cycle Time</strong> de datos y los <strong>DPMO</strong> de calidad.</p>
-                </div>
-                <div class="value-item">
-                    <h3>Automatización de Procesos</h3>
-                    <p>Diseño e implemento sistemas automatizados que eliminan procesos manuales, reducen errores al 0% y optimizan tiempos operativos. Expertise en <strong>Google Apps Script</strong>, <strong>Python</strong> y <strong>DataOps</strong>.</p>
-                </div>
-                <div class="value-item">
-                    <h3>Gobernanza de Datos (Green Lean)</h3>
-                    <p>Mi enfoque es <strong>Gobernanza como Green Lean</strong>: Elimino el desperdicio de Datos de Mala Calidad en la fuente mediante validación, reduciendo costos operacionales y asegurando la veracidad de la información.</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="section animate-on-scroll fade-in-up">
-            <h2>💼 Experiencia Profesional</h2>
-            <div class="experience-card">
-                <div class="experience-header">
-                    <div class="experience-title">
-                        <h3>Asistente Administrativo</h3>
-                        <p class="experience-company">Casa Muñoz – Central de Abastos, Ciudad de México</p>
-                    </div>
-                    <span class="experience-duration">4 meses</span>
-                </div>
-                <h4 style="color: var(--white); margin-top: 1rem;">Funciones clave:</h4>
-                <ul style="color: var(--white); margin-left: 1.5rem;">
-                    <li>Administración de bases de datos operativas</li>
-                    <li>Generación de reportes administrativos</li>
-                    <li>Implementación de controles de calidad</li>
-                    <li>Coordinación con proveedores y áreas internas</li>
-                </ul>
-                <h4 style="color: var(--white); margin-top: 1rem;">Logros cuantificables:</h4>
-                <ul style="color: var(--white); margin-left: 1.5rem;">
-                    <li>Reducción significativa de errores en captura de datos</li>
-                    <li>Identificación de oportunidades de mejora de procesos</li>
-                    <li>Aseguramiento de integridad de información</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="section animate-on-scroll fade-in-up">
-            <h2>🎓 Formación Académica</h2>
-            <div class="education-grid">
-                <a href="apuntes-ia.html" class="education-item">
-                    <div class="education-header">
-                        <h3>Hybridge Education</h3>
-                        <span class="progress-label">3er Semestre</span>
-                    </div>
-                    <p>Ingeniería en Inteligencia Artificial</p>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 33%;"></div> 
-                    </div>
-                </a>
-                
-                <a href="apuntes-industrial.html" class="education-item">
-                    <div class="education-header">
-                        <h3>Universidad Virtual del Estado de Guanajuato (UVEG)</h3>
-                        <span class="progress-label">38% Completado</span>
-                    </div>
-                    <p>Ingeniería Industrial</p>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 38%;"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        
-        <div class="section animate-on-scroll fade-in-up">
-            <h2>🏆 Certificaciones y Programas Especiales</h2>
-            
-            <h3 style="color: var(--white); margin-bottom: 1rem;">Lean Six Sigma (CSSC) - Roadmap</h3>
-            <div class="cert-roadmap">
-                <div class="cert-item">
-                    <div class="cert-status active"></div>
-                    <div class="cert-info">
-                        <h4>Lean Management</h4>
-                        <p>En curso • 60% completado</p>
-                    </div>
-                </div>
-                <div class="cert-item">
-                    <div class="cert-status"></div>
-                    <div class="cert-info">
-                        <h4>White Belt</h4>
-                        <p>Planeado</p>
-                    </div>
-                </div>
-                <div class="cert-item">
-                    <div class="cert-status"></div>
-                    <div class="cert-info">
-                        <h4>Yellow Belt</h4>
-                        <p>Planeado</p>
-                    </div>
-                </div>
-                <div class="cert-item">
-                    <div class="cert-status"></div>
-                    <div class="cert-info">
-                        <h4>Green Belt</h4>
-                        <p>Planeado</p>
-                    </div>
-                </div>
-                <div class="cert-item">
-                    <div class="cert-status"></div>
-                    <div class="cert-info">
-                        <h4>Black Belt</h4>
-                        <p>Planeado</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="section animate-on-scroll fade-in-up">
-            <h2>🌟 Programas Destacados</h2>
-            <div class="carousel-container">
-                <div class="carousel-viewport">
-                    <div class="carousel-track" id="program-track">
-                        <div class="slide">
-                            <div class="program-card program-card-anahuac">
-                                <h3>Seminario de IA y Ciencia de Datos</h3>
-                                <p><strong>Universidad Anáhuac México Norte</strong><br>Becario 100% del Seminario de IA y Ciencia de Datos (Programa Santander 2026). Formación avanzada en inteligencia artificial y análisis de datos aplicado a problemas de negocio.</p>
-                            </div>
-                        </div>
-                        <div class="slide">
-                            <div class="program-card program-card-one">
-                                <h3>Oracle Next Education (ONE)</h3>
-                                <p>Programa intensivo de 6 meses en desarrollo full-stack, metodologías Ágiles y lógica de programación. Actualmente especializado en <strong>Ciencia de Datos</strong>, profundizando en manipulación, análisis y visualización de datos.</p>
-                            </div>
-                        </div>
-                        <div class="slide">
-                            <div class="program-card program-card-aspire">
-                                <h3>AspireLeaders Program</h3>
-                                <p><strong>Harvard University</strong><br>Seleccionado para programa global de desarrollo de liderazgo fundado por catedráticos de Harvard University, diseñado para potenciar el talento emergente a través de networking, mentorías y formación ejecutiva.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-btn prev" id="program-prev" aria-label="Anterior">&#10094;</button>
-                <button class="carousel-btn next" id="program-next" aria-label="Siguiente">&#10095;</button>
-            </div>
-        </div>
-
-        <div class="section animate-on-scroll fade-in-up">
-            <h2>💡 Habilidades Blandas</h2>
-            <div class="skills-grid">
-                <div class="skill" onclick="openModal('comunicacion')">Comunicación Efectiva</div>
-                <div class="skill" onclick="openModal('liderazgo')">Liderazgo Proactivo</div>
-                <div class="skill" onclick="openModal('resolucion')">Resolución de Problemas</div>
-                <div class="skill" onclick="openModal('ownership')">Ownership</div>
-                <div class="skill" onclick="openModal('colaboracion')">Trabajo Colaborativo</div>
-                <div class="skill" onclick="openModal('curiosidad')">Curiosidad por Datos</div>
-            </div>
-        </div>
-
-        <div class="section animate-on-scroll fade-in-up">
-            <h2>🛠️ Habilidades Técnicas</h2>
-            <div class="skills-grid">
-                <div class="skill" onclick="openModal('governance')">Data Governance</div>
-                <div class="skill" onclick="openModal('pythonSql')">Python & SQL</div>
-                <div class="skill" onclick="openModal('dataops')">DataOps</div>
-                <div class="skill" onclick="openModal('automation')">Process Automation</div>
-                <div class="skill" onclick="openModal('sixSigma')">Lean Six Sigma</div>
-                <div class="skill" onclick="openModal('prompt')">Prompt Engineering</div>
-                <div class="skill" onclick="openModal('googleWorkspace')">Google Workspace</div>
-                <div class="skill" onclick="openModal('excel')">Excel Avanzado</div>
-            </div>
-        </div>
-
-        <div class="section animate-on-scroll fade-in-up">
-            <h2>🚀 Proyecto Destacado</h2>
-            <h3>Automatización de Registro y Gestión Documental</h3>
-            <p><strong>Tecnologías:</strong> Google Apps Script, Google Sheets, Google Forms, Gmail API, JavaScript</p>
-            <p>Diseñé e implementé un sistema automatizado de registro que aplica principios de <strong>DataOps</strong> y <strong>Lean</strong>. Los resultados operacionales son:</p>
-            <ul>
-                <li><strong>96% de reducción en tiempo de registro</strong> - Eliminación del 100% del trabajo manual de captura, ahorrando 65 horas-hombre por ciclo</li>
-                <li><strong>0% errores en captura de información</strong> - Reducción de DPMO de 2,500 a 250 mediante validaciones en la entrada</li>
-                <li><strong>120 participantes procesados exitosamente</strong> - Sistema probado en producción con 100% de tasa de éxito</li>
-            </ul>
-            <div class="links">
-                <a href="https://github.com/jose2501106-IA/Automatizacion-google-apps-script" target="_blank">Ver en GitHub</a>
-            </div>
-        </div>
-        
-        <div class="section animate-on-scroll fade-in-up">
-            <h2>🌱 Más Allá del Código</h2>
-            <p>
-                Creo firmemente en la mejora continua, no solo en la tecnología, sino a nivel personal. Mi enfoque se basa en la introspección y la <strong>resiliencia</strong>; veo cada desafío como una oportunidad para aprender y levantarme más fuerte.
-            </p>
-            <p>
-                Valoro la creación de entornos colaborativos y sanos, donde la conexión humana y la <strong>autenticidad</strong> son la base del éxito. Mi mayor motivación es hacer un trabajo que enorgullezca a mis mentores, mi familia y mi equipo.
-            </p>
-            
-            <div class="links-center animate-on-scroll fade-in-up">
-                <a href="curiosidades.html" class="btn-primary-ghost">📊 Datos Curiosos</a>
-                <a href="proyecto-l6s.html" class="btn-primary-ghost">🎯 Proyecto L6S (En Proceso)</a>
-            </div>
-        </div>
-
-        <div class="section animate-on-scroll fade-in-up">
-            <h2>📍 Información de Contacto</h2>
-            <p><strong>Ubicación:</strong> Ciudad de México, México</p>
-            <p><strong>Disponibilidad:</strong> Inmediata</p>
-            <p><strong>Modalidad:</strong> Remoto, Híbrido o Presencial</p>
-            <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/josehugomeza-ai" target="_blank" style="color: var(--primary-color); text-decoration: underline;">linkedin.com/in/josehugomeza-ai</a></p>
-            <p style="margin-top: 1rem;">Abierto a oportunidades en automatización de procesos, análisis de datos, mejora continua e inteligencia artificial.</p>
-        </div>
-
+<nav class="nav" aria-label="Principal">
+  <div class="nav__in">
+    <a class="marca" href="#inicio">JHM<span class="marca__sep"> / </span>PORTAFOLIO</a>
+    <div class="nav__enlaces" id="nav-enlaces">
+      <a href="#roles">Roles</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#experiencia">Experiencia</a>
+      <a href="#perfil">Formación</a>
+      <a href="#contacto">Contacto</a>
     </div>
+    <button class="btn-plano" type="button" aria-pressed="true" hidden>MODO PLANO · <span>ON</span></button>
+    <div class="idioma" role="group" aria-label="Idioma">
+      <a href="" lang="es" hreflang="es" aria-current="page">ES</a>
+      <a href="en/" lang="en" hreflang="en">EN</a>
+    </div>
+    <button class="nav__menu" type="button" aria-expanded="false" aria-controls="nav-enlaces">Menú</button>
+  </div>
+</nav>
 
-    <footer>
-        <p>© 2026 José Hugo Meza Vázquez | "Transformando procesos, un sistema a la vez"</p>
-        <p>Diseñado y construido con curiosidad y rigurosidad</p>
-    </footer>
+<main id="contenido">
 
-    <!-- Modales de Habilidades Blandas -->
-    <div id="comunicacion" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('comunicacion')">&times;</span> <h3>Comunicación Efectiva</h3> <p>Para mí, comunicar no es solo hablar, es asegurar que el mensaje se entienda. En mi proyecto de automatización, tuve que traducir requerimientos no-técnicos en lógica de programación clara y documentar el proceso para que otros pudieran entenderlo. Escucho para entender, no solo para responder.</p> </div> </div>
-    <div id="liderazgo" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('liderazgo')">&times;</span> <h3>Liderazgo Proactivo</h3> <p>El liderazgo no se trata de tener un título, sino de tomar la iniciativa. Cuando identifiqué la necesidad de automatizar el registro de pases, no esperé a que me lo pidieran; investigué, aprendí la tecnología necesaria y construí la solución. Liderar es resolver problemas antes de que crezcan.</p> </div> </div>
-    <div id="resolucion" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('resolucion')">&times;</span> <h3>Resolución de Problemas</h3> <p>Disfruto desglosando un problema complejo en partes más pequeñas y manejables. Durante el desarrollo de mi script, me enfrenté a errores de integración con las APIs. Mi método fue aislar cada componente, probarlo individualmente y luego reintegrarlo, asegurando una solución robusta y funcional.</p> </div> </div>
-    <div id="ownership" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('ownership')">&times;</span> <h3>Ownership</h3> <p>Tomo cada tarea como si fuera mi propio proyecto. Desde la concepción de la idea hasta la implementación y las pruebas, me hago responsable del resultado final. Para mí, "ownership" significa que si algo sale mal, es mi responsabilidad arreglarlo, y si sale bien, es un éxito del equipo.</p> </div> </div>
-    <div id="colaboracion" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('colaboracion')">&times;</span> <h3>Trabajo Colaborativo</h3> <p>Entiendo que las mejores ideas surgen de la diversidad de perspectivas. Aunque trabajé solo en mi proyecto de automatización, me apoyé en comunidades en línea y pedí feedback para mejorar el código. Estoy convencido de que colaborar y compartir conocimiento es la forma más rápida de crecer.</p> </div> </div>
-    <div id="curiosidad" class="modal"> <div class="modal-content"> <span class="close-btn" onclick="closeModal('curiosidad')">&times;</span> <h3>Curiosidad por Datos</h3> <p>Mi curiosidad va más allá de los números; busco el "porqué" detrás de cada dato. En mi experiencia con inventarios, no me conformaba con corregir una discrepancia, investigaba la causa raíz en el proceso logístico. Para mí, gobernar datos es tener la curiosidad para prevenir errores, no solo para corregirlos.</p> </div> </div>
-    
-    <!-- Modales de Habilidades Técnicas -->
-    <div id="governance" class="modal"> 
-        <div class="modal-content"> <span class="close-btn" onclick="closeModal('governance')">&times;</span> <h3>Data Governance</h3> <p>Entiendo el Gobierno de Datos como la base para la confianza en la información. Se trata de establecer procesos para asegurar que los datos sean precisos, consistentes y seguros a lo largo de su ciclo de vida. Mi proyecto de automatización es un ejemplo práctico: valida y estandariza la información de entrada para garantizar la calidad del resultado final.</p> </div> 
+<section id="inicio" class="hoja hoja--inicio" aria-labelledby="nombre">
+  <div class="hoja__meta"><div>HOJA 01 / INICIO</div><div>ESC 1:1 · REV 2026</div></div>
+  <div class="inicio">
+    <div class="inicio__texto">
+      <p class="kicker">DESARROLLADOR DE IA Y AUTOMATIZACIÓN</p>
+      <div class="bloque-nombre">
+        <div class="cota" aria-hidden="true"><span>y 000</span><i></i></div>
+        <h1 class="nombre" id="nombre">José Hugo<br>Meza</h1>
+        <div class="cota" aria-hidden="true"><span>y 196</span><i></i></div>
+      </div>
+      <div class="bloque-titulo">
+        <p class="subtitulo">IA aplicada a operaciones reales.</p>
+        <p class="bajada">Agentes, automatización y datos · Estudiante de Ing. en IA e Industrial</p>
+      </div>
+      <p class="historia">Entré a un negocio mayorista de la Central de Abasto como auxiliar administrativo y a los tres meses quedé al frente de su bodega. Hoy, como independiente, le construyo soluciones de IA y automatización que se usan todos los días, mientras estudio dos ingenierías: Inteligencia Artificial e Industrial.</p>
+      <div class="botones">
+        <a class="btn btn--pri" href="#proyectos">Ver proyectos</a>
+        <a class="btn btn--sec" href="mailto:jose2501106@hybridge.education">Escríbeme</a>
+      </div>
+      <dl class="ficha">
+        <div><dt>ESTUDIO</dt><dd>Ing. en IA (Hybridge) · Ing. Industrial (UVEG)</dd></div>
+        <div><dt>HOY</dt><dd>IA y automatización para un negocio de la Central de Abasto</dd></div>
+        <div><dt>UBICACIÓN</dt><dd>Ciudad de México</dd></div>
+      </dl>
     </div>
-    <div id="pythonSql" class="modal"> 
-        <div class="modal-content"> <span class="close-btn" onclick="closeModal('pythonSql')">&times;</span> <h3>Python & SQL</h3> <p>Utilizo Python, con librerías como Pandas, para la limpieza y manipulación de datos, y SQL para realizar consultas complejas y extraer información valiosa de bases de datos relacionales. Son las herramientas fundamentales con las que transformo datos crudos en conocimiento accionable.</p> </div> 
-    </div>
-    <div id="dataops" class="modal"> 
-        <div class="modal-content"> <span class="close-btn" onclick="closeModal('dataops')">&times;</span> <h3>DataOps</h3> <p>Aplico DataOps integrando <strong>Git (Control de Versiones)</strong> y <strong>CI/CD</strong> para el pipeline de datos. Utilizo la lógica <strong>Test-Driven Development</strong> para la calidad del dato, enfocando la automatización en el monitoreo de <strong>Drift de Datos</strong>, lo que garantiza la estabilidad del proceso industrial digital.</p> </div>
-    </div>
-    <div id="automation" class="modal"> 
-        <div class="modal-content"> <span class="close-btn" onclick="closeModal('automation')">&times;</span> <h3>Process Automation</h3> <p>Mi habilidad principal es identificar tareas manuales y repetitivas y construir soluciones de software para eliminarlas. Con Google Apps Script, pude integrar múltiples aplicaciones (Sheets, Slides, Gmail) para crear un flujo de trabajo autónomo que ahorra tiempo y reduce drásticamente el error humano.</p> </div> 
-    </div>
-    <div id="sixSigma" class="modal"> 
-        <div class="modal-content"> <span class="close-btn" onclick="closeModal('sixSigma')">&times;</span> <h3>Lean Six Sigma</h3> <p>Utilizo <strong>DMAIC</strong> como motor de mejora. Me especializo en <strong>Diseño de Experimentos (DOE)</strong> para optimización de variables críticas, <strong>Análisis de Capacidad</strong> para medir la estabilidad del proceso y <strong>Teoría de Restricciones (TOC)</strong> para maximizar el throughput de información, garantizando eficiencia estadística en los sistemas.</p></div> 
-    </div>
-    <div id="prompt" class="modal"> 
-        <div class="modal-content"> <span class="close-btn" onclick="closeModal('prompt')">&times;</span> <h3>Prompt Engineering</h3> <p>Aplico la <strong>Ingeniería del Prompt</strong> como una herramienta de <strong>Aceleración de Procesos (Lean)</strong>. Empleo Zero/Few-Shot Learning y técnicas de Chain-of-Thought para la generación eficiente de código y la exploración rápida de arquitecturas de IA, optimizando la tasa de transferencia de conocimiento.</p></div> 
-    </div>
-    <div id="googleWorkspace" class="modal">
-        <div class="modal-content"> <span class="close-btn" onclick="closeModal('googleWorkspace')">&times;</span> <h3>Google Workspace</h3> <p>Experto en la suite completa de Google Workspace (Sheets, Forms, Slides, Gmail, Drive) para automatización de flujos de trabajo y gestión colaborativa de proyectos. Implemento integraciones mediante Apps Script para conectar diferentes herramientas y crear sistemas autónomos.</p></div>
-    </div>
-    <div id="excel" class="modal">
-        <div class="modal-content"> <span class="close-btn" onclick="closeModal('excel')">&times;</span> <h3>Excel Avanzado</h3> <p>Dominio de Excel para análisis de datos, creación de dashboards interactivos, fórmulas avanzadas, tablas dinámicas y visualización de información. Utilizo Excel como herramienta fundamental para la toma de decisiones basada en datos y la presentación ejecutiva de resultados.</p></div>
-    </div>
+    <figure class="retrato">
+      <span class="esq esq--ti" aria-hidden="true"></span><span class="esq esq--td" aria-hidden="true"></span>
+      <span class="esq esq--bi" aria-hidden="true"></span><span class="esq esq--bd" aria-hidden="true"></span>
+      <div class="retrato__marco">
+        <img src="assets/img/retrato-864.webp" srcset="assets/img/retrato-432.webp 432w, assets/img/retrato-864.webp 864w"
+             sizes="(max-width: 520px) 90vw, 428px" width="864" height="1080" alt="José Hugo Meza" fetchpriority="high">
+        <div class="retrato__rejilla" aria-hidden="true"></div>
+        <div class="retrato__caja" aria-hidden="true"></div>
+        <div class="retrato__etiqueta" aria-hidden="true"><i></i><span>JHM · CDMX</span></div>
+        <div class="retrato__pie" aria-hidden="true"><span>IA + INDUSTRIAL</span><span>HYBRIDGE · UVEG</span></div>
+      </div>
+      <figcaption><span>FIG. 00 — RETRATO</span><span>864 × 1080</span></figcaption>
+    </figure>
+  </div>
+  <div class="cifras">
+    <a class="cifra" href="#p-03"><span class="cifra__cod">P-03</span><span class="cifra__val">v7</span><span class="cifra__txt">pipeline de auditoría corriendo en producción</span></a>
+    <a class="cifra" href="#p-01"><span class="cifra__cod">P-01</span><span class="cifra__val">8</span><span class="cifra__txt">herramientas en un agente de IA con datos oficiales</span></a>
+    <a class="cifra" href="#p-01"><span class="cifra__cod">P-01</span><span class="cifra__val">10k+</span><span class="cifra__txt">votos individuales de diputados en la base de ese agente</span></a>
+    <a class="cifra" href="#p-04"><span class="cifra__cod">P-04</span><span class="cifra__val">3.er</span><span class="cifra__txt">lugar en el Track Contenido · Goya Hack 2026 · UNAM</span></a>
+  </div>
+</section>
 
-    <!-- Modal de Contraseña -->
-    <div id="passwordModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('passwordModal')">&times;</span>
-            <h3>Acceso al CV Restringido</h3>
-            <p>Por favor, introduzca la contraseña proporcionada para acceder a mi CV:</p>
-            <input type="password" id="passwordInput" placeholder="Contraseña de Acceso">
-            <button onclick="submitPassword()">Acceder</button>
+<section id="roles" class="hoja" aria-labelledby="t-roles">
+  <div class="cab"><div class="cab__hoja">HOJA 02 / ROLES</div><h2 id="t-roles">Lo que hago, con evidencia</h2><div class="cab__regla"></div></div>
+  <div class="roles">
+    <article class="rol">
+      <div class="rol__cab"><span>R-01</span><span aria-hidden="true">+</span></div>
+      <div class="rol__cuerpo">
+        <h3>IA y agentes</h3>
+        <p>Agentes con herramientas e integración de modelos de lenguaje (Claude API), del prototipo a la herramienta funcional.</p>
+        <div class="rol__evidencia"><span>EVIDENCIA:</span><a href="#p-01">P-01</a><a href="#p-02">P-02</a></div>
+      </div>
+    </article>
+    <article class="rol">
+      <div class="rol__cab"><span>R-02</span><span aria-hidden="true">+</span></div>
+      <div class="rol__cuerpo">
+        <h3>Automatización de procesos</h3>
+        <p>Automatizo procesos operativos con Python y Apps Script, de la captura de datos a la auditoría diaria.</p>
+        <div class="rol__evidencia"><span>EVIDENCIA:</span><a href="#p-03">P-03</a></div>
+      </div>
+    </article>
+    <article class="rol">
+      <div class="rol__cab"><span>R-03</span><span aria-hidden="true">+</span></div>
+      <div class="rol__cuerpo">
+        <h3>Mejora continua / Lean</h3>
+        <p>Auditoría diaria de la operación del almacén, mejorada versión tras versión hasta la v7; formación en Lean Management (Lean Six Sigma Institute).</p>
+        <div class="rol__evidencia"><span>EVIDENCIA:</span><a href="#p-03">P-03</a></div>
+      </div>
+    </article>
+    <article class="rol">
+      <div class="rol__cab"><span>R-04</span><span aria-hidden="true">+</span></div>
+      <div class="rol__cuerpo">
+        <h3>Análisis de datos</h3>
+        <p>Limpieza y análisis con Pandas, y tableros para decidir con números.</p>
+        <div class="rol__evidencia"><span>EVIDENCIA:</span><a href="#p-01">P-01</a><a href="#p-03">P-03</a></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="proyectos" class="hoja" aria-labelledby="t-proyectos">
+  <div class="cab cab--corta"><div class="cab__hoja">HOJA 03 / PROYECTOS</div><h2 id="t-proyectos">Proyectos que lo demuestran</h2><div class="cab__regla"></div></div>
+  <div class="filtros" role="group" aria-label="FILTRAR:">
+    <span class="filtros__et">FILTRAR:</span>
+    <button type="button" data-filtro="todos" aria-pressed="true">Todos <span>4</span></button>
+    <button type="button" data-filtro="ia" aria-pressed="false">IA y agentes <span>2</span></button>
+    <button type="button" data-filtro="auto" aria-pressed="false">Automatización <span>1</span></button>
+    <button type="button" data-filtro="datos" aria-pressed="false">Datos <span>2</span></button>
+    <button type="button" data-filtro="producto" aria-pressed="false">Producto <span>2</span></button>
+  </div>
+  <div class="proyectos proyectos--pares">
+    <article class="proy" id="p-01" data-cat="ia datos">
+      <div class="proy__cab"><span>FIG. 01 — IA Y AGENTES · DATOS</span><span>FUNCIONAL</span></div>
+      <div class="proy__cuerpo">
+        <h3>AgenteMX</h3>
+        <p class="proy__sub">Agente de IA para transparencia legislativa</p>
+        <p class="proy__desc">Responde en lenguaje natural cómo votan los diputados, con datos oficiales y citas a la fuente. Incluye índice de disciplina partidista, detector de contradicciones y radar electoral.</p>
+        <div class="proy__demuestra"><span>DEMUESTRA:</span><strong>Agentes con herramientas · ETL de datos públicos · interfaz en Streamlit</strong></div>
+        <div class="proy__cifras">
+          <div><b>8</b><span>herramientas del agente</span></div>
+          <div><b>10k+</b><span>votos individuales</span></div>
+          <div><b>7</b><span>partidos cubiertos</span></div>
         </div>
+        <ul class="chips chips--punteadas"><li>Claude API</li><li>SQLite</li><li>Pandas</li><li>BeautifulSoup</li><li>Streamlit</li></ul>
+        <div class="proy__enlaces">
+          <a href="https://github.com/jose2501106-IA/agente-legislativo-mx" target="_blank" rel="noopener">Ver repositorio →</a>
+        </div>
+      </div>
+    </article>
+    <article class="proy" id="p-02" data-cat="ia producto">
+      <div class="proy__cab"><span>FIG. 02 — IA Y AGENTES · PRODUCTO</span><span>EN CONSTRUCCIÓN</span></div>
+      <div class="proy__cuerpo">
+        <h3>Neurona Artificial</h3>
+        <p class="proy__sub">Curso abierto para entender la IA por dentro</p>
+        <p class="proy__desc">Videos interactivos con laboratorio para entender cómo funciona la inteligencia artificial, de una sola neurona a los agentes que deciden y actúan. Cada lección trae capítulos, subtítulos y un laboratorio para mover cada pieza.</p>
+        <div class="proy__demuestra"><span>DEMUESTRA:</span><strong>Fundamentos de IA · explicar lo técnico con claridad · diseño de producto</strong></div>
+        <div class="proy__cifras">
+          <div><b>2</b><span>lecciones publicadas</span></div>
+          <div><b>7</b><span>lecciones en camino</span></div>
+        </div>
+        <ul class="chips chips--punteadas"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Sistema de diseño propio</li></ul>
+        <div class="proy__enlaces">
+          <a href="https://jose2501106-ia.github.io/NeuronaArtificial/" target="_blank" rel="noopener">Ver curso →</a>
+          <a href="https://github.com/jose2501106-IA/NeuronaArtificial" target="_blank" rel="noopener">Ver repositorio →</a>
+        </div>
+      </div>
+    </article>
+    <article class="proy" id="p-03" data-cat="auto datos">
+      <div class="proy__cab"><span>FIG. 03 — AUTOMATIZACIÓN · DATOS</span><span>EN PRODUCCIÓN</span></div>
+      <div class="proy__cuerpo">
+        <h3>Pipeline de auditoría</h3>
+        <p class="proy__sub">Negocio mayorista · Central de Abasto, CDMX</p>
+        <p class="proy__desc">Automatiza la auditoría diaria de la operación del almacén con Python y Apps Script. Va en su versión 7 y corre en producción todos los días.</p>
+        <div class="proy__demuestra"><span>DEMUESTRA:</span><strong>Software en producción · iteración continua hasta la v7</strong></div>
+        <div class="proy__cifras">
+          <div><b>v7</b><span>versión en producción</span></div>
+        </div>
+        <ul class="chips chips--punteadas"><li>Python</li><li>Apps Script</li><li>Google Sheets</li></ul>
+        <div class="proy__enlaces">
+          <span class="proy__privado">Repositorio privado</span>
+        </div>
+      </div>
+    </article>
+    <article class="proy" id="p-04" data-cat="producto">
+      <div class="proy__cab"><span>FIG. 04 — PRODUCTO</span><span>3.er LUGAR</span></div>
+      <div class="proy__cuerpo">
+        <h3>Cuentas Claras</h3>
+        <p class="proy__sub">Bitácora de fiado cofirmada · Goya Hack 2026</p>
+        <div class="distincion">
+          <img class="logo" src="assets/img/logos/medalla-3.svg" width="37" height="52" alt="" loading="lazy" decoding="async">
+          <div><div class="distincion__tit">3.er LUGAR · TRACK CONTENIDO</div><div class="distincion__txt">Goya Hack 2026 · Facultad de Ingeniería, UNAM</div></div>
+          <img class="logo" src="assets/img/logos/unam.webp" width="41" height="46" alt="" loading="lazy" decoding="async">
+        </div>
+        <p class="proy__desc">La bodega registra cada venta a crédito y el cliente la confirma desde su teléfono: nadie anota una deuda solo ni borra el historial. Las reglas las hace cumplir un contrato en Stellar.</p>
+        <div class="proy__demuestra"><span>DEMUESTRA:</span><strong>Contratos inteligentes · diseño de producto · pitch de 3 minutos</strong></div>
+        <div class="proy__cifras">
+          <div><b>3</b><span>reglas en el contrato</span></div>
+          <div><b>2</b><span>firmas por nota</span></div>
+        </div>
+        <ul class="chips chips--punteadas"><li>Stellar</li><li>Soroban · Rust</li><li>JavaScript</li><li>Node.js</li></ul>
+        <div class="proy__enlaces">
+          <a href="https://github.com/jose2501106-IA/goyahack_cuentas-claras" target="_blank" rel="noopener">Ver repositorio →</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="experiencia" class="hoja" aria-labelledby="t-exp">
+  <div class="cab"><div class="cab__hoja">HOJA 04 / EXPERIENCIA</div><h2 id="t-exp">Experiencia</h2><div class="cab__regla"></div></div>
+  <ol class="exp">
+    <li class="exp__fila">
+      <div class="exp__lado">
+        <span class="exp__et exp__et--actual">ACTUAL</span>
+        <span class="exp__lugar">CDMX</span>
+      </div>
+      <div class="exp__cuerpo">
+        <h3>Desarrollador independiente de IA y automatización</h3>
+        <p class="exp__donde">Negocio mayorista · Central de Abasto · sep 2026 – actual</p>
+        <ul class="exp__puntos"><li>Construyo soluciones de IA y automatización para la operación diaria del negocio.</li><li>Mantengo el pipeline de auditoría diaria en Python y Apps Script (v7, en producción).</li><li>Desarrollo herramientas internas para pedidos y control de bodega.</li></ul>
+      </div>
+    </li>
+    <li class="exp__fila">
+      <div class="exp__lado">
+        <span class="exp__et">AGO – SEP 2026</span>
+        <span class="exp__lugar">CDMX</span>
+      </div>
+      <div class="exp__cuerpo">
+        <h3>Encargado de bodega</h3>
+        <p class="exp__donde">Mismo negocio · Central de Abasto</p>
+        <ul class="exp__puntos"><li>Pasé de auxiliar administrativo a encargado de la bodega en tres meses.</li><li>Operé el día a día de un almacén de huevo.</li></ul>
+      </div>
+    </li>
+    <li class="exp__fila">
+      <div class="exp__lado">
+        <span class="exp__et">MAY – JUL 2026</span>
+        <span class="exp__lugar">CDMX</span>
+      </div>
+      <div class="exp__cuerpo">
+        <h3>Auxiliar administrativo</h3>
+        <p class="exp__donde">Negocio mayorista · Central de Abasto</p>
+        <ul class="exp__puntos"><li>Llevé los registros y reportes administrativos de la operación diaria.</li><li>Coordiné con proveedores y áreas internas.</li></ul>
+      </div>
+    </li>
+    <li class="exp__fila">
+      <div class="exp__lado">
+        <span class="exp__et">2026</span>
+        <span class="exp__lugar">UNAM · FI</span>
+      </div>
+      <div class="exp__cuerpo">
+        <h3>3.er lugar · Track Contenido</h3>
+        <p class="exp__donde">Goya Hack 2026 · Facultad de Ingeniería, UNAM</p>
+        <ul class="exp__puntos"><li>Tercer lugar del Track Contenido con Cuentas Claras: bitácora de fiado cofirmada con un contrato inteligente en Stellar, presentada en un pitch de 3 minutos.</li></ul>
+      </div>
+    </li>
+  </ol>
+  <p class="nota-tecnica">// Cómo trabajo: diagnóstico → diseño → construcción con IA y pruebas en 3 capas → control con DMAIC.</p>
+</section>
+
+<section id="perfil" class="hoja" aria-labelledby="t-perfil">
+  <div class="cab"><div class="cab__hoja">HOJA 05 / FORMACIÓN</div><h2 id="t-perfil">Formación y herramientas</h2><div class="cab__regla"></div></div>
+  <div class="perfil">
+    <div class="perfil__izq">
+      <p class="perfil__intro">Estudio dos ingenierías al mismo tiempo: Inteligencia Artificial en Hybridge Education e Industrial en la UVEG. En paralelo construyo soluciones de IA y automatización para un negocio de la Central de Abasto, donde convierto lo que aprendo en sistemas que se usan todos los días.</p>
+      <div class="blandas"><div class="blandas__et">HABILIDADES BLANDAS</div><p>Comunicación: dos competencias nacionales de oratoria y Parlamento Juvenil. Liderazgo: Aspire Leaders Program. Ritmo de operación real: decisiones diarias en un negocio con clientes y proveedores.</p></div>
+      <div class="herr">
+        <div class="herr__et">HERRAMIENTAS</div>
+        <div class="herr__fila"><div class="herr__grupo">PROGRAMACIÓN</div><ul class="chips"><li>Python</li><li>JavaScript</li><li>TypeScript</li><li>SQL</li><li>Bash</li></ul></div>
+        <div class="herr__fila"><div class="herr__grupo">IA Y DATOS</div><ul class="chips"><li>Claude API</li><li>Claude Code</li><li>OpenAI</li><li>Pandas</li><li>NumPy</li><li>Streamlit</li></ul></div>
+        <div class="herr__fila"><div class="herr__grupo">AUTOMATIZACIÓN</div><ul class="chips"><li>Apps Script</li><li>Google Workspace</li><li>Excel avanzado</li><li>GitHub Actions</li></ul></div>
+        <div class="herr__fila"><div class="herr__grupo">CLOUD Y HARDWARE</div><ul class="chips"><li>AWS</li><li>Docker</li><li>Linux</li><li>Arduino</li></ul></div>
+        <div class="herr__fila"><div class="herr__grupo">PROCESOS</div><ul class="chips"><li>Lean Six Sigma</li><li>DMAIC</li><li>SPC</li><li>DOE</li></ul></div>
+        <div class="herr__fila"><div class="herr__grupo">IDIOMAS</div><ul class="chips"><li>Español · nativo</li><li>Inglés · A2, en formación (beca Bécalos)</li></ul></div>
+      </div>
     </div>
+    <div class="formacion">
+      <div class="formacion__cab">FORMACIÓN Y PROGRAMAS</div>
+      <div class="formacion__item">
+        <div>
+          <div class="formacion__inst">Hybridge Education</div>
+          <div class="formacion__prog">Ingeniería en Inteligencia Artificial</div>
+          <div class="formacion__est">3.er cuatrimestre de 8</div>
+        </div>
+        <div class="formacion__logos"><img class="logo" src="assets/img/logos/hybridge.svg" width="110" height="19" alt="" loading="lazy" decoding="async"></div>
+      </div>
+      <div class="formacion__item">
+        <div>
+          <div class="formacion__inst">UVEG</div>
+          <div class="formacion__prog">Ingeniería Industrial</div>
+          <div class="formacion__est">38% completado</div>
+        </div>
+        <div class="formacion__logos"><img class="logo" src="assets/img/logos/uveg.svg" width="78" height="21" alt="" loading="lazy" decoding="async"></div>
+      </div>
+      <div class="formacion__item">
+        <div>
+          <div class="formacion__inst">Universidad Anáhuac México Norte</div>
+          <div class="formacion__prog">Seminario de IA y Ciencia de Datos</div>
+          <div class="formacion__est">Beca 100% · Santander 2026</div>
+        </div>
+        <div class="formacion__logos"><img class="logo" src="assets/img/logos/anahuac.svg" width="32" height="32" alt="" loading="lazy" decoding="async"></div>
+      </div>
+      <div class="formacion__item">
+        <div>
+          <div class="formacion__inst">Aspire Leaders Program</div>
+          <div class="formacion__prog">Programa de liderazgo global fundado por académicos de Harvard</div>
+          <div class="formacion__est">Seleccionado</div>
+        </div>
+        <div class="formacion__logos"><img class="logo" src="assets/img/logos/aspire.svg" width="80" height="28" alt="" loading="lazy" decoding="async"></div>
+      </div>
+      <div class="formacion__item">
+        <div>
+          <div class="formacion__inst">Oracle Next Education</div>
+          <div class="formacion__prog">Inmersión: Agentes de IA para Negocios</div>
+          <div class="formacion__est">Finalizado · 13 oct 2026 · 4 h</div><a class="formacion__ver" href="https://app.aluracursos.com/immersion/certificate/00c74f55-f2d9-4ec7-990c-bcddc214aaa0" target="_blank" rel="noopener">Verificar autenticidad ↗</a>
+        </div>
+        <div class="formacion__logos"><img class="logo" src="assets/img/logos/one.svg" width="62" height="32" alt="" loading="lazy" decoding="async"><img class="logo" src="assets/img/logos/oracle.svg" width="104" height="13" alt="" loading="lazy" decoding="async"></div>
+      </div>
+      <div class="formacion__item">
+        <div>
+          <div class="formacion__inst">Lean Six Sigma Institute</div>
+          <div class="formacion__prog">Lean Management</div>
+          <div class="formacion__est">En curso · avalado por The Council for Six Sigma Certification</div>
+        </div>
+        <div class="formacion__logos"><img class="logo" src="assets/img/logos/lssi.svg" width="78" height="32" alt="" loading="lazy" decoding="async"></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script>
-        function checkPassword(event) {
-            event.preventDefault(); 
-            document.getElementById('passwordModal').style.display = "block";
-            document.getElementById('passwordInput').value = '';
-            document.getElementById('passwordInput').focus();
-        }
+<section id="contacto" class="hoja hoja--contacto" aria-labelledby="t-contacto">
+  <div class="cab__hoja">HOJA 06 / CONTACTO</div>
+  <div class="contacto">
+    <div class="contacto__izq">
+      <h2 id="t-contacto">¿Hablamos de IA aplicada a operaciones?</h2>
+      <p>Escríbeme por correo o por LinkedIn.</p>
+      <div class="botones">
+        <a class="btn btn--pri" href="mailto:jose2501106@hybridge.education">Escribir correo →</a>
+        <a class="btn btn--sec" href="https://www.linkedin.com/in/josehugomeza-ai/" target="_blank" rel="noopener">Ir a LinkedIn ↗</a>
+      </div>
+    </div>
+    <div class="contacto__der">
+      <a class="contacto__fila" href="mailto:jose2501106@hybridge.education"><span>CORREO</span><strong>jose2501106@hybridge.education</strong><i aria-hidden="true">↗</i></a>
+      <a class="contacto__fila" href="https://www.linkedin.com/in/josehugomeza-ai/" target="_blank" rel="noopener"><span>LINKEDIN</span><strong>in/josehugomeza-ai</strong><i aria-hidden="true">↗</i></a>
+      <a class="contacto__fila" href="https://github.com/jose2501106-IA" target="_blank" rel="noopener"><span>GITHUB</span><strong>jose2501106-IA</strong><i aria-hidden="true">↗</i></a>
+      <div class="contacto__fila"><span>UBICACIÓN</span><strong>Ciudad de México, México</strong><i aria-hidden="true">·</i></div>
+    </div>
+  </div>
+</section>
 
-        function submitPassword() {
-            const correctPassword = "Hybridge2501106"; 
-            const enteredPassword = document.getElementById('passwordInput').value;
-            
-            if (enteredPassword === correctPassword) {
-                window.open("https://drive.google.com/file/d/181wkopI_I6T0KGhwypm6gz5R9VVPEha4/view?usp=sharing", "_blank");
-                closeModal('passwordModal');
-            } else {
-                alert("Contraseña incorrecta. Acceso denegado.");
-                document.getElementById('passwordInput').value = '';
-                document.getElementById('passwordInput').focus(); 
-            }
-        }
-        
-        function setupCarousel(trackId, prevBtnId, nextBtnId) {
-            const track = document.getElementById(trackId);
-            const prevBtn = document.getElementById(prevBtnId);
-            const nextBtn = document.getElementById(nextBtnId);
-            
-            if (!track || !prevBtn || !nextBtn) return;
-            
-            const slides = Array.from(track.children);
-            const totalSlides = slides.length;
-            let currentIndex = 0;
+</main>
 
-            function updateSlidePosition() {
-                track.style.transform = `translateX(-${currentIndex * 100}%)`;
-            }
-            function updateButtons() {
-                prevBtn.classList.toggle('hidden', currentIndex === 0);
-                nextBtn.classList.toggle('hidden', currentIndex === totalSlides - 1);
-            }
-            prevBtn.addEventListener('click', () => {
-                if (currentIndex > 0) { currentIndex--; updateSlidePosition(); updateButtons(); }
-            });
-            nextBtn.addEventListener('click', () => {
-                if (currentIndex < totalSlides - 1) { currentIndex++; updateSlidePosition(); updateButtons(); }
-            });
-            updateButtons();
-        }
-
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = "block";
-        }
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = "none";
-        }
-        window.onclick = function(event) {
-            const modals = document.getElementsByClassName('modal');
-            for (let i = 0; i < modals.length; i++) {
-                if (event.target == modals[i]) {
-                    modals[i].style.display = "none";
-                }
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const backgroundElementsContainer = document.querySelector('.background-elements');
-            
-            const numStars = 440; 
-            for (let i = 0; i < numStars; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                star.style.left = `${Math.random() * 100}vw`; 
-                star.style.top = `${Math.random() * 100}vh`;
-                star.style.setProperty('--delay', `${Math.random() * 15}s`);
-                star.style.setProperty('--duration', `${5 + Math.random() * 8}s`);
-                backgroundElementsContainer.appendChild(star);
-            }
-
-            const numGalaxies = 8; 
-            for (let i = 0; i < numGalaxies; i++) {
-                const galaxy = document.createElement('div');
-                galaxy.classList.add('galaxy');
-                
-                const size = Math.random() * 80 + 80; 
-                galaxy.style.width = `${size}px`;
-                galaxy.style.height = `${size}px`;
-                
-                const startX = Math.random() * 100;
-                const startY = Math.random() * 100;
-                galaxy.style.left = `${startX}vw`; 
-                galaxy.style.top = `${startY}vh`;
-                
-                galaxy.style.setProperty('--delay-galaxy', `${Math.random() * 20}s`);
-                galaxy.style.setProperty('--duration-galaxy', `${30 + Math.random() * 30}s`); 
-                galaxy.style.setProperty('--max-opacity', `${0.1 + Math.random() * 0.2}`); 
-                
-                galaxy.style.setProperty('--start-x', `0vw`);
-                galaxy.style.setProperty('--start-y', `0vh`);
-                galaxy.style.setProperty('--end-x', `${(Math.random() - 0.5) * 50}vw`);
-                galaxy.style.setProperty('--end-y', `${(Math.random() - 0.5) * 50}vh`);
-                
-                backgroundElementsContainer.appendChild(galaxy);
-            }
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('show');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-            const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
-            elementsToAnimate.forEach((el) => observer.observe(el));
-            
-            setupCarousel('program-track', 'program-prev', 'program-next');
-        });
-    </script>
+<footer class="pie">
+  <div class="pie__in"><div class="pie__frase">“Ingeniero industrial en formación, developer por curiosidad, operador por necesidad.”</div><div>© 2026 José Hugo Meza Vázquez</div></div>
+</footer>
+</div>
+<script src="assets/js/sitio.js?v=2826cf74" defer></script>
 </body>
 </html>

@@ -1,0 +1,250 @@
+{#- Plantilla única del portafolio. Se genera una vez por idioma con scripts/generar.py.
+    No edites index.html ni en/index.html a mano: edita data/perfil.yml. -#}
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ t(s.sitio.titulo) }}</title>
+<meta name="description" content="{{ t(s.sitio.descripcion) }}">
+<meta name="author" content="{{ s.sitio.nombre_completo }}">
+<link rel="canonical" href="{{ url_pagina }}">
+<link rel="alternate" hreflang="es" href="{{ s.sitio.url }}">
+<link rel="alternate" hreflang="en" href="{{ s.sitio.url }}en/">
+<link rel="alternate" hreflang="x-default" href="{{ s.sitio.url }}">
+<meta name="theme-color" content="#0B1F4A">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="{{ s.sitio.nombre }}">
+<meta property="og:title" content="{{ t(s.sitio.titulo) }}">
+<meta property="og:description" content="{{ t(s.sitio.descripcion) }}">
+<meta property="og:url" content="{{ url_pagina }}">
+<meta property="og:image" content="{{ s.sitio.url }}assets/img/og-{{ lang }}.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ t(s.sitio.imagen_alt) }}">
+<meta property="og:locale" content="{{ 'es_MX' if lang == 'es' else 'en_US' }}">
+<meta property="og:locale:alternate" content="{{ 'en_US' if lang == 'es' else 'es_MX' }}">
+<meta property="profile:first_name" content="José Hugo">
+<meta property="profile:last_name" content="Meza">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ t(s.sitio.titulo) }}">
+<meta name="twitter:description" content="{{ t(s.sitio.descripcion) }}">
+<meta name="twitter:image" content="{{ s.sitio.url }}assets/img/og-{{ lang }}.jpg">
+<link rel="icon" href="{{ raiz }}favicon.svg" type="image/svg+xml">
+<link rel="icon" href="{{ raiz }}favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="{{ raiz }}apple-touch-icon.png">
+<link rel="preload" href="{{ raiz }}assets/fuentes/space-mono-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ raiz }}assets/fuentes/titillium-web-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ raiz }}assets/css/sitio.css?v={{ version }}">
+<script type="application/ld+json">{{ jsonld | safe }}</script>
+</head>
+<body>
+<a class="saltar" href="#contenido">{{ t(s.ui.saltar) }}</a>
+<div class="lienzo">
+
+<nav class="nav" aria-label="{{ 'Principal' if lang == 'es' else 'Main' }}">
+  <div class="nav__in">
+    <a class="marca" href="#inicio">{{ s.sitio.marca }}<span class="marca__sep"> / </span>{{ t(s.ui.marca_sub) }}</a>
+    <div class="nav__enlaces" id="nav-enlaces">
+      {%- for nombre, ancla in nav %}
+      <a href="#{{ ancla }}">{{ nombre }}</a>
+      {%- endfor %}
+    </div>
+    <button class="btn-plano" type="button" aria-pressed="true" hidden>{{ t(s.ui.modo_plano) }} · <span>ON</span></button>
+    <div class="idioma" role="group" aria-label="{{ 'Idioma' if lang == 'es' else 'Language' }}">
+      <a href="{{ raiz }}" lang="es" hreflang="es"{% if lang == 'es' %} aria-current="page"{% endif %}>ES</a>
+      <a href="{{ raiz }}en/" lang="en" hreflang="en"{% if lang == 'en' %} aria-current="page"{% endif %}>EN</a>
+    </div>
+    <button class="nav__menu" type="button" aria-expanded="false" aria-controls="nav-enlaces">{{ t(s.ui.menu) }}</button>
+  </div>
+</nav>
+
+<main id="contenido">
+
+<section id="inicio" class="hoja hoja--inicio" aria-labelledby="nombre">
+  <div class="hoja__meta"><div>{{ t(s.ui.hoja) }} 01 / {{ t(s.secciones.inicio) }}</div><div>{{ t(s.ui.escala) }} 1:1 · REV {{ s.sitio.anio }}</div></div>
+  <div class="inicio">
+    <div class="inicio__texto">
+      <p class="kicker">{{ t(s.portada.linea_superior) }}</p>
+      <div class="bloque-nombre">
+        <div class="cota" aria-hidden="true"><span>y 000</span><i></i></div>
+        <h1 class="nombre" id="nombre">{{ s.sitio.nombre_h1[0] }}<br>{{ s.sitio.nombre_h1[1] }}</h1>
+        <div class="cota" aria-hidden="true"><span>y 196</span><i></i></div>
+      </div>
+      <div class="bloque-titulo">
+        <p class="subtitulo">{{ t(s.portada.subtitulo) }}</p>
+        <p class="bajada">{{ t(s.portada.bajada) }}</p>
+      </div>
+      <p class="historia">{{ t(s.portada.historia) }}</p>
+      <div class="botones">
+        <a class="btn btn--pri" href="#proyectos">{{ t(s.portada.boton_principal) }}</a>
+        <a class="btn btn--sec" href="mailto:{{ s.contacto.correo }}">{{ t(s.portada.boton_secundario) }}</a>
+      </div>
+      <dl class="ficha">
+        {%- for d in s.portada.datos %}
+        <div><dt>{{ t(d.etiqueta) }}</dt><dd>{{ t(d.valor) }}</dd></div>
+        {%- endfor %}
+      </dl>
+    </div>
+    <figure class="retrato">
+      <span class="esq esq--ti" aria-hidden="true"></span><span class="esq esq--td" aria-hidden="true"></span>
+      <span class="esq esq--bi" aria-hidden="true"></span><span class="esq esq--bd" aria-hidden="true"></span>
+      <div class="retrato__marco">
+        <img src="{{ raiz }}assets/img/retrato-864.webp" srcset="{{ raiz }}assets/img/retrato-432.webp 432w, {{ raiz }}assets/img/retrato-864.webp 864w"
+             sizes="(max-width: 520px) 90vw, 428px" width="864" height="1080" alt="{{ s.sitio.nombre }}" fetchpriority="high">
+        <div class="retrato__rejilla" aria-hidden="true"></div>
+        <div class="retrato__caja" aria-hidden="true"></div>
+        <div class="retrato__etiqueta" aria-hidden="true"><i></i><span>{{ s.portada.retrato.etiqueta }}</span></div>
+        <div class="retrato__pie" aria-hidden="true"><span>{{ t(s.portada.retrato.pie_izq) }}</span><span>{{ s.portada.retrato.pie_der }}</span></div>
+      </div>
+      <figcaption><span>FIG. 00 — {{ t(s.ui.retrato) }}</span><span>{{ s.portada.retrato.medidas }}</span></figcaption>
+    </figure>
+  </div>
+  <div class="cifras">
+    {%- for c in s.portada.cifras %}
+    <a class="cifra" href="#{{ c.codigo | lower }}"><span class="cifra__cod">{{ c.codigo }}</span><span class="cifra__val">{{ t(c.valor) }}</span><span class="cifra__txt">{{ t(c.texto) }}</span></a>
+    {%- endfor %}
+  </div>
+</section>
+
+<section id="roles" class="hoja" aria-labelledby="t-roles">
+  <div class="cab"><div class="cab__hoja">{{ t(s.ui.hoja) }} 02 / {{ t(s.secciones.roles) }}</div><h2 id="t-roles">{{ t(s.secciones.roles.titulo) }}</h2><div class="cab__regla"></div></div>
+  <div class="roles">
+    {%- for r in s.roles %}
+    <article class="rol">
+      <div class="rol__cab"><span>{{ r.codigo }}</span><span aria-hidden="true">+</span></div>
+      <div class="rol__cuerpo">
+        <h3>{{ t(r.titulo) }}</h3>
+        <p>{{ t(r.texto) }}</p>
+        <div class="rol__evidencia"><span>{{ t(s.ui.evidencia) }}</span>{% for e in r.evidencia %}<a href="#{{ e | lower }}">{{ e }}</a>{% endfor %}</div>
+      </div>
+    </article>
+    {%- endfor %}
+  </div>
+</section>
+
+<section id="proyectos" class="hoja" aria-labelledby="t-proyectos">
+  <div class="cab cab--corta"><div class="cab__hoja">{{ t(s.ui.hoja) }} 03 / {{ t(s.secciones.proyectos) }}</div><h2 id="t-proyectos">{{ t(s.secciones.proyectos.titulo) }}</h2><div class="cab__regla"></div></div>
+  <div class="filtros" role="group" aria-label="{{ t(s.ui.filtrar) }}">
+    <span class="filtros__et">{{ t(s.ui.filtrar) }}</span>
+    <button type="button" data-filtro="todos" aria-pressed="true">{{ t(s.ui.todos) }} <span>{{ s.proyectos | length }}</span></button>
+    {%- for clave, cat in s.categorias.items() if conteo[clave] %}
+    <button type="button" data-filtro="{{ clave }}" aria-pressed="false">{{ t(cat) }} <span>{{ conteo[clave] }}</span></button>
+    {%- endfor %}
+  </div>
+  <div class="proyectos{{ ' proyectos--pares' if s.proyectos|length in (2, 4) else '' }}">
+    {%- for p in s.proyectos %}
+    <article class="proy" id="{{ p.codigo | lower }}" data-cat="{{ p.categorias | join(' ') }}">
+      <div class="proy__cab"><span>FIG. {{ p.codigo[2:] }} — {% for c in p.categorias %}{{ t(s.categorias[c].fig) }}{% if not loop.last %} · {% endif %}{% endfor %}</span><span>{{ t(p.estado) }}</span></div>
+      <div class="proy__cuerpo">
+        <h3>{{ t(p.nombre) }}</h3>
+        <p class="proy__sub">{{ t(p.subtitulo) }}</p>
+        {%- if p.distincion is defined %}
+        <div class="distincion">
+          {{ logo('medalla-3') }}
+          <div><div class="distincion__tit">{{ t(p.distincion.titulo) }}</div><div class="distincion__txt">{{ t(p.distincion.texto) }}</div></div>
+          {{ logo('unam') }}
+        </div>
+        {%- endif %}
+        <p class="proy__desc">{{ t(p.descripcion) }}</p>
+        <div class="proy__demuestra"><span>{{ t(s.ui.demuestra) }}</span><strong>{{ t(p.demuestra) }}</strong></div>
+        <div class="proy__cifras">
+          {%- for c in p.cifras %}
+          <div><b>{{ c.valor }}</b><span>{{ t(c.texto) }}</span></div>
+          {%- endfor %}
+        </div>
+        <ul class="chips chips--punteadas">{% for x in p.tecnologias %}<li>{{ t(x) }}</li>{% endfor %}</ul>
+        <div class="proy__enlaces">
+          {%- for e in p.enlaces %}
+          <a href="{{ e.url }}" target="_blank" rel="noopener">{{ t(e.texto) }} →</a>
+          {%- else %}
+          <span class="proy__privado">{{ t(p.nota_sin_enlace) if p.nota_sin_enlace is defined else t(s.ui.privado) }}</span>
+          {%- endfor %}
+        </div>
+      </div>
+    </article>
+    {%- endfor %}
+  </div>
+</section>
+
+<section id="experiencia" class="hoja" aria-labelledby="t-exp">
+  <div class="cab"><div class="cab__hoja">{{ t(s.ui.hoja) }} 04 / {{ t(s.secciones.experiencia) }}</div><h2 id="t-exp">{{ t(s.secciones.experiencia.titulo) }}</h2><div class="cab__regla"></div></div>
+  <ol class="exp">
+    {%- for x in s.experiencia %}
+    <li class="exp__fila">
+      <div class="exp__lado">
+        <span class="exp__et{% if loop.first %} exp__et--actual{% endif %}">{{ t(x.etiqueta) }}</span>
+        <span class="exp__lugar">{{ t(x.lugar) }}</span>
+        {%- if x.logo is defined %}<div class="exp__logo">{{ logo(x.logo) }}</div>{% endif %}
+      </div>
+      <div class="exp__cuerpo">
+        <h3>{{ t(x.puesto) }}</h3>
+        <p class="exp__donde">{{ t(x.donde) }}</p>
+        <ul class="exp__puntos">{% for pt in x.puntos %}<li>{{ t(pt) }}</li>{% endfor %}</ul>
+      </div>
+    </li>
+    {%- endfor %}
+  </ol>
+  <p class="nota-tecnica">{{ t(s.como_trabajo) }}</p>
+</section>
+
+<section id="perfil" class="hoja" aria-labelledby="t-perfil">
+  <div class="cab"><div class="cab__hoja">{{ t(s.ui.hoja) }} 05 / {{ t(s.secciones.perfil) }}</div><h2 id="t-perfil">{{ t(s.secciones.perfil.titulo) }}</h2><div class="cab__regla"></div></div>
+  <div class="perfil">
+    <div class="perfil__izq">
+      <p class="perfil__intro">{{ t(s.perfil.intro) }}</p>
+      <div class="blandas"><div class="blandas__et">{{ t(s.ui.habilidades_blandas) }}</div><p>{{ t(s.perfil.habilidades_blandas) }}</p></div>
+      <div class="herr">
+        <div class="herr__et">{{ t(s.ui.herramientas) }}</div>
+        {%- for g in s.perfil.herramientas %}
+        <div class="herr__fila"><div class="herr__grupo">{{ t(g.grupo) }}</div><ul class="chips">{% for i in g.lista %}<li>{{ t(i) }}</li>{% endfor %}</ul></div>
+        {%- endfor %}
+        <div class="herr__fila"><div class="herr__grupo">{{ t(s.ui.idiomas) }}</div><ul class="chips">{% for i in s.perfil.idiomas %}<li>{{ t(i) }}</li>{% endfor %}</ul></div>
+      </div>
+    </div>
+    <div class="formacion">
+      <div class="formacion__cab">{{ t(s.ui.formacion_programas) }}</div>
+      {%- for f in s.perfil.formacion %}
+      <div class="formacion__item">
+        <div>
+          <div class="formacion__inst">{{ t(f.institucion) }}</div>
+          <div class="formacion__prog">{{ t(f.programa) }}</div>
+          <div class="formacion__est">{{ t(f.estado) }}</div>
+          {%- if f.verificar is defined %}<a class="formacion__ver" href="{{ f.verificar }}" target="_blank" rel="noopener">{{ t(s.ui.verificar) }} ↗</a>{% endif %}
+        </div>
+        <div class="formacion__logos">{% for l in f.logos %}{{ logo(l) }}{% endfor %}</div>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section id="contacto" class="hoja hoja--contacto" aria-labelledby="t-contacto">
+  <div class="cab__hoja">{{ t(s.ui.hoja) }} 06 / {{ t(s.secciones.contacto) }}</div>
+  <div class="contacto">
+    <div class="contacto__izq">
+      <h2 id="t-contacto">{{ t(s.seccion_contacto.titulo) }}</h2>
+      <p>{{ t(s.seccion_contacto.texto) }}</p>
+      <div class="botones">
+        <a class="btn btn--pri" href="mailto:{{ s.contacto.correo }}">{{ t(s.seccion_contacto.boton_correo) }} →</a>
+        <a class="btn btn--sec" href="{{ s.contacto.linkedin_url }}" target="_blank" rel="noopener">{{ t(s.seccion_contacto.boton_linkedin) }} ↗</a>
+      </div>
+    </div>
+    <div class="contacto__der">
+      <a class="contacto__fila" href="mailto:{{ s.contacto.correo }}"><span>{{ t(s.seccion_contacto.filas.correo) }}</span><strong>{{ s.contacto.correo }}</strong><i aria-hidden="true">↗</i></a>
+      <a class="contacto__fila" href="{{ s.contacto.linkedin_url }}" target="_blank" rel="noopener"><span>{{ s.seccion_contacto.filas.linkedin }}</span><strong>{{ s.contacto.linkedin_txt }}</strong><i aria-hidden="true">↗</i></a>
+      <a class="contacto__fila" href="{{ s.contacto.github_url }}" target="_blank" rel="noopener"><span>{{ s.seccion_contacto.filas.github }}</span><strong>{{ s.contacto.github_txt }}</strong><i aria-hidden="true">↗</i></a>
+      <div class="contacto__fila"><span>{{ t(s.seccion_contacto.filas.ubicacion) }}</span><strong>{{ t(s.contacto.ubicacion) }}</strong><i aria-hidden="true">·</i></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="pie">
+  <div class="pie__in"><div class="pie__frase">{{ t(s.pie.frase) }}</div><div>© {{ s.sitio.anio }} {{ s.sitio.nombre_completo }}</div></div>
+</footer>
+</div>
+<script src="{{ raiz }}assets/js/sitio.js?v={{ version }}" defer></script>
+</body>
+</html>

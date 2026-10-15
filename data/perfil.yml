@@ -1,0 +1,278 @@
+# ─────────────────────────────────────────────────────────────────────
+# perfil.yml · FUENTE ÚNICA del portafolio, el README y LinkedIn
+# Edita aquí y vuelve a generar el sitio (scripts/generar.py).
+# Cada texto visible va en español (es) e inglés (en).
+# Regla: nada se publica si no está aquí; nada aquí sin poder sostenerlo.
+# ─────────────────────────────────────────────────────────────────────
+
+sitio:
+  url: "https://jose2501106-ia.github.io/"
+  nombre: "José Hugo Meza"
+  nombre_completo: "José Hugo Meza Vázquez"
+  nombre_h1: ["José Hugo", "Meza"]
+  marca: "JHM"
+  anio: 2026
+  titulo:
+    es: "José Hugo Meza · IA aplicada a operaciones reales"
+    en: "José Hugo Meza · AI applied to real-world operations"
+  descripcion:
+    es: "Desarrollador de IA y automatización. Construyo soluciones de IA para un negocio real de la Central de Abasto y estudio Ing. en IA e Industrial."
+    en: "AI and automation developer. I build AI tools for a real wholesale business in Mexico City while studying AI and Industrial Engineering."
+  imagen_alt:
+    es: "José Hugo Meza · IA aplicada a operaciones reales"
+    en: "José Hugo Meza · AI applied to real-world operations"
+
+contacto:
+  correo: "jose2501106@hybridge.education"
+  linkedin_url: "https://www.linkedin.com/in/josehugomeza-ai/"
+  linkedin_txt: "in/josehugomeza-ai"
+  github_url: "https://github.com/jose2501106-IA"
+  github_txt: "jose2501106-IA"
+  ubicacion:
+    es: "Ciudad de México, México"
+    en: "Mexico City, Mexico"
+
+# Textos fijos de la interfaz
+ui:
+  nav: {es: ["Roles", "Proyectos", "Experiencia", "Formación", "Contacto"], en: ["Roles", "Projects", "Experience", "Education", "Contact"]}
+  marca_sub: {es: "PORTAFOLIO", en: "PORTFOLIO"}
+  hoja: {es: "HOJA", en: "SHEET"}
+  escala: {es: "ESC", en: "SCALE"}
+  modo_plano: {es: "MODO PLANO", en: "BLUEPRINT MODE"}
+  menu: {es: "Menú", en: "Menu"}
+  saltar: {es: "Saltar al contenido", en: "Skip to content"}
+  retrato: {es: "RETRATO", en: "PORTRAIT"}
+  evidencia: {es: "EVIDENCIA:", en: "EVIDENCE:"}
+  filtrar: {es: "FILTRAR:", en: "FILTER:"}
+  todos: {es: "Todos", en: "All"}
+  demuestra: {es: "DEMUESTRA:", en: "SHOWS:"}
+  privado: {es: "Repositorio privado", en: "Private repository"}
+  habilidades_blandas: {es: "HABILIDADES BLANDAS", en: "SOFT SKILLS"}
+  herramientas: {es: "HERRAMIENTAS", en: "TOOLS"}
+  idiomas: {es: "IDIOMAS", en: "LANGUAGES"}
+  formacion_programas: {es: "FORMACIÓN Y PROGRAMAS", en: "EDUCATION & PROGRAMS"}
+  verificar: {es: "Verificar autenticidad", en: "Verify certificate"}
+
+secciones:
+  inicio: {es: "INICIO", en: "HOME"}
+  roles: {es: "ROLES", en: "ROLES", titulo: {es: "Lo que hago, con evidencia", en: "What I do, with evidence"}}
+  proyectos: {es: "PROYECTOS", en: "PROJECTS", titulo: {es: "Proyectos que lo demuestran", en: "Projects as evidence"}}
+  experiencia: {es: "EXPERIENCIA", en: "EXPERIENCE", titulo: {es: "Experiencia", en: "Experience"}}
+  perfil: {es: "FORMACIÓN", en: "EDUCATION", titulo: {es: "Formación y herramientas", en: "Education & tools"}}
+  contacto: {es: "CONTACTO", en: "CONTACT"}
+
+portada:
+  linea_superior: {es: "DESARROLLADOR DE IA Y AUTOMATIZACIÓN", en: "AI & AUTOMATION DEVELOPER"}
+  # Título principal (opción B) partido en dos líneas
+  subtitulo: {es: "IA aplicada a operaciones reales.", en: "AI applied to real-world operations."}
+  bajada: {es: "Agentes, automatización y datos · Estudiante de Ing. en IA e Industrial", en: "Agents, automation and data · AI & Industrial Engineering student"}
+  historia:
+    es: "Entré a un negocio mayorista de la Central de Abasto como auxiliar administrativo y a los tres meses quedé al frente de su bodega. Hoy, como independiente, le construyo soluciones de IA y automatización que se usan todos los días, mientras estudio dos ingenierías: Inteligencia Artificial e Industrial."
+    en: "I joined a wholesale business at Mexico City's Central de Abasto market as an administrative assistant, and three months later I was running its warehouse. Today, as an independent developer, I build AI and automation tools that the business uses every day, while pursuing two engineering degrees: Artificial Intelligence and Industrial Engineering."
+  boton_principal: {es: "Ver proyectos", en: "See projects"}
+  boton_secundario: {es: "Escríbeme", en: "Email me"}
+  datos:
+    - etiqueta: {es: "ESTUDIO", en: "STUDYING"}
+      valor: {es: "Ing. en IA (Hybridge) · Ing. Industrial (UVEG)", en: "AI Engineering (Hybridge) · Industrial Engineering (UVEG)"}
+    - etiqueta: {es: "HOY", en: "NOW"}
+      valor: {es: "IA y automatización para un negocio de la Central de Abasto", en: "AI & automation for a wholesale business in Mexico City"}
+    - etiqueta: {es: "UBICACIÓN", en: "BASED IN"}
+      valor: {es: "Ciudad de México", en: "Mexico City"}
+  retrato:
+    pie_izq: {es: "IA + INDUSTRIAL", en: "AI + INDUSTRIAL"}
+    pie_der: "HYBRIDGE · UVEG"
+    etiqueta: "JHM · CDMX"
+    medidas: "864 × 1080"
+  cifras:
+    - {codigo: "P-03", valor: "v7", texto: {es: "pipeline de auditoría corriendo en producción", en: "audit pipeline running in production"}}
+    - {codigo: "P-01", valor: "8", texto: {es: "herramientas en un agente de IA con datos oficiales", en: "tools in an AI agent built on official data"}}
+    - {codigo: "P-01", valor: "10k+", texto: {es: "votos individuales de diputados en la base de ese agente", en: "individual votes by deputies in that agent's database"}}
+    - {codigo: "P-04", valor: {es: "3.er", en: "3rd"}, texto: {es: "lugar en el Track Contenido · Goya Hack 2026 · UNAM", en: "place, Content track · Goya Hack 2026 · UNAM"}}
+
+roles:
+  - codigo: "R-01"
+    titulo: {es: "IA y agentes", en: "AI & agents"}
+    texto: {es: "Agentes con herramientas e integración de modelos de lenguaje (Claude API), del prototipo a la herramienta funcional.", en: "Tool-using agents and LLM integration (Claude API), from prototype to working tool."}
+    evidencia: ["P-01", "P-02"]
+  - codigo: "R-02"
+    titulo: {es: "Automatización de procesos", en: "Process automation"}
+    texto: {es: "Automatizo procesos operativos con Python y Apps Script, de la captura de datos a la auditoría diaria.", en: "I automate operational processes with Python and Apps Script, from data entry to the daily audit."}
+    evidencia: ["P-03"]
+  - codigo: "R-03"
+    titulo: {es: "Mejora continua / Lean", en: "Continuous improvement / Lean"}
+    texto: {es: "Auditoría diaria de la operación del almacén, mejorada versión tras versión hasta la v7; formación en Lean Management (Lean Six Sigma Institute).", en: "A daily warehouse operations audit, improved version after version up to v7; training in Lean Management (Lean Six Sigma Institute)."}
+    evidencia: ["P-03"]
+  - codigo: "R-04"
+    titulo: {es: "Análisis de datos", en: "Data analysis"}
+    texto: {es: "Limpieza y análisis con Pandas, y tableros para decidir con números.", en: "Data cleaning and analysis with Pandas, and dashboards for data-driven decisions."}
+    evidencia: ["P-01", "P-03"]
+
+# Categorías de los filtros (en este orden)
+categorias:
+  ia: {es: "IA y agentes", en: "AI & agents", fig: {es: "IA Y AGENTES", en: "AI & AGENTS"}}
+  auto: {es: "Automatización", en: "Automation", fig: {es: "AUTOMATIZACIÓN", en: "AUTOMATION"}}
+  datos: {es: "Datos", en: "Data", fig: {es: "DATOS", en: "DATA"}}
+  lean: {es: "Lean / procesos", en: "Lean / process", fig: {es: "LEAN / PROCESOS", en: "LEAN / PROCESS"}}
+  producto: {es: "Producto", en: "Product", fig: {es: "PRODUCTO", en: "PRODUCT"}}
+
+proyectos:
+  - codigo: "P-01"
+    nombre: "AgenteMX"
+    categorias: [ia, datos]
+    estado: {es: "FUNCIONAL", en: "FUNCTIONAL"}
+    subtitulo: {es: "Agente de IA para transparencia legislativa", en: "AI agent for legislative transparency"}
+    descripcion:
+      es: "Responde en lenguaje natural cómo votan los diputados, con datos oficiales y citas a la fuente. Incluye índice de disciplina partidista, detector de contradicciones y radar electoral."
+      en: "Answers plain-language questions about how members of Mexico's Chamber of Deputies vote, with official data and source citations. Includes a party-discipline index, a contradiction detector and an election radar."
+    demuestra: {es: "Agentes con herramientas · ETL de datos públicos · interfaz en Streamlit", en: "Tool-using agents · public-data ETL · Streamlit UI"}
+    cifras:
+      - {valor: "8", texto: {es: "herramientas del agente", en: "agent tools"}}
+      - {valor: "10k+", texto: {es: "votos individuales", en: "individual votes"}}
+      - {valor: "7", texto: {es: "partidos cubiertos", en: "parties covered"}}
+    tecnologias: ["Claude API", "SQLite", "Pandas", "BeautifulSoup", "Streamlit"]
+    enlaces:
+      - {texto: {es: "Ver repositorio", en: "View repository (in Spanish)"}, url: "https://github.com/jose2501106-IA/agente-legislativo-mx"}
+
+  - codigo: "P-02"
+    nombre: "Neurona Artificial"
+    categorias: [ia, producto]
+    estado: {es: "EN CONSTRUCCIÓN", en: "WORK IN PROGRESS"}
+    subtitulo: {es: "Curso abierto para entender la IA por dentro", en: "An open course on how AI works under the hood"}
+    descripcion:
+      es: "Videos interactivos con laboratorio para entender cómo funciona la inteligencia artificial, de una sola neurona a los agentes que deciden y actúan. Cada lección trae capítulos, subtítulos y un laboratorio para mover cada pieza."
+      en: "Interactive videos with a hands-on lab to understand how artificial intelligence works, from a single neuron to agents that decide and act. Each lesson has chapters, captions and a lab where you can adjust every part."
+    demuestra: {es: "Fundamentos de IA · explicar lo técnico con claridad · diseño de producto", en: "AI fundamentals · explaining technical ideas clearly · product design"}
+    cifras:
+      - {valor: "2", texto: {es: "lecciones publicadas", en: "lessons published"}}
+      - {valor: "7", texto: {es: "lecciones en camino", en: "lessons on the way"}}
+    tecnologias: ["HTML", "CSS", "JavaScript", {es: "Sistema de diseño propio", en: "Custom design system"}]
+    enlaces:
+      - {texto: {es: "Ver curso", en: "View course (in Spanish)"}, url: "https://jose2501106-ia.github.io/NeuronaArtificial/"}
+      - {texto: {es: "Ver repositorio", en: "View repository"}, url: "https://github.com/jose2501106-IA/NeuronaArtificial"}
+
+  - codigo: "P-03"
+    nombre: {es: "Pipeline de auditoría", en: "Audit pipeline"}
+    categorias: [auto, datos]
+    estado: {es: "EN PRODUCCIÓN", en: "IN PRODUCTION"}
+    subtitulo: {es: "Negocio mayorista · Central de Abasto, CDMX", en: "Wholesale business · Central de Abasto, Mexico City"}
+    descripcion:
+      es: "Automatiza la auditoría diaria de la operación del almacén con Python y Apps Script. Va en su versión 7 y corre en producción todos los días."
+      en: "Automates the warehouse's daily operations audit with Python and Apps Script. Now on version 7, running in production every day."
+    demuestra: {es: "Software en producción · iteración continua hasta la v7", en: "Production software · iterated through 7 versions"}
+    cifras:
+      - {valor: "v7", texto: {es: "versión en producción", en: "production version"}}
+    tecnologias: ["Python", "Apps Script", "Google Sheets"]
+    enlaces: []          # repo privado: se muestra la etiqueta ui.privado
+
+  - codigo: "P-04"
+    nombre: "Cuentas Claras"
+    categorias: [producto]
+    estado: {es: "3.er LUGAR", en: "3RD PLACE"}
+    subtitulo: {es: "Bitácora de fiado cofirmada · Goya Hack 2026", en: "Credit ledger signed by both parties · Goya Hack 2026"}
+    distincion:
+      titulo: {es: "3.er LUGAR · TRACK CONTENIDO", en: "3RD PLACE · CONTENT TRACK"}
+      texto: {es: "Goya Hack 2026 · Facultad de Ingeniería, UNAM", en: "Goya Hack 2026 · UNAM School of Engineering"}
+    descripcion:
+      es: "La bodega registra cada venta a crédito y el cliente la confirma desde su teléfono: nadie anota una deuda solo ni borra el historial. Las reglas las hace cumplir un contrato en Stellar."
+      en: "The wholesaler records each credit sale and the customer confirms it from their phone, so neither side can log a debt alone or erase the history. A Stellar smart contract enforces the rules."
+    demuestra: {es: "Contratos inteligentes · diseño de producto · pitch de 3 minutos", en: "Smart contracts · product design · 3-minute pitch"}
+    cifras:
+      - {valor: "3", texto: {es: "reglas en el contrato", en: "on-chain rules"}}
+      - {valor: "2", texto: {es: "firmas por nota", en: "signatures per entry"}}
+    tecnologias: ["Stellar", "Soroban · Rust", "JavaScript", "Node.js"]
+    enlaces:
+      - {texto: {es: "Ver repositorio", en: "View repository (in Spanish)"}, url: "https://github.com/jose2501106-IA/goyahack_cuentas-claras"}
+
+experiencia:
+  - etiqueta: {es: "ACTUAL", en: "CURRENT"}
+    lugar: {es: "CDMX", en: "MEXICO CITY"}
+    puesto: {es: "Desarrollador independiente de IA y automatización", en: "Independent AI & automation developer"}
+    donde: {es: "Negocio mayorista · Central de Abasto · sep 2026 – actual", en: "Wholesale business · Central de Abasto · Sep 2026 – present"}
+    puntos:
+      - {es: "Construyo soluciones de IA y automatización para la operación diaria del negocio.", en: "I build AI and automation tools for the business's daily operations."}
+      - {es: "Mantengo el pipeline de auditoría diaria en Python y Apps Script (v7, en producción).", en: "I maintain the daily audit pipeline in Python and Apps Script (v7, in production)."}
+      - {es: "Desarrollo herramientas internas para pedidos y control de bodega.", en: "I build internal tools for orders and inventory control."}
+  - etiqueta: {es: "AGO – SEP 2026", en: "AUG – SEP 2026"}
+    lugar: {es: "CDMX", en: "MEXICO CITY"}
+    puesto: {es: "Encargado de bodega", en: "Warehouse manager"}
+    donde: {es: "Mismo negocio · Central de Abasto", en: "Same business · Central de Abasto"}
+    puntos:
+      - {es: "Pasé de auxiliar administrativo a encargado de la bodega en tres meses.", en: "Moved up from administrative assistant to warehouse manager in three months."}
+      - {es: "Operé el día a día de un almacén de huevo.", en: "I ran day-to-day operations at an egg warehouse."}
+  - etiqueta: {es: "MAY – JUL 2026", en: "MAY – JUL 2026"}
+    lugar: {es: "CDMX", en: "MEXICO CITY"}
+    puesto: {es: "Auxiliar administrativo", en: "Administrative assistant"}
+    donde: {es: "Negocio mayorista · Central de Abasto", en: "Wholesale business · Central de Abasto"}
+    puntos:
+      - {es: "Llevé los registros y reportes administrativos de la operación diaria.", en: "I kept the administrative records and reports for daily operations."}
+      - {es: "Coordiné con proveedores y áreas internas.", en: "I coordinated with suppliers and internal teams."}
+  - etiqueta: {es: "2026", en: "2026"}
+    lugar: {es: "UNAM · FI", en: "UNAM"}
+    puesto: {es: "3.er lugar · Track Contenido", en: "3rd place · Content track"}
+    donde: {es: "Goya Hack 2026 · Facultad de Ingeniería, UNAM", en: "Goya Hack 2026 · UNAM School of Engineering"}
+    puntos:
+      - {es: "Tercer lugar del Track Contenido con Cuentas Claras: bitácora de fiado cofirmada con un contrato inteligente en Stellar, presentada en un pitch de 3 minutos.", en: "Third place in the Content track with Cuentas Claras: a credit ledger signed by both parties and enforced by a Stellar smart contract, presented in a 3-minute pitch."}
+
+como_trabajo:
+  es: "// Cómo trabajo: diagnóstico → diseño → construcción con IA y pruebas en 3 capas → control con DMAIC."
+  en: "// How I work: diagnose → design → build with AI and 3-layer testing → control with DMAIC."
+
+perfil:
+  intro:
+    es: "Estudio dos ingenierías al mismo tiempo: Inteligencia Artificial en Hybridge Education e Industrial en la UVEG. En paralelo construyo soluciones de IA y automatización para un negocio de la Central de Abasto, donde convierto lo que aprendo en sistemas que se usan todos los días."
+    en: "I'm pursuing two engineering degrees at the same time: Artificial Intelligence at Hybridge Education and Industrial Engineering at UVEG. Alongside my studies, I build AI and automation tools for a wholesale business at Mexico City's Central de Abasto market, where I turn what I learn into systems used every day."
+  habilidades_blandas:
+    es: "Comunicación: dos competencias nacionales de oratoria y Parlamento Juvenil. Liderazgo: Aspire Leaders Program. Ritmo de operación real: decisiones diarias en un negocio con clientes y proveedores."
+    en: "Communication: two national public-speaking competitions and Youth Parliament. Leadership: Aspire Leaders Program. Fast-paced operations: daily decisions in a business with customers and suppliers."
+  herramientas:
+    - grupo: {es: "PROGRAMACIÓN", en: "PROGRAMMING"}
+      lista: ["Python", "JavaScript", "TypeScript", "SQL", "Bash"]
+    - grupo: {es: "IA Y DATOS", en: "AI & DATA"}
+      lista: ["Claude API", "Claude Code", "OpenAI", "Pandas", "NumPy", "Streamlit"]
+    - grupo: {es: "AUTOMATIZACIÓN", en: "AUTOMATION"}
+      lista: ["Apps Script", "Google Workspace", {es: "Excel avanzado", en: "Advanced Excel"}, "GitHub Actions"]
+    - grupo: {es: "CLOUD Y HARDWARE", en: "CLOUD & HARDWARE"}
+      lista: ["AWS", "Docker", "Linux", "Arduino"]
+    - grupo: {es: "PROCESOS", en: "PROCESS"}
+      lista: ["Lean Six Sigma", "DMAIC", "SPC", "DOE"]
+  idiomas:
+    - {es: "Español · nativo", en: "Spanish · native"}
+    - {es: "Inglés · A2, en formación (beca Bécalos)", en: "English · A2, improving (Bécalos English scholarship)"}
+  formacion:
+    - institucion: "Hybridge Education"
+      programa: {es: "Ingeniería en Inteligencia Artificial", en: "AI Engineering"}
+      estado: {es: "3.er cuatrimestre de 8", en: "Term 3 of 8"}
+      logos: [hybridge]
+    - institucion: {es: "UVEG", en: "UVEG · Virtual University of the State of Guanajuato"}
+      programa: {es: "Ingeniería Industrial", en: "Industrial Engineering"}
+      estado: {es: "38% completado", en: "38% complete"}
+      logos: [uveg]
+    - institucion: "Universidad Anáhuac México Norte"
+      programa: {es: "Seminario de IA y Ciencia de Datos", en: "AI & Data Science Seminar"}
+      estado: {es: "Beca 100% · Santander 2026", en: "Full scholarship · Santander 2026"}
+      logos: [anahuac]
+    - institucion: "Aspire Leaders Program"
+      programa: {es: "Programa de liderazgo global fundado por académicos de Harvard", en: "Global leadership program founded by Harvard faculty"}
+      estado: {es: "Seleccionado", en: "Selected"}
+      logos: [aspire]
+    - institucion: "Oracle Next Education"
+      programa: {es: "Inmersión: Agentes de IA para Negocios", en: "Immersion: AI Agents for Business"}
+      estado: {es: "Finalizado · 13 oct 2026 · 4 h", en: "Completed · Oct 13, 2026 · 4 h"}
+      verificar: "https://app.aluracursos.com/immersion/certificate/00c74f55-f2d9-4ec7-990c-bcddc214aaa0"
+      logos: [one, oracle]
+    - institucion: "Lean Six Sigma Institute"
+      programa: {es: "Lean Management", en: "Lean Management"}
+      estado: {es: "En curso · avalado por The Council for Six Sigma Certification", en: "In progress · endorsed by The Council for Six Sigma Certification"}
+      logos: [lssi]
+
+seccion_contacto:
+  titulo: {es: "¿Hablamos de IA aplicada a operaciones?", en: "Let's talk about AI applied to operations"}
+  texto: {es: "Escríbeme por correo o por LinkedIn.", en: "Reach me by email or on LinkedIn."}
+  boton_correo: {es: "Escribir correo", en: "Send an email"}
+  boton_linkedin: {es: "Ir a LinkedIn", en: "Go to LinkedIn"}
+  filas: {correo: {es: "CORREO", en: "EMAIL"}, linkedin: "LINKEDIN", github: "GITHUB", ubicacion: {es: "UBICACIÓN", en: "LOCATION"}}
+
+pie:
+  frase:
+    es: "“Ingeniero industrial en formación, developer por curiosidad, operador por necesidad.”"
+    en: "“Industrial engineer in training, developer out of curiosity, operator out of necessity.”"
