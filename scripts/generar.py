@@ -22,6 +22,7 @@ ANCLAS_NAV = ["roles", "proyectos", "experiencia", "perfil", "contacto"]
 
 # Logos: archivo y tamaño en pantalla (px). Son decorativos: el texto de al lado ya nombra la institución.
 LOGOS = {
+    "medalla-2": ("medalla-2.svg", 37, 52),
     "medalla-3": ("medalla-3.svg", 37, 52),
     "unam": ("unam.webp", 41, 46),
     "hybridge": ("hybridge.svg", 110, 19),
@@ -67,6 +68,9 @@ def validar(s):
         for c in p["categorias"]:
             if c not in s["categorias"]:
                 errores.append(f"{p['codigo']} usa la categoría '{c}', que no está definida")
+        for d in p.get("distinciones", {}).get("premios", []):
+            if d["medalla"] not in LOGOS:
+                errores.append(f"{p['codigo']} usa la medalla '{d['medalla']}', que no está en LOGOS")
     for x in s["experiencia"]:
         if x.get("logo") and x["logo"] not in LOGOS:
             errores.append(f"Logo desconocido en experiencia: {x['logo']}")
@@ -109,6 +113,10 @@ def json_ld(s, lang):
 def main():
     s = yaml.safe_load((RAIZ / "data/perfil.yml").read_text(encoding="utf-8"))
     errores = validar(s)
+    if "cv" in s:  # el sitio enlaza al CV: los PDF deben existir antes de publicar
+        for lang in IDIOMAS:
+            if not (RAIZ / s["cv"]["archivo"][lang]).exists():
+                errores.append(f"Falta el CV {s['cv']['archivo'][lang]}: genéralo con python3 scripts/generar_cv.py")
     if errores:
         print("No se generó nada. Corrige data/perfil.yml:\n  - " + "\n  - ".join(errores))
         sys.exit(1)

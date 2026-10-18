@@ -1,9 +1,11 @@
 # Para generar el sitio (scripts/generar.py)
 jinja2>=3.1
 pyyaml>=6.0
-# Solo para regenerar imágenes de vista previa e íconos (scripts/imagenes.py)
+# Para el CV en PDF (scripts/generar_cv.py; necesita >=1.42 por page.pdf(tagged=...))
+# y para regenerar imágenes de vista previa e íconos (scripts/imagenes.py)
 # Después de instalar: python3 -m playwright install chromium
-playwright>=1.40
+playwright>=1.42
+# Solo para las imágenes (scripts/imagenes.py)
 fonttools>=4.40
 brotli>=1.0
 pillow>=10.0

@@ -1,0 +1,157 @@
+{#- CV en PDF: una página carta por idioma. Lo genera scripts/generar_cv.py desde data/perfil.yml.
+    Una sola columna, texto real y títulos de sección estándar para que los ATS lo lean en orden. -#}
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<title>{{ s.sitio.nombre_completo }} · {{ t(s.cv.documento) }}</title>
+<meta name="author" content="{{ s.sitio.nombre_completo }}">
+<style>
+  @font-face { font-family: "Space Mono"; font-weight: 400; src: url("{{ base }}assets/fuentes/space-mono-400.woff2") format("woff2"); }
+  @font-face { font-family: "Space Mono"; font-weight: 700; src: url("{{ base }}assets/fuentes/space-mono-700.woff2") format("woff2"); }
+  @font-face { font-family: "Titillium Web"; font-weight: 400; src: url("{{ base }}assets/fuentes/titillium-web-400.woff2") format("woff2"); }
+  @font-face { font-family: "Titillium Web"; font-weight: 600; src: url("{{ base }}assets/fuentes/titillium-web-600.woff2") format("woff2"); }
+
+  :root {
+    --azul: #0046B8; --tinta: #0B1F4A; --texto: #2A3142; --gris: #5A6F9A; --linea: #C9D4E8;
+    --mono: "Space Mono", ui-monospace, monospace; --sans: "Titillium Web", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #fff; }
+  body { font: 400 9.5pt/1.2 var(--sans); color: var(--texto); font-variant-ligatures: none; }
+  a { color: var(--azul); text-decoration: none; }
+  ul { list-style: none; }
+  strong { font-weight: 600; color: var(--tinta); }
+  p, li { text-wrap: pretty; }   /* evita renglones con una sola palabra */
+
+  /* La hoja: el cuerpo crece y el pie queda al fondo */
+  .cv { width: {{ ancho_util }}in; min-height: calc({{ alto_util }}in - 2px); display: flex; flex-direction: column; }
+  .cuerpo { flex: 1 0 auto; }
+
+  /* Encabezado */
+  .cab { padding-bottom: 6pt; border-bottom: 1.5pt solid var(--azul); }
+  .cab h1 { font: 700 20pt/1.05 var(--mono); letter-spacing: -0.02em; color: var(--tinta); }
+  .cab__titulo { margin-top: 1.5pt; font: 600 11.5pt/1.2 var(--sans); color: var(--azul); }
+  .cab__contacto { margin-top: 1.5pt; }
+  .dato { white-space: nowrap; }
+  .sep { color: var(--gris); }
+
+  /* Secciones */
+  section { margin-top: 6.5pt; }
+  h2 { display: flex; align-items: center; gap: 6pt; margin-bottom: 2.5pt;
+       font: 700 8.5pt/1.15 var(--mono); letter-spacing: 0.04em; text-transform: uppercase; color: var(--azul); }
+  h2::after { content: ""; flex: 1 1 0; border-top: 0.75pt solid var(--linea); }
+
+  /* Entradas: «título — dónde» a la izquierda, fecha o estado a la derecha */
+  .item + .item { margin-top: 3pt; }
+  .item__cab { display: flex; justify-content: space-between; align-items: baseline; gap: 12pt; }
+  h3 { font: 600 9.5pt/1.2 var(--sans); color: var(--tinta); }
+  .item__sub { font-weight: 400; color: var(--azul); }
+  .item__fecha { flex: none; font: 400 7.5pt/1.2 var(--mono); color: var(--gris); white-space: nowrap; }
+  /* Viñeta en línea con sangría francesa. Nada de position: Chromium pintaría (y escribiría en el PDF)
+     los elementos posicionados al final, y un ATS que lee el flujo vería las viñetas fuera de lugar. */
+  .puntos li { padding-left: 9pt; text-indent: -9pt; }
+  .puntos li::before { content: "–"; display: inline-block; width: 9pt; text-indent: 0; color: var(--azul); }
+
+  .proy__tec { display: flex; justify-content: space-between; align-items: baseline; gap: 12pt; }
+  .proy__tec > :last-child { flex: none; white-space: nowrap; }
+  .et { font: 400 7.5pt/1 var(--mono); letter-spacing: 0.02em; text-transform: uppercase; color: var(--gris); }
+  .privado { color: var(--gris); }
+
+  .formacion li { display: flex; justify-content: space-between; align-items: baseline; gap: 12pt; }
+  .formacion__est { flex: none; color: var(--gris); }
+
+  /* Habilidades: etiqueta en línea, sin columna aparte (un ATS podría leer todas las etiquetas y luego los valores) */
+  .habilidades p + p { margin-top: 1.5pt; }
+  .habilidades .et { color: var(--azul); white-space: nowrap; }
+
+  /* Pie */
+  .pie { margin-top: 7pt; padding-top: 3.5pt; border-top: 0.75pt solid var(--linea); display: flex; justify-content: space-between;
+         font: 400 7pt/1.2 var(--mono); color: var(--gris); }
+  .pie a { color: var(--gris); }
+</style>
+</head>
+<body>
+<div class="cv">
+<div class="cuerpo">
+
+<header class="cab">
+  <h1>{{ s.sitio.nombre_completo }}</h1>
+  <p class="cab__titulo">{{ t(s.cv.titulo_profesional) }}</p>
+  <p class="cab__contacto">
+    <span class="dato">{{ t(s.contacto.ubicacion) }}</span><span class="sep">&nbsp;·</span>
+    <a class="dato" href="mailto:{{ s.contacto.correo }}">{{ s.contacto.correo }}</a><br>
+    <a class="dato" href="{{ s.contacto.linkedin_url }}">{{ url_visible(s.contacto.linkedin_url) }}</a><span class="sep">&nbsp;·</span>
+    <a class="dato" href="{{ s.contacto.github_url }}">{{ url_visible(s.contacto.github_url) }}</a><span class="sep">&nbsp;·</span>
+    <a class="dato" href="{{ portafolio }}">{{ url_visible(portafolio) }}</a>
+  </p>
+</header>
+
+<section>
+  <h2>{{ t(s.cv.secciones.perfil) }}</h2>
+  <p>{{ t(s.perfil.intro) }}</p>
+</section>
+
+{%- macro entrada(x) %}
+  <article class="item">
+    <div class="item__cab"><h3>{{ t(x.puesto) }} <span class="item__sub">— {{ t(x.donde) }}</span></h3><span class="item__fecha">{{ t(x.etiqueta) }}</span></div>
+    <ul class="puntos">{% for pt in x.puntos %}<li>{{ t(pt) }}</li>{% endfor %}</ul>
+  </article>
+{%- endmacro %}
+
+<section>
+  <h2>{{ t(s.cv.secciones.experiencia) }}</h2>
+  {%- for x in trabajos %}{{ entrada(x) }}{% endfor %}
+</section>
+
+{%- if premios %}
+<section>
+  <h2>{{ t(s.cv.secciones.premios) }}</h2>
+  {%- for x in premios %}{{ entrada(x) }}{% endfor %}
+</section>
+{%- endif %}
+
+<section>
+  <h2>{{ t(s.cv.secciones.proyectos) }}</h2>
+  {%- for p in s.proyectos %}
+  <article class="item">
+    <div class="item__cab"><h3>{{ t(p.nombre) }} <span class="item__sub">— {{ t(p.subtitulo) }}</span></h3><span class="item__fecha">{{ t(p.estado) }}</span></div>
+    <p>{{ t(p.descripcion) }}</p>
+    <p class="proy__tec">
+      <span><span class="et">{{ t(s.cv.tecnologias) }}:</span> {{ lista(p.tecnologias) }}</span>
+      {%- if p.enlaces %}
+      <a href="{{ p.enlaces[0].url }}">{{ url_visible(p.enlaces[0].url) }}</a>
+      {%- else %}
+      <span class="privado">{{ t(p.nota_sin_enlace) if p.nota_sin_enlace is defined else t(s.ui.privado) }}</span>
+      {%- endif %}
+    </p>
+  </article>
+  {%- endfor %}
+</section>
+
+<section>
+  <h2>{{ t(s.cv.secciones.formacion) }}</h2>
+  <ul class="formacion">
+    {%- for f in s.perfil.formacion %}
+    <li><span><strong>{{ t(f.institucion) }}</strong> — {{ t(f.programa) }}</span><span class="formacion__est">{{ t(f.estado) }}</span></li>
+    {%- endfor %}
+  </ul>
+</section>
+
+<section>
+  <h2>{{ t(s.cv.secciones.habilidades) }}</h2>
+  <div class="habilidades">
+    <p>
+      {%- for g in s.perfil.herramientas %}
+      <span class="et">{{ t(g.grupo) }}</span>&nbsp;{{ lista(g.lista) }}{% if not loop.last %}<span class="sep">&nbsp;·</span>{% endif %}
+      {%- endfor %}</p>
+    <p><span class="et">{{ t(s.ui.idiomas) }}</span>&nbsp;{{ lista(s.perfil.idiomas, "; ") }}</p>
+    <p><span class="et">{{ t(s.ui.habilidades_blandas) }}</span>&nbsp;{{ t(s.perfil.habilidades_blandas) }}</p>
+  </div>
+</section>
+
+</div>
+<footer class="pie"><span>{{ t(s.cv.actualizado) }} {{ actualizado }}</span><a href="{{ portafolio }}">{{ url_visible(portafolio) }}</a></footer>
+</div>
+</body>
+</html>

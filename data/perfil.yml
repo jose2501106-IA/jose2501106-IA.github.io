@@ -87,7 +87,7 @@ portada:
     - {codigo: "P-03", valor: "v7", texto: {es: "pipeline de auditoría corriendo en producción", en: "audit pipeline running in production"}}
     - {codigo: "P-01", valor: "8", texto: {es: "herramientas en un agente de IA con datos oficiales", en: "tools in an AI agent built on official data"}}
     - {codigo: "P-01", valor: "10k+", texto: {es: "votos individuales de diputados en la base de ese agente", en: "individual votes by deputies in that agent's database"}}
-    - {codigo: "P-04", valor: {es: "3.er", en: "3rd"}, texto: {es: "lugar en el Track Contenido · Goya Hack 2026 · UNAM", en: "place, Content track · Goya Hack 2026 · UNAM"}}
+    - {codigo: "P-04", valor: "2", texto: {es: "premios en Goya Hack 2026 · UNAM: 2.º Track Pollar y 3.er Track Contenido", en: "awards at Goya Hack 2026 · UNAM: 2nd Pollar track, 3rd Content track"}}
 
 roles:
   - codigo: "R-01"
@@ -167,11 +167,13 @@ proyectos:
   - codigo: "P-04"
     nombre: "Cuentas Claras"
     categorias: [producto]
-    estado: {es: "3.er LUGAR", en: "3RD PLACE"}
+    estado: {es: "2 PREMIOS", en: "2 AWARDS"}
     subtitulo: {es: "Bitácora de fiado cofirmada · Goya Hack 2026", en: "Credit ledger signed by both parties · Goya Hack 2026"}
-    distincion:
-      titulo: {es: "3.er LUGAR · TRACK CONTENIDO", en: "3RD PLACE · CONTENT TRACK"}
-      texto: {es: "Goya Hack 2026 · Facultad de Ingeniería, UNAM", en: "Goya Hack 2026 · UNAM School of Engineering"}
+    distinciones:
+      texto: {es: "Goya Hack 2026 · CriptoUNAM × Facultad de Ingeniería, UNAM", en: "Goya Hack 2026 · CriptoUNAM × UNAM School of Engineering"}
+      premios:
+        - {medalla: "medalla-2", titulo: {es: "2.º LUGAR · TRACK POLLAR", en: "2ND PLACE · POLLAR TRACK"}}
+        - {medalla: "medalla-3", titulo: {es: "3.er LUGAR · TRACK CONTENIDO", en: "3RD PLACE · CONTENT TRACK"}}
     descripcion:
       es: "La bodega registra cada venta a crédito y el cliente la confirma desde su teléfono: nadie anota una deuda solo ni borra el historial. Las reglas las hace cumplir un contrato en Stellar."
       en: "The wholesaler records each credit sale and the customer confirms it from their phone, so neither side can log a debt alone or erase the history. A Stellar smart contract enforces the rules."
@@ -206,12 +208,15 @@ experiencia:
     puntos:
       - {es: "Llevé los registros y reportes administrativos de la operación diaria.", en: "I kept the administrative records and reports for daily operations."}
       - {es: "Coordiné con proveedores y áreas internas.", en: "I coordinated with suppliers and internal teams."}
-  - etiqueta: {es: "2026", en: "2026"}
+  - etiqueta: {es: "SEP 2026", en: "SEP 2026"}
     lugar: {es: "UNAM · FI", en: "UNAM"}
-    puesto: {es: "3.er lugar · Track Contenido", en: "3rd place · Content track"}
-    donde: {es: "Goya Hack 2026 · Facultad de Ingeniería, UNAM", en: "Goya Hack 2026 · UNAM School of Engineering"}
+    tipo: premio          # el CV lo lista en «Premios», no en «Experiencia»
+    puesto: {es: "2.º lugar Track Pollar · 3.er lugar Track Contenido", en: "2nd place, Pollar track · 3rd place, Content track"}
+    donde: {es: "Goya Hack 2026 · CriptoUNAM × Facultad de Ingeniería, UNAM", en: "Goya Hack 2026 · CriptoUNAM × UNAM School of Engineering"}
     puntos:
-      - {es: "Tercer lugar del Track Contenido con Cuentas Claras: bitácora de fiado cofirmada con un contrato inteligente en Stellar, presentada en un pitch de 3 minutos.", en: "Third place in the Content track with Cuentas Claras: a credit ledger signed by both parties and enforced by a Stellar smart contract, presented in a 3-minute pitch."}
+      - {es: "Dos premios con Cuentas Claras, uno de los 12 proyectos finalistas: bitácora de fiado cofirmada con un contrato inteligente en Stellar, presentada en un pitch de 3 minutos.", en: "Two awards with Cuentas Claras, one of the 12 finalist projects: a credit ledger signed by both parties and enforced by a Stellar smart contract, presented in a 3-minute pitch."}
+      - {es: "Segundo lugar del Track Pollar, patrocinado por Pollar (infraestructura de wallets y pagos sobre Stellar).", en: "Second place in the Pollar track, sponsored by Pollar (wallet and payments infrastructure on Stellar)."}
+      - {es: "Tercer lugar del Track Contenido.", en: "Third place in the Content track."}
 
 como_trabajo:
   es: "// Cómo trabajo: diagnóstico → diseño → construcción con IA y pruebas en 3 capas → control con DMAIC."
@@ -270,7 +275,28 @@ seccion_contacto:
   texto: {es: "Escríbeme por correo o por LinkedIn.", en: "Reach me by email or on LinkedIn."}
   boton_correo: {es: "Escribir correo", en: "Send an email"}
   boton_linkedin: {es: "Ir a LinkedIn", en: "Go to LinkedIn"}
-  filas: {correo: {es: "CORREO", en: "EMAIL"}, linkedin: "LINKEDIN", github: "GITHUB", ubicacion: {es: "UBICACIÓN", en: "LOCATION"}}
+  filas: {correo: {es: "CORREO", en: "EMAIL"}, linkedin: "LINKEDIN", github: "GITHUB", cv: {es: "CV", en: "RÉSUMÉ"}, ubicacion: {es: "UBICACIÓN", en: "LOCATION"}}
+
+# CV en PDF: lo genera scripts/generar_cv.py desde este mismo archivo
+cv:
+  archivo: {es: "cv/jose-hugo-meza-cv-es.pdf", en: "cv/jose-hugo-meza-cv-en.pdf"}
+  boton: {es: "Descargar CV (PDF)", en: "Download résumé (PDF)"}
+  nav: {es: "CV", en: "Résumé"}
+  # Textos propios del PDF (plantillas/cv.html.j2). El resto sale de las secciones de arriba.
+  documento: {es: "CV", en: "Résumé"}
+  titulo_profesional: {es: "Desarrollador de IA y automatización", en: "AI & automation developer"}   # = portada.linea_superior en tipo oración
+  secciones:
+    perfil: {es: "Perfil", en: "Summary"}
+    experiencia: {es: "Experiencia", en: "Experience"}
+    premios: {es: "Premios", en: "Awards"}
+    proyectos: {es: "Proyectos", en: "Projects"}
+    formacion: {es: "Formación", en: "Education"}
+    habilidades: {es: "Habilidades", en: "Skills"}
+  tecnologias: {es: "Tecnologías", en: "Tech"}
+  actualizado: {es: "Actualizado:", en: "Updated:"}
+  meses:
+    es: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+    en: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
 pie:
   frase:
