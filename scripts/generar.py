@@ -22,6 +22,7 @@ ANCLAS_NAV = ["roles", "proyectos", "experiencia", "perfil", "contacto"]
 
 # Logos: archivo y tamaño en pantalla (px). Son decorativos: el texto de al lado ya nombra la institución.
 LOGOS = {
+    "medalla-2": ("medalla-2.svg", 37, 52),
     "medalla-3": ("medalla-3.svg", 37, 52),
     "unam": ("unam.webp", 41, 46),
     "hybridge": ("hybridge.svg", 110, 19),
@@ -67,6 +68,9 @@ def validar(s):
         for c in p["categorias"]:
             if c not in s["categorias"]:
                 errores.append(f"{p['codigo']} usa la categoría '{c}', que no está definida")
+        for d in p.get("distinciones", {}).get("premios", []):
+            if d["medalla"] not in LOGOS:
+                errores.append(f"{p['codigo']} usa la medalla '{d['medalla']}', que no está en LOGOS")
     for x in s["experiencia"]:
         if x.get("logo") and x["logo"] not in LOGOS:
             errores.append(f"Logo desconocido en experiencia: {x['logo']}")

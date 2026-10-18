@@ -49,6 +49,7 @@
       {%- for nombre, ancla in nav %}
       <a href="#{{ ancla }}">{{ nombre }}</a>
       {%- endfor %}
+      <a class="nav__cv" href="{{ raiz }}{{ t(s.cv.archivo) }}" target="_blank" rel="noopener" type="application/pdf">{{ t(s.cv.nav) }} ↓</a>
     </div>
     <button class="btn-plano" type="button" aria-pressed="true" hidden>{{ t(s.ui.modo_plano) }} · <span>ON</span></button>
     <div class="idioma" role="group" aria-label="{{ 'Idioma' if lang == 'es' else 'Language' }}">
@@ -139,10 +140,10 @@
       <div class="proy__cuerpo">
         <h3>{{ t(p.nombre) }}</h3>
         <p class="proy__sub">{{ t(p.subtitulo) }}</p>
-        {%- if p.distincion is defined %}
+        {%- if p.distinciones is defined %}
         <div class="distincion">
-          {{ logo('medalla-3') }}
-          <div><div class="distincion__tit">{{ t(p.distincion.titulo) }}</div><div class="distincion__txt">{{ t(p.distincion.texto) }}</div></div>
+          <span class="distincion__medallas">{% for d in p.distinciones.premios %}{{ logo(d.medalla) }}{% endfor %}</span>
+          <div>{% for d in p.distinciones.premios %}<div class="distincion__tit">{{ t(d.titulo) }}</div>{% endfor %}<div class="distincion__txt">{{ t(p.distinciones.texto) }}</div></div>
           {{ logo('unam') }}
         </div>
         {%- endif %}
@@ -234,6 +235,7 @@
       <a class="contacto__fila" href="mailto:{{ s.contacto.correo }}"><span>{{ t(s.seccion_contacto.filas.correo) }}</span><strong>{{ s.contacto.correo }}</strong><i aria-hidden="true">↗</i></a>
       <a class="contacto__fila" href="{{ s.contacto.linkedin_url }}" target="_blank" rel="noopener"><span>{{ s.seccion_contacto.filas.linkedin }}</span><strong>{{ s.contacto.linkedin_txt }}</strong><i aria-hidden="true">↗</i></a>
       <a class="contacto__fila" href="{{ s.contacto.github_url }}" target="_blank" rel="noopener"><span>{{ s.seccion_contacto.filas.github }}</span><strong>{{ s.contacto.github_txt }}</strong><i aria-hidden="true">↗</i></a>
+      <a class="contacto__fila" href="{{ raiz }}{{ t(s.cv.archivo) }}" target="_blank" rel="noopener" type="application/pdf"><span>{{ t(s.seccion_contacto.filas.cv) }}</span><strong>{{ t(s.cv.boton) }}</strong><i aria-hidden="true">↓</i></a>
       <div class="contacto__fila"><span>{{ t(s.seccion_contacto.filas.ubicacion) }}</span><strong>{{ t(s.contacto.ubicacion) }}</strong><i aria-hidden="true">·</i></div>
     </div>
   </div>
