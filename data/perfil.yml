@@ -282,7 +282,21 @@ cv:
   archivo: {es: "cv/jose-hugo-meza-cv-es.pdf", en: "cv/jose-hugo-meza-cv-en.pdf"}
   boton: {es: "Descargar CV (PDF)", en: "Download résumé (PDF)"}
   nav: {es: "CV", en: "Résumé"}
-  fila_txt: {es: "PDF · 1 página", en: "PDF · 1 page"}
+  # Textos propios del PDF (plantillas/cv.html.j2). El resto sale de las secciones de arriba.
+  documento: {es: "CV", en: "Résumé"}
+  titulo_profesional: {es: "Desarrollador de IA y automatización", en: "AI & automation developer"}   # = portada.linea_superior en tipo oración
+  secciones:
+    perfil: {es: "Perfil", en: "Summary"}
+    experiencia: {es: "Experiencia", en: "Experience"}
+    premios: {es: "Premios", en: "Awards"}
+    proyectos: {es: "Proyectos", en: "Projects"}
+    formacion: {es: "Formación", en: "Education"}
+    habilidades: {es: "Habilidades", en: "Skills"}
+  tecnologias: {es: "Tecnologías", en: "Tech"}
+  actualizado: {es: "Actualizado:", en: "Updated:"}
+  meses:
+    es: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+    en: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
 pie:
   frase:

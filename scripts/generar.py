@@ -113,6 +113,10 @@ def json_ld(s, lang):
 def main():
     s = yaml.safe_load((RAIZ / "data/perfil.yml").read_text(encoding="utf-8"))
     errores = validar(s)
+    if "cv" in s:  # el sitio enlaza al CV: los PDF deben existir antes de publicar
+        for lang in IDIOMAS:
+            if not (RAIZ / s["cv"]["archivo"][lang]).exists():
+                errores.append(f"Falta el CV {s['cv']['archivo'][lang]}: genéralo con python3 scripts/generar_cv.py")
     if errores:
         print("No se generó nada. Corrige data/perfil.yml:\n  - " + "\n  - ".join(errores))
         sys.exit(1)
