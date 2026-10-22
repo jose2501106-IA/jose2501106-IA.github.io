@@ -277,18 +277,17 @@ perfil:
       estado: {es: "En curso · avalado por The Council for Six Sigma Certification", en: "In progress · endorsed by The Council for Six Sigma Certification"}
       logos: [lssi]
   # Oratoria y comunidad: misma forma que «formacion». Va en el portafolio y el README, no en el CV (no cabe).
-  # Sin logos de instituciones de gobierno: el del Senado lleva el Escudo Nacional (su uso en documentos
-  # particulares está prohibido, art. 6 de la Ley sobre el Escudo, la Bandera y el Himno Nacionales).
-  # El rol de embajador se mantiene solo mientras participe.
+  # Logos del Senado y del Congreso de Oaxaca: decisión de José (participó en ambos concursos), con las
+  # imágenes que él entregó. El rol de embajador se mantiene solo mientras participe.
   oratoria_comunidad:
     - institucion: {es: "Senado de la República", en: "Mexican Senate"}
       programa: {es: "Certamen Nacional de Oratoria “Ricardo Flores Magón”", en: "“Ricardo Flores Magón” National Oratory Contest"}
       estado: {es: "Febrero 2026", en: "February 2026"}
-      logos: [oratoria]
+      logos: [senado]
     - institucion: {es: "Congreso del Estado de Oaxaca", en: "Oaxaca State Congress"}
       programa: {es: "Concurso Nacional de Oratoria “Benito Juárez García”", en: "“Benito Juárez García” National Oratory Contest"}
       estado: {es: "Marzo 2026", en: "March 2026"}
-      logos: [oratoria]
+      logos: [congreso-oaxaca]
     - institucion: {es: "Programa de Embajadores de Stellar", en: "Stellar Ambassador Program"}
       programa: {es: "Embajador en Latinoamérica · coordinado por BAF", en: "Ambassador in Latin America · run by BAF"}
       estado: {es: "Desde octubre de 2026", en: "Since October 2026"}

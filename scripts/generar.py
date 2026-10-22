@@ -34,7 +34,8 @@ LOGOS = {
     "lssi": ("lssi.svg", 78, 32),
     "stellar": ("stellar.svg", 96, 24),      # SVG oficial de @stellar/design-system (solo cambian colores)
     "baf": ("baf.webp", 56, 28),             # imagen entregada por José, recortada (sin redibujar)
-    "oratoria": ("oratoria.svg", 32, 32),    # ícono propio: atril con micrófono
+    "senado": ("senado.webp", 46, 46),                    # imágenes entregadas por José, recortadas (sin redibujar)
+    "congreso-oaxaca": ("congreso-oaxaca.webp", 88, 44),
 }
 
 
