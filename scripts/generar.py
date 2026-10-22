@@ -32,6 +32,9 @@ LOGOS = {
     "one": ("one.svg", 62, 32),
     "oracle": ("oracle.svg", 104, 13),
     "lssi": ("lssi.svg", 78, 32),
+    "stellar": ("stellar.svg", 96, 24),      # SVG oficial de @stellar/design-system (solo cambian colores)
+    "baf": ("baf.webp", 56, 28),             # imagen entregada por José, recortada (sin redibujar)
+    "oratoria": ("oratoria.svg", 32, 32),    # ícono propio: atril con micrófono
 }
 
 
@@ -74,7 +77,7 @@ def validar(s):
     for x in s["experiencia"]:
         if x.get("logo") and x["logo"] not in LOGOS:
             errores.append(f"Logo desconocido en experiencia: {x['logo']}")
-    for f in s["perfil"]["formacion"]:
+    for f in s["perfil"]["formacion"] + s["perfil"].get("oratoria_comunidad", []):
         for fa in f.get("fases", []):
             if "nombre" not in fa or "estado" not in fa:
                 errores.append(f"Una fase de {f['institucion']} no tiene nombre o estado")

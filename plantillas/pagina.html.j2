@@ -197,7 +197,7 @@
   <div class="perfil">
     <div class="perfil__izq">
       <p class="perfil__intro">{{ t(s.perfil.intro) }}</p>
-      <div class="blandas"><div class="blandas__et">{{ t(s.ui.habilidades_blandas) }}</div><p>{{ t(s.perfil.habilidades_blandas) }}{% if s.perfil.comunidad is defined %} {{ t(s.perfil.comunidad) }}{% endif %}</p></div>
+      <div class="blandas"><div class="blandas__et">{{ t(s.ui.habilidades_blandas) }}</div><p>{{ t(s.perfil.habilidades_blandas) }}</p></div>
       <div class="herr">
         <div class="herr__et">{{ t(s.ui.herramientas) }}</div>
         {%- for g in s.perfil.herramientas %}
@@ -206,9 +206,12 @@
         <div class="herr__fila"><div class="herr__grupo">{{ t(s.ui.idiomas) }}</div><ul class="chips">{% for i in s.perfil.idiomas %}<li>{{ t(i) }}</li>{% endfor %}</ul></div>
       </div>
     </div>
+    {#- Formación a la derecha; oratoria y comunidad debajo de herramientas (en celular, después de formación) #}
+    {%- for clase, titulo, lista in [("perfil__der", s.ui.formacion_programas, s.perfil.formacion), ("perfil__ora", s.ui.oratoria_comunidad, s.perfil.oratoria_comunidad)] %}
+    <div class="{{ clase }}">
     <div class="formacion">
-      <div class="formacion__cab">{{ t(s.ui.formacion_programas) }}</div>
-      {%- for f in s.perfil.formacion %}
+      <div class="formacion__cab">{{ t(titulo) }}</div>
+      {%- for f in lista %}
       <div class="formacion__item">
         <div>
           <div class="formacion__inst">{{ t(f.institucion) }}</div>
@@ -232,6 +235,8 @@
       </div>
       {%- endfor %}
     </div>
+    </div>
+    {%- endfor %}
   </div>
 </section>
 
