@@ -284,6 +284,8 @@ perfil:
     - institucion: "Universidad Anáhuac México · World Youth Alliance"
       programa: {es: "Emerging Leaders Conference 2026: “Educación en dignidad humana e identidad personal”", en: "Emerging Leaders Conference 2026: “Education in Human Dignity and Personal Identity”"}
       estado: {es: "Reconocimiento por participación · 23 y 24 de septiembre de 2026", en: "Certificate of participation · September 23–24, 2026"}
+      corto: {es: "Emerging Leaders Conference 2026 (Anáhuac · WYA)", en: "Emerging Leaders Conference 2026 (Anáhuac · WYA)"}   # para enlaces de texto
+      documento: "reconocimientos/2026-09-23_emerging-leaders-conference.pdf"   # PDF original del reconocimiento
       logos: [anahuac, wya]
     - institucion: {es: "Senado de la República", en: "Mexican Senate"}
       programa: {es: "Certamen Nacional de Oratoria “Ricardo Flores Magón”", en: "“Ricardo Flores Magón” National Oratory Contest"}
