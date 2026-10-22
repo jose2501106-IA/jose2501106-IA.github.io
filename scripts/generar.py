@@ -143,8 +143,7 @@ def main():
             archivo, ancho, alto = LOGOS[clave]
             capa = lambda carpeta, clase: (f'<img class="{clase}" src="{raiz}assets/img/logos/{carpeta}{archivo}" '
                                            f'width="{ancho}" height="{alto}" alt="" loading="lazy" decoding="async">')
-            return Markup(f'<span class="logo" style="--w:{ancho}px;aspect-ratio:{ancho}/{alto}">'
-                          f'{capa("", "logo__linea")}{capa("color/", "logo__color")}</span>')
+            return Markup(f'<span class="logo">{capa("", "logo__linea")}{capa("color/", "logo__color")}</span>')
 
         html = plantilla.render(
             s=s, lang=lang, raiz=raiz, t=t, logo=logo, version=version, conteo=conteo,

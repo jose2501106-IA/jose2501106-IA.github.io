@@ -177,8 +177,8 @@ section[id], article[id] { scroll-margin-top: 72px; }
 @media (max-width: 640px) { .distincion { flex-wrap: wrap; } .distincion__medallas { flex-basis: 100%; } .distincion > .logo { display: none; } }
 /* Logos en dos capas: contorno azul (modo plano) y color de marca, como en el diseño original.
    Se encienden al pasar el cursor por su fila o caja, o en todos con el modo plano apagado. */
-.logo { position: relative; display: block; flex: 0 0 auto; width: var(--w); max-width: 100%; }
-.logo img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.logo { display: grid; flex: 0 0 auto; }
+.logo img { grid-area: 1 / 1; display: block; max-width: 100%; object-fit: contain; }   /* las dos capas en la misma celda, del tamaño de sus atributos */
 .logo__color { opacity: 0; }
 .listo .logo img { transition: opacity .4s ease; }
 :root:not(.plano-on) .logo__color, .formacion__item:hover .logo__color, .formacion__item:focus-within .logo__color,
@@ -290,7 +290,7 @@ a.contacto__fila:hover { background: var(--suave); color: var(--tinta); }
   .exp__fila { padding: 18px 16px; }
   .exp__lado { flex-basis: 100%; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 10px; }
   .exp__logo { margin-top: 0; margin-left: auto; }
-  .exp__logo .logo { width: 48px; }
+  .exp__logo .logo img { width: 48px; height: auto; }
   .herr__fila { grid-template-columns: 1fr; gap: 6px; }
   .contacto__izq { padding: 28px 20px; border-right: 0; border-bottom: 1px solid var(--azul); }
   .contacto__fila { grid-template-columns: 1fr 20px; padding: 14px 18px; }
