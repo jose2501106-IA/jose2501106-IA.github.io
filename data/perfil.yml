@@ -53,6 +53,7 @@ ui:
   formacion_programas: {es: "FORMACIÓN Y PROGRAMAS", en: "EDUCATION & PROGRAMS"}
   oratoria_comunidad: {es: "LIDERAZGO, ORATORIA Y COMUNIDAD", en: "LEADERSHIP, PUBLIC SPEAKING & COMMUNITY"}
   verificar: {es: "Verificar autenticidad", en: "Verify certificate"}
+  ver_reconocimiento: {es: "Ver reconocimiento (PDF)", en: "View certificate (PDF)"}
 
 secciones:
   inicio: {es: "INICIO", en: "HOME"}
@@ -292,6 +293,12 @@ perfil:
       programa: {es: "Concurso Nacional de Oratoria “Benito Juárez García”", en: "“Benito Juárez García” National Oratory Contest"}
       estado: {es: "Marzo 2026", en: "March 2026"}
       logos: [congreso-oaxaca]
+    - institucion: "Universidad Anáhuac México · Human & Nonhuman Communication Lab"
+      programa: {es: "Primer Hackathon de Vibe Coding de la Anáhuac: “El Lenguaje es el nuevo código: Prompting Good Hackathon de AI for Good”", en: "First Vibe Coding Hackathon at Anáhuac: “Language Is the New Code: Prompting Good Hackathon, AI for Good”"}
+      estado: {es: "Reconocimiento como asistente · 17 de abril de 2026", en: "Certificate of attendance · April 17, 2026"}
+      corto: {es: "Hackathon de Vibe Coding (Anáhuac)", en: "Vibe Coding Hackathon (Anáhuac)"}   # para enlaces de texto
+      documento: "reconocimientos/2026-04-17_hackathon-vibe-coding-anahuac.pdf"   # copia digital del reconocimiento
+      logos: [anahuac]
     - institucion: {es: "Programa de Embajadores de Stellar", en: "Stellar Ambassador Program"}
       programa: {es: "Embajador en Latinoamérica · coordinado por BAF", en: "Ambassador in Latin America · run by BAF"}
       estado: {es: "Desde octubre de 2026", en: "Since October 2026"}

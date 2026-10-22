@@ -230,6 +230,7 @@
           <div class="formacion__est">{{ t(f.estado) }}</div>
           {%- if f.verificar is defined %}<a class="formacion__ver" href="{{ f.verificar }}" target="_blank" rel="noopener">{{ t(s.ui.verificar) }} ↗</a>{% endif %}
           {%- endif %}
+          {%- if f.documento is defined %}<a class="formacion__ver" href="{{ raiz }}{{ f.documento }}" target="_blank" rel="noopener">{{ t(s.ui.ver_reconocimiento) }} ↗</a>{% endif %}
         </div>
         <div class="formacion__logos">{% for l in f.logos %}{{ logo(l) }}{% endfor %}</div>
       </div>
