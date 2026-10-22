@@ -79,8 +79,9 @@ def validar(s):
             if l not in LOGOS:
                 errores.append(f"Logo desconocido en formación: {l}")
     for nombre, (archivo, _, _) in LOGOS.items():
-        if not (RAIZ / "assets/img/logos" / archivo).exists():
-            errores.append(f"No existe el archivo del logo {nombre}: assets/img/logos/{archivo}")
+        for carpeta in ("", "color/"):
+            if not (RAIZ / "assets/img/logos" / carpeta / archivo).exists():
+                errores.append(f"No existe el archivo del logo {nombre}: assets/img/logos/{carpeta}{archivo}")
     return errores
 
 
@@ -134,9 +135,13 @@ def main():
             return x[lang] if es_traducible(x) else x
 
         def logo(clave, raiz=raiz):
+            # Dos capas, como el componente original del diseño: contorno azul (modo plano) y color de marca.
+            # El CSS cruza de una a otra al pasar el cursor por su fila o caja, o con el modo plano apagado.
             archivo, ancho, alto = LOGOS[clave]
-            return Markup(f'<img class="logo" src="{raiz}assets/img/logos/{archivo}" width="{ancho}" height="{alto}" '
-                          f'alt="" loading="lazy" decoding="async">')
+            capa = lambda carpeta, clase: (f'<img class="{clase}" src="{raiz}assets/img/logos/{carpeta}{archivo}" '
+                                           f'width="{ancho}" height="{alto}" alt="" loading="lazy" decoding="async">')
+            return Markup(f'<span class="logo" style="--w:{ancho}px;aspect-ratio:{ancho}/{alto}">'
+                          f'{capa("", "logo__linea")}{capa("color/", "logo__color")}</span>')
 
         html = plantilla.render(
             s=s, lang=lang, raiz=raiz, t=t, logo=logo, version=version, conteo=conteo,

@@ -32,7 +32,12 @@
 
   // Modo plano: cruz con coordenadas que sigue al mouse (no aplica en pantallas táctiles)
   const btnPlano = d.querySelector(".btn-plano");
-  if (!btnPlano || !matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  const listo = () => requestAnimationFrame(() => root.classList.add("listo"));
+  if (!btnPlano || !matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    root.classList.remove("plano-on");   // sin cursor no hay modo plano: los logos se ven a color
+    listo();
+    return;
+  }
   btnPlano.hidden = false;
   let on = true;
   try { on = localStorage.getItem("plano") !== "off"; } catch (e) { /* almacenamiento no disponible */ }
@@ -53,6 +58,7 @@
     aplicar();
   });
   aplicar();
+  listo();
   let px = 0, py = 0, cuadro = 0;
   const pintar = () => {
     cuadro = 0;
