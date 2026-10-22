@@ -175,7 +175,18 @@ section[id], article[id] { scroll-margin-top: 72px; }
 .distincion__txt { font-size: 14px; line-height: 1.4; color: var(--texto); }
 .distincion__medallas { display: flex; gap: 6px; flex: 0 0 auto; }
 @media (max-width: 640px) { .distincion { flex-wrap: wrap; } .distincion__medallas { flex-basis: 100%; } .distincion > .logo { display: none; } }
-.logo { display: block; flex: 0 0 auto; height: auto; }
+/* Logos en dos capas: contorno azul (modo plano) y color de marca, como en el diseño original.
+   Se encienden al pasar el cursor por su fila o caja, o en todos con el modo plano apagado. */
+.logo { position: relative; display: block; flex: 0 0 auto; width: var(--w); max-width: 100%; }
+.logo img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.logo__color { opacity: 0; }
+.listo .logo img { transition: opacity .4s ease; }
+:root:not(.plano-on) .logo__color, .formacion__item:hover .logo__color, .formacion__item:focus-within .logo__color,
+.distincion:hover .logo__color, .exp__fila:hover .logo__color { opacity: 1; }
+:root:not(.plano-on) .logo__linea, .formacion__item:hover .logo__linea, .formacion__item:focus-within .logo__linea,
+.distincion:hover .logo__linea, .exp__fila:hover .logo__linea { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .listo .logo img { transition: none; } }
+@media print { .logo__color { opacity: 1 !important; } .logo__linea { opacity: 0 !important; } }
 
 /* Experiencia */
 .exp { border: 1.5px solid var(--azul); background: #fff; }
