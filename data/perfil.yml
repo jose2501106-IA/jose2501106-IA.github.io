@@ -294,8 +294,10 @@ perfil:
       documento: "reconocimientos/2026-02-24_certamen-oratoria-ricardo-flores-magon.pdf"   # copia digital del reconocimiento
       logos: [senado]
     - institucion: {es: "Congreso del Estado de Oaxaca", en: "Oaxaca State Congress"}
-      programa: {es: "Concurso Nacional de Oratoria “Benito Juárez García”", en: "“Benito Juárez García” National Oratory Contest"}
-      estado: {es: "Marzo 2026", en: "March 2026"}
+      programa: {es: "XXIV Certamen Nacional de Oratoria “Licenciado Benito Juárez García 2026”", en: "24th “Licenciado Benito Juárez García 2026” National Oratory Contest"}
+      estado: {es: "Reconocimiento por destacada participación · 27 de marzo de 2026", en: "Recognition for outstanding participation · March 27, 2026"}
+      corto: {es: "Certamen Nacional de Oratoria “Benito Juárez García” (Oaxaca)", en: "“Benito Juárez García” National Oratory Contest (Oaxaca)"}   # para enlaces de texto
+      documento: "reconocimientos/2026-03-27_certamen-nacional-oratoria-benito-juarez.pdf"   # copia digital del reconocimiento
       logos: [congreso-oaxaca]
     - institucion: "Universidad Anáhuac México · Human & Nonhuman Communication Lab"
       programa: {es: "Primer Hackathon de Vibe Coding de la Anáhuac: “El Lenguaje es el nuevo código: Prompting Good Hackathon de AI for Good”", en: "First Vibe Coding Hackathon at Anáhuac: “Language Is the New Code: Prompting Good Hackathon, AI for Good”"}
