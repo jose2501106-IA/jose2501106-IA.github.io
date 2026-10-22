@@ -261,9 +261,15 @@ perfil:
       estado: {es: "Seleccionado", en: "Selected"}
       logos: [aspire]
     - institucion: "Oracle Next Education"
-      programa: {es: "Inmersión: Agentes de IA para Negocios", en: "Immersion: AI Agents for Business"}
-      estado: {es: "Finalizado · 13 oct 2026 · 4 h", en: "Completed · Oct 13, 2026 · 4 h"}
-      verificar: "https://app.aluracursos.com/immersion/certificate/00c74f55-f2d9-4ec7-990c-bcddc214aaa0"
+      programa: "ONE AI For Business"
+      estado: {es: "En curso · Fase Tech Builder", en: "In progress · Tech Builder phase"}   # resumen: CV y texto alternativo
+      fases:   # ruta del programa: lo terminado (con su certificado) y lo que está en curso
+        - nombre: {es: "Inmersión: Agentes de IA para Negocios", en: "Immersion: AI Agents for Business"}
+          estado: {es: "Finalizada · 13 oct 2026", en: "Completed · Oct 13, 2026"}
+          hecha: true
+          verificar: "https://app.aluracursos.com/immersion/certificate/00c74f55-f2d9-4ec7-990c-bcddc214aaa0"
+        - nombre: {es: "Fase Tech Builder", en: "Tech Builder phase"}
+          estado: {es: "En curso · desde oct 2026", en: "In progress · since Oct 2026"}
       logos: [one, oracle]
     - institucion: "Lean Six Sigma Institute"
       programa: {es: "Lean Management", en: "Lean Management"}

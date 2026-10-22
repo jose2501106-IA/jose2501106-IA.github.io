@@ -227,6 +227,16 @@ section[id], article[id] { scroll-margin-top: 72px; }
 .formacion__est { font: 11px var(--mono); color: var(--gris); line-height: 1.5; }
 .formacion__ver { margin-top: 6px; font: 11px var(--mono); letter-spacing: 1px; color: var(--gris); }
 .formacion__logos { display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+/* Ruta de un programa por fases: terminada (cuadro lleno con palomita) → en curso (cuadro con punto) */
+.fases { margin-top: 6px; display: flex; flex-direction: column; gap: 8px; }
+.fase { position: relative; padding-left: 22px; display: flex; flex-direction: column; gap: 1px; }
+.fase::before { content: ""; position: absolute; left: 0; top: 4px; width: 12px; height: 12px; box-sizing: border-box;
+  border: 1.5px solid var(--azul); background: radial-gradient(circle, var(--azul) 0 2px, #fff 2.5px); }
+.fase--hecha::before { background: var(--azul) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.6 6.2l2.2 2.2 4.6-4.8' fill='none' stroke='%23fff' stroke-width='1.8'/%3E%3C/svg%3E") center / 100% no-repeat; }
+.fase:not(:last-child)::after { content: ""; position: absolute; left: 5.25px; top: 19px; bottom: -6px; border-left: 1.5px dashed var(--punteada); }
+.fase__nombre { font-size: 14px; line-height: 1.35; color: var(--texto); }
+.fase__est { font: 11px var(--mono); line-height: 1.5; color: var(--gris); }
+.fase__ver { align-self: flex-start; margin-top: 2px; font: 11px var(--mono); letter-spacing: 1px; color: var(--gris); }
 
 /* Contacto */
 .hoja--contacto > .cab__hoja { margin-bottom: 10px; }

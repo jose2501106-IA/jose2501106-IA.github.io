@@ -75,6 +75,9 @@ def validar(s):
         if x.get("logo") and x["logo"] not in LOGOS:
             errores.append(f"Logo desconocido en experiencia: {x['logo']}")
     for f in s["perfil"]["formacion"]:
+        for fa in f.get("fases", []):
+            if "nombre" not in fa or "estado" not in fa:
+                errores.append(f"Una fase de {f['institucion']} no tiene nombre o estado")
         for l in f.get("logos", []):
             if l not in LOGOS:
                 errores.append(f"Logo desconocido en formación: {l}")

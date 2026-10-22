@@ -210,8 +210,20 @@
         <div>
           <div class="formacion__inst">{{ t(f.institucion) }}</div>
           <div class="formacion__prog">{{ t(f.programa) }}</div>
+          {%- if f.fases is defined %}
+          <ol class="fases">
+            {%- for fa in f.fases %}
+            <li class="fase{{ ' fase--hecha' if fa.hecha is defined and fa.hecha }}">
+              <span class="fase__nombre">{{ t(fa.nombre) }}</span>
+              <span class="fase__est">{{ t(fa.estado) }}</span>
+              {%- if fa.verificar is defined %}<a class="fase__ver" href="{{ fa.verificar }}" target="_blank" rel="noopener">{{ t(s.ui.verificar) }} ↗</a>{% endif %}
+            </li>
+            {%- endfor %}
+          </ol>
+          {%- else %}
           <div class="formacion__est">{{ t(f.estado) }}</div>
           {%- if f.verificar is defined %}<a class="formacion__ver" href="{{ f.verificar }}" target="_blank" rel="noopener">{{ t(s.ui.verificar) }} ↗</a>{% endif %}
+          {%- endif %}
         </div>
         <div class="formacion__logos">{% for l in f.logos %}{{ logo(l) }}{% endfor %}</div>
       </div>
