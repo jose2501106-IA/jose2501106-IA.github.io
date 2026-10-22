@@ -51,7 +51,7 @@ ui:
   herramientas: {es: "HERRAMIENTAS", en: "TOOLS"}
   idiomas: {es: "IDIOMAS", en: "LANGUAGES"}
   formacion_programas: {es: "FORMACIÓN Y PROGRAMAS", en: "EDUCATION & PROGRAMS"}
-  oratoria_comunidad: {es: "ORATORIA Y COMUNIDAD", en: "PUBLIC SPEAKING & COMMUNITY"}
+  oratoria_comunidad: {es: "LIDERAZGO, ORATORIA Y COMUNIDAD", en: "LEADERSHIP, PUBLIC SPEAKING & COMMUNITY"}
   verificar: {es: "Verificar autenticidad", en: "Verify certificate"}
 
 secciones:
@@ -228,8 +228,8 @@ perfil:
     es: "Estudio dos ingenierías al mismo tiempo: Inteligencia Artificial en Hybridge Education e Industrial en la UVEG. En paralelo automatizo la operación de una empresa de distribución, donde convierto lo que aprendo en sistemas que se usan todos los días."
     en: "I'm pursuing two engineering degrees at the same time: Artificial Intelligence at Hybridge Education and Industrial Engineering at UVEG. Alongside my studies, I automate operations for a distribution company, where I turn what I learn into systems used every day."
   habilidades_blandas:
-    es: "Comunicación: dos concursos nacionales de oratoria (2026). Liderazgo: Aspire Leaders Program. Ritmo de operación real: decisiones diarias en un negocio con clientes y proveedores."
-    en: "Communication: two national public-speaking contests (2026). Leadership: Aspire Leaders Program. Fast-paced operations: daily decisions in a business with customers and suppliers."
+    es: "Comunicación: dos concursos nacionales de oratoria (2026). Liderazgo: Aspire Leaders Program y Emerging Leaders Conference 2026. Ritmo de operación real: decisiones diarias en un negocio con clientes y proveedores."
+    en: "Communication: two national public-speaking contests (2026). Leadership: Aspire Leaders Program and Emerging Leaders Conference 2026. Fast-paced operations: daily decisions in a business with customers and suppliers."
   herramientas:
     - grupo: {es: "PROGRAMACIÓN", en: "PROGRAMMING"}
       lista: ["Python", "JavaScript", "TypeScript", "SQL", "Bash"]
@@ -280,6 +280,10 @@ perfil:
   # Logos del Senado y del Congreso de Oaxaca: decisión de José (participó en ambos concursos), con las
   # imágenes que él entregó. El rol de embajador se mantiene solo mientras participe.
   oratoria_comunidad:
+    - institucion: "Universidad Anáhuac México · World Youth Alliance"
+      programa: {es: "Emerging Leaders Conference 2026: “Educación en dignidad humana e identidad personal”", en: "Emerging Leaders Conference 2026: “Education in Human Dignity and Personal Identity”"}
+      estado: {es: "Reconocimiento por participación · 23 y 24 de septiembre de 2026", en: "Certificate of participation · September 23–24, 2026"}
+      logos: [anahuac, wya]
     - institucion: {es: "Senado de la República", en: "Mexican Senate"}
       programa: {es: "Certamen Nacional de Oratoria “Ricardo Flores Magón”", en: "“Ricardo Flores Magón” National Oratory Contest"}
       estado: {es: "Febrero 2026", en: "February 2026"}

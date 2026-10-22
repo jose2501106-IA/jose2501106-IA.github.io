@@ -38,6 +38,7 @@ LOGOS = {
     #   El sello del Senado va siempre en sus colores originales (su manual de identidad no permite cambiarle
     #   el color): la capa del modo plano es la misma imagen a color.
     "congreso-oaxaca": ("congreso-oaxaca.webp", 88, 44),
+    "wya": ("wya.webp", 50, 48),                           # World Youth Alliance: logo tomado del reconocimiento de José
 }
 
 
