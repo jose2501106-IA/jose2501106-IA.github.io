@@ -288,7 +288,7 @@ perfil:
       documento: "reconocimientos/2026-09-23_emerging-leaders-conference.pdf"   # PDF original del reconocimiento
       logos: [anahuac, wya]
     - institucion: {es: "Senado de la República", en: "Mexican Senate"}
-      programa: {es: "II Certamen de Oratoria “Ricardo Flores Magón 2026”", en: "2nd “Ricardo Flores Magón 2026” Oratory Contest"}
+      programa: {es: "II Certamen de Oratoria “Ricardo Flores Magón 2026” · nacional, con estudiantes de varios estados", en: "2nd “Ricardo Flores Magón 2026” Oratory Contest · national, with students from several states"}
       estado: {es: "Reconocimiento por destacada participación · 24 de febrero de 2026", en: "Recognition for outstanding participation · February 24, 2026"}
       corto: {es: "Certamen de Oratoria “Ricardo Flores Magón” (Senado)", en: "“Ricardo Flores Magón” Oratory Contest (Senate)"}   # para enlaces de texto
       documento: "reconocimientos/2026-02-24_certamen-oratoria-ricardo-flores-magon.pdf"   # copia digital del reconocimiento
