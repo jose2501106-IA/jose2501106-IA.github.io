@@ -197,7 +197,7 @@
   <div class="perfil">
     <div class="perfil__izq">
       <p class="perfil__intro">{{ t(s.perfil.intro) }}</p>
-      <div class="blandas"><div class="blandas__et">{{ t(s.ui.habilidades_blandas) }}</div><p>{{ t(s.perfil.habilidades_blandas) }}</p></div>
+      <div class="blandas"><div class="blandas__et">{{ t(s.ui.habilidades_blandas) }}</div><p>{{ t(s.perfil.habilidades_blandas) }}{% if s.perfil.comunidad is defined %} {{ t(s.perfil.comunidad) }}{% endif %}</p></div>
       <div class="herr">
         <div class="herr__et">{{ t(s.ui.herramientas) }}</div>
         {%- for g in s.perfil.herramientas %}

@@ -229,6 +229,10 @@ perfil:
   habilidades_blandas:
     es: "Comunicación: dos competencias nacionales de oratoria y Parlamento Juvenil. Liderazgo: Aspire Leaders Program. Ritmo de operación real: decisiones diarias en un negocio con clientes y proveedores."
     en: "Communication: two national public-speaking competitions and Youth Parliament. Leadership: Aspire Leaders Program. Fast-paced operations: daily decisions in a business with customers and suppliers."
+  # Rol activo en comunidad: va en el portafolio y el README, no en el CV. Mantenerlo solo mientras participe.
+  comunidad:
+    es: "Comunidad: embajador del Programa de Embajadores de Stellar en Latinoamérica (BAF), desde octubre de 2026."
+    en: "Community: ambassador, Stellar Ambassador Program in Latin America (BAF), since October 2026."
   herramientas:
     - grupo: {es: "PROGRAMACIÓN", en: "PROGRAMMING"}
       lista: ["Python", "JavaScript", "TypeScript", "SQL", "Bash"]
