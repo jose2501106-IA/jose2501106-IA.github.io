@@ -1,7 +1,7 @@
 {#- Plantilla única del portafolio. Se genera una vez por idioma con scripts/generar.py.
     No edites index.html ni en/index.html a mano: edita data/perfil.yml. -#}
 <!doctype html>
-<html lang="{{ lang }}" class="plano-on">
+<html lang="{{ lang }}">
 <head>
 <meta charset="utf-8">
 {#- Seguridad: la página solo carga lo propio (estilos, script, fuentes e imágenes del sitio). Sin estilos ni scripts en línea. #}
@@ -52,9 +52,10 @@
       {%- for nombre, ancla in nav %}
       <a href="#{{ ancla }}">{{ nombre }}</a>
       {%- endfor %}
-      <a class="nav__cv" href="{{ raiz }}{{ t(s.cv.archivo) }}" target="_blank" rel="noopener" type="application/pdf">{{ t(s.cv.nav) }} ↓</a>
+      <a class="nav__cv" href="{{ raiz }}{{ t(s.cv.archivo) }}" download type="application/pdf">{{ t(s.cv.nav) }} ↓</a>
     </div>
-    <button class="btn-plano" type="button" aria-pressed="true" hidden>{{ t(s.ui.modo_plano) }} · <span>ON</span></button>
+    {#- Vista plano: apagada por defecto; el script la muestra solo con mouse. El estado lo da aria-pressed. #}
+    <button class="btn-plano" type="button" aria-pressed="false" title="{{ t(s.ui.vista_plano_ayuda) }}" hidden>{{ t(s.ui.vista_plano) }} <span class="btn-plano__estado" aria-hidden="true">OFF</span></button>
     <div class="idioma" role="group" aria-label="{{ 'Idioma' if lang == 'es' else 'Language' }}">
       <a href="{{ raiz }}" lang="es" hreflang="es"{% if lang == 'es' %} aria-current="page"{% endif %}>ES</a>
       <a href="{{ raiz }}en/" lang="en" hreflang="en"{% if lang == 'en' %} aria-current="page"{% endif %}>EN</a>
@@ -66,48 +67,45 @@
 <main id="contenido">
 
 <section id="inicio" class="hoja hoja--inicio" aria-labelledby="nombre">
-  <div class="hoja__meta"><div>{{ t(s.ui.hoja) }} 01 / {{ t(s.secciones.inicio) }}</div><div>{{ t(s.ui.escala) }} 1:1 · REV {{ s.sitio.anio }}</div></div>
+  <div class="hoja__meta">{{ t(s.ui.hoja) }} 01 / {{ t(s.secciones.inicio) }}</div>
+  {#- Orden en el código = orden en celular: quién es y qué hace, la prueba (cifras), datos y retrato.
+      En computadora la rejilla pone el retrato a la derecha y las cifras abajo, dentro del primer pantallazo. #}
   <div class="inicio">
     <div class="inicio__texto">
       <p class="kicker">{{ t(s.portada.linea_superior) }}</p>
-      <div class="bloque-nombre">
-        <div class="cota" aria-hidden="true"><span>y 000</span><i></i></div>
-        <h1 class="nombre" id="nombre">{{ s.sitio.nombre_h1[0] }}<br>{{ s.sitio.nombre_h1[1] }}</h1>
-        <div class="cota" aria-hidden="true"><span>y 196</span><i></i></div>
-      </div>
+      <h1 class="nombre" id="nombre">{{ s.sitio.nombre_h1[0] }}<br>{{ s.sitio.nombre_h1[1] }}</h1>
       <div class="bloque-titulo">
         <p class="subtitulo">{{ t(s.portada.subtitulo) }}</p>
         <p class="bajada">{{ t(s.portada.bajada)|replace(" · ", "&nbsp;· "|safe) }}</p>
       </div>
-      <p class="historia">{{ t(s.portada.historia) }}</p>
+      <p class="historia">{{ t(s.portada.historia_corta) }}</p>
       <div class="botones">
         <a class="btn btn--pri" href="#proyectos">{{ t(s.portada.boton_principal) }}</a>
-        <a class="btn btn--sec" href="mailto:{{ s.contacto.correo }}">{{ t(s.portada.boton_secundario) }}</a>
+        <a class="btn btn--sec" href="{{ raiz }}{{ t(s.cv.archivo) }}" download type="application/pdf">{{ t(s.cv.boton) }} <span aria-hidden="true">↓</span></a>
+        <a class="btn btn--ter" href="mailto:{{ s.contacto.correo }}">{{ t(s.portada.boton_secundario) }}</a>
       </div>
-      <dl class="ficha">
-        {%- for d in s.portada.datos %}
-        <div><dt>{{ t(d.etiqueta) }}</dt><dd>{{ t(d.valor) }}</dd></div>
-        {%- endfor %}
-      </dl>
     </div>
+    <div class="cifras">
+      {%- for c in s.portada.cifras %}
+      <a class="cifra" href="#{{ c.codigo | lower }}"><span class="cifra__cod">{{ c.codigo }}</span><span class="cifra__val">{{ t(c.valor) }}</span><span class="cifra__txt">{{ t(c.texto) }}</span></a>
+      {%- endfor %}
+    </div>
+    <dl class="ficha">
+      {%- for d in s.portada.datos %}
+      <div><dt>{{ t(d.etiqueta) }}</dt><dd>{{ t(d.valor) }}</dd></div>
+      {%- endfor %}
+    </dl>
     <figure class="retrato">
       <span class="esq esq--ti" aria-hidden="true"></span><span class="esq esq--td" aria-hidden="true"></span>
       <span class="esq esq--bi" aria-hidden="true"></span><span class="esq esq--bd" aria-hidden="true"></span>
       <div class="retrato__marco">
         <img src="{{ raiz }}assets/img/retrato-864.webp" srcset="{{ raiz }}assets/img/retrato-432.webp 432w, {{ raiz }}assets/img/retrato-864.webp 864w"
-             sizes="(max-width: 520px) 90vw, 428px" width="864" height="1080" alt="{{ s.sitio.nombre }}" fetchpriority="high">
+             sizes="(max-width: 520px) 90vw, 336px" width="864" height="1080" alt="{{ s.sitio.nombre }}" fetchpriority="high">
         <div class="retrato__rejilla" aria-hidden="true"></div>
         <div class="retrato__caja" aria-hidden="true"></div>
         <div class="retrato__etiqueta" aria-hidden="true"><i></i><span>{{ s.portada.retrato.etiqueta }}</span></div>
-        <div class="retrato__pie" aria-hidden="true"><span>{{ t(s.portada.retrato.pie_izq) }}</span><span>{{ s.portada.retrato.pie_der }}</span></div>
       </div>
-      <figcaption><span>FIG. 00 — {{ t(s.ui.retrato) }}</span><span>{{ s.portada.retrato.medidas }}</span></figcaption>
     </figure>
-  </div>
-  <div class="cifras">
-    {%- for c in s.portada.cifras %}
-    <a class="cifra" href="#{{ c.codigo | lower }}"><span class="cifra__cod">{{ c.codigo }}</span><span class="cifra__val">{{ t(c.valor) }}</span><span class="cifra__txt">{{ t(c.texto) }}</span></a>
-    {%- endfor %}
   </div>
 </section>
 
@@ -116,7 +114,7 @@
   <div class="roles">
     {%- for r in s.roles %}
     <article class="rol">
-      <div class="rol__cab"><span>{{ r.codigo }}</span><span aria-hidden="true">+</span></div>
+      <div class="rol__cab">{{ r.codigo }}</div>
       <div class="rol__cuerpo">
         <h3>{{ t(r.titulo) }}</h3>
         <p>{{ t(r.texto) }}</p>
@@ -139,7 +137,34 @@
   <div class="proyectos{{ ' proyectos--pares' if s.proyectos|length in (2, 4) else '' }}">
     {%- for p in s.proyectos %}
     <article class="proy" id="{{ p.codigo | lower }}" data-cat="{{ p.categorias | join(' ') }}">
-      <div class="proy__cab"><span>FIG. {{ p.codigo[2:] }} — {% for c in p.categorias %}{{ t(s.categorias[c].fig) }}{% if not loop.last %} · {% endif %}{% endfor %}</span><span>{{ t(p.estado) }}</span></div>
+      {#- El código (P-0X) es el mismo que citan los roles y las cifras de la portada #}
+      <div class="proy__cab"><span>{{ p.codigo }} · {% for c in p.categorias %}{{ t(s.categorias[c].fig) }}{% if not loop.last %} · {% endif %}{% endfor %}</span><span>{{ t(p.estado) }}</span></div>
+      {%- if p.imagen is defined %}
+      <figure class="proy__media">
+        <img src="{{ raiz }}{{ p.imagen.archivo }}-640.webp" srcset="{{ raiz }}{{ p.imagen.archivo }}-640.webp 640w, {{ raiz }}{{ p.imagen.archivo }}-1280.webp 1280w"
+             sizes="(min-width: 900px) 590px, 100vw" width="1280" height="640" alt="{{ t(p.imagen.alt) }}" loading="lazy" decoding="async">
+        <figcaption class="proy__pie">{{ t(p.imagen.pie) }}</figcaption>
+      </figure>
+      {%- else %}
+      {#- Esquema hecho con texto (se lee, se traduce y no pesa): pasos en orden y, si aplica, la línea de versiones #}
+      <figure class="proy__media proy__media--esquema">
+        <div class="esquema">
+          <ol class="esquema__pasos{{ ' esquema__pasos--' ~ p.esquema.pasos|length }}">
+            {%- for paso in p.esquema.pasos %}
+            <li><span class="esquema__n">{{ '%02d' % loop.index }}</span><b>{{ t(paso.titulo) }}</b><span>{{ t(paso.texto) }}</span></li>
+            {%- endfor %}
+          </ol>
+          {%- if p.esquema.versiones is defined %}
+          {%- set total = p.esquema.versiones.total %}
+          <div class="versiones">
+            <ol class="versiones__linea">{% for v in range(1, total + 1) %}<li{% if v == total %} class="versiones__actual"{% endif %}>v{{ v }}</li>{% endfor %}</ol>
+            <p class="versiones__txt"><b>v{{ total }}</b> {{ t(p.esquema.versiones.texto) }}</p>
+          </div>
+          {%- endif %}
+        </div>
+        <figcaption class="proy__pie">{{ t(p.esquema.pie) }}</figcaption>
+      </figure>
+      {%- endif %}
       <div class="proy__cuerpo">
         <h3>{{ t(p.nombre) }}</h3>
         <p class="proy__sub">{{ t(p.subtitulo) }}</p>
@@ -256,7 +281,7 @@
       <a class="contacto__fila" href="mailto:{{ s.contacto.correo }}"><span>{{ t(s.seccion_contacto.filas.correo) }}</span><strong>{{ s.contacto.correo }}</strong><i aria-hidden="true">↗</i></a>
       <a class="contacto__fila" href="{{ s.contacto.linkedin_url }}" target="_blank" rel="noopener"><span>{{ s.seccion_contacto.filas.linkedin }}</span><strong>{{ s.contacto.linkedin_txt }}</strong><i aria-hidden="true">↗</i></a>
       <a class="contacto__fila" href="{{ s.contacto.github_url }}" target="_blank" rel="noopener"><span>{{ s.seccion_contacto.filas.github }}</span><strong>{{ s.contacto.github_txt }}</strong><i aria-hidden="true">↗</i></a>
-      <a class="contacto__fila" href="{{ raiz }}{{ t(s.cv.archivo) }}" target="_blank" rel="noopener" type="application/pdf"><span>{{ t(s.seccion_contacto.filas.cv) }}</span><strong>{{ t(s.cv.boton) }}</strong><i aria-hidden="true">↓</i></a>
+      <a class="contacto__fila" href="{{ raiz }}{{ t(s.cv.archivo) }}" download type="application/pdf"><span>{{ t(s.seccion_contacto.filas.cv) }}</span><strong>{{ t(s.cv.boton) }}</strong><i aria-hidden="true">↓</i></a>
       <div class="contacto__fila"><span>{{ t(s.seccion_contacto.filas.ubicacion) }}</span><strong>{{ t(s.contacto.ubicacion) }}</strong><i aria-hidden="true">·</i></div>
     </div>
   </div>
@@ -268,6 +293,13 @@
   <div class="pie__in"><div class="pie__frase">{{ t(s.pie.frase) }}</div><div>© {{ s.sitio.anio }} {{ s.sitio.nombre_completo }}</div></div>
 </footer>
 </div>
+{#- Celular: CV, correo y LinkedIn a un toque. El script la muestra al pasar los botones de la portada
+    y la esconde en Contacto (ahí ya están). Sin script no aparece: esos enlaces siguen en la portada y en Contacto. #}
+<nav class="barra" aria-label="{{ t(s.ui.acciones_rapidas) }}" hidden>
+  <a class="barra__cv" href="{{ raiz }}{{ t(s.cv.archivo) }}" download type="application/pdf">{{ t(s.cv.nav) }} <span aria-hidden="true">↓</span></a>
+  <a href="mailto:{{ s.contacto.correo }}">{{ t(s.ui.correo) }}</a>
+  <a href="{{ s.contacto.linkedin_url }}" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+</nav>
 <script src="{{ raiz }}assets/js/sitio.js?v={{ version }}" defer></script>
 </body>
 </html>

@@ -37,11 +37,14 @@ ui:
   nav: {es: ["Roles", "Proyectos", "Experiencia", "Formación", "Contacto"], en: ["Roles", "Projects", "Experience", "Education", "Contact"]}
   marca_sub: {es: "PORTAFOLIO", en: "PORTFOLIO"}
   hoja: {es: "HOJA", en: "SHEET"}
-  escala: {es: "ESC", en: "SCALE"}
-  modo_plano: {es: "MODO PLANO", en: "BLUEPRINT MODE"}
+  escala: {es: "ESC", en: "SCALE"}          # lo usan el README y la imagen para compartir; el sitio ya no
+  # Vista plano: apagada por defecto (logos a color); quien visita la enciende. Solo aparece con mouse.
+  vista_plano: {es: "Vista plano", en: "Blueprint view"}
+  vista_plano_ayuda: {es: "Enciende una cuadrícula con coordenadas que sigue al mouse y pasa los logos a trazo azul", en: "Turns on a grid with coordinates that follows your mouse and switches logos to blue outlines"}
   menu: {es: "Menú", en: "Menu"}
   saltar: {es: "Saltar al contenido", en: "Skip to content"}
-  retrato: {es: "RETRATO", en: "PORTRAIT"}
+  acciones_rapidas: {es: "Acciones rápidas", en: "Quick actions"}   # barra fija del celular: CV, correo y LinkedIn
+  correo: {es: "Correo", en: "Email"}
   evidencia: {es: "EVIDENCIA:", en: "EVIDENCE:"}
   filtrar: {es: "FILTRAR:", en: "FILTER:"}
   todos: {es: "Todos", en: "All"}
@@ -60,7 +63,7 @@ secciones:
   roles: {es: "ROLES", en: "ROLES", titulo: {es: "Lo que hago, con evidencia", en: "What I do, with evidence"}}
   proyectos: {es: "PROYECTOS", en: "PROJECTS", titulo: {es: "Proyectos que lo demuestran", en: "Projects as evidence"}}
   experiencia: {es: "EXPERIENCIA", en: "EXPERIENCE", titulo: {es: "Experiencia", en: "Experience"}}
-  perfil: {es: "FORMACIÓN", en: "EDUCATION", titulo: {es: "Formación y herramientas", en: "Education & tools"}}
+  perfil: {es: "FORMACIÓN", en: "EDUCATION", titulo: {es: "Formación, herramientas y liderazgo", en: "Education, tools & leadership"}}
   contacto: {es: "CONTACTO", en: "CONTACT"}
 
 portada:
@@ -68,9 +71,12 @@ portada:
   # Título principal (opción B) partido en dos líneas
   subtitulo: {es: "Automatización inteligente y agentes de IA.", en: "Intelligent automation and AI agents."}
   bajada: {es: "Python, datos y modelos de lenguaje · Estudiante de Ing. en IA e Industrial", en: "Python, data and language models · AI & Industrial Engineering student"}
-  historia:
+  historia:            # versión larga: README del perfil
     es: "Entré a una empresa de distribución como auxiliar administrativo y a los tres meses quedé al frente de su bodega. Hoy, como desarrollador independiente, la apoyo con automatizaciones que se usan todos los días y desarrollo sus primeras soluciones de IA, mientras estudio dos ingenierías: Inteligencia Artificial e Industrial."
     en: "I joined a distribution company as an administrative assistant, and three months later I was running its warehouse. Today, as an independent developer, I support it with automation tools it uses every day and I'm developing its first AI solutions, while pursuing two engineering degrees: Artificial Intelligence and Industrial Engineering."
+  historia_corta:      # versión de la portada del sitio: lo de estudiar ya va en la bajada y el detalle, en Experiencia
+    es: "En una empresa de distribución pasé de auxiliar administrativo a encargado de bodega en tres meses. Hoy, como desarrollador independiente, automatizo su operación y desarrollo sus primeras soluciones de IA."
+    en: "At a distribution company, I went from administrative assistant to warehouse manager in three months. Today, as an independent developer, I automate its operations and I'm developing its first AI solutions."
   boton_principal: {es: "Ver proyectos", en: "See projects"}
   boton_secundario: {es: "Escríbeme", en: "Email me"}
   datos:
@@ -81,10 +87,8 @@ portada:
     - etiqueta: {es: "UBICACIÓN", en: "BASED IN"}
       valor: {es: "Ciudad de México", en: "Mexico City"}
   retrato:
-    pie_izq: {es: "IA + INDUSTRIAL", en: "AI + INDUSTRIAL"}
-    pie_der: "HYBRIDGE · UVEG"
-    etiqueta: "JHM · CDMX"
-    medidas: "864 × 1080"
+    pie_izq: {es: "IA + INDUSTRIAL", en: "AI + INDUSTRIAL"}   # imagen para compartir (og)
+    etiqueta: "JHM · CDMX"                                   # anotación de plano sobre el retrato
   cifras:
     - {codigo: "P-03", valor: "v7", texto: {es: "pipeline de auditoría corriendo en producción", en: "audit pipeline running in production"}}
     - {codigo: "P-01", valor: "8", texto: {es: "herramientas en un agente de IA con datos oficiales", en: "tools in an AI agent built on official data"}}
@@ -127,6 +131,15 @@ proyectos:
       es: "Responde en lenguaje natural cómo votan los diputados, con datos oficiales y citas a la fuente. Incluye índice de disciplina partidista, detector de contradicciones y radar electoral."
       en: "Answers plain-language questions about how members of Mexico's Chamber of Deputies vote, with official data and source citations. Includes a party-discipline index, a contradiction detector and an election radar."
     demuestra: {es: "Agentes con herramientas · ETL de datos públicos · interfaz en Streamlit", en: "Tool-using agents · public-data ETL · Streamlit UI"}
+    # Imagen de la tarjeta: «imagen» (captura real) o «esquema» (diagrama hecho con texto de esta ficha).
+    # Aquí, esquema: los pasos salen de la arquitectura que documenta el README del repositorio.
+    esquema:
+      pie: {es: "ESQUEMA · CÓMO RESPONDE EL AGENTE", en: "DIAGRAM · HOW THE AGENT ANSWERS"}
+      pasos:
+        - {titulo: {es: "Pregunta", en: "Question"}, texto: {es: "en lenguaje natural", en: "in plain language"}}
+        - {titulo: {es: "Claude decide", en: "Claude decides"}, texto: {es: "qué herramienta usar", en: "which tool to use"}}
+        - {titulo: {es: "8 herramientas", en: "8 tools"}, texto: {es: "consultan la base SQLite", en: "query the SQLite database"}}
+        - {titulo: {es: "Respuesta", en: "Answer"}, texto: {es: "con citas a fuentes oficiales", en: "with official source citations"}}
     cifras:
       - {valor: "8", texto: {es: "herramientas del agente", en: "agent tools"}}
       - {valor: "10k+", texto: {es: "votos individuales", en: "individual votes"}}
@@ -144,6 +157,10 @@ proyectos:
       es: "Videos interactivos con laboratorio para entender cómo funciona la inteligencia artificial, de una sola neurona a los agentes que deciden y actúan. Cada lección trae capítulos, subtítulos y un laboratorio para mover cada pieza."
       en: "Interactive videos with a hands-on lab to understand how artificial intelligence works, from a single neuron to agents that decide and act. Each lesson has chapters, captions and a lab where you can adjust every part."
     demuestra: {es: "Fundamentos de IA · explicar lo técnico con claridad · diseño de producto", en: "AI fundamentals · explaining technical ideas clearly · product design"}
+    imagen:   # captura del sitio público del curso (lección 1); archivos -640.webp y -1280.webp
+      archivo: "assets/img/proyectos/p-02-neurona"
+      alt: {es: "Laboratorio de la lección «La neurona»: controles para mover entradas y pesos junto al diagrama de la neurona y su resultado", en: "Lab from the lesson “The neuron”: sliders for inputs and weights next to a diagram of the neuron and its output"}
+      pie: {es: "CAPTURA · LABORATORIO DE «LA NEURONA»", en: "SCREENSHOT · “THE NEURON” LAB (IN SPANISH)"}
     cifras:
       - {valor: "2", texto: {es: "lecciones publicadas", en: "lessons published"}}
       - {valor: "7", texto: {es: "lecciones en camino", en: "lessons on the way"}}
@@ -161,6 +178,12 @@ proyectos:
       es: "Automatiza la auditoría diaria de la operación del almacén con Python y Apps Script. Va en su versión 7 y corre en producción todos los días."
       en: "Automates the warehouse's daily operations audit with Python and Apps Script. Now on version 7, running in production every day."
     demuestra: {es: "Software en producción · iteración continua hasta la v7", en: "Production software · iterated through 7 versions"}
+    esquema:   # repositorio privado: diagrama sin datos, solo con lo que ya dice esta ficha y el rol R-02
+      pie: {es: "ESQUEMA · REPOSITORIO PRIVADO", en: "DIAGRAM · PRIVATE REPOSITORY"}
+      pasos:
+        - {titulo: {es: "Captura de datos", en: "Data capture"}, texto: {es: "de la operación del almacén", en: "from warehouse operations"}}
+        - {titulo: {es: "Auditoría diaria", en: "Daily audit"}, texto: {es: "Python · Apps Script", en: "Python · Apps Script"}}
+      versiones: {total: 7, texto: {es: "en producción, todos los días", en: "in production, every day"}}
     cifras:
       - {valor: "v7", texto: {es: "versión en producción", en: "production version"}}
     tecnologias: ["Python", "Apps Script", "Google Sheets"]
@@ -178,8 +201,12 @@ proyectos:
         - {medalla: "medalla-3", titulo: {es: "3.er LUGAR · TRACK CONTENIDO", en: "3RD PLACE · CONTENT TRACK"}}
     descripcion:
       es: "La bodega registra cada venta a crédito y el cliente la confirma desde su teléfono: nadie anota una deuda solo ni borra el historial. Las reglas las hace cumplir un contrato en Stellar."
-      en: "The wholesaler records each credit sale and the customer confirms it from their phone, so neither side can log a debt alone or erase the history. A Stellar smart contract enforces the rules."
+      en: "The seller records each credit sale and the customer confirms it from their phone, so neither side can log a debt alone or erase the history. A Stellar smart contract enforces the rules."
     demuestra: {es: "Contratos inteligentes · diseño de producto · pitch de 3 minutos", en: "Smart contracts · product design · 3-minute pitch"}
+    imagen:   # tres capturas oficiales del repositorio (demo/capturas), sin retocar: firma → cumplida → historial
+      archivo: "assets/img/proyectos/p-04-cuentas-claras"
+      alt: {es: "Tres pantallas de la app: una nota de fiado que espera la firma de la clienta, la misma nota ya cumplida y otra bodega consultando su historial", en: "Three app screens: a credit entry awaiting the customer’s signature, the same entry marked as paid on time, and another seller checking her record"}
+      pie: {es: "CAPTURAS · APP CON DATOS FICTICIOS", en: "SCREENSHOTS · APP WITH SAMPLE DATA (IN SPANISH)"}
     cifras:
       - {valor: "3", texto: {es: "reglas en el contrato", en: "on-chain rules"}}
       - {valor: "2", texto: {es: "firmas por nota", en: "signatures per entry"}}
@@ -342,3 +369,9 @@ pie:
   frase:
     es: "“Ingeniero industrial en formación, developer por curiosidad, operador por necesidad.”"
     en: "“Industrial engineer in training, developer out of curiosity, operator out of necessity.”"
+
+# Página 404 (GitHub Pages la muestra en cualquier dirección que no exista). Va en los dos idiomas a la vez.
+pagina_404:
+  titulo: {es: "Esta hoja no está en el plano", en: "This sheet isn't in the blueprint"}
+  texto: {es: "La página que buscas no existe o cambió de lugar.", en: "The page you're looking for doesn't exist or has moved."}
+  inicio: {es: "Ir al portafolio", en: "Go to the portfolio"}

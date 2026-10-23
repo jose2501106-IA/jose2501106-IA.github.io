@@ -1,7 +1,7 @@
 """Genera el portafolio desde data/perfil.yml (fuente única).
 
 Uso:  python3 scripts/generar.py
-Salida: index.html (español), en/index.html (inglés), sitemap.xml y robots.txt.
+Salida: index.html (español), en/index.html (inglés), 404.html (bilingüe), sitemap.xml y robots.txt.
 
 Antes de escribir nada valida la fuente: traducciones completas, evidencias que
 apuntan a proyectos existentes y logos conocidos. Si algo falla, no genera.
@@ -19,6 +19,7 @@ from markupsafe import Markup
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 IDIOMAS = ("es", "en")
 ANCLAS_NAV = ["roles", "proyectos", "experiencia", "perfil", "contacto"]
+ANCHOS_IMAGEN = (640, 1280)   # imágenes de proyectos: <archivo>-640.webp y <archivo>-1280.webp, proporción 2:1
 
 # Logos: archivo y tamaño en pantalla (px). Son decorativos: el texto de al lado ya nombra la institución.
 LOGOS = {
@@ -78,6 +79,18 @@ def validar(s):
         for d in p.get("distinciones", {}).get("premios", []):
             if d["medalla"] not in LOGOS:
                 errores.append(f"{p['codigo']} usa la medalla '{d['medalla']}', que no está en LOGOS")
+        # Cada tarjeta lleva una imagen (captura real) o un esquema: así todas miden lo mismo
+        if ("imagen" in p) == ("esquema" in p):
+            errores.append(f"{p['codigo']} necesita «imagen» o «esquema» (uno de los dos)")
+        if "imagen" in p:
+            for ancho in ANCHOS_IMAGEN:
+                if not (RAIZ / f"{p['imagen']['archivo']}-{ancho}.webp").exists():
+                    errores.append(f"Falta la imagen de {p['codigo']}: {p['imagen']['archivo']}-{ancho}.webp")
+            for clave in ("alt", "pie"):
+                if clave not in p["imagen"]:
+                    errores.append(f"A la imagen de {p['codigo']} le falta «{clave}»")
+        if "esquema" in p and (not p["esquema"].get("pasos") or "pie" not in p["esquema"]):
+            errores.append(f"El esquema de {p['codigo']} necesita «pasos» y «pie»")
     for x in s["experiencia"]:
         if x.get("logo") and x["logo"] not in LOGOS:
             errores.append(f"Logo desconocido en experiencia: {x['logo']}")
@@ -164,6 +177,11 @@ def main():
         destino.parent.mkdir(parents=True, exist_ok=True)
         destino.write_text(html, encoding="utf-8")
         print(f"✓ {destino.relative_to(RAIZ)} ({len(html.encode()):,} bytes)")
+
+    # 404: GitHub Pages la sirve en cualquier ruta que no exista, así que sus enlaces van desde la raíz del dominio
+    html = env.get_template("404.html.j2").render(s=s, raiz="/", version=version)
+    (RAIZ / "404.html").write_text(html, encoding="utf-8")
+    print(f"✓ 404.html ({len(html.encode()):,} bytes)")
 
     hoy = datetime.date.today().isoformat()
     url = s["sitio"]["url"]

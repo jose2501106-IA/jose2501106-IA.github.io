@@ -6,7 +6,7 @@ Sitio: <https://jose2501106-ia.github.io/> (español) · <https://jose2501106-ia
 
 Todo el contenido vive en [`data/perfil.yml`](data/perfil.yml). De ese archivo salen el sitio, el CV en PDF y el README del perfil de GitHub (repo `jose2501106-IA`, con `scripts/generar_readme.py`); más adelante, los textos de LinkedIn.
 
-**No edites `index.html` ni `en/index.html` a mano:** se sobrescriben cada vez que se genera el sitio.
+**No edites `index.html`, `en/index.html` ni `404.html` a mano:** se sobrescriben cada vez que se genera el sitio.
 
 ## Cómo actualizar
 
@@ -17,6 +17,15 @@ Todo el contenido vive en [`data/perfil.yml`](data/perfil.yml). De ese archivo s
 5. Si cambiaste el título principal o la foto, regenera la vista previa y los íconos: `python3 -m playwright install chromium` y luego `python3 scripts/imagenes.py`.
 6. Revisa y sube los cambios.
 
+### Imagen de cada proyecto
+
+Cada tarjeta de proyecto lleva **una** de estas dos cosas (el generador no avanza si falta o si hay las dos):
+
+- `imagen`: captura real, en proporción 2:1, guardada como `assets/img/proyectos/<nombre>-640.webp` y `<nombre>-1280.webp`, con `alt` (qué se ve) y `pie` (qué es: captura, datos ficticios…).
+- `esquema`: diagrama hecho con texto de la propia ficha (`pasos` y, si aplica, `versiones`). Sirve para proyectos privados o sin captura pública; no inventa datos: solo usa lo que ya dice la ficha.
+
+Nunca subas una captura con datos reales de clientes, montos, nombres o pantallas privadas.
+
 ## Estructura
 
 | Ruta | Qué es |
@@ -25,8 +34,8 @@ Todo el contenido vive en [`data/perfil.yml`](data/perfil.yml). De ese archivo s
 | `plantillas/` | Plantillas del sitio, del CV y de la imagen para compartir |
 | `scripts/` | Generadores del sitio, del CV y de imágenes |
 | `cv/` | CV en PDF generado (español e inglés) |
-| `assets/` | Estilos, JavaScript, fuentes, retrato, logos e imágenes para compartir |
+| `reconocimientos/` | Reconocimientos en PDF que enlaza la sección de liderazgo |
+| `assets/` | Estilos, JavaScript, fuentes, retrato, logos, imágenes de proyectos e imágenes para compartir |
 | `index.html`, `en/index.html` | Páginas generadas |
+| `404.html` | Página de «no encontrada», bilingüe (GitHub Pages la muestra en cualquier dirección que no exista) |
 | `sitemap.xml`, `robots.txt`, íconos | Para buscadores y navegadores |
-
-Los apuntes y el proyecto Lean Six Sigma que siguen en la raíz se mudan a sus propios repos en la fase 2.
