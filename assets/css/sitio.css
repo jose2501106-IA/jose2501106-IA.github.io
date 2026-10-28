@@ -256,13 +256,15 @@ img { max-width: 100%; }
 .exp__et { align-self: flex-start; font: 700 12px var(--mono); letter-spacing: 1.5px; color: var(--azul); background: #fff; border: 1.5px solid var(--azul); padding: 2px 7px; }
 .exp__et--actual { color: #fff; background: var(--azul); }
 .exp__lugar { font: 12px var(--mono); letter-spacing: 1px; color: var(--gris); }
-.exp__logo { margin-top: 10px; }
+.exp__logo { margin-top: 10px; display: flex; gap: 8px; }
 .exp__cuerpo { flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
 .exp h3 { font: 700 19px/1.25 var(--mono); color: var(--tinta); }
 .exp__donde { font-size: 15px; font-weight: 600; color: var(--azul-vivo); }
 .exp__puntos li { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 8px; font-size: 15px; line-height: 1.55; color: var(--texto); }
 .exp__puntos li + li { margin-top: 8px; }
 .exp__puntos li::before { content: "—"; font-family: var(--mono); color: var(--azul-vivo); }
+.exp__lleva { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 4px; }
+.exp__lleva-et { font: 12px var(--mono); letter-spacing: 1.5px; color: var(--gris); }
 .nota-tecnica { margin-top: 14px; font: 12px/1.6 var(--mono); color: var(--gris); }
 
 /* Formación y herramientas */
