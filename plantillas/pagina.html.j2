@@ -204,12 +204,15 @@
       <div class="exp__lado">
         <span class="exp__et{% if loop.first %} exp__et--actual{% endif %}">{{ t(x.etiqueta) }}</span>
         <span class="exp__lugar">{{ t(x.lugar) }}</span>
-        {%- if x.logo is defined %}<div class="exp__logo">{{ logo(x.logo) }}</div>{% endif %}
+        {%- if x.logos is defined %}<div class="exp__logo">{% for l in x.logos %}{{ logo(l) }}{% endfor %}</div>{% elif x.logo is defined %}<div class="exp__logo">{{ logo(x.logo) }}</div>{% endif %}
       </div>
       <div class="exp__cuerpo">
         <h3>{{ t(x.puesto) }}</h3>
         <p class="exp__donde">{{ t(x.donde) }}</p>
         <ul class="exp__puntos">{% for pt in x.puntos %}<li>{{ t(pt) }}</li>{% endfor %}</ul>
+        {%- if x.habilidades is defined %}
+        <div class="exp__lleva"><span class="exp__lleva-et">{{ t(s.ui.me_llevo) }}</span><ul class="chips chips--punteadas">{% for h in x.habilidades %}<li>{{ t(h) }}</li>{% endfor %}</ul></div>
+        {%- endif %}
       </div>
     </li>
     {%- endfor %}

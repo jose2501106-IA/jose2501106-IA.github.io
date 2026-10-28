@@ -57,6 +57,7 @@ ui:
   oratoria_comunidad: {es: "LIDERAZGO, ORATORIA Y COMUNIDAD", en: "LEADERSHIP, PUBLIC SPEAKING & COMMUNITY"}
   verificar: {es: "Verificar autenticidad", en: "Verify certificate"}
   ver_reconocimiento: {es: "Ver reconocimiento (PDF)", en: "View certificate (PDF)"}
+  me_llevo: {es: "LO QUE MÁS ME LLEVO:", en: "WHAT I TAKE AWAY:"}   # etiquetas de habilidades en una entrada de experiencia
 
 secciones:
   inicio: {es: "INICIO", en: "HOME"}
@@ -237,9 +238,43 @@ experiencia:
     puntos:
       - {es: "Llevé los registros y reportes administrativos de la operación diaria.", en: "I kept the administrative records and reports for daily operations."}
       - {es: "Coordiné con proveedores y áreas internas.", en: "I coordinated with suppliers and internal teams."}
+  - etiqueta: {es: "OCT 2026", en: "OCT 2026"}
+    lugar: {es: "CDMX · COYOACÁN", en: "MEXICO CITY · COYOACÁN"}
+    tipo: premio          # el CV lo lista en «Premios», no en «Experiencia»
+    logos: [medalla-1]
+    puesto: {es: "1.er lugar en equipo · Laboratorio de Futuros", en: "1st place as a team · Futures Lab"}
+    donde: {es: "Chilangatón 2026 · SECTEI y SEDECO, Ciudad de México", en: "Chilangatón 2026 · SECTEI and SEDECO, Mexico City"}
+    puntos:
+      - {es: "Primer lugar con el equipo La Chilangonería del futuro, por una propuesta de movilidad para la CDMX y su zona metropolitana al 2040, con lente de cuidados y periferias.", en: "First place with the team La Chilangonería del futuro, for a mobility proposal for Mexico City and its metropolitan area by 2040, with a focus on caregiving and the urban periphery."}
+      - {es: "Aprendí de mis compañeras, especialistas en estudios de futuros, su metodología de investigación. En un día pasamos de 34 fuerzas de cambio con fuente a una matriz impacto × incertidumbre, 3 escenarios al 2040 y 11 metas medibles.", en: "I learned the futures-studies research method from my teammates, who are specialists in the field. In one day we went from 34 sourced drivers of change to an impact × uncertainty matrix, 3 scenarios for 2040 and 11 measurable goals."}
+      - {es: "Mi rol: análisis de datos e investigación, con apoyo de IA (Claude) y revisión humana de cada cifra.", en: "My role: data analysis and research, supported by AI (Claude), with every figure reviewed by a person."}
+    habilidades:          # el sitio las muestra como «Lo que más me llevo»
+      - {es: "Trabajo en equipo", en: "Teamwork"}
+      - {es: "Confianza", en: "Trust"}
+      - {es: "Comunicación", en: "Communication"}
+      - {es: "Estudios de futuros", en: "Futures studies"}
+    lamina:               # solo la usa la lámina «logro» del README del perfil (repo jose2501106-IA); el sitio y el CV no
+      hoja: {es: "00-A / LOGRO", en: "00-A / AWARD"}
+      kicker: {es: "1.er LUGAR · LABORATORIO DE FUTUROS", en: "1ST PLACE · FUTURES LAB"}
+      titulo: "Chilangatón 2026"
+      equipo: {es: "En equipo con La Chilangonería del futuro", en: "As a team with La Chilangonería del futuro"}
+      propuesta: {es: "La propuesta del equipo: movilidad para la CDMX y su zona metropolitana al 2040, con lente de cuidados y periferias.", en: "The team's proposal: mobility for Mexico City and its metropolitan area by 2040, with a focus on caregiving and the urban periphery."}
+      metodo: {es: "METODOLOGÍA DE ESTUDIOS DE FUTUROS · LA APRENDÍ DE MIS COMPAÑERAS ESPECIALISTAS", en: "FUTURES-STUDIES METHOD · LEARNED FROM MY TEAMMATES, WHO ARE SPECIALISTS"}
+      pasos:
+        - {valor: {es: "34 fuerzas de cambio", en: "34 drivers of change"}, texto: {es: "con fuente · STEEP", en: "sourced · STEEP"}}
+        - {valor: {es: "Matriz", en: "Matrix"}, texto: {es: "impacto × incertidumbre", en: "impact × uncertainty"}}
+        - {valor: {es: "3 escenarios al 2040", en: "3 scenarios for 2040"}, texto: {es: "Colapso · Inercial · Transformación", en: "Collapse · Inertial · Transformation"}}
+        - {valor: {es: "11 metas", en: "11 goals"}, texto: {es: "medibles", en: "measurable"}}
+      ficha:
+        - {et: {es: "MI ROL", en: "MY ROLE"}, valor: {es: "Análisis de datos e investigación", en: "Data analysis and research"}}
+        - {et: {es: "LO QUE MÁS ME LLEVO", en: "WHAT I TAKE AWAY"}, valor: {es: "Trabajo en equipo, confianza y comunicación", en: "Teamwork, trust and communication"}}
+        - {et: {es: "FECHA", en: "DATE"}, valor: {es: "25 de octubre de 2026", en: "October 25, 2026"}}
+      nota: {es: "// Investigación con apoyo de IA (Claude); cada cifra con fuente y revisión humana.", en: "// Research supported by AI (Claude); every figure sourced and reviewed by a person."}
+      enlace: {texto: {es: "Laboratorio de Futuros · Chilangatón 2026 · Ver convocatoria", en: "Futures Lab · Chilangatón 2026 · See the call"}, url: "https://luma.com/j55anly0"}
   - etiqueta: {es: "SEP 2026", en: "SEP 2026"}
     lugar: {es: "UNAM · FI", en: "UNAM"}
     tipo: premio          # el CV lo lista en «Premios», no en «Experiencia»
+    logos: [medalla-2, medalla-3]
     puesto: {es: "2.º lugar Track Pollar · 3.er lugar Track Contenido", en: "2nd place, Pollar track · 3rd place, Content track"}
     donde: {es: "Goya Hack 2026 · CriptoUNAM × Facultad de Ingeniería, UNAM", en: "Goya Hack 2026 · CriptoUNAM × UNAM School of Engineering"}
     puntos:

@@ -23,6 +23,7 @@ ANCHOS_IMAGEN = (640, 1280)   # imágenes de proyectos: <archivo>-640.webp y <ar
 
 # Logos: archivo y tamaño en pantalla (px). Son decorativos: el texto de al lado ya nombra la institución.
 LOGOS = {
+    "medalla-1": ("medalla-1.svg", 37, 52),
     "medalla-2": ("medalla-2.svg", 37, 52),
     "medalla-3": ("medalla-3.svg", 37, 52),
     "unam": ("unam.webp", 41, 46),
@@ -94,6 +95,9 @@ def validar(s):
     for x in s["experiencia"]:
         if x.get("logo") and x["logo"] not in LOGOS:
             errores.append(f"Logo desconocido en experiencia: {x['logo']}")
+        for l in x.get("logos", []):
+            if l not in LOGOS:
+                errores.append(f"Logo desconocido en experiencia: {l}")
     for f in s["perfil"]["formacion"] + s["perfil"].get("oratoria_comunidad", []):
         if "documento" in f and not (RAIZ / f["documento"]).exists():
             errores.append(f"No existe el documento de {f['institucion']}: {f['documento']}")
