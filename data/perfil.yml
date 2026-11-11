@@ -310,7 +310,7 @@ perfil:
   formacion:
     - institucion: "Hybridge Education"
       programa: {es: "Ingeniería en Inteligencia Artificial", en: "AI Engineering"}
-      estado: {es: "3.er cuatrimestre de 8", en: "Term 3 of 8"}
+      estado: {es: "4.º cuatrimestre de 8", en: "Term 4 of 8"}
       logos: [hybridge]
     - institucion: {es: "UVEG", en: "UVEG · Virtual University of the State of Guanajuato"}
       programa: {es: "Ingeniería Industrial", en: "Industrial Engineering"}
