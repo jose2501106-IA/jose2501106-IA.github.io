@@ -6,7 +6,9 @@ pyyaml==6.0.3
 # y para regenerar imágenes de vista previa e íconos (scripts/imagenes.py)
 # Después de instalar: python3 -m playwright install chromium
 playwright==1.56.0
-# Solo para las imágenes (scripts/imagenes.py)
+# Para el CV (saca de la fuente variable un archivo por peso, para que el PDF la incruste bien)
+# y para las imágenes (scripts/imagenes.py)
 fonttools==4.65.0
 brotli==1.2.0
+# Solo para las imágenes (scripts/imagenes.py)
 pillow==12.3.0

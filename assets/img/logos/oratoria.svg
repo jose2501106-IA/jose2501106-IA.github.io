@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 46">
+  <title>Oratoria</title>
+  <circle cx="23" cy="23" r="22.25" fill="none" stroke="#0F5E66" stroke-width="1.5"/>
+  <circle cx="23" cy="23" r="18.75" fill="#0F5E66"/>
+  <g transform="translate(23 23) scale(.8) translate(-23 -22.75)" fill="none" stroke="#F7F8F7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="18.5" y="9" width="9" height="16" rx="4.5"/>
+    <path d="M14 21.5a9 9 0 0 0 18 0"/>
+    <path d="M23 30.5v5.5"/>
+    <path d="M18 36.5h10"/>
+  </g>
+</svg>

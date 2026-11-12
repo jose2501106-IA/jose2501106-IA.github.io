@@ -36,10 +36,9 @@ LOGOS = {
     "lssi": ("lssi.svg", 78, 32),
     "stellar": ("stellar.svg", 96, 24),      # SVG oficial de @stellar/design-system (solo cambian colores)
     "baf": ("baf.webp", 56, 28),             # imagen entregada por José, recortada (sin redibujar)
-    "senado": ("senado.webp", 46, 46),                    # imágenes entregadas por José, recortadas (sin redibujar).
-    #   El sello del Senado va siempre en sus colores originales (su manual de identidad no permite cambiarle
-    #   el color): la capa del modo plano es la misma imagen a color.
-    "congreso-oaxaca": ("congreso-oaxaca.webp", 88, 44),
+    "oratoria": ("oratoria.svg", 46, 46),                  # marca propia: micrófono en un disco con aro, en el acento
+    #   del sitio. Va en el certamen realizado en el Senado, en lugar del sello: lo organizó un senador, no la institución.
+    "congreso-oaxaca": ("congreso-oaxaca.webp", 88, 44),  # imagen entregada por José, recortada (sin redibujar)
     "wya": ("wya.webp", 50, 48),                           # World Youth Alliance: logo tomado del reconocimiento de José
 }
 
@@ -66,13 +65,33 @@ def validar(s):
 
     recorrer(s, "perfil")
     codigos = {p["codigo"] for p in s["proyectos"]}
+    # Anclas que puede citar «evidencia_extra»: secciones fijas de la plantilla y entradas de experiencia con «id»
+    anclas = set(ANCLAS_NAV) | {"liderazgo"} | {x["id"] for x in s["experiencia"] if "id" in x}
     for r in s["roles"]:
         for e in r["evidencia"]:
             if e not in codigos:
                 errores.append(f"El rol {r['codigo']} cita {e}, que no existe en proyectos")
+        for x in r.get("evidencia_extra", []):
+            if x["ancla"] not in anclas:
+                errores.append(f"El rol {r['codigo']} cita el ancla «{x['ancla']}», que no existe en la página")
+    for i, a in enumerate(s["seccion_contacto"].get("aportes", [])):
+        for e in a.get("evidencia", []):
+            if e not in codigos:
+                errores.append(f"El aporte {i + 1} de Contacto cita {e}, que no existe en proyectos")
+        for x in a.get("evidencia_extra", []):
+            if x["ancla"] not in anclas:
+                errores.append(f"El aporte {i + 1} de Contacto cita el ancla «{x['ancla']}», que no existe en la página")
+        if not (a.get("evidencia") or a.get("evidencia_extra")):
+            errores.append(f"El aporte {i + 1} de Contacto no tiene respaldo («evidencia» o «evidencia_extra»)")
+    if sum(d.get("clave") == "ubicacion" for d in s["portada"]["datos"]) != 1:
+        errores.append("portada.datos necesita exactamente un dato con «clave: ubicacion» (pie del retrato)")
     for c in s["portada"]["cifras"]:
         if c["codigo"] not in codigos:
             errores.append(f"La cifra '{c['valor']}' cita {c['codigo']}, que no existe en proyectos")
+        # Regla del estilo A: cada cifra de la portada con su fuente (corta bajo la cifra, completa en referencias)
+        fuente = c.get("fuente", {})
+        if not ("corta" in fuente and "completa" in fuente):
+            errores.append(f"La cifra '{c['valor']}' necesita «fuente» con «corta» y «completa»")
     for p in s["proyectos"]:
         for c in p["categorias"]:
             if c not in s["categorias"]:
@@ -156,6 +175,10 @@ def main():
     plantilla = env.get_template("pagina.html.j2")
     version = version_activos()
     conteo = {c: sum(c in p["categorias"] for p in s["proyectos"]) for c in s["categorias"]}
+    proyectos_por_codigo = {p["codigo"]: p for p in s["proyectos"]}
+    # Cifras de la portada en el orden de los proyectos (AgenteMX primero); el orden es estable dentro de cada proyecto
+    orden = {p["codigo"]: i for i, p in enumerate(s["proyectos"])}
+    cifras_portada = sorted(s["portada"]["cifras"], key=lambda c: orden[c["codigo"]])
 
     for lang in IDIOMAS:
         raiz = "" if lang == "es" else "../"
@@ -164,15 +187,15 @@ def main():
             return x[lang] if es_traducible(x) else x
 
         def logo(clave, raiz=raiz):
-            # Dos capas, como el componente original del diseño: contorno azul (modo plano) y color de marca.
-            # El CSS cruza de una a otra al pasar el cursor por su fila o caja, o con el modo plano apagado.
+            # Logo en sus colores de marca (estilo A · Laboratorio). Decorativo: el texto de al lado ya nombra la institución.
             archivo, ancho, alto = LOGOS[clave]
-            capa = lambda carpeta, clase: (f'<img class="{clase}" src="{raiz}assets/img/logos/{carpeta}{archivo}" '
-                                           f'width="{ancho}" height="{alto}" alt="" loading="lazy" decoding="async">')
-            return Markup(f'<span class="logo">{capa("", "logo__linea")}{capa("color/", "logo__color")}</span>')
+            return Markup(f'<span class="logo"><img src="{raiz}assets/img/logos/color/{archivo}" '
+                          f'width="{ancho}" height="{alto}" alt="" loading="lazy" decoding="async"></span>')
 
         html = plantilla.render(
             s=s, lang=lang, raiz=raiz, t=t, logo=logo, version=version, conteo=conteo,
+            cifras=cifras_portada, proy=proyectos_por_codigo,
+            ubicacion=next(d for d in s["portada"]["datos"] if d.get("clave") == "ubicacion"),
             nav=list(zip(t(s["ui"]["nav"]), ANCLAS_NAV)),
             url_pagina=s["sitio"]["url"] + ("" if lang == "es" else "en/"),
             jsonld=json_ld(s, lang),

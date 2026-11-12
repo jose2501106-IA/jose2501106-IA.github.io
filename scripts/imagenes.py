@@ -3,6 +3,7 @@
 Uso:  python3 scripts/imagenes.py
 Requiere: playwright (con Chromium), jinja2, pyyaml, fonttools, brotli, pillow  (ver scripts/requisitos.txt)
 Salida: assets/img/og-es.jpg, assets/img/og-en.jpg, favicon.svg, favicon-32.png, favicon.ico, apple-touch-icon.png
+Estilo A · Laboratorio: Schibsted Grotesk y Fragment Mono (assets/fuentes/), acento petróleo #0F5E66.
 """
 import asyncio
 import pathlib
@@ -12,21 +13,23 @@ import yaml
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.pens.transformPen import TransformPen
 from fontTools.ttLib import TTFont
+from fontTools.varLib import instancer
 from jinja2 import Environment, FileSystemLoader
 from PIL import Image
 from playwright.async_api import async_playwright
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
+ACENTO = "#0F5E66"
 
 
 def favicon_svg():
-    """Monograma JHM en Space Mono Bold convertido a trazos (no depende de fuentes instaladas)."""
-    fuente = TTFont(RAIZ / "assets/fuentes/space-mono-700.woff2")
-    glifos, cmap, upm = fuente.getGlyphSet(), fuente.getBestCmap(), fuente["head"].unitsPerEm
-    alto_mayus = fuente["OS/2"].sCapHeight or 700
+    """Monograma JHM en Schibsted Grotesk Bold convertido a trazos (no depende de fuentes instaladas)."""
+    fuente = instancer.instantiateVariableFont(TTFont(RAIZ / "assets/fuentes/schibsted-grotesk.woff2"), {"wght": 700})
+    glifos, cmap = fuente.getGlyphSet(), fuente.getBestCmap()
+    alto_mayus = fuente["OS/2"].sCapHeight or 1440
     texto, lado = "JHM", 64
     ancho_unidades = sum(glifos[cmap[ord(c)]].width for c in texto)
-    escala = 54 / ancho_unidades
+    escala = 50 / ancho_unidades
     x = (lado - ancho_unidades * escala) / 2
     base = lado / 2 + alto_mayus * escala / 2
     pluma = SVGPathPen(glifos)
@@ -35,8 +38,16 @@ def favicon_svg():
         g.draw(TransformPen(pluma, (escala, 0, 0, -escala, x, base)))
         x += g.width * escala
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {lado} {lado}">'
-            f'<rect width="{lado}" height="{lado}" fill="#0046B8"/>'
+            f'<rect width="{lado}" height="{lado}" fill="{ACENTO}"/>'
             f'<path fill="#fff" d="{pluma.getCommands()}"/></svg>\n')
+
+
+def ubicacion(s, t):
+    """Valor del dato «Ubicación» de la portada (pie de la foto: «José Hugo Meza, Ciudad de México»)."""
+    for d in s["portada"]["datos"]:
+        if d.get("clave") == "ubicacion":
+            return t(d["valor"])
+    raise SystemExit("Falta el dato con «clave: ubicacion» en portada.datos (data/perfil.yml)")
 
 
 async def main():
@@ -52,17 +63,21 @@ async def main():
             # Vista previa para compartir, una por idioma
             for lang in ("es", "en"):
                 t = lambda x: x[lang] if isinstance(x, dict) and "es" in x else x
-                html = og.render(lang=lang, base=RAIZ.as_uri() + "/", anio=s["sitio"]["anio"],
-                                 hoja=t(s["ui"]["hoja"]), perfil=("PERFIL" if lang == "es" else "PROFILE"),
+                html = og.render(lang=lang, base=RAIZ.as_uri() + "/",
                                  kicker=t(s["portada"]["linea_superior"]), nombre=s["sitio"]["nombre_h1"],
                                  sub=t(s["portada"]["subtitulo"]), bajada=t(s["portada"]["bajada"]),
-                                 ruta=("" if lang == "es" else "/en"), idiomas="ES · EN",
-                                 escala=t(s["ui"]["escala"]), pie_izq=t(s["portada"]["retrato"]["pie_izq"]))
+                                 nombre_corto=s["sitio"]["nombre"], ubicacion=ubicacion(s, t),
+                                 ruta=("" if lang == "es" else "/en"), idiomas="ES · EN")
                 archivo = tmp / f"og-{lang}.html"
                 archivo.write_text(html, encoding="utf-8")
                 pagina = await navegador.new_page(viewport={"width": 1200, "height": 630})
                 await pagina.goto(archivo.as_uri(), wait_until="load")
                 await pagina.evaluate("document.fonts.ready")
+                # Si una fuente no cargó, la imagen saldría con otra letra: mejor detenerse
+                faltan = await pagina.evaluate("""() => ['700 104px "Schibsted Grotesk"', '500 32px "Schibsted Grotesk"',
+                    '400 17px "Fragment Mono"'].filter(f => !document.fonts.check(f))""")
+                if faltan:
+                    raise SystemExit(f"No cargaron las fuentes {faltan} (revisa assets/fuentes/)")
                 await pagina.wait_for_timeout(300)
                 png = tmp / f"og-{lang}.png"
                 await pagina.screenshot(path=str(png))
