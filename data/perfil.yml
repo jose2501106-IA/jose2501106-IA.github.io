@@ -363,7 +363,7 @@ experiencia:
       - {es: "Segundo lugar del Track Pollar, patrocinado por Pollar (infraestructura de wallets y pagos sobre Stellar).", en: "Second place in the Pollar track, sponsored by Pollar (wallet and payments infrastructure on Stellar)."}
       - {es: "Tercer lugar del Track Contenido.", en: "Third place in the Content track."}
     cv_puntos:
-      - {es: "Dos premios con Cuentas Claras: bitácora de fiado cofirmada por bodega y cliente con un contrato inteligente en Stellar.", en: "Two awards with Cuentas Claras: a credit ledger signed by both seller and customer and enforced by a Stellar smart contract."}
+      - {es: "Dos premios con Cuentas Claras: bitácora de fiado firmada por bodega y cliente con un contrato inteligente en Stellar.", en: "Two awards with Cuentas Claras: a credit ledger signed by both seller and customer and enforced by a Stellar smart contract."}
 
 como_trabajo:
   es: "// Cómo trabajo: diagnóstico → diseño → construcción con IA y pruebas en 3 capas → control con DMAIC."
