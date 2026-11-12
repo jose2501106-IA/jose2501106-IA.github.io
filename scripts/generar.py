@@ -36,10 +36,9 @@ LOGOS = {
     "lssi": ("lssi.svg", 78, 32),
     "stellar": ("stellar.svg", 96, 24),      # SVG oficial de @stellar/design-system (solo cambian colores)
     "baf": ("baf.webp", 56, 28),             # imagen entregada por José, recortada (sin redibujar)
-    "senado": ("senado.webp", 46, 46),                    # imágenes entregadas por José, recortadas (sin redibujar).
-    #   El sello del Senado va siempre en sus colores originales (su manual de identidad no permite cambiarle
-    #   el color): la capa del modo plano es la misma imagen a color.
-    "congreso-oaxaca": ("congreso-oaxaca.webp", 88, 44),
+    "oratoria": ("oratoria.svg", 46, 46),                  # marca propia: micrófono en un disco con aro, en el acento
+    #   del sitio. Va en el certamen realizado en el Senado, en lugar del sello: lo organizó un senador, no la institución.
+    "congreso-oaxaca": ("congreso-oaxaca.webp", 88, 44),  # imagen entregada por José, recortada (sin redibujar)
     "wya": ("wya.webp", 50, 48),                           # World Youth Alliance: logo tomado del reconocimiento de José
 }
 

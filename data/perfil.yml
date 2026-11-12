@@ -424,8 +424,9 @@ perfil:
       logos: [lssi]
   # Oratoria y comunidad: misma forma que «formacion». Va en el portafolio y el README. Al CV («Oratoria y
   # liderazgo») solo pasan las entradas con la clave «cv», en este orden y con su texto corto.
-  # Logos del Senado y del Congreso de Oaxaca: decisión de José (participó en ambos concursos), con las
-  # imágenes que él entregó. El rol de embajador se mantiene solo mientras participe.
+  # Logo del Congreso de Oaxaca: decisión de José (participó en el concurso), con la imagen que él entregó.
+  # El certamen realizado en el Senado lleva una marca propia («oratoria»), no el sello del Senado
+  # (decisión de José, 11 nov 2026). El rol de embajador se mantiene solo mientras participe.
   oratoria_comunidad:
     # El reconocimiento lo otorga un senador y dice «realizado en el Senado de la República»:
     # el Senado va como sede, no como la institución que lo entrega.
@@ -434,7 +435,7 @@ perfil:
       estado: {es: "Reconocimiento por destacada participación · 24 de febrero de 2026", en: "Recognition for outstanding participation · February 24, 2026"}
       corto: {es: "Certamen de Oratoria “Ricardo Flores Magón” (realizado en el Senado)", en: "“Ricardo Flores Magón” Oratory Contest (held at the Senate)"}   # para enlaces de texto
       documento: "reconocimientos/2026-02-24_certamen-oratoria-ricardo-flores-magon.pdf"   # copia digital del reconocimiento
-      logos: [senado]
+      logos: [oratoria]
       cv:
         institucion: {es: "II Certamen de Oratoria “Ricardo Flores Magón”", en: "“Ricardo Flores Magón” Oratory Contest (2nd edition)"}   # el año va en la fecha
         programa: {es: "realizado en el Senado · destacada participación", en: "held at the Mexican Senate · outstanding participation"}   # corto: cabe en un renglón
