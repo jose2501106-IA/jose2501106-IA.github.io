@@ -88,7 +88,7 @@
     <figure class="retrato">
       <img src="{{ raiz }}assets/img/retrato-864.webp" srcset="{{ raiz }}assets/img/retrato-432.webp 432w, {{ raiz }}assets/img/retrato-864.webp 864w"
            sizes="(max-width: 520px) 92vw, 405px" width="864" height="1080" alt="{{ s.sitio.nombre }}" fetchpriority="high">
-      <figcaption class="pie-fig"><span class="pie-fig__n">Fig. 1</span><span>{{ s.sitio.nombre }}, {{ t(s.portada.datos[-1].valor) }}</span></figcaption>
+      <figcaption class="pie-fig"><span class="pie-fig__n">Fig. 1</span><span>{{ s.sitio.nombre }}, {{ t(ubicacion.valor) }}</span></figcaption>
     </figure>
     <div class="portada__detalle">
       <p class="historia">{{ t(s.portada.historia_corta) }}</p>
@@ -140,10 +140,11 @@
   </header>
   <div class="roles">
     {%- for r in s.roles %}
-    <article class="rol">
+    {#- El primer rol va destacado (dos columnas). La evidencia cita proyectos y, si hace falta, otra parte de la página. #}
+    <article class="rol{{ ' rol--destacado' if loop.first }}">
       <h3 class="rol__tit">{{ t(r.titulo) }}</h3>
       <p class="rol__txt">{{ t(r.texto) }}</p>
-      <p class="rol__evidencia"><span class="etiqueta">{{ t(s.ui.evidencia)|trim(':') }}</span>{% for e in r.evidencia %}<a href="#{{ e | lower }}">{{ t(proy[e].nombre) }}</a>{% endfor %}</p>
+      <p class="respaldo"><span class="etiqueta">{{ t(s.ui.evidencia)|trim(':') }}</span>{% for e in r.evidencia %}<a href="#{{ e | lower }}">{{ t(proy[e].nombre) }}</a>{% endfor %}{% for x in r.evidencia_extra | default([]) %}<a href="#{{ x.ancla }}">{{ t(x.texto) }}</a>{% endfor %}</p>
     </article>
     {%- endfor %}
   </div>
@@ -200,6 +201,9 @@
         {%- endif %}
         <dl class="ficha">
           <div class="ficha__fila"><dt class="etiqueta">{{ t(s.ui.ficha.que_hace) }}</dt><dd>{{ t(p.descripcion) }}</dd></div>
+          {%- if p.fuentes is defined %}
+          <div class="ficha__fila"><dt class="etiqueta">{{ t(s.ui.ficha.fuentes) }}</dt><dd>{{ t(p.fuentes) }}</dd></div>
+          {%- endif %}
           {%- if p.distinciones is defined %}
           <div class="ficha__fila"><dt class="etiqueta">{{ t(s.ui.ficha.distinciones) }}</dt>
             <dd class="distincion">
@@ -237,7 +241,7 @@
   </header>
   <ol class="exp">
     {%- for x in s.experiencia %}
-    <li class="exp__fila">
+    <li class="exp__fila"{% if x.id is defined %} id="{{ x.id }}"{% endif %}>
       <div class="exp__lado">
         <p class="etiqueta exp__fecha{% if loop.first %} exp__fecha--actual{% endif %}">{{ t(x.etiqueta) }}</p>
         <p class="etiqueta exp__lugar">{{ t(x.lugar) }}</p>
@@ -281,7 +285,7 @@
     </div>
     {#- Formación a la derecha; liderazgo, oratoria y comunidad debajo de herramientas (en celular, después de formación) #}
     {%- for clase, titulo, lista in [("perfil__der", s.ui.formacion_programas, s.perfil.formacion), ("perfil__ora", s.ui.oratoria_comunidad, s.perfil.oratoria_comunidad)] %}
-    <section class="{{ clase }}" aria-labelledby="t-{{ clase }}">
+    <section class="{{ clase }}"{% if clase == 'perfil__ora' %} id="liderazgo"{% endif %} aria-labelledby="t-{{ clase }}">
       <h3 class="etiqueta lista__tit" id="t-{{ clase }}">{{ t(titulo) }}</h3>
       <ul class="lista">
         {%- for f in lista %}
@@ -319,6 +323,20 @@
     <p class="etiqueta etiqueta--acento">{{ t(s.secciones.contacto) }}</p>
     <h2 class="sec-cab__tit" id="t-contacto">{{ t(s.seccion_contacto.titulo) }}</h2>
   </header>
+  {#- Cierre con propuesta concreta: en qué puedo aportar, cada punto con su respaldo en esta misma página #}
+  <section class="aportes-bloque" aria-labelledby="t-aportes">
+    <h3 class="etiqueta aportes-bloque__tit" id="t-aportes">{{ t(s.ui.aportes) }}</h3>
+    <ol class="aportes">
+      {%- for a in s.seccion_contacto.aportes %}
+      <li class="aporte">
+        <span class="aporte__n" aria-hidden="true">{{ '%02d' % loop.index }}</span>
+        <h4 class="aporte__tit">{{ t(a.titulo) }}</h4>
+        <p class="aporte__txt">{{ t(a.texto) }}</p>
+        <p class="respaldo"><span class="etiqueta">{{ t(s.ui.respaldo) }}</span>{% for e in a.evidencia | default([]) %}<a href="#{{ e | lower }}">{{ t(proy[e].nombre) }}</a>{% endfor %}{% for x in a.evidencia_extra | default([]) %}<a href="#{{ x.ancla }}">{{ t(x.texto) }}</a>{% endfor %}</p>
+      </li>
+      {%- endfor %}
+    </ol>
+  </section>
   <div class="contacto">
     <div class="contacto__izq">
       <p class="contacto__txt">{{ t(s.seccion_contacto.texto) }}</p>

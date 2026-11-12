@@ -45,7 +45,7 @@
   const baseOtroIdioma = otroIdioma?.getAttribute("href");
   const barra = d.querySelector(".barra");
   const botonesPortada = d.querySelector(".portada .acciones");
-  const contacto = d.getElementById("contacto");
+  const contacto = d.querySelector("#contacto .contacto");   // los botones y datos de contacto, no el inicio de la sección
   if (barra) barra.hidden = false;
   let actual, pendiente = 0;
   const revisar = () => {

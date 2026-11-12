@@ -66,10 +66,26 @@ def validar(s):
 
     recorrer(s, "perfil")
     codigos = {p["codigo"] for p in s["proyectos"]}
+    # Anclas que puede citar «evidencia_extra»: secciones fijas de la plantilla y entradas de experiencia con «id»
+    anclas = set(ANCLAS_NAV) | {"liderazgo"} | {x["id"] for x in s["experiencia"] if "id" in x}
     for r in s["roles"]:
         for e in r["evidencia"]:
             if e not in codigos:
                 errores.append(f"El rol {r['codigo']} cita {e}, que no existe en proyectos")
+        for x in r.get("evidencia_extra", []):
+            if x["ancla"] not in anclas:
+                errores.append(f"El rol {r['codigo']} cita el ancla «{x['ancla']}», que no existe en la página")
+    for i, a in enumerate(s["seccion_contacto"].get("aportes", [])):
+        for e in a.get("evidencia", []):
+            if e not in codigos:
+                errores.append(f"El aporte {i + 1} de Contacto cita {e}, que no existe en proyectos")
+        for x in a.get("evidencia_extra", []):
+            if x["ancla"] not in anclas:
+                errores.append(f"El aporte {i + 1} de Contacto cita el ancla «{x['ancla']}», que no existe en la página")
+        if not (a.get("evidencia") or a.get("evidencia_extra")):
+            errores.append(f"El aporte {i + 1} de Contacto no tiene respaldo («evidencia» o «evidencia_extra»)")
+    if sum(d.get("clave") == "ubicacion" for d in s["portada"]["datos"]) != 1:
+        errores.append("portada.datos necesita exactamente un dato con «clave: ubicacion» (pie del retrato)")
     for c in s["portada"]["cifras"]:
         if c["codigo"] not in codigos:
             errores.append(f"La cifra '{c['valor']}' cita {c['codigo']}, que no existe en proyectos")
@@ -180,6 +196,7 @@ def main():
         html = plantilla.render(
             s=s, lang=lang, raiz=raiz, t=t, logo=logo, version=version, conteo=conteo,
             cifras=cifras_portada, proy=proyectos_por_codigo,
+            ubicacion=next(d for d in s["portada"]["datos"] if d.get("clave") == "ubicacion"),
             nav=list(zip(t(s["ui"]["nav"]), ANCLAS_NAV)),
             url_pagina=s["sitio"]["url"] + ("" if lang == "es" else "en/"),
             jsonld=json_ld(s, lang),

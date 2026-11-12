@@ -45,9 +45,9 @@ def favicon_svg():
 def ubicacion(s, t):
     """Valor del dato «Ubicación» de la portada (pie de la foto: «José Hugo Meza, Ciudad de México»)."""
     for d in s["portada"]["datos"]:
-        if d["etiqueta"]["es"] == "UBICACIÓN":
+        if d.get("clave") == "ubicacion":
             return t(d["valor"])
-    raise SystemExit("Falta el dato UBICACIÓN en portada.datos (data/perfil.yml)")
+    raise SystemExit("Falta el dato con «clave: ubicacion» en portada.datos (data/perfil.yml)")
 
 
 async def main():

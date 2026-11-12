@@ -1,5 +1,9 @@
-{#- CV en PDF: una página carta por idioma. Lo genera scripts/generar_cv.py desde data/perfil.yml.
-    Una sola columna, texto real y títulos de sección estándar para que los ATS lo lean en orden. -#}
+{#- CV en PDF: una página carta, estilo A · Laboratorio. Lo genera scripts/generar_cv.py desde data/perfil.yml.
+    Una sola columna de lectura, texto real y títulos de sección estándar para que los ATS lo lean en orden.
+    Todas las medidas salen de --c (el cuerpo del texto, en pt): el generador elige el cuerpo y, si sobra
+    espacio, lo reparte entre el interlineado (--il) y las secciones (--aire).
+    Con una postulación (variable «post») agrega «Objetivo» arriba y «En qué puedo aportar» después del perfil.
+    Donde existen, usa los textos cortos del CV (cv_puntos, cv_descripcion, cv_fuentes, cv_donde, cv_etiqueta). -#}
 <!doctype html>
 <html lang="{{ lang }}">
 <head>
@@ -7,68 +11,104 @@
 <title>{{ s.sitio.nombre_completo }} · {{ t(s.cv.documento) }}</title>
 <meta name="author" content="{{ s.sitio.nombre_completo }}">
 <style>
-  @font-face { font-family: "Space Mono"; font-weight: 400; src: url("{{ base }}assets/fuentes/space-mono-400.woff2") format("woff2"); }
-  @font-face { font-family: "Space Mono"; font-weight: 700; src: url("{{ base }}assets/fuentes/space-mono-700.woff2") format("woff2"); }
-  @font-face { font-family: "Titillium Web"; font-weight: 400; src: url("{{ base }}assets/fuentes/titillium-web-400.woff2") format("woff2"); }
-  @font-face { font-family: "Titillium Web"; font-weight: 600; src: url("{{ base }}assets/fuentes/titillium-web-600.woff2") format("woff2"); }
+  {%- for peso, url in fuentes.sans %}
+  @font-face { font-family: "Schibsted Grotesk"; font-style: normal; font-weight: {{ peso }}; src: url("{{ url }}") format("truetype"); }
+  {%- endfor %}
+  @font-face { font-family: "Fragment Mono"; font-style: normal; font-weight: 400; src: url("{{ fuentes.mono }}") format("woff2"); }
 
   :root {
-    --azul: #0046B8; --tinta: #0B1F4A; --texto: #2A3142; --gris: #5A6F9A; --linea: #C9D4E8;
-    --mono: "Space Mono", ui-monospace, monospace; --sans: "Titillium Web", Arial, sans-serif;
+    --c: {{ cuerpo }}pt;     /* cuerpo del texto: lo fija el generador */
+    --il: 1.26;              /* interlineado del texto: crece cuando sobra hoja */
+    --aire: 0pt;             /* espacio extra entre secciones cuando sobra hoja */
+    --tinta: #12181B; --gris: #4A575C; --regla: #DCE2E3; --acento: #0F5E66; --suave: #E2EEEF;
+    --sans: "Schibsted Grotesk", Arial, sans-serif; --mono: "Fragment Mono", ui-monospace, monospace;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { background: #fff; }
-  body { font: 400 9.5pt/1.2 var(--sans); color: var(--texto); font-variant-ligatures: none; }
-  a { color: var(--azul); text-decoration: none; }
-  ul { list-style: none; }
-  strong { font-weight: 600; color: var(--tinta); }
+  /* Sin «tabular-nums» en el texto corrido: en Schibsted Grotesk también ensancha comas y puntos.
+     Las fechas y los estados van en mono, que ya es de ancho fijo. */
+  body { font: 400 var(--c)/var(--il) var(--sans); color: var(--tinta); font-synthesis: none; font-variant-ligatures: none; }
+  a { color: inherit; text-decoration: none; }
+  ul, ol { list-style: none; }
+  strong { font-weight: 600; }
   p, li { text-wrap: pretty; }   /* evita renglones con una sola palabra */
+  .mono { font-family: var(--mono); font-size: .8em; }
 
   /* La hoja: el cuerpo crece y el pie queda al fondo */
   .cv { width: {{ ancho_util }}in; min-height: calc({{ alto_util }}in - 2px); display: flex; flex-direction: column; }
   .cuerpo { flex: 1 0 auto; }
 
-  /* Encabezado */
-  .cab { padding-bottom: 6pt; border-bottom: 1.5pt solid var(--azul); }
-  .cab h1 { font: 700 20pt/1.05 var(--mono); letter-spacing: -0.02em; color: var(--tinta); }
-  .cab__titulo { margin-top: 1.5pt; font: 600 11.5pt/1.2 var(--sans); color: var(--azul); }
-  .cab__contacto { margin-top: 1.5pt; }
-  .dato { white-space: nowrap; }
-  .sep { color: var(--gris); }
+  /* Encabezado: nombre y marca; título profesional y ciudad; enlaces de contacto */
+  .cab { padding-bottom: calc(var(--c) * .54); border-bottom: 1.5pt solid var(--tinta); }
+  .cab__fila { display: flex; justify-content: space-between; align-items: baseline; gap: calc(var(--c) * 1.4); }
+  .cab h1 { font: 700 max(22pt, calc(var(--c) * 2.45))/1.04 var(--sans); letter-spacing: -.03em; word-spacing: .07em; }   /* el espacio entre palabras compensa el interletrado negativo */
+  .cab__marca { flex: none; display: flex; align-items: center; gap: calc(var(--c) * .65); align-self: center;
+                font: 400 calc(var(--c) * 1.02)/1 var(--mono); letter-spacing: .06em; }
+  .cab__nodo { display: block; width: calc(var(--c) * 2.9); height: calc(var(--c) * 1.0875); color: var(--acento); }
+  .cab__fila--titulo { margin-top: calc(var(--c) * .28); flex-wrap: wrap; row-gap: 0; }
+  .cab__titulo { font: 500 calc(var(--c) * 1.12)/1.25 var(--sans); letter-spacing: -.005em; }
+  .cab__lugar { flex: none; font: 400 calc(var(--c) * .8)/1.25 var(--mono); color: var(--gris); white-space: nowrap; }
+  /* Los enlaces nunca pasan de 7 pt: así los cuatro caben en un renglón con cualquier cuerpo */
+  .cab__contacto { margin-top: calc(var(--c) * .24); font: 400 min(calc(var(--c) * .8), 7pt)/1.4 var(--mono); color: var(--gris); }
+  .cab__contacto a { color: var(--tinta); white-space: nowrap; }
 
-  /* Secciones */
-  section { margin-top: 6.5pt; }
-  h2 { display: flex; align-items: center; gap: 6pt; margin-bottom: 2.5pt;
-       font: 700 8.5pt/1.15 var(--mono); letter-spacing: 0.04em; text-transform: uppercase; color: var(--azul); }
-  h2::after { content: ""; flex: 1 1 0; border-top: 0.75pt solid var(--linea); }
+  /* Secciones: etiqueta en mono petróleo y regla fina */
+  section { margin-top: calc(var(--c) * .62 + var(--aire)); }
+  h2 { display: flex; align-items: center; gap: calc(var(--c) * .7); margin-bottom: calc(var(--c) * .2);
+       font: 400 calc(var(--c) * .82)/1.18 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--acento); }
+  h2::after { content: ""; flex: 1 1 0; border-top: .75pt solid var(--regla); }
+
+  /* Objetivo de la postulación: lo primero que se lee */
+  .objetivo { padding: calc(var(--c) * .5) calc(var(--c) * 1.05) calc(var(--c) * .6);
+              background: var(--suave); border-left: calc(var(--c) * .3) solid var(--acento); }
+  .objetivo h2 { margin-bottom: calc(var(--c) * .14); }
+  .objetivo h2::after { content: none; }
+  .objetivo p { font: 500 calc(var(--c) * 1.08)/1.32 var(--sans); }
+
+  /* En qué puedo aportar: rejilla de dos columnas con reglas finas */
+  .aportes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .aporte { padding: calc(var(--c) * .3) 0 calc(var(--c) * .36); }
+  .aporte:nth-child(odd) { padding-right: calc(var(--c) * 1.2); border-right: .75pt solid var(--regla); }
+  .aporte:nth-child(even) { padding-left: calc(var(--c) * 1.2); }
+  .aporte:nth-child(n+3) { border-top: .75pt solid var(--regla); }
+  .aporte:nth-child(-n+2) { padding-top: 0; }
+  .aporte:nth-last-child(-n+2) { padding-bottom: 0; }
+  .aporte__tit { font-weight: 600; }
+  .aporte__n { margin-right: .5em; font: 400 .8em var(--mono); color: var(--acento); }
+  .aporte__res { margin-top: calc(var(--c) * .06); font: 400 calc(var(--c) * .78)/1.32 var(--mono); color: var(--gris); }
+  .aporte__res .et { font-size: 1em; color: var(--acento); }
 
   /* Entradas: «título — dónde» a la izquierda, fecha o estado a la derecha */
-  .item + .item { margin-top: 3pt; }
-  .item__cab { display: flex; justify-content: space-between; align-items: baseline; gap: 12pt; }
-  h3 { font: 600 9.5pt/1.2 var(--sans); color: var(--tinta); }
-  .item__sub { font-weight: 400; color: var(--azul); }
-  .item__fecha { flex: none; font: 400 7.5pt/1.2 var(--mono); color: var(--gris); white-space: nowrap; }
+  .item + .item { margin-top: calc(var(--c) * .36); }
+  .item__cab { display: flex; justify-content: space-between; align-items: baseline; gap: calc(var(--c) * 1.4); }
+  h3 { font: 600 1em/1.3 var(--sans); padding-left: calc(var(--c) * 1.05); text-indent: calc(var(--c) * -1.05); }   /* si parte en dos renglones, el segundo va sangrado */
+  .item__sub { font-weight: 400; color: var(--gris); }
+  .item__fecha { flex: none; font: 400 calc(var(--c) * .8)/1.3 var(--mono); color: var(--gris); white-space: nowrap; }
   /* Viñeta en línea con sangría francesa. Nada de position: Chromium pintaría (y escribiría en el PDF)
      los elementos posicionados al final, y un ATS que lee el flujo vería las viñetas fuera de lugar. */
-  .puntos li { padding-left: 9pt; text-indent: -9pt; }
-  .puntos li::before { content: "–"; display: inline-block; width: 9pt; text-indent: 0; color: var(--azul); }
+  .puntos li { padding-left: calc(var(--c) * 1.05); text-indent: calc(var(--c) * -1.05); }
+  .puntos li::before { content: "•"; display: inline-block; width: calc(var(--c) * 1.05); text-indent: 0; color: var(--acento); }
 
-  .proy__tec { display: flex; justify-content: space-between; align-items: baseline; gap: 12pt; }
+  /* Etiquetas en línea («Datos y fuentes», «Tecnologías», grupos de habilidades) */
+  .et { font: 400 .8em/1 var(--mono); letter-spacing: .04em; text-transform: uppercase; color: var(--gris); }
+  .proy__tec { display: flex; justify-content: space-between; align-items: baseline; gap: calc(var(--c) * 1.4);
+               font: 400 calc(var(--c) * .8)/1.45 var(--mono); color: var(--gris); }
+  .proy__tec .et { font-size: 1em; }
   .proy__tec > :last-child { flex: none; white-space: nowrap; }
-  .et { font: 400 7.5pt/1 var(--mono); letter-spacing: 0.02em; text-transform: uppercase; color: var(--gris); }
-  .privado { color: var(--gris); }
+  .proy__tec a { color: var(--acento); }
 
-  .formacion li { display: flex; justify-content: space-between; align-items: baseline; gap: 12pt; }
-  .formacion__est { flex: none; color: var(--gris); }
+  /* Formación y oratoria: «institución — programa» y, a la derecha, el estado o la fecha */
+  .filas li { display: flex; justify-content: space-between; align-items: baseline; gap: calc(var(--c) * 1.4); }
+  .filas li > :first-child { padding-left: calc(var(--c) * 1.05); text-indent: calc(var(--c) * -1.05); }
+  .filas__der { flex: none; font: 400 calc(var(--c) * .8)/1.3 var(--mono); color: var(--gris); white-space: nowrap; }
 
   /* Habilidades: etiqueta en línea, sin columna aparte (un ATS podría leer todas las etiquetas y luego los valores) */
-  .habilidades p + p { margin-top: 1.5pt; }
-  .habilidades .et { color: var(--azul); white-space: nowrap; }
+  .habilidades .et { color: var(--acento); white-space: nowrap; }
+  .sep { color: var(--gris); }
 
   /* Pie */
-  .pie { margin-top: 7pt; padding-top: 3.5pt; border-top: 0.75pt solid var(--linea); display: flex; justify-content: space-between;
-         font: 400 7pt/1.2 var(--mono); color: var(--gris); }
-  .pie a { color: var(--gris); }
+  .pie { margin-top: calc(var(--c) * .6); padding-top: calc(var(--c) * .32); border-top: .75pt solid var(--regla);
+         display: flex; justify-content: space-between; font: 400 calc(var(--c) * .76)/1.25 var(--mono); color: var(--gris); }
 </style>
 </head>
 <body>
@@ -76,26 +116,74 @@
 <div class="cuerpo">
 
 <header class="cab">
-  <h1>{{ s.sitio.nombre_completo }}</h1>
-  <p class="cab__titulo">{{ t(s.cv.titulo_profesional) }}</p>
+  <div class="cab__fila">
+    <h1>{{ s.sitio.nombre_completo }}</h1>
+    <p class="cab__marca"><svg class="cab__nodo" viewBox="0 0 32 12" aria-hidden="true"><circle cx="5" cy="6" r="5" fill="currentColor"/><path d="M10 6H24" stroke="currentColor" stroke-width="1.5"/><circle cx="28" cy="6" r="3.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>{{ s.sitio.marca }}</span></p>
+  </div>
+  <div class="cab__fila cab__fila--titulo">
+    <p class="cab__titulo">{{ titulo_profesional }}</p>
+    <p class="cab__lugar">{{ t(s.contacto.ubicacion) }}</p>
+  </div>
   <p class="cab__contacto">
-    <span class="dato">{{ t(s.contacto.ubicacion) }}</span><span class="sep">&nbsp;·</span>
-    <a class="dato" href="mailto:{{ s.contacto.correo }}">{{ s.contacto.correo }}</a><br>
-    <a class="dato" href="{{ s.contacto.linkedin_url }}">{{ url_visible(s.contacto.linkedin_url) }}</a><span class="sep">&nbsp;·</span>
-    <a class="dato" href="{{ s.contacto.github_url }}">{{ url_visible(s.contacto.github_url) }}</a><span class="sep">&nbsp;·</span>
-    <a class="dato" href="{{ portafolio }}">{{ url_visible(portafolio) }}</a>
+    <a href="mailto:{{ s.contacto.correo }}">{{ s.contacto.correo }}</a><span class="sep">&nbsp;· </span>
+    <a href="{{ s.contacto.linkedin_url }}">{{ url_visible(s.contacto.linkedin_url) }}</a><span class="sep">&nbsp;· </span>
+    <a href="{{ s.contacto.github_url }}">{{ url_visible(s.contacto.github_url) }}</a><span class="sep">&nbsp;· </span>
+    <a href="{{ portafolio }}">{{ url_visible(portafolio) }}</a>
   </p>
 </header>
 
+{%- if post %}
+<section class="objetivo">
+  <h2>{{ t(s.cv.secciones.objetivo) }}</h2>
+  <p>{{ t(post.objetivo) }}</p>
+</section>
+{%- endif %}
+
 <section>
   <h2>{{ t(s.cv.secciones.perfil) }}</h2>
-  <p>{{ t(s.perfil.intro) }}</p>
+  <p>{{ t(s.cv.perfil) }}</p>
+</section>
+
+{%- if post %}
+<section>
+  <h2>{{ t(s.cv.secciones.aportes) }}</h2>
+  <ol class="aportes">
+    {%- for a in post.aportes %}
+    <li class="aporte">
+      <p class="aporte__tit"><span class="aporte__n">{{ '%02d' % loop.index }}</span>{{ t(a.titulo) }}</p>
+      <p>{{ t(a.texto) }}</p>
+      <p class="aporte__res"><span class="et">{{ t(s.ui.respaldo) }}:</span> {{ t(a.respaldo) }}</p>
+    </li>
+    {%- endfor %}
+  </ol>
+</section>
+{%- endif %}
+
+<section>
+  <h2>{{ t(s.cv.secciones.proyectos) }}</h2>
+  {%- for p in proyectos %}
+  <article class="item">
+    <div class="item__cab"><h3>{{ t(p.nombre) }} <span class="item__sub">— {{ t(p.subtitulo) }}</span></h3><span class="item__fecha">{{ t(p.estado) }}</span></div>
+    <p>{{ t(p.cv_descripcion) if p.cv_descripcion is defined else t(p.descripcion) }}</p>
+    {%- if p.fuentes is defined %}
+    <p><span class="et">{{ t(s.ui.ficha.fuentes) }}:</span> {{ t(p.cv_fuentes) if p.cv_fuentes is defined else t(p.fuentes) }}</p>
+    {%- endif %}
+    <p class="proy__tec">
+      <span><span class="et">{{ t(s.cv.tecnologias) }}:</span> {{ lista(p.tecnologias) }}</span>
+      {%- if p.enlaces %}
+      <a href="{{ p.enlaces[0].url }}">{{ url_visible(p.enlaces[0].url) }}</a>
+      {%- else %}
+      <span>{{ t(p.nota_sin_enlace) if p.nota_sin_enlace is defined else t(s.ui.privado) }}</span>
+      {%- endif %}
+    </p>
+  </article>
+  {%- endfor %}
 </section>
 
 {%- macro entrada(x) %}
   <article class="item">
-    <div class="item__cab"><h3>{{ t(x.puesto) }} <span class="item__sub">— {{ t(x.donde) }}</span></h3><span class="item__fecha">{{ t(x.etiqueta) }}</span></div>
-    <ul class="puntos">{% for pt in x.puntos %}<li>{{ t(pt) }}</li>{% endfor %}</ul>
+    <div class="item__cab"><h3>{{ t(x.puesto) }} <span class="item__sub">— {{ t(x.cv_donde) if x.cv_donde is defined else t(x.donde) }}</span></h3><span class="item__fecha">{{ t(x.cv_etiqueta) if x.cv_etiqueta is defined else t(x.etiqueta) }}</span></div>
+    <ul class="puntos">{% for pt in (x.cv_puntos if x.cv_puntos is defined else x.puntos) %}<li>{{ t(pt) }}</li>{% endfor %}</ul>
   </article>
 {%- endmacro %}
 
@@ -112,31 +200,24 @@
 {%- endif %}
 
 <section>
-  <h2>{{ t(s.cv.secciones.proyectos) }}</h2>
-  {%- for p in s.proyectos %}
-  <article class="item">
-    <div class="item__cab"><h3>{{ t(p.nombre) }} <span class="item__sub">— {{ t(p.subtitulo) }}</span></h3><span class="item__fecha">{{ t(p.estado) }}</span></div>
-    <p>{{ t(p.descripcion) }}</p>
-    <p class="proy__tec">
-      <span><span class="et">{{ t(s.cv.tecnologias) }}:</span> {{ lista(p.tecnologias) }}</span>
-      {%- if p.enlaces %}
-      <a href="{{ p.enlaces[0].url }}">{{ url_visible(p.enlaces[0].url) }}</a>
-      {%- else %}
-      <span class="privado">{{ t(p.nota_sin_enlace) if p.nota_sin_enlace is defined else t(s.ui.privado) }}</span>
-      {%- endif %}
-    </p>
-  </article>
-  {%- endfor %}
-</section>
-
-<section>
   <h2>{{ t(s.cv.secciones.formacion) }}</h2>
-  <ul class="formacion">
+  <ul class="filas">
     {%- for f in s.perfil.formacion %}
-    <li><span><strong>{{ t(f.institucion) }}</strong> — {{ t(f.programa) }}</span><span class="formacion__est">{{ t(f.estado) }}</span></li>
+    <li><span><strong>{{ t(f.institucion) }}</strong> — {{ t(f.programa) }}</span><span class="filas__der">{{ t(f.estado) }}</span></li>
     {%- endfor %}
   </ul>
 </section>
+
+{%- if liderazgo %}
+<section>
+  <h2>{{ t(s.cv.secciones.liderazgo) }}</h2>
+  <ul class="filas">
+    {%- for f in liderazgo %}
+    <li><span><strong>{{ t(f.cv.institucion) if f.cv.institucion is defined else t(f.institucion) }}</strong> — {{ t(f.cv.programa) }}</span><span class="filas__der">{{ t(f.cv.fecha) }}</span></li>
+    {%- endfor %}
+  </ul>
+</section>
+{%- endif %}
 
 <section>
   <h2>{{ t(s.cv.secciones.habilidades) }}</h2>
@@ -144,9 +225,8 @@
     <p>
       {%- for g in s.perfil.herramientas %}
       <span class="et">{{ t(g.grupo) }}</span>&nbsp;{{ lista(g.lista) }}{% if not loop.last %}<span class="sep">&nbsp;·</span>{% endif %}
-      {%- endfor %}</p>
-    <p><span class="et">{{ t(s.ui.idiomas) }}</span>&nbsp;{{ lista(s.perfil.idiomas, "; ") }}</p>
-    <p><span class="et">{{ t(s.ui.habilidades_blandas) }}</span>&nbsp;{{ t(s.perfil.habilidades_blandas) }}</p>
+      {%- endfor %}<span class="sep">&nbsp;·</span>
+      <span class="et">{{ t(s.ui.idiomas) }}</span>&nbsp;{{ lista(s.perfil.idiomas, "; ") }}</p>
   </div>
 </section>
 
