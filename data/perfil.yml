@@ -58,6 +58,21 @@ ui:
   verificar: {es: "Verificar autenticidad", en: "Verify certificate"}
   ver_reconocimiento: {es: "Ver reconocimiento (PDF)", en: "View certificate (PDF)"}
   me_llevo: {es: "LO QUE MÁS ME LLEVO:", en: "WHAT I TAKE AWAY:"}   # etiquetas de habilidades en una entrada de experiencia
+  # Estilo A · Laboratorio (nov 2026): portada con registro y evidencia con fuentes; proyectos como ficha técnica
+  registro: {es: "Registro", en: "At a glance"}
+  evidencia_titulo: {es: "Evidencia", en: "Evidence"}
+  evidencia_nota: {es: "Cada cifra, con su fuente al pie", en: "Every figure, with its source below"}
+  referencias: {es: "Referencias", en: "References"}
+  referencia: {es: "Referencia", en: "Reference"}   # nombre accesible de cada «[n]»
+  fuente: {es: "Fuente:", en: "Source:"}
+  proyecto: {es: "Proyecto", en: "Project"}
+  estado: {es: "Estado", en: "Status"}
+  ficha:
+    que_hace: {es: "Qué hace", en: "What it does"}
+    distinciones: {es: "Distinciones", en: "Awards"}
+    demuestra: {es: "Demuestra", en: "Shows"}
+    tecnologias: {es: "Tecnologías", en: "Technologies"}
+    cifras: {es: "Cifras", en: "Figures"}
 
 secciones:
   inicio: {es: "INICIO", en: "HOME"}
@@ -90,11 +105,34 @@ portada:
   retrato:
     pie_izq: {es: "IA + INDUSTRIAL", en: "AI + INDUSTRIAL"}   # imagen para compartir (og)
     etiqueta: "JHM · CDMX"                                   # anotación de plano sobre el retrato
+  # Cada cifra lleva su fuente: «corta» va bajo la cifra y «completa» en las referencias de la portada.
+  # El sitio las ordena como los proyectos (AgenteMX primero).
   cifras:
-    - {codigo: "P-03", valor: "v7", texto: {es: "pipeline de auditoría corriendo en producción", en: "audit pipeline running in production"}}
-    - {codigo: "P-01", valor: "8", texto: {es: "herramientas en un agente de IA con datos oficiales", en: "tools in an AI agent built on official data"}}
-    - {codigo: "P-01", valor: "10k+", texto: {es: "votos individuales de diputados en la base de ese agente", en: "individual votes by deputies in that agent's database"}}
-    - {codigo: "P-04", valor: "2", texto: {es: "premios en Goya Hack 2026 · UNAM: 2.º Track Pollar y 3.er Track Contenido", en: "awards at Goya Hack 2026 · UNAM: 2nd Pollar track, 3rd Content track"}}
+    - codigo: "P-03"
+      valor: "v7"
+      texto: {es: "pipeline de auditoría corriendo en producción", en: "audit pipeline running in production"}
+      fuente:
+        corta: {es: "Empresa de distribución", en: "Distribution company"}
+        completa: {es: "empresa de distribución (repositorio privado)", en: "distribution company (private repository)"}
+    - codigo: "P-01"
+      valor: "8"
+      texto: {es: "herramientas en un agente de IA con datos oficiales", en: "tools in an AI agent built on official data"}
+      fuente:
+        corta: {es: "Repositorio de AgenteMX", en: "AgenteMX repository"}
+        completa: {es: "repositorio de AgenteMX", en: "AgenteMX repository"}
+        url: "https://github.com/jose2501106-IA/agente-legislativo-mx"
+    - codigo: "P-01"
+      valor: "10k+"
+      texto: {es: "votos individuales de diputados en la base de ese agente", en: "individual votes by deputies in that agent's database"}
+      fuente:
+        corta: {es: "SITL, Cámara de Diputados", en: "SITL, Chamber of Deputies"}
+        completa: {es: "votaciones nominales del SITL, Cámara de Diputados · sitl.diputados.gob.mx", en: "roll-call votes from SITL, Mexican Chamber of Deputies · sitl.diputados.gob.mx"}
+    - codigo: "P-04"
+      valor: "2"
+      texto: {es: "premios en Goya Hack 2026 · UNAM: 2.º Track Pollar y 3.er Track Contenido", en: "awards at Goya Hack 2026 · UNAM: 2nd Pollar track, 3rd Content track"}
+      fuente:
+        corta: {es: "Goya Hack 2026", en: "Goya Hack 2026"}
+        completa: {es: "Goya Hack 2026, CriptoUNAM y Facultad de Ingeniería, UNAM", en: "Goya Hack 2026, CriptoUNAM and UNAM School of Engineering"}
 
 roles:
   - codigo: "R-01"
@@ -407,6 +445,6 @@ pie:
 
 # Página 404 (GitHub Pages la muestra en cualquier dirección que no exista). Va en los dos idiomas a la vez.
 pagina_404:
-  titulo: {es: "Esta hoja no está en el plano", en: "This sheet isn't in the blueprint"}
+  titulo: {es: "Página no encontrada", en: "Page not found"}
   texto: {es: "La página que buscas no existe o cambió de lugar.", en: "The page you're looking for doesn't exist or has moved."}
   inicio: {es: "Ir al portafolio", en: "Go to the portfolio"}

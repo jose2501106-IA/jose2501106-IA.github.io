@@ -1,5 +1,8 @@
-{#- Plantilla única del portafolio. Se genera una vez por idioma con scripts/generar.py.
+{#- Plantilla única del portafolio (estilo A · Laboratorio). Se genera una vez por idioma con scripts/generar.py.
     No edites index.html ni en/index.html a mano: edita data/perfil.yml. -#}
+{%- macro nodo(clase="marca__nodo") -%}
+<svg class="{{ clase }}" width="32" height="12" viewBox="0 0 32 12" aria-hidden="true" focusable="false"><circle cx="5" cy="6" r="5" fill="currentColor"/><path d="M10 6H24" stroke="currentColor" stroke-width="1.5"/><circle cx="28" cy="6" r="3.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+{%- endmacro -%}
 <!doctype html>
 <html lang="{{ lang }}">
 <head>
@@ -15,7 +18,7 @@
 <link rel="alternate" hreflang="es" href="{{ s.sitio.url }}">
 <link rel="alternate" hreflang="en" href="{{ s.sitio.url }}en/">
 <link rel="alternate" hreflang="x-default" href="{{ s.sitio.url }}">
-<meta name="theme-color" content="#0B1F4A">
+<meta name="theme-color" content="#FFFFFF">
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="{{ s.sitio.nombre }}">
 <meta property="og:title" content="{{ t(s.sitio.titulo) }}">
@@ -36,158 +39,189 @@
 <link rel="icon" href="{{ raiz }}favicon.svg" type="image/svg+xml">
 <link rel="icon" href="{{ raiz }}favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="{{ raiz }}apple-touch-icon.png">
-<link rel="preload" href="{{ raiz }}assets/fuentes/space-mono-700.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="{{ raiz }}assets/fuentes/titillium-web-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ raiz }}assets/fuentes/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ raiz }}assets/fuentes/fragment-mono-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{ raiz }}assets/css/sitio.css?v={{ version }}">
 <script type="application/ld+json">{{ jsonld | safe }}</script>
 </head>
 <body>
 <a class="saltar" href="#contenido">{{ t(s.ui.saltar) }}</a>
-<div class="lienzo">
 
-<nav class="nav" aria-label="{{ 'Principal' if lang == 'es' else 'Main' }}">
-  <div class="nav__in">
-    <a class="marca" href="#inicio">{{ s.sitio.marca }}<span class="marca__sep"> / </span>{{ t(s.ui.marca_sub) }}</a>
-    <div class="nav__enlaces" id="nav-enlaces">
-      {%- for nombre, ancla in nav %}
-      <a href="#{{ ancla }}">{{ nombre }}</a>
-      {%- endfor %}
-      <a class="nav__cv" href="{{ raiz }}{{ t(s.cv.archivo) }}" download type="application/pdf">{{ t(s.cv.nav) }} ↓</a>
-    </div>
-    {#- Vista plano: apagada por defecto; el script la muestra solo con mouse. El estado lo da aria-pressed. #}
-    <button class="btn-plano" type="button" aria-pressed="false" title="{{ t(s.ui.vista_plano_ayuda) }}" hidden>{{ t(s.ui.vista_plano) }} <span class="btn-plano__estado" aria-hidden="true">OFF</span></button>
+<header class="cabecera">
+  <div class="cabecera__in">
+    <a class="marca" href="#inicio">
+      {{ nodo() }}
+      <span class="marca__sigla">{{ s.sitio.marca }}</span>
+      <span class="marca__sep" aria-hidden="true"></span>
+      <span class="marca__nombre">{{ s.sitio.nombre }}</span>
+    </a>
+    {#- Orden del código = orden del teclado: en celular y tableta, «Menú» y enseguida sus enlaces; luego el idioma #}
+    <nav class="nav" aria-label="{{ 'Principal' if lang == 'es' else 'Main' }}">
+      <button class="nav__menu" type="button" aria-expanded="false" aria-controls="nav-enlaces"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 4H14M2 8H14M2 12H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>{{ t(s.ui.menu) }}</button>
+      <div class="nav__enlaces" id="nav-enlaces">
+        {%- for nombre, ancla in nav %}
+        <a href="#{{ ancla }}">{{ nombre }}</a>
+        {%- endfor %}
+        <a class="nav__cv" href="{{ raiz }}{{ t(s.cv.archivo) }}" download type="application/pdf">{{ t(s.cv.nav) }} (PDF)</a>
+      </div>
+    </nav>
     <div class="idioma" role="group" aria-label="{{ 'Idioma' if lang == 'es' else 'Language' }}">
       <a href="{{ raiz }}" lang="es" hreflang="es"{% if lang == 'es' %} aria-current="page"{% endif %}>ES</a>
+      <span aria-hidden="true">/</span>
       <a href="{{ raiz }}en/" lang="en" hreflang="en"{% if lang == 'en' %} aria-current="page"{% endif %}>EN</a>
     </div>
-    <button class="nav__menu" type="button" aria-expanded="false" aria-controls="nav-enlaces">{{ t(s.ui.menu) }}</button>
   </div>
-</nav>
+</header>
 
 <main id="contenido">
 
-<section id="inicio" class="hoja hoja--inicio" aria-labelledby="nombre">
-  <div class="hoja__meta">{{ t(s.ui.hoja) }} 01 / {{ t(s.secciones.inicio) }}</div>
-  {#- Orden en el código = orden en celular: quién es y qué hace, la prueba (cifras), datos y retrato.
-      En computadora la rejilla pone el retrato a la derecha y las cifras abajo, dentro del primer pantallazo. #}
-  <div class="inicio">
-    <div class="inicio__texto">
-      <p class="kicker">{{ t(s.portada.linea_superior) }}</p>
+<section id="inicio" class="portada" aria-labelledby="nombre">
+  {#- Orden en el código = orden en celular: quién es, retrato, historia y acciones, registro.
+      En computadora la rejilla pone el retrato a la derecha de todo el texto. #}
+  <div class="portada__in">
+    <div class="portada__intro">
+      <p class="etiqueta etiqueta--acento">{{ t(s.portada.linea_superior) }}</p>
       <h1 class="nombre" id="nombre">{{ s.sitio.nombre_h1[0] }}<br>{{ s.sitio.nombre_h1[1] }}</h1>
-      <div class="bloque-titulo">
-        <p class="subtitulo">{{ t(s.portada.subtitulo) }}</p>
-        <p class="bajada">{{ t(s.portada.bajada)|replace(" · ", "&nbsp;· "|safe) }}</p>
-      </div>
+      <p class="subtitulo">{{ t(s.portada.subtitulo) }}</p>
+      <p class="bajada">{{ t(s.portada.bajada)|replace(" · ", "&nbsp;· "|safe) }}</p>
+    </div>
+    <figure class="retrato">
+      <img src="{{ raiz }}assets/img/retrato-864.webp" srcset="{{ raiz }}assets/img/retrato-432.webp 432w, {{ raiz }}assets/img/retrato-864.webp 864w"
+           sizes="(max-width: 520px) 92vw, 405px" width="864" height="1080" alt="{{ s.sitio.nombre }}" fetchpriority="high">
+      <figcaption class="pie-fig"><span class="pie-fig__n">Fig. 1</span><span>{{ s.sitio.nombre }}, {{ t(s.portada.datos[-1].valor) }}</span></figcaption>
+    </figure>
+    <div class="portada__detalle">
       <p class="historia">{{ t(s.portada.historia_corta) }}</p>
-      <div class="botones">
+      <div class="acciones">
         <a class="btn btn--pri" href="#proyectos">{{ t(s.portada.boton_principal) }}</a>
-        <a class="btn btn--sec" href="{{ raiz }}{{ t(s.cv.archivo) }}" download type="application/pdf">{{ t(s.cv.boton) }} <span aria-hidden="true">↓</span></a>
-        <a class="btn btn--ter" href="mailto:{{ s.contacto.correo }}">{{ t(s.portada.boton_secundario) }}</a>
+        <a class="enlace" href="{{ raiz }}{{ t(s.cv.archivo) }}" download type="application/pdf">{{ t(s.cv.boton) }}</a>
+        <a class="enlace" href="mailto:{{ s.contacto.correo }}">{{ t(s.portada.boton_secundario) }}</a>
       </div>
+      <section class="registro" aria-labelledby="t-registro">
+        <h2 class="etiqueta registro__tit" id="t-registro">{{ t(s.ui.registro) }}</h2>
+        <dl class="registro__lista">
+          {%- for d in s.portada.datos %}
+          <div><dt class="etiqueta">{{ t(d.etiqueta) }}</dt><dd>{{ t(d.valor) }}</dd></div>
+          {%- endfor %}
+        </dl>
+      </section>
+    </div>
+  </div>
+
+  <section class="evidencia" aria-labelledby="t-evidencia">
+    <div class="cab-fila">
+      <h2 class="titulo-3" id="t-evidencia">{{ t(s.ui.evidencia_titulo) }}</h2>
+      <p class="nota">{{ t(s.ui.evidencia_nota) }}</p>
     </div>
     <div class="cifras">
-      {%- for c in s.portada.cifras %}
-      <a class="cifra" href="#{{ c.codigo | lower }}"><span class="cifra__cod">{{ c.codigo }}</span><span class="cifra__val">{{ t(c.valor) }}</span><span class="cifra__txt">{{ t(c.texto) }}</span></a>
+      {%- for c in cifras %}
+      <div class="cifra">
+        <p class="cifra__val">{{ t(c.valor) }}</p>
+        <p class="cifra__txt">{{ t(c.texto) }}</p>
+        <p class="cifra__fuente"><a href="#ref-{{ loop.index }}" aria-label="{{ t(s.ui.referencia) }} {{ loop.index }}">[{{ loop.index }}]</a> {{ t(c.fuente.corta) }}</p>
+      </div>
       {%- endfor %}
     </div>
-    <dl class="ficha">
-      {%- for d in s.portada.datos %}
-      <div><dt>{{ t(d.etiqueta) }}</dt><dd>{{ t(d.valor) }}</dd></div>
-      {%- endfor %}
-    </dl>
-    <figure class="retrato">
-      <span class="esq esq--ti" aria-hidden="true"></span><span class="esq esq--td" aria-hidden="true"></span>
-      <span class="esq esq--bi" aria-hidden="true"></span><span class="esq esq--bd" aria-hidden="true"></span>
-      <div class="retrato__marco">
-        <img src="{{ raiz }}assets/img/retrato-864.webp" srcset="{{ raiz }}assets/img/retrato-432.webp 432w, {{ raiz }}assets/img/retrato-864.webp 864w"
-             sizes="(max-width: 520px) 90vw, 336px" width="864" height="1080" alt="{{ s.sitio.nombre }}" fetchpriority="high">
-        <div class="retrato__rejilla" aria-hidden="true"></div>
-        <div class="retrato__caja" aria-hidden="true"></div>
-        <div class="retrato__etiqueta" aria-hidden="true"><i></i><span>{{ s.portada.retrato.etiqueta }}</span></div>
-      </div>
-    </figure>
-  </div>
+    <div class="referencias">
+      <h3 class="etiqueta" id="t-referencias">{{ t(s.ui.referencias) }}</h3>
+      <ol aria-labelledby="t-referencias">
+        {%- for c in cifras %}
+        <li id="ref-{{ loop.index }}">[{{ loop.index }}] {{ t(s.ui.fuente) }} {{ t(c.fuente.completa) }}{% if c.fuente.url is defined %} · <a href="{{ c.fuente.url }}" target="_blank" rel="noopener">{{ c.fuente.url | replace("https://", "") }}</a>{% endif %}</li>
+        {%- endfor %}
+      </ol>
+    </div>
+  </section>
 </section>
 
-<section id="roles" class="hoja" aria-labelledby="t-roles">
-  <div class="cab"><div class="cab__hoja">{{ t(s.ui.hoja) }} 02 / {{ t(s.secciones.roles) }}</div><h2 id="t-roles">{{ t(s.secciones.roles.titulo) }}</h2><div class="cab__regla"></div></div>
+<section id="roles" class="seccion" aria-labelledby="t-roles">
+  <header class="sec-cab">
+    <p class="etiqueta etiqueta--acento">{{ t(s.secciones.roles) }}</p>
+    <h2 class="sec-cab__tit" id="t-roles">{{ t(s.secciones.roles.titulo) }}</h2>
+  </header>
   <div class="roles">
     {%- for r in s.roles %}
     <article class="rol">
-      <div class="rol__cab">{{ r.codigo }}</div>
-      <div class="rol__cuerpo">
-        <h3>{{ t(r.titulo) }}</h3>
-        <p>{{ t(r.texto) }}</p>
-        <div class="rol__evidencia"><span>{{ t(s.ui.evidencia) }}</span>{% for e in r.evidencia %}<a href="#{{ e | lower }}">{{ e }}</a>{% endfor %}</div>
-      </div>
+      <h3 class="rol__tit">{{ t(r.titulo) }}</h3>
+      <p class="rol__txt">{{ t(r.texto) }}</p>
+      <p class="rol__evidencia"><span class="etiqueta">{{ t(s.ui.evidencia)|trim(':') }}</span>{% for e in r.evidencia %}<a href="#{{ e | lower }}">{{ t(proy[e].nombre) }}</a>{% endfor %}</p>
     </article>
     {%- endfor %}
   </div>
 </section>
 
-<section id="proyectos" class="hoja" aria-labelledby="t-proyectos">
-  <div class="cab cab--corta"><div class="cab__hoja">{{ t(s.ui.hoja) }} 03 / {{ t(s.secciones.proyectos) }}</div><h2 id="t-proyectos">{{ t(s.secciones.proyectos.titulo) }}</h2><div class="cab__regla"></div></div>
-  <div class="filtros" role="group" aria-label="{{ t(s.ui.filtrar) }}">
-    <span class="filtros__et">{{ t(s.ui.filtrar) }}</span>
-    <button type="button" data-filtro="todos" aria-pressed="true">{{ t(s.ui.todos) }} <span>{{ s.proyectos | length }}</span></button>
+<section id="proyectos" class="seccion" aria-labelledby="t-proyectos">
+  <header class="sec-cab">
+    <p class="etiqueta etiqueta--acento">{{ t(s.secciones.proyectos) }}</p>
+    <h2 class="sec-cab__tit" id="t-proyectos">{{ t(s.secciones.proyectos.titulo) }}</h2>
+  </header>
+  <div class="filtros" role="group" aria-label="{{ t(s.ui.filtrar)|trim(':')|capitalize }}">
+    <span class="etiqueta">{{ t(s.ui.filtrar)|trim(':') }}</span>
+    <button type="button" data-filtro="todos" aria-pressed="true">{{ t(s.ui.todos) }} <span class="filtros__n">{{ s.proyectos | length }}</span></button>
     {%- for clave, cat in s.categorias.items() if conteo[clave] %}
-    <button type="button" data-filtro="{{ clave }}" aria-pressed="false">{{ t(cat) }} <span>{{ conteo[clave] }}</span></button>
+    <button type="button" data-filtro="{{ clave }}" aria-pressed="false">{{ t(cat) }} <span class="filtros__n">{{ conteo[clave] }}</span></button>
     {%- endfor %}
   </div>
-  <div class="proyectos{{ ' proyectos--pares' if s.proyectos|length in (2, 4) else '' }}">
+  <div class="proyectos">
     {%- for p in s.proyectos %}
-    <article class="proy" id="{{ p.codigo | lower }}" data-cat="{{ p.categorias | join(' ') }}">
-      {#- El código (P-0X) es el mismo que citan los roles y las cifras de la portada #}
-      <div class="proy__cab"><span>{{ p.codigo }} · {% for c in p.categorias %}{{ t(s.categorias[c].fig) }}{% if not loop.last %} · {% endif %}{% endfor %}</span><span>{{ t(p.estado) }}</span></div>
-      {%- if p.imagen is defined %}
-      <figure class="proy__media">
-        <img src="{{ raiz }}{{ p.imagen.archivo }}-640.webp" srcset="{{ raiz }}{{ p.imagen.archivo }}-640.webp 640w, {{ raiz }}{{ p.imagen.archivo }}-1280.webp 1280w"
-             sizes="(min-width: 900px) 590px, 100vw" width="1280" height="640" alt="{{ t(p.imagen.alt) }}" loading="lazy" decoding="async">
-        <figcaption class="proy__pie">{{ t(p.imagen.pie) }}</figcaption>
-      </figure>
-      {%- else %}
-      {#- Esquema hecho con texto (se lee, se traduce y no pesa): pasos en orden y, si aplica, la línea de versiones #}
-      <figure class="proy__media proy__media--esquema">
-        <div class="esquema">
-          <ol class="esquema__pasos{{ ' esquema__pasos--' ~ p.esquema.pasos|length }}">
-            {%- for paso in p.esquema.pasos %}
-            <li><span class="esquema__n">{{ '%02d' % loop.index }}</span><b>{{ t(paso.titulo) }}</b><span>{{ t(paso.texto) }}</span></li>
-            {%- endfor %}
-          </ol>
-          {%- if p.esquema.versiones is defined %}
-          {%- set total = p.esquema.versiones.total %}
-          <div class="versiones">
-            <ol class="versiones__linea">{% for v in range(1, total + 1) %}<li{% if v == total %} class="versiones__actual"{% endif %}>v{{ v }}</li>{% endfor %}</ol>
-            <p class="versiones__txt"><b>v{{ total }}</b> {{ t(p.esquema.versiones.texto) }}</p>
+    {%- set n = loop.index %}
+    <article class="proy" id="{{ p.codigo | lower }}" data-cat="{{ p.categorias | join(' ') }}" aria-labelledby="t-{{ p.codigo | lower }}">
+      <header class="proy__cab">
+        <p class="etiqueta etiqueta--acento proy__kicker">{{ t(s.ui.proyecto) }} {{ n }} · {% for c in p.categorias %}{{ t(s.categorias[c]) }}{% if not loop.last %} · {% endif %}{% endfor %}</p>
+        <p class="etiqueta proy__estado"><span class="proy__punto" aria-hidden="true"></span>{{ t(s.ui.estado) }} · {{ t(p.estado) }}</p>
+        <h3 class="proy__nombre" id="t-{{ p.codigo | lower }}">{{ t(p.nombre) }}</h3>
+        <p class="proy__sub">{{ t(p.subtitulo) }}</p>
+      </header>
+      <div class="proy__cuerpo">
+        {%- if p.imagen is defined %}
+        <figure class="proy__fig">
+          <img src="{{ raiz }}{{ p.imagen.archivo }}-640.webp" srcset="{{ raiz }}{{ p.imagen.archivo }}-640.webp 640w, {{ raiz }}{{ p.imagen.archivo }}-1280.webp 1280w"
+               sizes="(min-width: 1080px) 560px, 92vw" width="1280" height="640" alt="{{ t(p.imagen.alt) }}" loading="lazy" decoding="async">
+          <figcaption class="pie-fig"><span class="pie-fig__n">Fig. {{ n + 1 }}</span><span>{{ t(p.imagen.pie) }}</span></figcaption>
+        </figure>
+        {%- else %}
+        {#- Esquema hecho con texto (se lee, se traduce y no pesa): pasos en orden y, si aplica, la línea de versiones #}
+        <figure class="proy__fig">
+          <div class="esquema">
+            <ol class="esquema__pasos">
+              {%- for paso in p.esquema.pasos %}
+              <li><span class="esquema__n">{{ '%02d' % loop.index }}</span><b>{{ t(paso.titulo) }}</b><span class="esquema__txt">{{ t(paso.texto) }}</span></li>
+              {%- endfor %}
+            </ol>
+            {%- if p.esquema.versiones is defined %}
+            {%- set total = p.esquema.versiones.total %}
+            <div class="versiones">
+              <ol class="versiones__linea">{% for v in range(1, total + 1) %}<li{% if v == total %} class="versiones__actual"{% endif %}>v{{ v }}</li>{% endfor %}</ol>
+              <p class="versiones__txt"><b>v{{ total }}</b> {{ t(p.esquema.versiones.texto) }}</p>
+            </div>
+            {%- endif %}
+          </div>
+          <figcaption class="pie-fig"><span class="pie-fig__n">Fig. {{ n + 1 }}</span><span>{{ t(p.esquema.pie) }}</span></figcaption>
+        </figure>
+        {%- endif %}
+        <dl class="ficha">
+          <div class="ficha__fila"><dt class="etiqueta">{{ t(s.ui.ficha.que_hace) }}</dt><dd>{{ t(p.descripcion) }}</dd></div>
+          {%- if p.distinciones is defined %}
+          <div class="ficha__fila"><dt class="etiqueta">{{ t(s.ui.ficha.distinciones) }}</dt>
+            <dd class="distincion">
+              <span class="distincion__medallas">{% for d in p.distinciones.premios %}{{ logo(d.medalla) }}{% endfor %}</span>
+              <span class="distincion__textos">{% for d in p.distinciones.premios %}<span class="distincion__tit">{{ t(d.titulo) }}</span>{% endfor %}<span class="distincion__txt">{{ t(p.distinciones.texto) }}</span></span>
+              {{ logo('unam') }}
+            </dd>
           </div>
           {%- endif %}
-        </div>
-        <figcaption class="proy__pie">{{ t(p.esquema.pie) }}</figcaption>
-      </figure>
-      {%- endif %}
-      <div class="proy__cuerpo">
-        <h3>{{ t(p.nombre) }}</h3>
-        <p class="proy__sub">{{ t(p.subtitulo) }}</p>
-        {%- if p.distinciones is defined %}
-        <div class="distincion">
-          <span class="distincion__medallas">{% for d in p.distinciones.premios %}{{ logo(d.medalla) }}{% endfor %}</span>
-          <div>{% for d in p.distinciones.premios %}<div class="distincion__tit">{{ t(d.titulo) }}</div>{% endfor %}<div class="distincion__txt">{{ t(p.distinciones.texto) }}</div></div>
-          {{ logo('unam') }}
-        </div>
-        {%- endif %}
-        <p class="proy__desc">{{ t(p.descripcion) }}</p>
-        <div class="proy__demuestra"><span>{{ t(s.ui.demuestra) }}</span><strong>{{ t(p.demuestra) }}</strong></div>
-        <div class="proy__cifras">
+          <div class="ficha__fila"><dt class="etiqueta">{{ t(s.ui.ficha.demuestra) }}</dt><dd>{{ t(p.demuestra) }}</dd></div>
+          <div class="ficha__fila"><dt class="etiqueta">{{ t(s.ui.ficha.tecnologias) }}</dt><dd class="ficha__mono">{% for x in p.tecnologias %}{{ t(x) }}{% if not loop.last %} · {% endif %}{% endfor %}</dd></div>
+        </dl>
+        <div class="proy__cifras" role="group" aria-label="{{ t(s.ui.ficha.cifras) }}">
           {%- for c in p.cifras %}
-          <div><b>{{ c.valor }}</b><span>{{ t(c.texto) }}</span></div>
+          <p class="proy__cifra"><b>{{ c.valor }}</b><span>{{ t(c.texto) }}</span></p>
           {%- endfor %}
         </div>
-        <ul class="chips chips--punteadas">{% for x in p.tecnologias %}<li>{{ t(x) }}</li>{% endfor %}</ul>
         <div class="proy__enlaces">
           {%- for e in p.enlaces %}
-          <a href="{{ e.url }}" target="_blank" rel="noopener">{{ t(e.texto) }} →</a>
+          <a class="btn btn--sec" href="{{ e.url }}" target="_blank" rel="noopener">{{ t(e.texto) }} <span aria-hidden="true">↗</span></a>
           {%- else %}
-          <span class="proy__privado">{{ t(p.nota_sin_enlace) if p.nota_sin_enlace is defined else t(s.ui.privado) }}</span>
+          <span class="etiqueta">{{ t(p.nota_sin_enlace) if p.nota_sin_enlace is defined else t(s.ui.privado) }}</span>
           {%- endfor %}
         </div>
       </div>
@@ -196,110 +230,125 @@
   </div>
 </section>
 
-<section id="experiencia" class="hoja" aria-labelledby="t-exp">
-  <div class="cab"><div class="cab__hoja">{{ t(s.ui.hoja) }} 04 / {{ t(s.secciones.experiencia) }}</div><h2 id="t-exp">{{ t(s.secciones.experiencia.titulo) }}</h2><div class="cab__regla"></div></div>
+<section id="experiencia" class="seccion" aria-labelledby="t-exp">
+  <header class="sec-cab">
+    <p class="etiqueta etiqueta--acento">{{ t(s.secciones.experiencia) }}</p>
+    <h2 class="sec-cab__tit" id="t-exp">{{ t(s.secciones.experiencia.titulo) }}</h2>
+  </header>
   <ol class="exp">
     {%- for x in s.experiencia %}
     <li class="exp__fila">
       <div class="exp__lado">
-        <span class="exp__et{% if loop.first %} exp__et--actual{% endif %}">{{ t(x.etiqueta) }}</span>
-        <span class="exp__lugar">{{ t(x.lugar) }}</span>
-        {%- if x.logos is defined %}<div class="exp__logo">{% for l in x.logos %}{{ logo(l) }}{% endfor %}</div>{% elif x.logo is defined %}<div class="exp__logo">{{ logo(x.logo) }}</div>{% endif %}
+        <p class="etiqueta exp__fecha{% if loop.first %} exp__fecha--actual{% endif %}">{{ t(x.etiqueta) }}</p>
+        <p class="etiqueta exp__lugar">{{ t(x.lugar) }}</p>
+        {%- if x.logos is defined %}<div class="exp__logos">{% for l in x.logos %}{{ logo(l) }}{% endfor %}</div>{% elif x.logo is defined %}<div class="exp__logos">{{ logo(x.logo) }}</div>{% endif %}
       </div>
       <div class="exp__cuerpo">
-        <h3>{{ t(x.puesto) }}</h3>
+        <h3 class="exp__puesto">{{ t(x.puesto) }}</h3>
         <p class="exp__donde">{{ t(x.donde) }}</p>
         <ul class="exp__puntos">{% for pt in x.puntos %}<li>{{ t(pt) }}</li>{% endfor %}</ul>
         {%- if x.habilidades is defined %}
-        <div class="exp__lleva"><span class="exp__lleva-et">{{ t(s.ui.me_llevo) }}</span><ul class="chips chips--punteadas">{% for h in x.habilidades %}<li>{{ t(h) }}</li>{% endfor %}</ul></div>
+        <div class="exp__lleva"><span class="etiqueta">{{ t(s.ui.me_llevo)|trim(':') }}</span><ul class="marcas">{% for h in x.habilidades %}<li>{{ t(h) }}</li>{% endfor %}</ul></div>
         {%- endif %}
       </div>
     </li>
     {%- endfor %}
   </ol>
-  <p class="nota-tecnica">{{ t(s.como_trabajo) }}</p>
+  <p class="nota-metodo">{{ t(s.como_trabajo)|replace("// ", "", 1) }}</p>
 </section>
 
-<section id="perfil" class="hoja" aria-labelledby="t-perfil">
-  <div class="cab"><div class="cab__hoja">{{ t(s.ui.hoja) }} 05 / {{ t(s.secciones.perfil) }}</div><h2 id="t-perfil">{{ t(s.secciones.perfil.titulo) }}</h2><div class="cab__regla"></div></div>
+<section id="perfil" class="seccion" aria-labelledby="t-perfil">
+  <header class="sec-cab">
+    <p class="etiqueta etiqueta--acento">{{ t(s.secciones.perfil) }}</p>
+    <h2 class="sec-cab__tit" id="t-perfil">{{ t(s.secciones.perfil.titulo) }}</h2>
+  </header>
   <div class="perfil">
     <div class="perfil__izq">
       <p class="perfil__intro">{{ t(s.perfil.intro) }}</p>
-      <div class="blandas"><div class="blandas__et">{{ t(s.ui.habilidades_blandas) }}</div><p>{{ t(s.perfil.habilidades_blandas) }}</p></div>
-      <div class="herr">
-        <div class="herr__et">{{ t(s.ui.herramientas) }}</div>
-        {%- for g in s.perfil.herramientas %}
-        <div class="herr__fila"><div class="herr__grupo">{{ t(g.grupo) }}</div><ul class="chips">{% for i in g.lista %}<li>{{ t(i) }}</li>{% endfor %}</ul></div>
-        {%- endfor %}
-        <div class="herr__fila"><div class="herr__grupo">{{ t(s.ui.idiomas) }}</div><ul class="chips">{% for i in s.perfil.idiomas %}<li>{{ t(i) }}</li>{% endfor %}</ul></div>
+      <div class="bloque">
+        <h3 class="etiqueta bloque__tit">{{ t(s.ui.habilidades_blandas) }}</h3>
+        <p>{{ t(s.perfil.habilidades_blandas) }}</p>
+      </div>
+      <div class="bloque">
+        <h3 class="etiqueta bloque__tit">{{ t(s.ui.herramientas) }}</h3>
+        <dl class="herr">
+          {%- for g in s.perfil.herramientas %}
+          <div class="herr__fila"><dt class="etiqueta">{{ t(g.grupo) }}</dt><dd><ul class="marcas">{% for i in g.lista %}<li>{{ t(i) }}</li>{% endfor %}</ul></dd></div>
+          {%- endfor %}
+          <div class="herr__fila"><dt class="etiqueta">{{ t(s.ui.idiomas) }}</dt><dd><ul class="marcas">{% for i in s.perfil.idiomas %}<li>{{ t(i) }}</li>{% endfor %}</ul></dd></div>
+        </dl>
       </div>
     </div>
-    {#- Formación a la derecha; oratoria y comunidad debajo de herramientas (en celular, después de formación) #}
+    {#- Formación a la derecha; liderazgo, oratoria y comunidad debajo de herramientas (en celular, después de formación) #}
     {%- for clase, titulo, lista in [("perfil__der", s.ui.formacion_programas, s.perfil.formacion), ("perfil__ora", s.ui.oratoria_comunidad, s.perfil.oratoria_comunidad)] %}
-    <div class="{{ clase }}">
-    <div class="formacion">
-      <div class="formacion__cab">{{ t(titulo) }}</div>
-      {%- for f in lista %}
-      <div class="formacion__item">
-        <div>
-          <div class="formacion__inst">{{ t(f.institucion) }}</div>
-          <div class="formacion__prog">{{ t(f.programa) }}</div>
-          {%- if f.fases is defined %}
-          <ol class="fases">
-            {%- for fa in f.fases %}
-            <li class="fase{{ ' fase--hecha' if fa.hecha is defined and fa.hecha }}">
-              <span class="fase__nombre">{{ t(fa.nombre) }}</span>
-              <span class="fase__est">{{ t(fa.estado) }}</span>
-              {%- if fa.verificar is defined %}<a class="fase__ver" href="{{ fa.verificar }}" target="_blank" rel="noopener">{{ t(s.ui.verificar) }} ↗</a>{% endif %}
-            </li>
-            {%- endfor %}
-          </ol>
-          {%- else %}
-          <div class="formacion__est">{{ t(f.estado) }}</div>
-          {%- if f.verificar is defined %}<a class="formacion__ver" href="{{ f.verificar }}" target="_blank" rel="noopener">{{ t(s.ui.verificar) }} ↗</a>{% endif %}
-          {%- endif %}
-          {%- if f.documento is defined %}<a class="formacion__ver" href="{{ raiz }}{{ f.documento }}" target="_blank" rel="noopener">{{ t(s.ui.ver_reconocimiento) }} ↗</a>{% endif %}
-        </div>
-        <div class="formacion__logos">{% for l in f.logos %}{{ logo(l) }}{% endfor %}</div>
-      </div>
-      {%- endfor %}
-    </div>
-    </div>
+    <section class="{{ clase }}" aria-labelledby="t-{{ clase }}">
+      <h3 class="etiqueta lista__tit" id="t-{{ clase }}">{{ t(titulo) }}</h3>
+      <ul class="lista">
+        {%- for f in lista %}
+        <li class="form">
+          <div class="form__texto">
+            <p class="form__inst">{{ t(f.institucion) }}</p>
+            <p class="form__prog">{{ t(f.programa) }}</p>
+            {%- if f.fases is defined %}
+            <ol class="fases">
+              {%- for fa in f.fases %}
+              <li class="fase{{ ' fase--hecha' if fa.hecha is defined and fa.hecha }}">
+                <span class="fase__nombre">{{ t(fa.nombre) }}</span>
+                <span class="fase__est">{{ t(fa.estado) }}</span>
+                {%- if fa.verificar is defined %}<a class="form__ver" href="{{ fa.verificar }}" target="_blank" rel="noopener">{{ t(s.ui.verificar) }} <span aria-hidden="true">↗</span></a>{% endif %}
+              </li>
+              {%- endfor %}
+            </ol>
+            {%- else %}
+            <p class="form__est">{{ t(f.estado) }}</p>
+            {%- if f.verificar is defined %}<a class="form__ver" href="{{ f.verificar }}" target="_blank" rel="noopener">{{ t(s.ui.verificar) }} <span aria-hidden="true">↗</span></a>{% endif %}
+            {%- endif %}
+            {%- if f.documento is defined %}<a class="form__ver" href="{{ raiz }}{{ f.documento }}" target="_blank" rel="noopener">{{ t(s.ui.ver_reconocimiento) }} <span aria-hidden="true">↗</span></a>{% endif %}
+          </div>
+          <div class="form__logos">{% for l in f.logos %}{{ logo(l) }}{% endfor %}</div>
+        </li>
+        {%- endfor %}
+      </ul>
+    </section>
     {%- endfor %}
   </div>
 </section>
 
-<section id="contacto" class="hoja hoja--contacto" aria-labelledby="t-contacto">
-  <div class="cab__hoja">{{ t(s.ui.hoja) }} 06 / {{ t(s.secciones.contacto) }}</div>
+<section id="contacto" class="seccion seccion--contacto" aria-labelledby="t-contacto">
+  <header class="sec-cab">
+    <p class="etiqueta etiqueta--acento">{{ t(s.secciones.contacto) }}</p>
+    <h2 class="sec-cab__tit" id="t-contacto">{{ t(s.seccion_contacto.titulo) }}</h2>
+  </header>
   <div class="contacto">
     <div class="contacto__izq">
-      <h2 id="t-contacto">{{ t(s.seccion_contacto.titulo) }}</h2>
-      <p>{{ t(s.seccion_contacto.texto) }}</p>
-      <div class="botones">
-        <a class="btn btn--pri" href="mailto:{{ s.contacto.correo }}">{{ t(s.seccion_contacto.boton_correo) }} →</a>
-        <a class="btn btn--sec" href="{{ s.contacto.linkedin_url }}" target="_blank" rel="noopener">{{ t(s.seccion_contacto.boton_linkedin) }} ↗</a>
+      <p class="contacto__txt">{{ t(s.seccion_contacto.texto) }}</p>
+      <div class="acciones">
+        <a class="btn btn--pri" href="mailto:{{ s.contacto.correo }}">{{ t(s.seccion_contacto.boton_correo) }}</a>
+        <a class="btn btn--sec" href="{{ s.contacto.linkedin_url }}" target="_blank" rel="noopener">{{ t(s.seccion_contacto.boton_linkedin) }} <span aria-hidden="true">↗</span></a>
       </div>
     </div>
-    <div class="contacto__der">
-      <a class="contacto__fila" href="mailto:{{ s.contacto.correo }}"><span>{{ t(s.seccion_contacto.filas.correo) }}</span><strong>{{ s.contacto.correo }}</strong><i aria-hidden="true">↗</i></a>
-      <a class="contacto__fila" href="{{ s.contacto.linkedin_url }}" target="_blank" rel="noopener"><span>{{ s.seccion_contacto.filas.linkedin }}</span><strong>{{ s.contacto.linkedin_txt }}</strong><i aria-hidden="true">↗</i></a>
-      <a class="contacto__fila" href="{{ s.contacto.github_url }}" target="_blank" rel="noopener"><span>{{ s.seccion_contacto.filas.github }}</span><strong>{{ s.contacto.github_txt }}</strong><i aria-hidden="true">↗</i></a>
-      <a class="contacto__fila" href="{{ raiz }}{{ t(s.cv.archivo) }}" download type="application/pdf"><span>{{ t(s.seccion_contacto.filas.cv) }}</span><strong>{{ t(s.cv.boton) }}</strong><i aria-hidden="true">↓</i></a>
-      <div class="contacto__fila"><span>{{ t(s.seccion_contacto.filas.ubicacion) }}</span><strong>{{ t(s.contacto.ubicacion) }}</strong><i aria-hidden="true">·</i></div>
-    </div>
+    <ul class="contacto__lista">
+      <li><a class="contacto__fila" href="mailto:{{ s.contacto.correo }}"><span class="etiqueta">{{ t(s.seccion_contacto.filas.correo) }}</span><span class="contacto__valor">{{ s.contacto.correo }}</span><span class="contacto__flecha" aria-hidden="true">↗</span></a></li>
+      <li><a class="contacto__fila" href="{{ s.contacto.linkedin_url }}" target="_blank" rel="noopener"><span class="etiqueta">{{ s.seccion_contacto.filas.linkedin }}</span><span class="contacto__valor">{{ s.contacto.linkedin_txt }}</span><span class="contacto__flecha" aria-hidden="true">↗</span></a></li>
+      <li><a class="contacto__fila" href="{{ s.contacto.github_url }}" target="_blank" rel="noopener"><span class="etiqueta">{{ s.seccion_contacto.filas.github }}</span><span class="contacto__valor">{{ s.contacto.github_txt }}</span><span class="contacto__flecha" aria-hidden="true">↗</span></a></li>
+      <li><a class="contacto__fila" href="{{ raiz }}{{ t(s.cv.archivo) }}" download type="application/pdf"><span class="etiqueta">{{ t(s.seccion_contacto.filas.cv) }}</span><span class="contacto__valor">{{ t(s.cv.boton) }}</span><span class="contacto__flecha" aria-hidden="true">↓</span></a></li>
+      <li><div class="contacto__fila"><span class="etiqueta">{{ t(s.seccion_contacto.filas.ubicacion) }}</span><span class="contacto__valor">{{ t(s.contacto.ubicacion) }}</span></div></li>
+    </ul>
   </div>
 </section>
 
 </main>
 
 <footer class="pie">
-  <div class="pie__in"><div class="pie__frase">{{ t(s.pie.frase) }}</div><div>© {{ s.sitio.anio }} {{ s.sitio.nombre_completo }}</div></div>
+  <div class="pie__in">
+    <p class="pie__frase">{{ t(s.pie.frase) }}</p>
+    <p class="pie__firma">{{ nodo("pie__nodo") }}<span>© {{ s.sitio.anio }} {{ s.sitio.nombre_completo }}</span></p>
+  </div>
 </footer>
-</div>
 {#- Celular: CV, correo y LinkedIn a un toque. El script la muestra al pasar los botones de la portada
     y la esconde en Contacto (ahí ya están). Sin script no aparece: esos enlaces siguen en la portada y en Contacto. #}
 <nav class="barra" aria-label="{{ t(s.ui.acciones_rapidas) }}" hidden>
-  <a class="barra__cv" href="{{ raiz }}{{ t(s.cv.archivo) }}" download type="application/pdf">{{ t(s.cv.nav) }} <span aria-hidden="true">↓</span></a>
+  <a class="barra__cv" href="{{ raiz }}{{ t(s.cv.archivo) }}" download type="application/pdf">{{ t(s.cv.nav) }} (PDF)</a>
   <a href="mailto:{{ s.contacto.correo }}">{{ t(s.ui.correo) }}</a>
   <a href="{{ s.contacto.linkedin_url }}" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
 </nav>
